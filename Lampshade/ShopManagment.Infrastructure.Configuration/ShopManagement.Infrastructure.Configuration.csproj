@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj" />
+    <ProjectReference Include="..\ShopManagementDomain\ShopManagementDomain.csproj" />
+    <ProjectReference Include="..\ShopManagemnt.Applocation.Contracts\ShopManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\SM.Infrastructure.EFCore\SM.Infrastructure.EFCore.csproj" />
+  </ItemGroup>
+
+</Project>
