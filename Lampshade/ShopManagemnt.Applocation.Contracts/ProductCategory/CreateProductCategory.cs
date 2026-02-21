@@ -2,21 +2,20 @@
 
 public class CreateProductCategory
 {
-    public string Title { get; private set; }
+    public string Title { get; set; }
 
-    public string Description { get; private set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 
     public string CreationDate { get; set; }
 
-    public string Picture { get; private set; }
-    public string PictureAlt { get; private set; }
+    public string Picture { get; set; }
+    public string PictureAlt { get; set; }
 
-    public string PictureTitle { get; private set; }
+    public string PictureTitle { get; set; }
 
-    public string MetaDezcription { get; private set; }
+    public string MetaDescription { get; set; }
 
-    public string Keywords { get; private set; }
+    public string Keywords { get; set; }
 
-    public string Slug { get; private set; }
-
+    public string Slug { get; set; }
 }

@@ -358,6 +358,26 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/.vs
+/Blockchain/.vs/Blockchain.slnx/FileContentIndex
+/Blockchain/.vs
+/Blockchain/.vs/Blockchain.slnx
+/Blockchain/.vs/Blockchain.slnx/v18
+# Visual Studio files
+.vs/
+[Oo]bj/
+[Bb]in/
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+
+.idea/
+*.sln.iml
+*.csproj.iml
+*.DotSettings.user
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
@@ -366,3 +386,4 @@ FodyWeavers.xsd
 Lampshade/.vs/Lampshade.slnx/v18/.suo
 Lampshade/.vs/Lampshade.slnx/v18/.suo
 /Lampshade/.vs/Lampshade.slnx/v18
+Lampshade/.vs/Lampshade.slnx/v18/.suo

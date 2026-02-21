@@ -4,17 +4,19 @@ using SM.Infrastructure.EFCore.Mapping;
 
 namespace SM.Infrastructure.EFCore;
 
-public class LampshadeContext:DbContext
+public class ShopContext : DbContext
 {
-    private readonly DbSet<ProductCategory> _products;
-    public LampshadeContext(DbContextOptions<LampshadeContext> options)
+    public ShopContext(DbContextOptions<ShopContext> options)
         : base(options)
     {
     }
 
+    public DbSet<ProductCategory> Products { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new ProductCategoryMapping());
+        var assembly = typeof(ProductCategoryMapping).Assembly;
+        modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

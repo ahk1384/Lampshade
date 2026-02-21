@@ -1,41 +1,54 @@
 ﻿using System.Linq.Expressions;
-using _0_Framework.Application;
 using _0_Framework.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace _0_Framework.Infrastructure;
 
-public class BaseRepository<TKey,T> : IRepository<TKey,T> where T : EntityBase<TKey>
+public class BaseRepository<TKey, T> : IRepository<TKey, T> where T : EntityBase<TKey>
 {
     private readonly DbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
     public BaseRepository(DbContext context)
     {
         _context = context;
     }
 
-    public OperationResult Create(T entity)
+    public void Create(T entity)
     {
-        throw new NotImplementedException();
+        _context.Add<T>(entity);
     }
 
-    public OperationResult Edit(T entity)
+    public void Edit(T entity)
     {
-        throw new NotImplementedException();
+        _context.Update<T>(entity);
+    }
+
+    public void Remove(TKey id)
+    {
+        var context = Get(id);
+        context.Remove();
+    }
+
+    public void Restore(TKey id)
+    {
+        var context = Get(id);
+        context.Restore();
+        _unitOfWork.CommitTran();
     }
 
     public T Get(TKey id)
     {
-        throw new NotImplementedException();
+        return _context.Find<T>(id);
     }
 
     public List<T> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Set<T>().ToList();
     }
 
     public bool Exists(Expression<Func<T, bool>> expression)
     {
-        throw new NotImplementedException();
+        return _context.Set<T>().Any(expression);
     }
 }
