@@ -1,8 +1,9 @@
-﻿using System.Globalization;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
-using ShopManagement.Application.Contracts.ProductCategory;
+using Microsoft.EntityFrameworkCore;
+using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
+using System.Globalization;
 
 namespace ShopManagement.Application;
 
@@ -116,8 +117,18 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         return operationResult.Success();
     }
 
-    public List<ProductCategory> GetList()
+    List<EditProductCategory> IProductCategoryApplication.GetList()
     {
-        return _repository.GetAll();
+        return _repository.GetList();
+    }
+
+    public EditProductCategory GetDetails(long id)
+    {
+        return _repository.GetDetails(id);
+    }
+
+    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
+    {
+        return _repository.Search(searchModel);
     }
 }

@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ShopManagement.Application.Contracts.ProductCategoryAgg;
+using ShopManagementDomain.ProductCategoryAgg;
+using SM.Infrastructure.EFCore;
 
-namespace ServiceHost.Pages
+namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
 {
-    public class IndexModel : PageModel
+    public partial class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        public List<ProductCategoryViewModel> ProductCategories { get; set; }
+        private readonly IProductCategoryApplication _productCategoryApplication;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IProductCategoryApplication productCategoryApplication)
         {
-            _logger = logger;
+            _productCategoryApplication = productCategoryApplication;
         }
+
 
         public void OnGet()
         {
-
+            ProductCategories = _productCategoryApplication.GetAll();
         }
     }
 }
