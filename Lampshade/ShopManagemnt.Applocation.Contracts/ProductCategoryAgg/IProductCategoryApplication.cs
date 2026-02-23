@@ -6,9 +6,7 @@ namespace ShopManagement.Application.Contracts.ProductCategoryAgg;
 
 public interface IProductCategoryApplication
 {
-    ProductCategoryViewModel Get(long id);
-
-    List<ProductCategoryViewModel> GetAll();
+    List<ProductCategoryViewModel> GetProductCategories();
 
     OperationResult Add(CreateProductCategory productCategory);
 
@@ -22,7 +20,7 @@ public interface IProductCategoryApplication
 
     EditProductCategory GetDetails(long id);
 
-    List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel);
+    List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel,bool showDeleted = false);
 
 
 

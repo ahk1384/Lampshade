@@ -14,20 +14,35 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
         public List<ProductCategoryViewModel> ProductCategories { get; set; }
         private readonly IProductCategoryApplication _productCategoryApplication;
         public ProductCategorySearchModel SearchModel;
+        public static bool WatchDeleted = false;
+        public bool watch = false;
         public Index1Model(IProductCategoryApplication productCategoryApplication)
         {
             _productCategoryApplication = productCategoryApplication;
         }
 
 
-        public void OnGet(ProductCategorySearchModel searchModel)
+        public void OnGet(ProductCategorySearchModel? searchModel)
         {
-            ProductCategories = _productCategoryApplication.Search(searchModel);
+            ProductCategories = _productCategoryApplication.Search(searchModel, WatchDeleted);
+            watch = WatchDeleted;
         }
 
+        
         public IActionResult OnGetCreate()
         {
             return Partial("./Create", new CreateProductCategory());
+        }
+
+        public RedirectToPageResult OnGetDeleted()
+        {
+            WatchDeleted = true;
+            return RedirectToPage();
+        }
+        public RedirectToPageResult OnGetActive()
+        {
+            WatchDeleted = false;
+            return RedirectToPage();
         }
 
         public JsonResult OnPostCreate(CreateProductCategory command)
@@ -51,5 +66,18 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
             var result = _productCategoryApplication.Edit(command);
             return new JsonResult(result);
         }
+
+        public RedirectToPageResult OnGetRemove(long id)
+        {
+            _productCategoryApplication.Remove(id);
+            return RedirectToPage();
+        }
+        public RedirectToPageResult OnGetRestore(long id)
+        {
+            _productCategoryApplication.Restore(id);
+            return RedirectToPage("./Index",OnGetDeleted());
+        }
+
+        
     }
 }

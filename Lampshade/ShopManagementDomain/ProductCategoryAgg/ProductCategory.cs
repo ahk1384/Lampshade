@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Domain;
+using ShopManagementDomain.ProductAgg;
 
 namespace ShopManagementDomain.ProductCategoryAgg;
 
@@ -6,6 +7,7 @@ public class ProductCategory : EntityBase<long>
 {
     public ProductCategory()
     {
+        Products = new List<Product>();
     }
 
     public ProductCategory(string title, string picture, string pictureAlt, string pictureTitle, string metaDescription,
@@ -34,6 +36,8 @@ public class ProductCategory : EntityBase<long>
     public string Keywords { get; private set; }
 
     public string Slug { get; private set; }
+
+    public List<Product> Products { get; }
 
     public void Edit(string title, string picture, string pictureAlt, string pictureTitle, string metaDescription,
         string keywords, string slug)

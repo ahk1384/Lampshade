@@ -13,29 +13,10 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
     private readonly IProductCategoryRepository _repository = repository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public ProductCategoryViewModel Get(long id)
+    
+    public List<ProductCategoryViewModel> GetProductCategories()
     {
-        var p1 = _repository.Get(id);
-        return new ProductCategoryViewModel
-        {
-            Title = p1.Title,
-            CreationDate = p1.CreationDate.ToString(CultureInfo.InvariantCulture),
-            Description = p1.Description,
-            Id = p1.Id,
-            Picture = p1.Picture
-        };
-    }
-
-    public List<ProductCategoryViewModel> GetAll()
-    {
-        return _repository.GetAll().Select(x => new ProductCategoryViewModel
-        {
-            Title = x.Title,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
-            Description = x.Description,
-            Id = x.Id,
-            Picture = x.Picture
-        }).ToList();
+        return _repository.GetProductCategories();
     }
 
     public OperationResult Add(CreateProductCategory productCategory)
@@ -69,7 +50,6 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
             p1.Edit(productCategory.Title, productCategory.Picture, productCategory.PictureAlt,
                 productCategory.PictureTitle, productCategory.MetaDescription, productCategory.Keywords,
                 productCategory.Slug);
-            //_repository.Edit(p1);
         }
         catch (Exception e)
         {
@@ -87,7 +67,7 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         _unitOfWork.BeginTran();
         try
         {
-            _repository.Remove(id);
+            _repository.Get(id).Remove();
         }
         catch (Exception e)
         {
@@ -105,7 +85,7 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         _unitOfWork.BeginTran();
         try
         {
-            _repository.Restore(id);
+            _repository.Get(id).Restore();
         }
         catch (Exception e)
         {
@@ -127,8 +107,8 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         return _repository.GetDetails(id);
     }
 
-    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
+    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel,bool showDeleted =false)
     {
-        return _repository.Search(searchModel);
+        return _repository.Search(searchModel,showDeleted);
     }
 }

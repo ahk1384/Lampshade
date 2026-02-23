@@ -19,7 +19,7 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
 
         public void OnGet()
         {
-            ProductCategories = _productCategoryApplication.GetAll();
+            //ProductCategories = _productCategoryApplication.GetAll();
         }
     }
 }

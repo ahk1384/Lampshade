@@ -1,0 +1,117 @@
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
+using ShopManagement.Application.Contracts.ProductAgg;
+using ShopManagement.Application.Contracts.ProductCategoryAgg;
+using ShopManagementDomain.ProductAgg;
+using ShopManagementDomain.ProductCategoryAgg;
+using System.Globalization;
+
+namespace ShopManagement.Application;
+
+public class ProductApplication : IProductApplication
+{
+    private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IProductCategoryRepository _productCategoryRepository;
+    public ProductApplication(IProductRepository productRepository, IUnitOfWork unitOfWork, IProductCategoryRepository productCategoryRepository)
+    {
+        _productRepository = productRepository;
+        _productCategoryRepository = productCategoryRepository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public OperationResult Add(CreateProduct product)
+    {
+        var operationResult = new OperationResult();
+        _unitOfWork.BeginTran();
+        try
+        {
+            var p1 = new Product(product.Name, product.Code, product.ShortDescription, product.Description, product.Picture.ToString(), product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug, product.CategoryId);
+            _productRepository.Create(p1);
+        }
+        catch (Exception e)
+        {
+            _unitOfWork.Rollback();
+            return operationResult.Fail();
+        }
+
+        _unitOfWork.CommitTran();
+        return operationResult.Success();
+    }
+
+    public OperationResult Edit(EditProduct product)
+    {
+        var operationResult = new OperationResult();
+        _unitOfWork.BeginTran();
+        try
+        {
+            var p1 = _productRepository.Get(product.Id);
+            p1.Edit(product.Name, product.Code, product.ShortDescription, product.Description, product.Picture.ToString(), product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug, product.CategoryId);
+            //_productRepository.Edit(p1);
+        }
+        catch (Exception e)
+        {
+            _unitOfWork.Rollback();
+            return operationResult.Fail();
+        }
+
+        _unitOfWork.CommitTran();
+        return operationResult.Success();
+    }
+
+    public OperationResult Remove(long id)
+    {
+        var operationResult = new OperationResult();
+        _unitOfWork.BeginTran();
+        try
+        {
+            _productRepository.Get(id).Remove();
+        }
+        catch (Exception e)
+        {
+            _unitOfWork.Rollback();
+            return operationResult.Fail();
+        }
+
+        _unitOfWork.CommitTran();
+        return operationResult.Success();
+    }
+
+    public OperationResult Restore(long id)
+    {
+        var operationResult = new OperationResult();
+        _unitOfWork.BeginTran();
+        try
+        {
+            _productRepository.Get(id).Restore();
+        }
+        catch (Exception e)
+        {
+            _unitOfWork.Rollback();
+            return operationResult.Fail();
+        }
+
+        _unitOfWork.CommitTran();
+        return operationResult.Success();
+    }
+
+    public List<EditProduct> GetList()
+    {
+        return _productRepository.GetList();
+    }
+
+    public EditProduct? GetDetails(long id)
+    {
+        return _productRepository.GetDetails(id);
+    }
+
+    public List<ProductViewModel> Search(ProductSearchModel searchModel, bool showDeleted = false)
+    {
+        return _productRepository.Search(searchModel, showDeleted);
+    }
+
+    public List<ProductViewModel> GetProducts()
+    {
+        return _productRepository.GetProducts();
+    }
+}

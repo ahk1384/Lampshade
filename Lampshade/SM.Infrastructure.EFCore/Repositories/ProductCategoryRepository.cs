@@ -17,7 +17,7 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
 
     public EditProductCategory? GetDetails(long id)
     {
-        return _context.Products.Select(x => new EditProductCategory
+        return _context.ProductCategories.Select(x => new EditProductCategory
         {
             Id = x.Id,
             Title = x.Title,
@@ -32,9 +32,30 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
         }).FirstOrDefault(x => x.Id == id);
     }
 
+    public List<ProductCategoryViewModel> GetProductCategories()
+    {
+        return _context.ProductCategories.Select(x => new ProductCategoryViewModel
+        {
+            Id = x.Id,
+            Title = x.Title
+        }).ToList();
+    }
+
+    public ProductCategoryViewModel GetProductCategory(long id)
+    {
+        return _context.ProductCategories.Where(x => x.Id == id).Select(x => new ProductCategoryViewModel
+        {
+            Id = x.Id,
+            Title = x.Title,
+            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
+            Description = x.Description,
+            Picture = x.Picture
+        }).FirstOrDefault();
+    }
+
     public List<EditProductCategory> GetList()
     {
-        return _context.Products.Select(x => new EditProductCategory
+        return _context.ProductCategories.Select(x => new EditProductCategory
         {
             Id = x.Id,
             Title = x.Title,
@@ -48,9 +69,13 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
             Slug = x.Slug
         }).ToList();
     }
-    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
+
+    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel, bool showDeleted)
     {
-        var query = _context.Products.Select(x => new ProductCategoryViewModel
+        var res = showDeleted
+            ? _context.ProductCategories.Where(x => x.IsDeleted)
+            : _context.ProductCategories.Where(x => !x.IsDeleted);
+       var query = res.Select(x => new ProductCategoryViewModel
         {
             Id = x.Id,
             Title = x.Title,
