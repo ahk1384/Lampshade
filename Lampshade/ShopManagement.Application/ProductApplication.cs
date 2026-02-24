@@ -23,6 +23,8 @@ public class ProductApplication : IProductApplication
     public OperationResult Add(CreateProduct product)
     {
         var operationResult = new OperationResult();
+        if (_productRepository.Exists(x => x.Name == product.Name))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {
@@ -42,6 +44,8 @@ public class ProductApplication : IProductApplication
     public OperationResult Edit(EditProduct product)
     {
         var operationResult = new OperationResult();
+        if (_productRepository.Exists(x => x.Name == product.Name))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {

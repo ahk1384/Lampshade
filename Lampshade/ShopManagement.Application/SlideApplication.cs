@@ -23,6 +23,8 @@ public class SlideApplication : ISlideApplication
     public OperationResult Create(CreateSlide command)
     {
         var operationResult = new OperationResult();
+        if (_slideRepository.Exists(x => x.Picture == command.Picture.ToString()))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {
@@ -42,6 +44,8 @@ public class SlideApplication : ISlideApplication
     public OperationResult Edit(EditSlide command)
     {
         var operationResult = new OperationResult();
+        if (_slideRepository.Exists(x => x.Picture == command.Picture.ToString()))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {

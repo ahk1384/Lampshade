@@ -1,15 +1,15 @@
 ﻿@page
-@model ServiceHost.Areas.Adminstrator.Pages.Shop.ProductPictures.IndexModel
+@model ServiceHost.Areas.Adminstrator.Pages.Discounts.CustomerDiscount.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
-    ViewData["title"] = "مدیریت عکس محصولات";
+    ViewData["title"] = "مدیریت تخفیفات مشتری";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد عکس محصول جدید</a>
+            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد تخفیف جدید</a>
         </p>
     </div>
 </div>
@@ -18,17 +18,25 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">جستجو در عکس محصولات</h3>
+                <h3 class="panel-title">جستجو در تخفیفات</h3>
             </div>
             <div class="panel-body">
                 <form class="form-inline" role="form" method="get">
                     <div class="form-group">
-                        <label class="sr-only" asp-for="SearchModel.ProductPictureId"></label>
-                        <input class="form-control" asp-for="SearchModel.ProductPictureId" placeholder="ایدی عکس">
+                        <label class="sr-only" asp-for="SearchModel.ProductId"></label>
+                        <input class="form-control" asp-for="SearchModel.ProductId" placeholder="ایدی محصول">
                     </div>
                     <div class="form-group">
-                        <label class="sr-only" asp-for="SearchModel.ProductName"></label>
-                        <input class="form-control" asp-for="SearchModel.ProductName" placeholder="نام محصول">
+                        <label class="sr-only" asp-for="SearchModel.StartDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.EndDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.EndDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.Reason"></label>
+                        <input class="form-control" asp-for="SearchModel.Reason" placeholder="دلیل تخفیف">
                     </div>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
                     <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index" asp-page-handler="Active">مشاهده همه</a>
@@ -43,7 +51,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">لیست عکس محصولات (@Model.ProductPictures.Count)</h3>
+                <h3 class="panel-title">لیست تخفیف مشتریان (@Model.CustomerDiscounts.Count)</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -52,21 +60,25 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>عکس</th>
                                 <th>محصول</th>
-                                <th>تاریخ تولید</th>
+                                <th>درصد تخفیف</th>
+                                <th>تاریخ شروع</th>
+                                <th>تاریخ پایان</th>
+                                <th>دلیل تخفیف</th>
+                                <th>تاریخ ایجاد</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach (var item in Model.ProductPictures)
+                            @foreach (var item in Model.CustomerDiscounts)
                             {
                                 <tr>
                                     <td>@item.Id</td>
-                                    <td>
-                                        <img src="~/CustomerDiscounts/@item.Picture" style="height: 70px; width: 70px;"/>
-                                    </td>
                                     <td>@item.Product</td>
+                                    <td>@item.DiscountRate</td>
+                                    <td>@item.StartDate</td>
+                                    <td>@item.EndDate</td>
+                                    <td>@item.Reason</td>
                                     <td>@item.CreationDate</td>
                                     <td>
                                         <a class="btn btn-warning pull-right m-rl-5"

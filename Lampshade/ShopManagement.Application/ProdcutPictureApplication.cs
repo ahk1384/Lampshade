@@ -20,6 +20,8 @@ public class ProductPictureApplication : IProductPictureApplication
     public OperationResult Create(CreateProductPicture command)
     {
         var operationResult = new OperationResult();
+        if (_pictureRepository.Exists(x => x.Picture == command.Picture.ToString()))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         var pictureProduct = new ProductPicture(command.ProductId, command.Picture.ToString(), command.PictureAlt,
             command.PictureTitle);
         _unitOfWork.BeginTran();
@@ -42,6 +44,8 @@ public class ProductPictureApplication : IProductPictureApplication
     public OperationResult Edit(EditProductPicture command)
     {
         var operationResult = new OperationResult();
+        if (_pictureRepository.Exists(x => x.Picture == command.Picture.ToString()))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {

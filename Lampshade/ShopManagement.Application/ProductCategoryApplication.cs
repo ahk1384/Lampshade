@@ -22,6 +22,8 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
     public OperationResult Add(CreateProductCategory productCategory)
     {
         var operationResult = new OperationResult();
+        if (_repository.Exists(x => x.Title == productCategory.Title))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {
@@ -43,6 +45,8 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
     public OperationResult Edit(EditProductCategory productCategory)
     {
         var operationResult = new OperationResult();
+        if (_repository.Exists(x => x.Title == productCategory.Title))
+            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _unitOfWork.BeginTran();
         try
         {

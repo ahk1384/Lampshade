@@ -24,9 +24,8 @@ public class ShopContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new ProductCategoryMapping());
-        modelBuilder.ApplyConfiguration(new ProductPictureMapping());
-        modelBuilder.ApplyConfiguration(new ProductMapping());
+        var assembly = typeof(ProductCategoryMapping).Assembly;
+        modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         base.OnModelCreating(modelBuilder);
     }
 }
