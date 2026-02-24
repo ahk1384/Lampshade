@@ -78,7 +78,7 @@
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
-    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+/*    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);*/
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }

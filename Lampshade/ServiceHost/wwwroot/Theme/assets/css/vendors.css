@@ -22365,7 +22365,7 @@ a.text-dark:hover {
     -ms-overflow-style: none;
     -ms-touch-action: auto;
     overflow: hidden !important;
-    overflow-anchor: none;
+/*    overflow-anchor: none;*/
     touch-action: auto;
 }
 

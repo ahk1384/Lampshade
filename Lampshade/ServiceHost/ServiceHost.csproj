@@ -15,6 +15,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopManagment.Infrastructure.Configuration\ShopManagement.Infrastructure.Configuration.csproj" />
+    <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Shared\Components\ProductCategoryWithProduct\" />
   </ItemGroup>
 
 </Project>

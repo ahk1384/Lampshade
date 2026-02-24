@@ -9,7 +9,7 @@
     color: #87cefa;
     display: none;
     opacity: .95;
-    pointer-event: none;
+/*    pointer-event: none;*/
     position: absolute;
     z-index: 1;
 }

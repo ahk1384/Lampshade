@@ -2165,7 +2165,7 @@ body.fixed-left .side-menu.left {
     margin-bottom: 30px;
     padding-bottom: 20px;
     position: relative;
-    webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+/*    webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);*/
 }
 
 .pricing-header {
