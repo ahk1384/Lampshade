@@ -11,13 +11,9 @@ namespace ShopManagement.Application;
 public class ProductApplication : IProductApplication
 {
     private readonly IProductRepository _productRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IProductCategoryRepository _productCategoryRepository;
-    public ProductApplication(IProductRepository productRepository, IUnitOfWork unitOfWork, IProductCategoryRepository productCategoryRepository)
+    public ProductApplication(IProductRepository productRepository)
     {
         _productRepository = productRepository;
-        _productCategoryRepository = productCategoryRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public OperationResult Add(CreateProduct product)
@@ -25,7 +21,7 @@ public class ProductApplication : IProductApplication
         var operationResult = new OperationResult();
         if (_productRepository.Exists(x => x.Name == product.Name))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _productRepository.BeginTran();
         try
         {
             var p1 = new Product(product.Name, product.Code, product.ShortDescription, product.Description, product.Picture.ToString(), product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug, product.CategoryId);
@@ -33,11 +29,11 @@ public class ProductApplication : IProductApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _productRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _productRepository.CommitTran();
         return operationResult.Success();
     }
 
@@ -46,7 +42,7 @@ public class ProductApplication : IProductApplication
         var operationResult = new OperationResult();
         if (_productRepository.Exists(x => x.Name == product.Name))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _productRepository.BeginTran();
         try
         {
             var p1 = _productRepository.Get(product.Id);
@@ -55,47 +51,47 @@ public class ProductApplication : IProductApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _productRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _productRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Remove(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _productRepository.BeginTran();
         try
         {
             _productRepository.Get(id).Remove();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _productRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _productRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Restore(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _productRepository.BeginTran();
         try
         {
             _productRepository.Get(id).Restore();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _productRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _productRepository.CommitTran();
         return operationResult.Success();
     }
 

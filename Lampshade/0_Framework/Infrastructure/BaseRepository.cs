@@ -32,4 +32,20 @@ public class BaseRepository<TKey, T> : IRepository<TKey, T> where T : EntityBase
     {
         return _context.Set<T>().Any(expression);
     }
+
+    public void CommitTran()
+    {
+        _context.Database.CommitTransaction();
+        _context.SaveChanges();
+    }
+
+    public void BeginTran()
+    {
+        _context.Database.BeginTransaction();
+    }
+
+    public void Rollback()
+    {
+        _context.Database.RollbackTransaction();
+    }
 }

@@ -1,4 +1,5 @@
-using DiscountManagemenet.Infrastructure.Configuration;
+using DiscountManagement.Infrastructure.Configuration;
+using InventoryManagement.Infrastructure.Configuration;
 using ShopManagement.Infrastructure.Configuration;
 
 namespace ServiceHost
@@ -10,8 +11,9 @@ namespace ServiceHost
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            ShopManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
             DiscountManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
+            ShopManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
+            InventoryManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
             builder.Services.AddRazorPages();
 
             var app = builder.Build();

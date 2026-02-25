@@ -1,4 +1,4 @@
-using DiscountManagmenet.Application.Contracts.CustomerDiscount;
+using DiscountManagement.Application.Contracts.CustomerDiscount;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,13 +28,10 @@ public class IndexModel : PageModel
     {
         // Ensure SearchModel is not null so the view's asp-for bindings work even when user leaves fields empty
         SearchModel = searchModel ?? new CustomerDiscountSearchModel();
+
         var allProducts = _productApplication.GetProducts();
         Products = new SelectList(allProducts, "Id", "Name");
         CustomerDiscounts = _customerDiscountApplication.Search(SearchModel, WatchDeleted);
-        foreach (var discount in CustomerDiscounts)
-        {
-            discount.Product = allProducts.FirstOrDefault(x => x.Id == discount.ProductId)?.Name;
-        }
         watch = WatchDeleted;
     }
 

@@ -9,12 +9,10 @@ namespace ShopManagement.Application;
 public class ProductPictureApplication : IProductPictureApplication
 {
     private readonly IProductPictureRepository _pictureRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public ProductPictureApplication(IProductPictureRepository pictureRepository, IUnitOfWork unitOfWork)
+    public ProductPictureApplication(IProductPictureRepository pictureRepository)
     {
         _pictureRepository = pictureRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public OperationResult Create(CreateProductPicture command)
@@ -24,7 +22,7 @@ public class ProductPictureApplication : IProductPictureApplication
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         var pictureProduct = new ProductPicture(command.ProductId, command.Picture.ToString(), command.PictureAlt,
             command.PictureTitle);
-        _unitOfWork.BeginTran();
+        _pictureRepository.BeginTran();
         try
         {
             var p1 = new ProductPicture(pictureProduct.ProductId, pictureProduct.Picture.ToString(), pictureProduct.PictureAlt,
@@ -33,11 +31,11 @@ public class ProductPictureApplication : IProductPictureApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _pictureRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _pictureRepository.CommitTran();
         return operationResult.Success();
     }
 
@@ -46,7 +44,7 @@ public class ProductPictureApplication : IProductPictureApplication
         var operationResult = new OperationResult();
         if (_pictureRepository.Exists(x => x.Picture == command.Picture.ToString()))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _pictureRepository.BeginTran();
         try
         {
             var productPicture= _pictureRepository.Get(command.Id);
@@ -54,47 +52,47 @@ public class ProductPictureApplication : IProductPictureApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _pictureRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _pictureRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Remove(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _pictureRepository.BeginTran();
         try
         {
             _pictureRepository.Get(id).Remove();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _pictureRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _pictureRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Restore(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _pictureRepository.BeginTran();
         try
         {
             _pictureRepository.Get(id).Restore();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _pictureRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _pictureRepository.CommitTran();
         return operationResult.Success();
     }
 

@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiscountManagmenet.Infrastructure.Configuration\DiscountManagmenet.Infrastructure.Configuration.csproj" />
+    <ProjectReference Include="..\DiscountManagmenet.Infrastructure.Configuration\DiscountManagement.Infrastructure.Configuration.csproj" />
+    <ProjectReference Include="..\InventoryManagement.Infrastructure.Configuration\InventoryManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\ShopManagment.Infrastructure.Configuration\ShopManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj" />
   </ItemGroup>

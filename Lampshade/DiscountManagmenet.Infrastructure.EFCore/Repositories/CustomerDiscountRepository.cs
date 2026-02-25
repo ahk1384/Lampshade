@@ -1,11 +1,11 @@
-﻿using _0_Framework.Application;
+﻿using System.Security.Cryptography.X509Certificates;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
-using DiscountManagemenet.Infrastructure.EFCore;
-using DiscountManagmenet.Application.Contracts.CustomerDiscount;
-using DiscountManagment.Domain.CustomerDiscountAgg;
+using DiscountManagement.Application.Contracts.CustomerDiscount;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 using SM.Infrastructure.EFCore;
 
-namespace DiscountManagmenet.Infrastructure.EFCore.Repositories;
+namespace DiscountManagement.Infrastructure.EFCore.Repositories;
 
 public class CustomerDiscountRepository : BaseRepository<long, CustomerDiscount> ,ICustomerDiscountRepository
 {
@@ -48,8 +48,12 @@ public class CustomerDiscountRepository : BaseRepository<long, CustomerDiscount>
             Reason = x.Reason,
             CreationDate = x.CreationDate.ToFarsi()
         });
-        if (searchModel.ProductId > 0)
-            query = query.Where(x => x.ProductId == searchModel.ProductId);
+
+        if (searchModel.ProductId>0)
+        {
+            query = query.Where(x => x.ProductId.ToString().Contains(searchModel.ProductId.ToString()));
+        }
+
         if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
         {
             query = query.Where(x => x.StartDateGr <= searchModel.StartDate.ToGeorgianDateTime());
@@ -63,7 +67,13 @@ public class CustomerDiscountRepository : BaseRepository<long, CustomerDiscount>
             query = query.Where(x => x.Reason.Contains(searchModel.Reason));
 
         }
-
-        return query.OrderByDescending(x => x.Id).ToList();
+        var results = query.ToList();
+        foreach (var discount in results)
+        {
+            discount.Product = products.FirstOrDefault(c => c.Id == discount.ProductId)?.Name;
+        }
+        if (!string.IsNullOrWhiteSpace(searchModel.Product))
+            results = results.Where(x => x.Product.Contains(searchModel.Product)).ToList();
+        return results.OrderByDescending(x => x.Id).ToList();
     }
 }

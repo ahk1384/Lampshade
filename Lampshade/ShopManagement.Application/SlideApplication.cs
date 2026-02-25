@@ -11,12 +11,10 @@ public class SlideApplication : ISlideApplication
 {
     //private readonly IFileUploader _fileUploader;
     private readonly ISlideRepository _slideRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public SlideApplication(ISlideRepository slideRepository, IUnitOfWork unitOfWork)
+    public SlideApplication(ISlideRepository slideRepository)
     {
         _slideRepository = slideRepository;
-        _unitOfWork = unitOfWork;
     }
 
 
@@ -25,7 +23,7 @@ public class SlideApplication : ISlideApplication
         var operationResult = new OperationResult();
         if (_slideRepository.Exists(x => x.Picture == command.Picture.ToString()))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _slideRepository.BeginTran();
         try
         {
             var p1 = new Slide(command.Picture.ToString(),command.PictureAlt,command.PictureTitle,command.Heading,command.Title,command.BtnText,command.Link,command.BtnText);
@@ -33,11 +31,11 @@ public class SlideApplication : ISlideApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _slideRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _slideRepository.CommitTran();
         return operationResult.Success();
     }
 
@@ -46,7 +44,7 @@ public class SlideApplication : ISlideApplication
         var operationResult = new OperationResult();
         if (_slideRepository.Exists(x => x.Picture == command.Picture.ToString()))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _slideRepository.BeginTran();
         try
         {
             var p1 = _slideRepository.Get(command.Id);
@@ -55,47 +53,47 @@ public class SlideApplication : ISlideApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _slideRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _slideRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Remove(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _slideRepository.BeginTran();
         try
         {
             _slideRepository.Get(id).Remove();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _slideRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _slideRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Restore(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _slideRepository.BeginTran();
         try
         {
             _slideRepository.Get(id).Restore();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _slideRepository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _slideRepository.CommitTran();
         return operationResult.Success();
     }
 

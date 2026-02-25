@@ -2,7 +2,7 @@
 using _0_Framework.Application;
 using ShopManagement.Application.Contracts.ProductAgg;
 
-namespace DiscountManagmenet.Application.Contracts.CustomerDiscount;
+namespace DiscountManagement.Application.Contracts.CustomerDiscount;
 
 public class DefineCustomerDiscount
 {

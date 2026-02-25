@@ -1,21 +1,17 @@
 ﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
-using DiscountManagmenet.Application.Contracts.CustomerDiscount;
-using DiscountManagment.Domain.CustomerDiscountAgg;
-using System.Diagnostics.CodeAnalysis;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using DiscountManagement.Application.Contracts.CustomerDiscount;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 
-namespace DiscountManagmenet.Application;
+namespace DiscountManagement.Application;
 
 public class CustomerDiscountApplication : ICustomerDiscountApplication
 {
     private readonly ICustomerDiscountRepository _customerDiscountRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public CustomerDiscountApplication(ICustomerDiscountRepository customerDiscountRepository, IUnitOfWork unitOfWork)
+    public CustomerDiscountApplication(ICustomerDiscountRepository customerDiscountRepository)
     {
         _customerDiscountRepository = customerDiscountRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public OperationResult Define(DefineCustomerDiscount command)
@@ -24,7 +20,7 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         if (_customerDiscountRepository.Exists(x =>
                 x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _customerDiscountRepository.BeginTran();
         try
         {
             var discount = new CustomerDiscount(command.ProductId, command.DiscountRate,
@@ -33,11 +29,11 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _customerDiscountRepository.Rollback();
             return operationResult.Fail(e.Message);
         }
 
-        _unitOfWork.CommitTran();
+        _customerDiscountRepository.CommitTran();
         return operationResult.Success();
     }
 
@@ -53,7 +49,7 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
 
             return operationResult.Fail(ApplicationMessages.InvalidDateRange);
 
-        _unitOfWork.BeginTran();
+        _customerDiscountRepository.BeginTran();
         try
         {
             var discount = _customerDiscountRepository.Get(command.Id);
@@ -62,11 +58,11 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _customerDiscountRepository.Rollback();
             return operationResult.Fail(e.Message);
         }
 
-        _unitOfWork.CommitTran();
+        _customerDiscountRepository.CommitTran();
         return operationResult.Success();
     }
 
@@ -83,7 +79,7 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
     public OperationResult Remove(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _customerDiscountRepository.BeginTran();
         try
         {
             var discount = _customerDiscountRepository.Get(id);
@@ -91,18 +87,18 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _customerDiscountRepository.Rollback();
             return operationResult.Fail(e.Message);
         }
 
-        _unitOfWork.CommitTran();
+        _customerDiscountRepository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Restore(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _customerDiscountRepository.BeginTran();
         try
         {
             var discount = _customerDiscountRepository.Get(id);
@@ -110,11 +106,11 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _customerDiscountRepository.Rollback();
             return operationResult.Fail(e.Message);
         }
 
-        _unitOfWork.CommitTran();
+        _customerDiscountRepository.CommitTran();
         return operationResult.Success();
     }
 }

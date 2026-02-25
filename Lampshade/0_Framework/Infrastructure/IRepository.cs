@@ -9,4 +9,10 @@ public interface IRepository<in TKey, T> where T : EntityBase<TKey>
     T Get(TKey id);
     List<T> GetAll();
     bool Exists(Expression<Func<T, bool>> expression);
+
+    void CommitTran();
+
+    void BeginTran();
+
+    void Rollback();
 }

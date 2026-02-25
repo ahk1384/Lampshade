@@ -1,13 +1,15 @@
 ﻿using _0_Framework.Infrastructure;
-using DiscountManagemenet.Infrastructure.EFCore;
-using DiscountManagmenet.Application;
-using DiscountManagmenet.Application.Contracts.CustomerDiscount;
-using DiscountManagmenet.Infrastructure.EFCore.Repositories;
-using DiscountManagment.Domain.CustomerDiscountAgg;
+using DiscountManagement.Application;
+using DiscountManagement.Application.Contracts.ColleagueDiscount;
+using DiscountManagement.Application.Contracts.CustomerDiscount;
+using DiscountManagement.Domain.ColleagueDiscountAgg;
+using DiscountManagement.Domain.CustomerDiscountAgg;
+using DiscountManagement.Infrastructure.EFCore;
+using DiscountManagement.Infrastructure.EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiscountManagemenet.Infrastructure.Configuration;
+namespace DiscountManagement.Infrastructure.Configuration;
 
 public class DiscountManagementBootstrapper 
 {
@@ -16,7 +18,9 @@ public class DiscountManagementBootstrapper
         services.AddTransient<ICustomerDiscountRepository, CustomerDiscountRepository>();
         services.AddTransient<ICustomerDiscountApplication, CustomerDiscountApplication>();
 
-        services.AddTransient<IUnitOfWork, UnitOfWorkDiscount>();
+        services.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
+        services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
+
         services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
     }
 }

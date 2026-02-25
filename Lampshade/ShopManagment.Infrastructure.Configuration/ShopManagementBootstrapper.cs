@@ -38,7 +38,6 @@ public class ShopManagementBootstrapper
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
 
-        services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
 
     }

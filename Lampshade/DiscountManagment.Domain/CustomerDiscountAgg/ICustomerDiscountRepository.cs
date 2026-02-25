@@ -1,7 +1,7 @@
 ﻿using _0_Framework.Infrastructure;
-using DiscountManagmenet.Application.Contracts.CustomerDiscount;
+using DiscountManagement.Application.Contracts.CustomerDiscount;
 
-namespace DiscountManagment.Domain.CustomerDiscountAgg;
+namespace DiscountManagement.Domain.CustomerDiscountAgg;
 
 public interface ICustomerDiscountRepository : IRepository<long,CustomerDiscount>
 {

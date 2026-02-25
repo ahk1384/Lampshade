@@ -7,11 +7,11 @@ using System.Globalization;
 
 namespace ShopManagement.Application;
 
-public class ProductCategoryApplication(IProductCategoryRepository repository, IUnitOfWork unitOfWork)
+public class ProductCategoryApplication(IProductCategoryRepository repository)
     : IProductCategoryApplication
 {
     private readonly IProductCategoryRepository _repository = repository;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
 
     
     public List<ProductCategoryViewModel> GetProductCategories()
@@ -24,7 +24,7 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         var operationResult = new OperationResult();
         if (_repository.Exists(x => x.Title == productCategory.Title))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _repository.BeginTran();
         try
         {
             var p1 = new ProductCategory(productCategory.Title, productCategory.Picture, productCategory.PictureAlt,
@@ -34,11 +34,11 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _repository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _repository.CommitTran();
         return operationResult.Success();
     }
 
@@ -47,7 +47,7 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         var operationResult = new OperationResult();
         if (_repository.Exists(x => x.Title == productCategory.Title))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-        _unitOfWork.BeginTran();
+        _repository.BeginTran();
         try
         {
             var p1 = _repository.Get(productCategory.Id);
@@ -57,47 +57,47 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _repository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _repository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Remove(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _repository.BeginTran();
         try
         {
             _repository.Get(id).Remove();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _repository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _repository.CommitTran();
         return operationResult.Success();
     }
 
     public OperationResult Restore(long id)
     {
         var operationResult = new OperationResult();
-        _unitOfWork.BeginTran();
+        _repository.BeginTran();
         try
         {
             _repository.Get(id).Restore();
         }
         catch (Exception e)
         {
-            _unitOfWork.Rollback();
+            _repository.Rollback();
             return operationResult.Fail();
         }
 
-        _unitOfWork.CommitTran();
+        _repository.CommitTran();
         return operationResult.Success();
     }
 

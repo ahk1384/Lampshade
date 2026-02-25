@@ -1,6 +1,6 @@
 ﻿using _0_Framework.Domain;
 
-namespace DiscountManagment.Domain.CustomerDiscountAgg;
+namespace DiscountManagement.Domain.CustomerDiscountAgg;
 
 public class CustomerDiscount : EntityBase<long>
 {

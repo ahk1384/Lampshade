@@ -1,15 +1,27 @@
 <Solution>
-  <Folder Name="/DiscoutManagemenet/" />
-  <Folder Name="/DiscoutManagemenet/Dm.Application/">
-    <Project Path="DiscountManagmenet.Application.Contracts/DiscountManagmenet.Application.Contracts.csproj" Id="2e8e66fb-8612-45a5-8fa3-f8a7478bc4cc" />
-    <Project Path="DiscountManagmenet.Application/DiscountManagmenet.Application.csproj" Id="602f8f3f-0b99-47e0-9011-c8976f98c59e" />
+  <Folder Name="/DiscoutManagement/" />
+  <Folder Name="/DiscoutManagement/Dm.Application/">
+    <Project Path="DiscountManagmenet.Application.Contracts/DiscountManagement.Application.Contracts.csproj" Id="2e8e66fb-8612-45a5-8fa3-f8a7478bc4cc" />
+    <Project Path="DiscountManagmenet.Application/DiscountManagement.Application.csproj" Id="602f8f3f-0b99-47e0-9011-c8976f98c59e" />
   </Folder>
-  <Folder Name="/DiscoutManagemenet/DM.Domain/">
-    <Project Path="DiscountManagment.Domain/DiscountManagment.Domain.csproj" Id="cc6a286e-055f-4645-adcd-b3093184b52f" />
+  <Folder Name="/DiscoutManagement/DM.Domain/">
+    <Project Path="DiscountManagment.Domain/DiscountManagement.Domain.csproj" Id="cc6a286e-055f-4645-adcd-b3093184b52f" />
   </Folder>
-  <Folder Name="/DiscoutManagemenet/DM.Infrastructure/">
-    <Project Path="DiscountManagmenet.Infrastructure.Configuration/DiscountManagmenet.Infrastructure.Configuration.csproj" Id="b88d18fe-2ecc-46c4-b3e8-bc9fe3e66f4d" />
-    <Project Path="DiscountManagmenet.Infrastructure.EFCore/DiscountManagmenet.Infrastructure.EFCore.csproj" Id="7316b6ae-cf53-4cf7-90c4-6c609331c9b7" />
+  <Folder Name="/DiscoutManagement/DM.Infrastructure/">
+    <Project Path="DiscountManagmenet.Infrastructure.Configuration/DiscountManagement.Infrastructure.Configuration.csproj" Id="b88d18fe-2ecc-46c4-b3e8-bc9fe3e66f4d" />
+    <Project Path="DiscountManagmenet.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj" Id="7316b6ae-cf53-4cf7-90c4-6c609331c9b7" />
+  </Folder>
+  <Folder Name="/InventoryManagement/" />
+  <Folder Name="/InventoryManagement/IM.Application/">
+    <Project Path="InventoryManagement.Application.Contracts/InventoryManagement.Application.Contracts.csproj" Id="bc08c15c-ce95-4bf1-a8b7-3c12d7e56167" />
+    <Project Path="InventoryManagement.Application/InventoryManagement.Application.csproj" Id="b971b61d-604c-4090-927c-97116e35282c" />
+  </Folder>
+  <Folder Name="/InventoryManagement/IM.Domain/">
+    <Project Path="InventoryManagement.Domain/InventoryManagement.Domain.csproj" Id="0648b140-2a26-4dfe-9af4-d0f13585f8ef" />
+  </Folder>
+  <Folder Name="/InventoryManagement/IM.Infrastructure/">
+    <Project Path="InventoryManagement.Infrastructure.Configuration/InventoryManagement.Infrastructure.Configuration.csproj" Id="40f0ff92-2450-4e87-84f8-cc5e5aef4156" />
+    <Project Path="InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj" Id="d868b480-a0f7-4f06-be48-63c9ae294c82" />
   </Folder>
   <Folder Name="/ShopManagement/" />
   <Folder Name="/ShopManagement/SM.Application/">

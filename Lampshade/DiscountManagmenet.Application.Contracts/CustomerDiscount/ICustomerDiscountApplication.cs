@@ -1,6 +1,6 @@
 ﻿using _0_Framework.Application;
 
-namespace DiscountManagmenet.Application.Contracts.CustomerDiscount;
+namespace DiscountManagement.Application.Contracts.CustomerDiscount;
 
 public interface ICustomerDiscountApplication
 {
