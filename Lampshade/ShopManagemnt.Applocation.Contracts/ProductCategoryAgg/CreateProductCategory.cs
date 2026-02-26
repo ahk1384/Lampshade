@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Application;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace ShopManagement.Application.Contracts.ProductCategoryAgg;
 
@@ -11,8 +12,8 @@ public class CreateProductCategory
     public string Description { get; set; } = string.Empty;
 
     public string CreationDate { get; set; }
-    [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string Picture { get; set; }
+
+    public IFormFile? Picture { get; set; }
 
     public string PictureAlt { get; set; }
 

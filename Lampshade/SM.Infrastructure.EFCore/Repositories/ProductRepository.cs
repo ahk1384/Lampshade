@@ -30,7 +30,6 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             Code = x.Code,
             CategoryId = x.CategoryId,
             Slug = x.Slug,
-            Picture = new FormFile(new MemoryStream(x.Picture.Length), 0, x.Picture.Length, "file", x.Picture),
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             Keywords = x.Keywords,
@@ -88,22 +87,22 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
         }).ToList();
     }
 
-    public List<EditProduct> GetList()
-    {
-        return _context.Products.Select(x => new EditProduct()
-        {
-            Id = x.Id,
-            Name = x.Name,
-            Code = x.Code,
-            CategoryId = x.CategoryId,
-            Slug = x.Slug,
-            Picture = new FormFile(new MemoryStream(x.Picture.Length), 0, x.Picture.Length, "file", x.Picture),
-            PictureAlt = x.PictureAlt,
-            PictureTitle = x.PictureTitle,
-            Keywords = x.Keywords,
-            MetaDescription = x.MetaDescription,
-            Description = x.Description,
-            ShortDescription = x.ShortDescription
-        }).ToList();
-    }
+    //public List<EditProduct> GetList()
+    //{
+    //    return _context.Products.Select(x => new EditProduct()
+    //    {
+    //        Id = x.Id,
+    //        Name = x.Name,
+    //        Code = x.Code,
+    //        CategoryId = x.CategoryId,
+    //        Slug = x.Slug,
+    //        Picture = x.Picture,
+    //        PictureAlt = x.PictureAlt,
+    //        PictureTitle = x.PictureTitle,
+    //        Keywords = x.Keywords,
+    //        MetaDescription = x.MetaDescription,
+    //        Description = x.Description,
+    //        ShortDescription = x.ShortDescription
+    //    }).ToList();
+    //}
 }

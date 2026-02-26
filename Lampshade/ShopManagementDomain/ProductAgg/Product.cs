@@ -55,7 +55,8 @@ public class Product : EntityBase<long>
         Code = code;
         ShortDescription = shortDescription;
         Description = description;
-        Picture = picture;
+        if (!string.IsNullOrWhiteSpace(picture))
+            Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
         CategoryId = categoryId;

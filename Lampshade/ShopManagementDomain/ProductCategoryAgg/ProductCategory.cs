@@ -10,7 +10,7 @@ public class ProductCategory : EntityBase<long>
         Products = new List<Product>();
     }
 
-    public ProductCategory(string title, string picture, string pictureAlt, string pictureTitle, string metaDescription,
+    public ProductCategory(string title, string picture, string description, string pictureAlt, string pictureTitle, string metaDescription,
         string keywords, string slug)
     {
         Title = title;
@@ -24,7 +24,7 @@ public class ProductCategory : EntityBase<long>
 
     public string Title { get; private set; }
 
-    public string Description { get; private set; } = string.Empty;
+    public string Description { get; private set; }
 
     public string Picture { get; private set; }
     public string PictureAlt { get; private set; }
@@ -39,11 +39,13 @@ public class ProductCategory : EntityBase<long>
 
     public List<Product> Products { get; }
 
-    public void Edit(string title, string picture, string pictureAlt, string pictureTitle, string metaDescription,
+    public void Edit(string title, string picture, string description, string pictureAlt, string pictureTitle, string metaDescription,
         string keywords, string slug)
     {
         Title = title;
-        Picture = picture;
+        if (!string.IsNullOrWhiteSpace(picture))
+            Picture = picture;
+        Description = description;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
         MetaDescription = metaDescription;

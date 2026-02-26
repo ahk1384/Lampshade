@@ -11,9 +11,12 @@ namespace ShopManagement.Application;
 public class ProductApplication : IProductApplication
 {
     private readonly IProductRepository _productRepository;
-    public ProductApplication(IProductRepository productRepository)
+    private readonly IFileUploader _fileUploader;
+
+    public ProductApplication(IProductRepository productRepository, IFileUploader fileUploader)
     {
         _productRepository = productRepository;
+        _fileUploader = fileUploader;
     }
 
     public OperationResult Add(CreateProduct product)
@@ -24,7 +27,13 @@ public class ProductApplication : IProductApplication
         _productRepository.BeginTran();
         try
         {
-            var p1 = new Product(product.Name, product.Code, product.ShortDescription, product.Description, product.Picture.ToString(), product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug, product.CategoryId);
+            var slug = product.Slug.Slugify();
+
+            var picturePath = $"{product.Slug}";
+            var pictureName = _fileUploader.Upload(product.Picture, picturePath);
+            var p1 = new Product(product.Name, product.Code, product.ShortDescription, product.Description, pictureName,
+                product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug,
+                product.CategoryId);
             _productRepository.Create(p1);
         }
         catch (Exception e)
@@ -40,14 +49,17 @@ public class ProductApplication : IProductApplication
     public OperationResult Edit(EditProduct product)
     {
         var operationResult = new OperationResult();
-        if (_productRepository.Exists(x => x.Name == product.Name))
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _productRepository.BeginTran();
         try
         {
             var p1 = _productRepository.Get(product.Id);
-            p1.Edit(product.Name, product.Code, product.ShortDescription, product.Description, product.Picture.ToString(), product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug, product.CategoryId);
-            //_productRepository.Edit(p1);
+            var slug = product.Slug.Slugify();
+
+            var picturePath = $"{product.Slug}";
+            var pictureName = _fileUploader.Upload(product.Picture, picturePath);
+            p1.Edit(product.Name, product.Code, product.ShortDescription, product.Description, pictureName,
+                product.PictureAlt, product.PictureTitle, product.MetaDescription, product.Keywords, product.Slug,
+                product.CategoryId);
         }
         catch (Exception e)
         {
@@ -93,11 +105,6 @@ public class ProductApplication : IProductApplication
 
         _productRepository.CommitTran();
         return operationResult.Success();
-    }
-
-    public List<EditProduct> GetList()
-    {
-        return _productRepository.GetList();
     }
 
     public EditProduct? GetDetails(long id)

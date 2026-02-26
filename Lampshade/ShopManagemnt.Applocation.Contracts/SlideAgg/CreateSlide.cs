@@ -6,7 +6,7 @@ namespace ShopManagement.Application.Contracts.SlideAgg;
 
 public class CreateSlide
 {
-    public IFormFile Picture { get; set; }
+    public IFormFile? Picture { get; set; }
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string PictureAlt { get; set; }

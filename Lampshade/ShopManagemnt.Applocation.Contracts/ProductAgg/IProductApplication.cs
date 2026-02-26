@@ -13,7 +13,7 @@ public interface IProductApplication
 
     OperationResult Restore(long id);
 
-    List<EditProduct> GetList();
+    //List<EditProduct> GetList();
 
     EditProduct? GetDetails(long id);
 

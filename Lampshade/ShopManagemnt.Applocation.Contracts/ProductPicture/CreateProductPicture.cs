@@ -12,13 +12,12 @@ public class CreateProductPicture
     public long ProductId { get; set; }
 
     //[MaxFileSize(1 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
-    public IFormFile Picture { get; set; }
+    public IFormFile? Picture { get; set; }
 
     //[Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string PictureAlt { get; set; }
 
     //[Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string PictureTitle { get; set; }
-
     public List<ProductViewModel> Products { get; set; }
 }

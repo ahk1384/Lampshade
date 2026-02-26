@@ -4,15 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
 using System.Globalization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application;
 
-public class ProductCategoryApplication(IProductCategoryRepository repository)
+public class ProductCategoryApplication(IProductCategoryRepository repository, IFileUploader fileUploader)
     : IProductCategoryApplication
 {
     private readonly IProductCategoryRepository _repository = repository;
 
-
+    private readonly IFileUploader _fileUploader = fileUploader;
     
     public List<ProductCategoryViewModel> GetProductCategories()
     {
@@ -27,7 +28,11 @@ public class ProductCategoryApplication(IProductCategoryRepository repository)
         _repository.BeginTran();
         try
         {
-            var p1 = new ProductCategory(productCategory.Title, productCategory.Picture, productCategory.PictureAlt,
+            var slug = productCategory.Slug.Slugify();
+
+            var picturePath = $"{productCategory.Slug}";
+            var pictureName = _fileUploader.Upload(productCategory.Picture, picturePath);
+            var p1 = new ProductCategory(productCategory.Title, pictureName, productCategory.Description, productCategory.PictureAlt,
                 productCategory.PictureTitle, productCategory.MetaDescription, productCategory.Keywords,
                 productCategory.Slug);
             _repository.Create(p1);
@@ -45,13 +50,16 @@ public class ProductCategoryApplication(IProductCategoryRepository repository)
     public OperationResult Edit(EditProductCategory productCategory)
     {
         var operationResult = new OperationResult();
-        if (_repository.Exists(x => x.Title == productCategory.Title))
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _repository.BeginTran();
         try
         {
             var p1 = _repository.Get(productCategory.Id);
-            p1.Edit(productCategory.Title, productCategory.Picture, productCategory.PictureAlt,
+            var slug = productCategory.Slug.Slugify();
+
+            var picturePath = $"{productCategory.Slug}";
+            var pictureName = _fileUploader.Upload(productCategory.Picture, picturePath);
+
+            p1.Edit(productCategory.Title, pictureName, productCategory.PictureAlt,productCategory.Description,
                 productCategory.PictureTitle, productCategory.MetaDescription, productCategory.Keywords,
                 productCategory.Slug);
         }

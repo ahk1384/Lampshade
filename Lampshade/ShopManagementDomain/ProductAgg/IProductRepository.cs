@@ -13,5 +13,5 @@ public interface IProductRepository : IRepository<long,Product>
 
     List<ProductViewModel> GetProducts();
 
-    List<EditProduct> GetList();
+
 }

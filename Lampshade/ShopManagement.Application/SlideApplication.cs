@@ -2,6 +2,7 @@
 using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.SlideAgg;
 using ShopManagementDomain.ProductAgg;
+using ShopManagementDomain.ProductCategoryAgg;
 using ShopManagementDomain.SlideAgg;
 using System.Collections.Generic;
 
@@ -9,12 +10,15 @@ namespace ShopManagement.Application;
 
 public class SlideApplication : ISlideApplication
 {
-    //private readonly IFileUploader _fileUploader;
+    private readonly IFileUploader _fileUploader;
     private readonly ISlideRepository _slideRepository;
+    private readonly IProductRepository _productRepository;
 
-    public SlideApplication(ISlideRepository slideRepository)
+    public SlideApplication(ISlideRepository slideRepository, IFileUploader fileUploader, IProductRepository productRepository)
     {
         _slideRepository = slideRepository;
+        _fileUploader = fileUploader;
+        _productRepository = productRepository;
     }
 
 
@@ -26,7 +30,8 @@ public class SlideApplication : ISlideApplication
         _slideRepository.BeginTran();
         try
         {
-            var p1 = new Slide(command.Picture.ToString(),command.PictureAlt,command.PictureTitle,command.Heading,command.Title,command.BtnText,command.Link,command.BtnText);
+            var pictureName = _fileUploader.Upload(command.Picture, "slides");
+            var p1 = new Slide(pictureName,command.PictureAlt,command.PictureTitle,command.Heading,command.Title,command.BtnText,command.Link,command.BtnText);
             _slideRepository.Create(p1);
         }
         catch (Exception e)
@@ -42,14 +47,14 @@ public class SlideApplication : ISlideApplication
     public OperationResult Edit(EditSlide command)
     {
         var operationResult = new OperationResult();
-        if (_slideRepository.Exists(x => x.Picture == command.Picture.ToString()))
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+        //if (_slideRepository.Exists(x => x.Picture == command.Picture))
+        //    return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+        var pictureName = _fileUploader.Upload(command.Picture, "slides");
         _slideRepository.BeginTran();
         try
         {
             var p1 = _slideRepository.Get(command.Id);
-            p1.Edit(command.Picture.ToString(), command.PictureAlt, command.PictureTitle, command.Heading, command.Title, command.BtnText, command.Link, command.BtnText);
-            //_productRepository.Edit(p1);
+            p1.Edit(pictureName, command.PictureAlt, command.PictureTitle, command.Heading, command.Title, command.BtnText, command.Link, command.BtnText);
         }
         catch (Exception e)
         {
