@@ -22,6 +22,7 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
         if (_repository.Exists(x =>
                 x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+        _repository.BeginTran();
         try
         {
             var discount = new ColleagueDiscount(command.ProductId, command.DiscountRate);
@@ -43,7 +44,6 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
         if (_repository.Exists(x =>
                 x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
-
         _repository.BeginTran();
         try
         {
