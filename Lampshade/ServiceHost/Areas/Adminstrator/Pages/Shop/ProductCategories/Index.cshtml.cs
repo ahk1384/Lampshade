@@ -1,11 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using ShopManagement.Application.Contracts.ProductCategoryAgg;
-using System.Collections.Generic;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
+using ShopManagement.Application.Contracts.ProductCategoryAgg;
+using System.Collections.Generic;
 
 namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
 {
@@ -47,6 +48,20 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
 
         public JsonResult OnPostCreate(CreateProductCategory command)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                    .Where(m => !string.IsNullOrWhiteSpace(m))
+                    .ToList();
+
+                var message = errors.Any()
+                    ? string.Join(" | ", errors)
+                    : "Validation failed";
+
+                return new JsonResult(new OperationResult().Fail(message));
+            }
             var result = _productCategoryApplication.Add(command);
             return new JsonResult(result);
         }
@@ -59,8 +74,19 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
 
         public JsonResult OnPostEdit(EditProductCategory command)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                    .Where(m => !string.IsNullOrWhiteSpace(m))
+                    .ToList();
+
+                var message = errors.Any()
+                    ? string.Join(" | ", errors)
+                    : "Validation failed";
+
+                return new JsonResult(new OperationResult().Fail(message));
             }
 
             var result = _productCategoryApplication.Edit(command);

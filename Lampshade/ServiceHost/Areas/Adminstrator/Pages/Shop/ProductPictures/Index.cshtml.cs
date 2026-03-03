@@ -1,3 +1,4 @@
+using _0_Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -59,6 +60,20 @@ public class IndexModel : PageModel
     //[NeedsPermission(ShopPermissions.CreateProduct)]
     public JsonResult OnPostCreate(CreateProductPicture command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
         var result = _productPictureApplication.Create(command);
         return new JsonResult(result);
     }
@@ -73,6 +88,20 @@ public class IndexModel : PageModel
     //[NeedsPermission(ShopPermissions.EditProduct)]
     public JsonResult OnPostEdit(EditProductPicture command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
         var result = _productPictureApplication.Edit(command);
         return new JsonResult(result);
     }

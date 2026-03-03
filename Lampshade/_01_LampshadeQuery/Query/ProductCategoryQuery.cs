@@ -82,7 +82,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 PictureTitle = x.PictureTitle,
                 Products = MapProducts(x.Products),
                 Slug = x.Slug,
-            }).ToList();
+            }).AsNoTracking().ToList();
     }
 
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()

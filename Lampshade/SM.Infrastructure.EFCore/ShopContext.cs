@@ -5,7 +5,6 @@ using ShopManagementDomain.ProductCategoryAgg;
 using ShopManagementDomain.ProductPictureAgg;
 using ShopManagementDomain.SlideAgg;
 using SM.Infrastructure.EFCore.Mapping;
-using SM.Infrastructure.EFCore.Migrations;
 
 namespace SM.Infrastructure.EFCore;
 

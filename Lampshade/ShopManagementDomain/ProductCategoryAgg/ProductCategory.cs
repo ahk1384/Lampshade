@@ -17,6 +17,7 @@ public class ProductCategory : EntityBase<long>
         Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
+        Description = description;
         MetaDescription = metaDescription;
         Keywords = keywords;
         Slug = slug;

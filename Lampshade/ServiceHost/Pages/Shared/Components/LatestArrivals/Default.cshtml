@@ -44,8 +44,8 @@
                                             @if (product.HasDiscount)
                                             {
                                                 <span class="sale">-@product.DiscountRate%</span>
-                                                <span class="new">جدید</span>
                                             }
+                                            <span class="new">جدید</span>
                                         </div>
                                         <a asp-page="/Product" asp-route-id="@product.Slug">
                                             <img src="~/ProductPictures/@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">

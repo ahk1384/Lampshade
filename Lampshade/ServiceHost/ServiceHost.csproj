@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlogManagemenet.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\DiscountManagmenet.Infrastructure.Configuration\DiscountManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.Configuration\InventoryManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\ShopManagment.Infrastructure.Configuration\ShopManagement.Infrastructure.Configuration.csproj" />
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Shared\Components\ProductCategoryWithProduct\" />
+    <Folder Include="wwwroot\ProductPictures\" />
   </ItemGroup>
 
 </Project>

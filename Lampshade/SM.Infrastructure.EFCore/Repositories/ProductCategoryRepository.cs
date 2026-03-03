@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
@@ -21,7 +22,6 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
         {
             Id = x.Id,
             Title = x.Title,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             Description = x.Description,
@@ -46,7 +46,7 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
         {
             Id = x.Id,
             Title = x.Title,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
+            CreationDate = x.CreationDate.ToFarsi(),
             Description = x.Description,
             Picture = x.Picture
         }).FirstOrDefault();
@@ -58,7 +58,6 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
         {
             Id = x.Id,
             Title = x.Title,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             Description = x.Description,
@@ -79,7 +78,7 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
             Title = x.Title,
             Description = x.Description,
             Picture = x.Picture,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
+            CreationDate = x.CreationDate.ToFarsi()
         });
         if (!string.IsNullOrWhiteSpace(searchModel.Name)) query = query.Where(x => x.Title.Contains(searchModel.Name));
 

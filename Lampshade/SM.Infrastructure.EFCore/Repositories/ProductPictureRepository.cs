@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +46,7 @@ public class ProductPictureRepository :BaseRepository<long,ProductPicture>,IProd
         {
             Id = x.Id,
             ProductId = x.ProductId,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
+            CreationDate = x.CreationDate.ToFarsi(),
             IsRemoved = x.IsDeleted,
             Picture = x.Picture,
             Product = x.Product.Name

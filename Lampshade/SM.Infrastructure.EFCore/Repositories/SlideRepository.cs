@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.SlideAgg;
 using ShopManagementDomain.SlideAgg;
@@ -40,7 +41,7 @@ public class SlideRepository : BaseRepository<long, Slide>, ISlideRepository
             Heading = x.Heading,
             Picture = x.Picture,
             Title = x.Title,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
+            CreationDate = x.CreationDate.ToFarsi(),
             IsDeleted = x.IsDeleted
         }).OrderByDescending(x => x.Id).ToList();
     }

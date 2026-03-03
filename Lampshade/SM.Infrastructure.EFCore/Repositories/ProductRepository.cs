@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductAgg;
 using ShopManagementDomain.ProductAgg;
 using System.Linq.Expressions;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using Microsoft.AspNetCore.Http.Internal;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
@@ -53,7 +54,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
                 CategoryId = x.CategoryId,
                 Code = x.Code,
                 Picture = x.Picture,
-                CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
+                CreationDate = x.CreationDate.ToFarsi()
             });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
@@ -83,7 +84,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             CategoryId = x.CategoryId,
             Code = x.Code,
             Picture = x.Picture,
-            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
+            CreationDate = x.CreationDate.ToFarsi()
         }).ToList();
     }
 

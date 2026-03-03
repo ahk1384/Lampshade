@@ -33,7 +33,7 @@
                                  aria-labelledby="product-tab-1">
                                 <div class="single-row-slider-wrapper">
                                     <div class="ht-slick-slider" data-slick-setting='{
-                                    "slidesToShow": 4,
+                                    "slidesToShow": 3,
                                     "slidesToScroll": 1,
                                     "arrows": true,
                                     "autoplay": false,
@@ -53,9 +53,9 @@
                                 ]'>
                                         @foreach (var product in category.Products)
                                         {
-                                            <div class="col">
+                                            <div>
                                                 <div class="single-grid-product">
-                                                    <div class="single-grid-product__image">
+                                                    <div class="single-grid-product__image" >
                                                         @if (product.HasDiscount)
                                                         {
                                                             <div class="single-grid-product__label">
@@ -63,8 +63,7 @@
                                                             </div>
                                                         }
                                                         <a asp-page="/Product" asp-route-id="@product.Slug">
-                                                            <img src="~/ProductPictures/@product.Picture" title="@product.PictureTitle" class="img-fluid"
-                                                                 alt="@product.PictureAlt">
+                                                            <img src="~/ProductPictures/@product.Picture" title="@product.PictureTitle" alt="@product.PictureAlt">
                                                         </a>
                                                     </div>
                                                     <div class="single-grid-product__content">

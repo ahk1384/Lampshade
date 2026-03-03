@@ -1,3 +1,4 @@
+using _0_Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopManagement.Application.Contracts.SlideAgg;
@@ -29,6 +30,20 @@ public class IndexModel : PageModel
 
     public JsonResult OnPostCreate(CreateSlide command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
         var result = _slideApplication.Create(command);
         return new JsonResult(result);
     }
@@ -41,6 +56,20 @@ public class IndexModel : PageModel
 
     public JsonResult OnPostEdit(EditSlide command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
         var result = _slideApplication.Edit(command);
         return new JsonResult(result);
     }

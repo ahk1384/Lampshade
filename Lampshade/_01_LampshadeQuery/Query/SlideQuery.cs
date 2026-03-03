@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _01_LampshadeQuery.Contracts.Slide;
+using Microsoft.EntityFrameworkCore;
 using SM.Infrastructure.EFCore;
 
 namespace _01_LampshadeQuery.Query;
@@ -28,6 +29,6 @@ public class SlideQuery : ISlideQuery
                 Link = x.Link,
                 Text = x.Text,
                 Title = x.Title
-            }).ToList();
+            }).AsNoTracking().ToList();
     }
 }

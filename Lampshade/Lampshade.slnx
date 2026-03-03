@@ -1,4 +1,22 @@
 <Solution>
+  <Folder Name="/BlogManagement/" />
+  <Folder Name="/BlogManagement/BM.Application/">
+    <Project Path="BlogManagement,Application.Contract/BlogManagement.Application.Contract.csproj" Id="dbae0a7e-07d2-45ef-a485-7fc1f6751c16" />
+    <Project Path="BlogManagement.Application/BlogManagement.Application.csproj" Id="f3928290-73a6-4db9-88b8-b0a23436c4c7" />
+  </Folder>
+  <Folder Name="/BlogManagement/BM.Domain/">
+    <Project Path="BlogManagmenet.Domain/BlogManagement.Domain.csproj" Id="9d4acc75-b58e-4ef7-9a97-d9f39573aa11" />
+  </Folder>
+  <Folder Name="/BlogManagement/BM.Infrastructure/">
+    <Project Path="BlogManagemenet.Infrastructure.Configuration/BlogManagement.Infrastructure.Configuration.csproj" Id="e1fdb250-c98c-4cd3-a7c4-29346a68b7e7" />
+    <Project Path="BlogManagement.Infrastructure/BlogManagement.Infrastructure.EFCore.csproj" Id="1fec703f-a087-4696-a154-5f482a71d46b" />
+  </Folder>
+  <Folder Name="/CommentManagement/" />
+  <Folder Name="/CommentManagement/CM,Application/" />
+  <Folder Name="/CommentManagement/CM,Infrastructure/">
+    <Project Path="CommentManagement.Infrastructure.EFCore/CommentManagement.Infrastructure.EFCore.csproj" Id="37b22637-46b8-44bf-a9e5-13d996042227" />
+  </Folder>
+  <Folder Name="/CommentManagement/CM.Domain/" />
   <Folder Name="/DiscoutManagement/" />
   <Folder Name="/DiscoutManagement/Dm.Application/">
     <Project Path="DiscountManagmenet.Application.Contracts/DiscountManagement.Application.Contracts.csproj" Id="2e8e66fb-8612-45a5-8fa3-f8a7478bc4cc" />

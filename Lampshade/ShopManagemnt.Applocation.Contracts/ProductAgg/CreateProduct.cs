@@ -36,7 +36,7 @@ public class CreateProduct
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string MetaDescription { get; set; }
 
-    public List<ProductCategoryViewModel> Categories { get; set; }
+    public List<ProductCategoryViewModel>? Categories { get; set; }
 
 
 }

@@ -1,6 +1,8 @@
+using _0_Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ShopManagement.Application.Contracts.ProductAgg;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 
@@ -15,6 +17,7 @@ public class IndexModel : PageModel
     public ProductSearchModel SearchModel;
     public static bool WatchDeleted = false;
     public bool watch = false;
+
     public IndexModel(IProductApplication productApplication,
         IProductCategoryApplication productCategoryApplication)
     {
@@ -28,7 +31,7 @@ public class IndexModel : PageModel
     public void OnGet(ProductSearchModel searchModel)
     {
         ProductCategories = new SelectList(_productCategoryApplication.GetProductCategories(), "Id", "Title");
-        Products = _productApplication.Search(searchModel,WatchDeleted);
+        Products = _productApplication.Search(searchModel, WatchDeleted);
         watch = WatchDeleted;
     }
 
@@ -40,11 +43,13 @@ public class IndexModel : PageModel
         };
         return Partial("./Create", command);
     }
+
     public RedirectToPageResult OnGetDeleted()
     {
         WatchDeleted = true;
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetActive()
     {
         WatchDeleted = false;
@@ -54,6 +59,21 @@ public class IndexModel : PageModel
     //[NeedsPermission(ShopPermissions.CreateProduct)]
     public JsonResult OnPostCreate(CreateProduct command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
+
         var result = _productApplication.Add(command);
         return new JsonResult(result);
     }
@@ -68,14 +88,30 @@ public class IndexModel : PageModel
     //[NeedsPermission(ShopPermissions.EditProduct)]
     public JsonResult OnPostEdit(EditProduct command)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => string.IsNullOrWhiteSpace(e.ErrorMessage) ? e.Exception?.Message : e.ErrorMessage)
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .ToList();
+
+            var message = errors.Any()
+                ? string.Join(" | ", errors)
+                : "Validation failed";
+
+            return new JsonResult(new OperationResult().Fail(message));
+        }
         var result = _productApplication.Edit(command);
         return new JsonResult(result);
     }
+
     public RedirectToPageResult OnGetRemove(long id)
     {
         _productApplication.Remove(id);
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetRestore(long id)
     {
         _productApplication.Restore(id);
