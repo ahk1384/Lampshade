@@ -8,6 +8,9 @@ using ShopManagementDomain.ProductAgg;
 using ShopManagementDomain.ProductPictureAgg;
 using SM.Infrastructure.EFCore;
 using System.Security.Cryptography.X509Certificates;
+using _01_LampshadeQuery.Contracts.Comment;
+using CommentManagement.Infrastructure.EFCore;
+using CommnetManagement.Infrastructure.EFCore;
 
 namespace _01_LampshadeQuery.Query;
 
@@ -16,18 +19,19 @@ public class ProductQuery : IProductQuery
     private readonly ShopContext _context;
     private readonly DiscountContext _discountContext;
     private readonly InventoryContext _inventoryContext;
-
-    public ProductQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext)
+    private readonly CommentContext _commentContext;
+    public ProductQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext, CommentContext commentContext)
     {
         _context = context;
         _discountContext = discountContext;
         _inventoryContext = inventoryContext;
+        _commentContext = commentContext;
     }
 
     public ProductQueryModel GetProductDetails(string slug)
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice }).ToList();
+            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -38,6 +42,7 @@ public class ProductQuery : IProductQuery
                 Id = product.Id,
                 Category = product.Category.Title,
                 Name = product.Name,
+                Code = product.Code,
                 Picture = product.Picture,
                 PictureAlt = product.PictureAlt,
                 PictureTitle = product.PictureTitle,
@@ -47,7 +52,7 @@ public class ProductQuery : IProductQuery
                 MetaDescription = product.MetaDescription,
                 CategorySlug = product.Category.Slug,
                 Pictures = MapProductPicture(product.ProductPictures),
-                Slug = product.Slug
+                Slug = product.Slug,
             }).AsNoTracking().FirstOrDefault(x =>x.Slug == slug);
 
         
@@ -56,6 +61,7 @@ public class ProductQuery : IProductQuery
             {
                 var price = productInventory.UnitPrice;
                 product.Price = price.ToMoney();
+                product.IsInStock = productInventory.InStock;
                 var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                 if (discount != null)
                 {
@@ -67,7 +73,22 @@ public class ProductQuery : IProductQuery
                     product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
             }
-        
+            product.Comments = _commentContext.Comments
+                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsConfirmed)
+                .Where(x => x.Type == CommentType.Product)
+                .Where(x => x.OwnerRecordId == product.Id)
+                .Select(x => new CommentQueryModel
+                {
+                    Id = x.Id,
+                    Message = x.Message,
+                    Name = x.Name,
+                    Type = x.Type,
+                    CreationDate = x.CreationDate.ToFarsi()
+                })
+                .OrderByDescending(x => x.Id)
+                .ToList();
+
         return product;
     }
 

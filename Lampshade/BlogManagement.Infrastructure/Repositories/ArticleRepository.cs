@@ -10,7 +10,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repositories;
 public class ArticleRepository : BaseRepository<long,Article>, IArticleRepository
 {
     private readonly BlogContext _blogContext;
-    public ArticleRepository(DbContext context, BlogContext blogContext) : base(context)
+    public ArticleRepository(BlogContext blogContext) : base(blogContext)
     {
         _blogContext = blogContext;
     }

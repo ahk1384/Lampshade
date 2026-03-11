@@ -1,4 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using _01_LampshadeQuery.Contracts.Article;
+using _01_LampshadeQuery.Contracts.ArticleCategory;
+using _01_LampshadeQuery.Query;
 using BlogManagement_Application.Contract.ArticleAgg;
 using BlogManagement_Application.Contract.ArticleCategoryAgg;
 using BlogManagement.Application;
@@ -20,6 +23,10 @@ public class BlogManagementBootstrapper
 
         services.AddTransient<IArticleCategoryRepository, ArticleCategoryRepository>();
         services.AddTransient<IArticleCategoryApplication, ArticleCategoryApplication>();
+
+
+        services.AddTransient<IArticleQuery, ArticleQuery>();
+        services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
 
         services.AddDbContext<BlogContext>(a=>a.UseSqlServer(connectionString));
     }

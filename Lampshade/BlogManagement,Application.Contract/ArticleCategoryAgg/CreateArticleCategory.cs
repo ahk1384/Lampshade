@@ -32,5 +32,5 @@ public class CreateArticleCategory
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string MetaDescription { get; set; }
 
-    public string CanonicalAddress { get; set; }
+    public string? CanonicalAddress { get; set; } = "";
 }

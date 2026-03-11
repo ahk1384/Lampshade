@@ -36,12 +36,12 @@
                                 <li class="menu-item-has-children">
                                     <a>مقالات</a>
                                     <ul class="sub-menu">
-                                        @* @foreach (var category in Model.ArticleCategories)
-                                        { *@
+                                        @foreach (var category in Model.ArticleCategories)
+                                        {
                                         <li>
-                                            @* <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a> *@
+                                            <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a>
                                         </li>
-                                        @* } *@
+                                        }
                                     </ul>
                                 </li>
                                 <li>
@@ -215,12 +215,12 @@
                     <li class="menu-item-has-children">
                         <a href="#">مقالات</a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="blog-left-sidebar.html">گروه مقاله1</a>
-                            </li>
-                            <li>
-                                <a href="blog-right-sidebar.html">گروه مقاله2</a>
-                            </li>
+                            @foreach (var category in Model.ArticleCategories)
+                            {
+                                <li>
+                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                </li>
+                            }
                         </ul>
                     </li>
                     <li class="">

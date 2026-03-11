@@ -20,6 +20,7 @@
     <ProjectReference Include="..\BlogManagement.Application\BlogManagement.Application.csproj" />
     <ProjectReference Include="..\BlogManagement.Infrastructure\BlogManagement.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\BlogManagmenet.Domain\BlogManagement.Domain.csproj" />
+    <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj" />
   </ItemGroup>
 
 </Project>

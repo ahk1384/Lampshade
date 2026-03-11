@@ -1,7 +1,6 @@
 ﻿using BlogManagement.Domain.ArticleCategoryAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Identity.Client;
 
 namespace BlogManagement.Infrastructure.EFCore.Mapping;
 

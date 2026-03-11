@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogManagemenet.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
+    <ProjectReference Include="..\CommentManagement.Infrastructure.Configuration\CommentManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\DiscountManagmenet.Infrastructure.Configuration\DiscountManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.Configuration\InventoryManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\ShopManagment.Infrastructure.Configuration\ShopManagement.Infrastructure.Configuration.csproj" />

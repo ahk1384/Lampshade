@@ -1,25 +1,36 @@
-using System.Runtime.InteropServices;
 using _01_LampshadeQuery.Contracts.Product;
+using CommentManagement.Application.Contracts.Comment;
+using CommnetManagement.Infrastructure.EFCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Runtime.InteropServices;
 
 namespace ServiceHost.Pages
 {
     public class ProductModel : PageModel
     {
-        private readonly IProductQuery _product;
+        private readonly ICommentApplication _commentApplication;
+        private readonly IProductQuery _productQuery;
+        public ProductQueryModel Product;
 
-        public ProductModel(IProductQuery product)
+        public ProductModel(IProductQuery product, IProductQuery productQuery, ICommentApplication commentApplication)
         {
-            _product = product;
+            _productQuery = productQuery;
+            _commentApplication = commentApplication;
+            _productQuery = product;
         }
 
-        public ProductQueryModel Product { get; set; }
 
 
         public void OnGet(string id)
         {
-            Product = _product.GetProductDetails(id);
+            Product = _productQuery.GetProductDetails(id);
+        }
+        public IActionResult OnPost(AddComment command, string productSlug)
+        {
+            command.Type = CommentType.Product;
+            var result = _commentApplication.Add(command);
+            return RedirectToPage("/Product", new { Id = productSlug });
         }
     }
 }

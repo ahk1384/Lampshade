@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlogManagement.Infrastructure\BlogManagement.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\BlogManagmenet.Domain\BlogManagement.Domain.csproj" />
+    <ProjectReference Include="..\CommentManagement.Domain\CommentManagement.Domain.csproj" />
+    <ProjectReference Include="..\CommentManagement.Infrastructure.EFCore\CommentManagement.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\DiscountManagmenet.Infrastructure.EFCore\DiscountManagement.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\DiscountManagment.Domain\DiscountManagement.Domain.csproj" />
     <ProjectReference Include="..\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />

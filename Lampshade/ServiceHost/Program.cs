@@ -1,5 +1,6 @@
 using _0_Framework.Application;
 using BlogManagement.Infrastructure.Configuration;
+using CommentManagement.Infrastructure.Configuration;
 using DiscountManagement.Infrastructure.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using ShopManagement.Infrastructure.Configuration;
@@ -17,6 +18,8 @@ namespace ServiceHost
             ShopManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
             InventoryManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
             BlogManagementBootstrapper.Configure(builder.Services, builder.Configuration.GetConnectionString("LampShadeDB"));
+            CommentManagementBootstrapper.Configure(builder.Services,
+                builder.Configuration.GetConnectionString("LampShadeDB"));
             builder.Services.AddTransient<IFileUploader, FileUploader>();
             builder.Services.AddRazorPages();
 

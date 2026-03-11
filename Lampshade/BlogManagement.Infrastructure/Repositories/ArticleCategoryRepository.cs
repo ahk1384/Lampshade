@@ -11,7 +11,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repositories;
 public class ArticleCategoryRepository : BaseRepository<long,ArticleCategory> , IArticleCategoryRepository
 {
     private readonly BlogContext _blogContext;
-    public ArticleCategoryRepository(DbContext context, BlogContext blogContext) : base(context)
+    public ArticleCategoryRepository(BlogContext blogContext) : base(blogContext)
     {
         _blogContext = blogContext;
     }
