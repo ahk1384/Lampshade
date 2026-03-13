@@ -1,13 +1,10 @@
 ﻿using _0_Framework.Application;
 using _01_LampshadeQuery.Contracts.Product;
-using _01_LampshadeQuery.Contracts.ProductCategory;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
-using ShopManagementDomain.ProductAgg;
 using ShopManagementDomain.ProductPictureAgg;
 using SM.Infrastructure.EFCore;
-using System.Security.Cryptography.X509Certificates;
 using _01_LampshadeQuery.Contracts.Comment;
 using CommentManagement.Infrastructure.EFCore;
 using CommnetManagement.Infrastructure.EFCore;

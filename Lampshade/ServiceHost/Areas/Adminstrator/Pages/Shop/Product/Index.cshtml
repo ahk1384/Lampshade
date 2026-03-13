@@ -1,14 +1,15 @@
 ﻿@page
+@using ShopManagement.Infrastructure.Configuration.Permissions
 @model ServiceHost.Areas.Adminstrator.Pages.Shop.Product.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
-    ViewData["title"] = "مدیریت گروه محصولات";
+    ViewData["title"] = "مدیریت محصولات";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
-        <p class="pull-left">
+        <p permission="ShopPermissions.CreateProduct" class="pull-left">
             <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد محصول جدید</a>
         </p>
     </div>
@@ -16,7 +17,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <div permission="ShopPermissions.SearchProducts" class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">جستجو در محصولات</h3>
             </div>
@@ -79,20 +80,20 @@
                                     <td>@item.Category</td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a class="btn btn-warning pull-right m-rl-5"
+                                        <a permission="ShopPermissions.EditProduct"class="btn btn-warning pull-right m-rl-5"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>
                                         @if (Model.watch)
                                         {
-                                            <a class="btn btn-success pull-right m-rl-5"
+                                            <a permission="@ShopPermissions.RemoveAndRestoreProduct" class="btn btn-success pull-right m-rl-5"
                                                asp-page-handler="Restore" , asp-route-id="@item.Id">
                                                 <i class="fa fa-refresh"></i> بازگردانی
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="btn btn-danger pull-right m-rl-5"
+                                            <a permission="@ShopPermissions.RemoveAndRestoreProduct" class="btn btn-danger pull-right m-rl-5"
                                                asp-page-handler="Remove" , asp-route-id="@item.Id">
                                                 <i class="fa fa-remove"></i> حذف
                                             </a>

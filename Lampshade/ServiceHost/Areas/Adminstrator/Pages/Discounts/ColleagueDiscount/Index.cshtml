@@ -1,4 +1,5 @@
 ﻿@page
+@using DiscountManagement.Infrastructure.Configuration.Permissions
 @model ServiceHost.Areas.Adminstrator.Pages.Discounts.ColleagueDiscount.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
@@ -8,7 +9,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
-        <p class="pull-left">
+        <p permission="@DiscountPermissions.DefineColleagueDiscount" class="pull-left">
             <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد تخفیف جدید</a>
         </p>
     </div>
@@ -16,7 +17,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <div permission="@DiscountPermissions.SearchColleagueDiscount" class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">جستجو در تخفیفات</h3>
             </div>
@@ -67,20 +68,20 @@
                                     <td>@item.DiscountRate</td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a class="btn btn-warning pull-right m-rl-5"
+                                        <a permission="@DiscountPermissions.EditColleagueDiscount" class="btn btn-warning pull-right m-rl-5"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>
                                         @if (Model.watch)
                                         {
-                                            <a class="btn btn-success pull-right m-rl-5"
+                                            <a permission="@DiscountPermissions.RemoveAndRestoreColleagueDiscount" class="btn btn-success pull-right m-rl-5"
                                                asp-page-handler="Restore" , asp-route-id="@item.Id">
                                                 <i class="fa fa-refresh"></i> بازگردانی
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="btn btn-danger pull-right m-rl-5"
+                                            <a permission="@DiscountPermissions.RemoveAndRestoreColleagueDiscount" class="btn btn-danger pull-right m-rl-5"
                                                asp-page-handler="Remove" , asp-route-id="@item.Id">
                                                 <i class="fa fa-remove"></i> حذف
                                             </a>

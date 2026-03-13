@@ -2,7 +2,7 @@ using CommentManagement.Application.Contracts.Comment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ServiceHost.Areas.Adminstrator.Pages.Comment
+namespace ServiceHost.Areas.Adminstrator.Pages.Comments
 {
     public class IndexModel : PageModel
     {
@@ -25,6 +25,15 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Comment
         public IActionResult OnGetCancel(long id)
         {
             var result = _commentApplication.Cancel(id);
+            if (result.IsSuccess)
+                return RedirectToPage("./Index");
+
+            Message = result.Message;
+            return RedirectToPage("./Index");
+        }
+        public IActionResult OnGetRestore(long id)
+        {
+            var result = _commentApplication.Restore(id);
             if (result.IsSuccess)
                 return RedirectToPage("./Index");
 

@@ -1,4 +1,5 @@
 using _0_Framework.Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,7 +8,6 @@ using ShopManagement.Application.Contracts.ProductAgg;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 
 namespace ServiceHost.Areas.Adminstrator.Pages.Shop.Product;
-
 public class IndexModel : PageModel
 {
     private readonly IProductApplication _productApplication;
@@ -18,6 +18,7 @@ public class IndexModel : PageModel
     public static bool WatchDeleted = false;
     public bool watch = false;
 
+    
     public IndexModel(IProductApplication productApplication,
         IProductCategoryApplication productCategoryApplication)
     {
@@ -28,6 +29,7 @@ public class IndexModel : PageModel
     [TempData] public string Message { get; set; }
 
     //[NeedsPermission(ShopPermissions.ListProducts)]
+    
     public void OnGet(ProductSearchModel searchModel)
     {
         ProductCategories = new SelectList(_productCategoryApplication.GetProductCategories(), "Id", "Title");

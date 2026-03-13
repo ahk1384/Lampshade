@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AccountManagement.Infrastructure.Configuration\AccountManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\BlogManagemenet.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\CommentManagement.Infrastructure.Configuration\CommentManagement.Infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\DiscountManagmenet.Infrastructure.Configuration\DiscountManagement.Infrastructure.Configuration.csproj" />
@@ -25,6 +26,11 @@
   <ItemGroup>
     <Folder Include="Pages\Shared\Components\ProductCategoryWithProduct\" />
     <Folder Include="wwwroot\ProductPictures\" />
+    <Folder Include="wwwroot\ProductPictures\ProfilePhoto\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\ProductPictures\ProfilePhoto\Admin\2026-03-12-16-15-03-profile.jpg" />
   </ItemGroup>
 
 </Project>

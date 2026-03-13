@@ -31,7 +31,7 @@ public class ArticleQuery : IArticleQuery
                 PictureTitle = x.PictureTitle,
                 PublishDate = x.PublishDate.ToFarsi(),
                 ShortDescription = x.ShortDescription
-            }).Take(10).ToList();
+            }).AsNoTracking().Take(10).ToList();
     }
 
     public ArticleQueryModel GetArticleDetails(string slug)
@@ -55,7 +55,7 @@ public class ArticleQuery : IArticleQuery
                 PictureTitle = x.PictureTitle,
                 PublishDate = x.PublishDate.ToFarsi(),
                 ShortDescription = x.ShortDescription
-            }).FirstOrDefault(x => x.Slug == slug);
+            }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         if (!string.IsNullOrWhiteSpace(article.Keywords))
             article.KeywordList = article.Keywords.Split(",").ToList();
@@ -73,7 +73,7 @@ public class ArticleQuery : IArticleQuery
                 Name = x.Name,
                 ParentId = x.parentId,
                 CreationDate = x.CreationDate.ToFarsi()
-            }).OrderByDescending(x => x.Id).ToList();
+            }).AsNoTracking().OrderByDescending(x => x.Id).ToList();
 
         foreach (var comment in comments)
             if (comment.ParentId > 0)

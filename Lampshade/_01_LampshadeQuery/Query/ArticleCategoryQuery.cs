@@ -34,7 +34,7 @@ public class ArticleCategoryQuery : IArticleCategoryQuery
             CanonicalAddress = x.CanonicalAddress,
             ArticlesCount = x.Articles.Count,
             Articles = MapArticles(x.Articles)
-        }).FirstOrDefault(x => x.Slug == slug);
+        }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         if (!string.IsNullOrWhiteSpace(articleCategory.Keywords))
             articleCategory.KeywordList = articleCategory.Keywords.Split(",").ToList();
@@ -67,6 +67,6 @@ public class ArticleCategoryQuery : IArticleCategoryQuery
                 PictureTitle = x.PictureTitle,
                 Slug = x.Slug,
                 ArticlesCount = x.Articles.Count
-            }).ToList();
+            }).AsNoTracking().ToList();
     }
 }

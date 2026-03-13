@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using _0_Framework.Infrastructure;
 using _01_LampshadeQuery.Contracts.Article;
 using _01_LampshadeQuery.Contracts.ArticleCategory;
 using _01_LampshadeQuery.Query;
@@ -7,6 +8,7 @@ using BlogManagement_Application.Contract.ArticleCategoryAgg;
 using BlogManagement.Application;
 using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
+using BlogManagement.Infrastructure.Configuration.Permissions;
 using BlogManagement.Infrastructure.EFCore;
 using BlogManagement.Infrastructure.EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,8 @@ public class BlogManagementBootstrapper
 
         services.AddTransient<IArticleQuery, ArticleQuery>();
         services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
-
+        
+        services.AddTransient<IPermissionExposer, BlogPermissionsExposer>();
         services.AddDbContext<BlogContext>(a=>a.UseSqlServer(connectionString));
     }
 }

@@ -72,6 +72,25 @@ public class CommentApplication : ICommentApplication
 
     }
 
+    public OperationResult Restore(long id)
+    {
+        var operationResult = new OperationResult();
+        _commentRepository.BeginTran();
+        try
+        {
+            var discount = _commentRepository.Get(id);
+            discount.Restore();
+        }
+        catch (Exception e)
+        {
+            _commentRepository.Rollback();
+            return operationResult.Fail(e.Message);
+        }
+
+        _commentRepository.CommitTran();
+        return operationResult.Success();
+    }
+
     public List<CommentViewModel> Search(CommentSearchModel searchModel,bool showDeleted)
     {
         return _commentRepository.Search(searchModel, showDeleted);
