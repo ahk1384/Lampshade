@@ -1,8 +1,6 @@
 ﻿using _0_Framework.Application;
-using BlogManagement.Domain.ArticleAgg;
-using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement_Application.Contract.ArticleCategoryAgg;
-using Microsoft.AspNetCore.JsonPatch.Operations;
+using BlogManagement.Domain.ArticleCategoryAgg;
 
 namespace BlogManagement.Application;
 

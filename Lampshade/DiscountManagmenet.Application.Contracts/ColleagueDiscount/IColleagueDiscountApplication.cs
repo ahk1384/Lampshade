@@ -14,5 +14,5 @@ public interface IColleagueDiscountApplication
 
     EditColleagueDiscount GetDetails(long id);
 
-    List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel,bool watchDeleted);
+    List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel, bool watchDeleted);
 }

@@ -1,5 +1,4 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
@@ -9,11 +8,13 @@ namespace AccountManagement.Application;
 public class AccountApplication : IAccountApplication
 {
     private readonly IAccountRepository _accountRepository;
-    private readonly IFileUploader _fileUploader;
     private readonly IAuthHelper _authHelper;
+    private readonly IFileUploader _fileUploader;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IRoleRepository _roleRepository;
-    public AccountApplication(IAccountRepository accountRepository, IFileUploader fileUploader, IAuthHelper authHelper, IPasswordHasher passwordHasher, IRoleRepository roleRepository)
+
+    public AccountApplication(IAccountRepository accountRepository, IFileUploader fileUploader, IAuthHelper authHelper,
+        IPasswordHasher passwordHasher, IRoleRepository roleRepository)
     {
         _accountRepository = accountRepository;
         _fileUploader = fileUploader;
@@ -41,7 +42,8 @@ public class AccountApplication : IAccountApplication
         try
         {
             var password = _passwordHasher.Hash(command.Password);
-            var account = new Account(command.Fullname,command.Username,password,command.Mobile,command.RoleId," ");
+            var account = new Account(command.Fullname, command.Username, password, command.Mobile, command.RoleId,
+                " ");
             _accountRepository.Create(account);
         }
         catch (Exception e)
@@ -57,7 +59,8 @@ public class AccountApplication : IAccountApplication
     public OperationResult Edit(EditAccount command)
     {
         var operationResult = new OperationResult();
-        if (_accountRepository.Exists(x => (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
+        if (_accountRepository.Exists(x =>
+                (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _accountRepository.BeginTran();
         try
@@ -65,12 +68,9 @@ public class AccountApplication : IAccountApplication
             var Path = $"ProfilePhoto/{command.Username}";
             var pictureName = _fileUploader.Upload(command.ProfilePhoto, Path);
             var account = _accountRepository.Get(command.Id);
-            List<PermissionAccount> permissions =  new List<PermissionAccount>();
-            if(command.Permissions != null)
-            {
-                permissions = SetPermissions(command.Permissions);
-            }
-            account.Edit(command.Fullname,command.Username,command.Mobile,command.RoleId,pictureName,permissions);
+            var permissions = new List<PermissionAccount>();
+            if (command.Permissions != null) permissions = SetPermissions(command.Permissions);
+            account.Edit(command.Fullname, command.Username, command.Mobile, command.RoleId, pictureName, permissions);
         }
         catch (Exception e)
         {
@@ -115,16 +115,16 @@ public class AccountApplication : IAccountApplication
             var res = _passwordHasher.Check(account.Password, command.Password);
             if (!res.Verified)
                 return operationResult.Fail(ApplicationMessages.WrongUserPass);
-            
+
             var rolepermissions = _roleRepository.Get(account.RoleId)
                 .Permissions
                 .Select(x => x.Code)
                 .ToList();
             var accountPermissions = _accountRepository.Get(account.Id).Permissions.Select(x => x.Code).ToList();
-            
+
             var permissions = rolepermissions.Union(accountPermissions).ToList();
-            var authViewModel = new AuthViewModel(account.Id, account.RoleId,account.Role.Name, account.Fullname
-                , account.Username, account.Mobile, permissions,account.ProfilePhoto);
+            var authViewModel = new AuthViewModel(account.Id, account.RoleId, account.Role.Name, account.Fullname
+                , account.Username, account.Mobile, permissions, account.ProfilePhoto);
 
             _authHelper.Signin(authViewModel);
             account.ChangePassword(command.Password);
@@ -133,6 +133,7 @@ public class AccountApplication : IAccountApplication
         {
             return operationResult.Fail(e.Message);
         }
+
         return operationResult.Success();
     }
 
@@ -158,20 +159,17 @@ public class AccountApplication : IAccountApplication
 
     public List<PermissionAccount> SetPermissions(List<int> permissions)
     {
-        List<PermissionAccount> permissionAccounts = new List<PermissionAccount>();
+        var permissionAccounts = new List<PermissionAccount>();
         foreach (var permission in permissions)
         {
-            if (!permissionAccounts.Any(x => x.Code == (permission/100)*100))
-            {
-                permissionAccounts.Add(new PermissionAccount((permission/100)*100));
-            }
-            if (!permissionAccounts.Any(x => x.Code == (permission/1000)*1000))
-            {
-                permissionAccounts.Add(new PermissionAccount((permission/1000)*1000));
-            }
-            
+            if (!permissionAccounts.Any(x => x.Code == permission / 100 * 100))
+                permissionAccounts.Add(new PermissionAccount(permission / 100 * 100));
+            if (!permissionAccounts.Any(x => x.Code == permission / 1000 * 1000))
+                permissionAccounts.Add(new PermissionAccount(permission / 1000 * 1000));
+
             permissionAccounts.Add(new PermissionAccount(permission));
         }
+
         return permissionAccounts;
     }
 }

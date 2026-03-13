@@ -1,5 +1,4 @@
-﻿using CommentManagement.Domain;
-using CommentManagement.Domain.CommentAgg;
+﻿using CommentManagement.Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

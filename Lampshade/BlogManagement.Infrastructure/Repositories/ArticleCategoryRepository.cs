@@ -1,6 +1,4 @@
-﻿
-
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using BlogManagement_Application.Contract.ArticleCategoryAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
@@ -8,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EFCore.Repositories;
 
-public class ArticleCategoryRepository : BaseRepository<long,ArticleCategory> , IArticleCategoryRepository
+public class ArticleCategoryRepository : BaseRepository<long, ArticleCategory>, IArticleCategoryRepository
 {
     private readonly BlogContext _blogContext;
+
     public ArticleCategoryRepository(BlogContext blogContext) : base(blogContext)
     {
         _blogContext = blogContext;
@@ -23,7 +22,8 @@ public class ArticleCategoryRepository : BaseRepository<long,ArticleCategory> , 
 
     public EditArticleCategory GetDetails(long id)
     {
-        return _blogContext.ArticleCategories.Select(x => new EditArticleCategory{
+        return _blogContext.ArticleCategories.Select(x => new EditArticleCategory
+        {
             Id = x.Id,
             Name = x.Name,
             CanonicalAddress = x.CanonicalAddress,
@@ -46,7 +46,7 @@ public class ArticleCategoryRepository : BaseRepository<long,ArticleCategory> , 
         }).ToList();
     }
 
-    public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel , bool showDeleted)
+    public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel, bool showDeleted)
     {
         var res = showDeleted
             ? _blogContext.ArticleCategories.Where(x => x.IsDeleted)

@@ -63,7 +63,7 @@
                 <div class="form-group">
                     <label asp-for="PictureTitle" class="control-label">عنوان</label>
                     <input type="text" class="form-control" asp-for="PictureTitle">
-                    <span asp-validation-for="PictureTitle" class="error"></span> 
+                    <span asp-validation-for="PictureTitle" class="error"></span>
                 </div>
             </div>
         </div>
@@ -71,7 +71,8 @@
             <div class="col-md-12">
                 <div class="form-group no-margin">
                     <label asp-for="ShortDescription" class="control-label">توضیحات</label>
-                    <textarea class="form-control autogrow" asp-for="ShortDescription" onchange="fillField('ShortDescription', 'MetaDescription')"
+                    <textarea class="form-control autogrow" asp-for="ShortDescription"
+                              onchange="fillField('ShortDescription', 'MetaDescription')"
                               style="height: 104px; overflow: hidden; resize: horizontal; word-wrap: break-word;"></textarea>
                     <span asp-validation-for="ShortDescription" class="error"></span>
                 </div>

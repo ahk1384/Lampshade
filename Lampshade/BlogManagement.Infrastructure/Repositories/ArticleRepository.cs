@@ -4,12 +4,12 @@ using BlogManagement_Application.Contract.ArticleAgg;
 using BlogManagement.Domain.ArticleAgg;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace BlogManagement.Infrastructure.EFCore.Repositories;
 
-public class ArticleRepository : BaseRepository<long,Article>, IArticleRepository
+public class ArticleRepository : BaseRepository<long, Article>, IArticleRepository
 {
     private readonly BlogContext _blogContext;
+
     public ArticleRepository(BlogContext blogContext) : base(blogContext)
     {
         _blogContext = blogContext;

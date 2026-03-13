@@ -31,7 +31,7 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetCreate()
     {
-        var command = new CreateAccount()
+        var command = new CreateAccount
         {
             Roles = _roleApplication.List()
         };

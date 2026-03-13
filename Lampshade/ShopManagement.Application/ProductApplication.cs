@@ -1,17 +1,13 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.ProductAgg;
-using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductAgg;
-using ShopManagementDomain.ProductCategoryAgg;
-using System.Globalization;
 
 namespace ShopManagement.Application;
 
 public class ProductApplication : IProductApplication
 {
-    private readonly IProductRepository _productRepository;
     private readonly IFileUploader _fileUploader;
+    private readonly IProductRepository _productRepository;
 
     public ProductApplication(IProductRepository productRepository, IFileUploader fileUploader)
     {

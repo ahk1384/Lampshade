@@ -44,6 +44,7 @@ public class IndexModel : PageModel
 
             return new JsonResult(new OperationResult().Fail(message));
         }
+
         var result = _slideApplication.Create(command);
         return new JsonResult(result);
     }
@@ -70,6 +71,7 @@ public class IndexModel : PageModel
 
             return new JsonResult(new OperationResult().Fail(message));
         }
+
         var result = _slideApplication.Edit(command);
         return new JsonResult(result);
     }

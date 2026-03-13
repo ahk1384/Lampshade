@@ -1,11 +1,16 @@
-﻿using System.Dynamic;
-using System.Reflection.Metadata.Ecma335;
-using _0_Framework.Domain;
+﻿using _0_Framework.Domain;
 
 namespace InventoryManagement.Domain.InventoryAgg;
 
 public class Inventory : EntityBase<long>
 {
+    public Inventory(long productId, double unitPrice)
+    {
+        ProductId = productId;
+        UnitPrice = unitPrice;
+        InStock = false;
+    }
+
     public long ProductId { get; private set; }
 
     public double UnitPrice { get; private set; }
@@ -13,13 +18,6 @@ public class Inventory : EntityBase<long>
     public bool InStock { get; private set; }
 
     public List<InventoryOperation> Operations { get; private set; }
-
-    public Inventory(long productId, double unitPrice)
-    {
-        ProductId = productId;
-        UnitPrice = unitPrice;
-        InStock = false;
-    }
 
     public void Edit(long productId, double unitPrice)
     {
@@ -41,13 +39,11 @@ public class Inventory : EntityBase<long>
         Operations.Add(operation);
         InStock = currentCount > 0;
     }
+
     public bool Reduce(long count, long operatorId, string description)
     {
         var currentCount = CalculateCurrentCount() - count;
-        if (currentCount < 0)
-        {
-            return false;
-        }
+        if (currentCount < 0) return false;
 
         var operation = new InventoryOperation(false, count, operatorId, currentCount, description, 1, Id);
         Operations.Add(operation);

@@ -9,18 +9,21 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Accounts.Account;
 
 public class EditModel : PageModel
 {
+    private readonly IAccountApplication _accountApplication;
     private readonly IEnumerable<IPermissionExposer> _exposers;
     private readonly IRoleApplication _roleApplication;
-    private readonly IAccountApplication _accountApplication;
-    public List<RoleViewModel> roles { get; set; } = new List<RoleViewModel>();
     public EditAccount Command;
     public List<SelectListItem> Permissions = new();
-    public EditModel(IRoleApplication roleApplication, IEnumerable<IPermissionExposer> exposers, IAccountApplication accountApplication)
+
+    public EditModel(IRoleApplication roleApplication, IEnumerable<IPermissionExposer> exposers,
+        IAccountApplication accountApplication)
     {
         _roleApplication = roleApplication;
         _exposers = exposers;
         _accountApplication = accountApplication;
     }
+
+    public List<RoleViewModel> roles { get; set; } = new();
 
     public void OnGet(long id)
     {
@@ -34,7 +37,6 @@ public class EditModel : PageModel
             {
                 var group = new SelectListGroup { Name = key };
                 foreach (var permission in value)
-                {
                     if (!rolePermissions.MappedPermissions.Any(x => x.Code == permission.Code))
                     {
                         var item = new SelectListItem(permission.Name, permission.Code.ToString())
@@ -46,7 +48,6 @@ public class EditModel : PageModel
                             item.Selected = true;
                         Permissions.Add(item);
                     }
-                }
             }
         }
     }

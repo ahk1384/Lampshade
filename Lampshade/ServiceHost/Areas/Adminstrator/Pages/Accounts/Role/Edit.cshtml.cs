@@ -12,6 +12,7 @@ public class EditModel : PageModel
     private readonly IRoleApplication _roleApplication;
     public EditRole Command;
     public List<SelectListItem> Permissions = new();
+
     public EditModel(IRoleApplication roleApplication, IEnumerable<IPermissionExposer> exposers)
     {
         _roleApplication = roleApplication;
@@ -26,9 +27,8 @@ public class EditModel : PageModel
             var exposedPermissions = exposer.Expose();
             foreach (var (key, value) in exposedPermissions)
             {
-                
                 var group = new SelectListGroup { Name = key };
-                
+
                 foreach (var permission in value)
                 {
                     var item = new SelectListItem(permission.Name, permission.Code.ToString())

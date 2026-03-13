@@ -7,8 +7,8 @@
 }
 
 <div class="row">
-    <div  class="col-sm-12">
-        <h4  class="page-title pull-right">@ViewData["title"]</h4>
+    <div class="col-sm-12">
+        <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p permission="@DiscountPermissions.DefineCustomerDiscount" class="pull-left">
             <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد تخفیف جدید</a>
         </p>
@@ -17,7 +17,7 @@
 
 <div class="row">
     <div permission="@DiscountPermissions.SearchCustomerDiscount" class="col-md-12">
-        <div  class="panel panel-default">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">جستجو در تخفیفات</h3>
             </div>
@@ -44,8 +44,10 @@
                         <input class="form-control" asp-for="SearchModel.Reason" placeholder="دلیل تخفیف">
                     </div>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
-                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index" asp-page-handler="Active">مشاهده همه</a>
-                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index" asp-page-handler="Deleted">مشاهده حذف شده ها</a>
+                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index"
+                       asp-page-handler="Active">مشاهده همه</a>
+                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index"
+                       asp-page-handler="Deleted">مشاهده حذف شده ها</a>
                 </form>
             </div>
         </div>
@@ -86,20 +88,23 @@
                                     <td>@item.Reason</td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a permission="@DiscountPermissions.EditCustomerDiscount" class="btn btn-warning pull-right m-rl-5"
+                                        <a permission="@DiscountPermissions.EditCustomerDiscount"
+                                           class="btn btn-warning pull-right m-rl-5"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>
                                         @if (Model.watch)
                                         {
-                                            <a permission="@DiscountPermissions.RemoveAndRestoreCustomerDiscount" class="btn btn-success pull-right m-rl-5"
+                                            <a permission="@DiscountPermissions.RemoveAndRestoreCustomerDiscount"
+                                               class="btn btn-success pull-right m-rl-5"
                                                asp-page-handler="Restore" , asp-route-id="@item.Id">
                                                 <i class="fa fa-refresh"></i> بازگردانی
                                             </a>
                                         }
                                         else
                                         {
-                                            <a permission="@DiscountPermissions.RemoveAndRestoreCustomerDiscount" class="btn btn-danger pull-right m-rl-5"
+                                            <a permission="@DiscountPermissions.RemoveAndRestoreCustomerDiscount"
+                                               class="btn btn-danger pull-right m-rl-5"
                                                asp-page-handler="Remove" , asp-route-id="@item.Id">
                                                 <i class="fa fa-remove"></i> حذف
                                             </a>
@@ -121,9 +126,9 @@
     <script src="~/adminTheme/assets/datatables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').dataTable();
-         
+
         });
     </script>
 }

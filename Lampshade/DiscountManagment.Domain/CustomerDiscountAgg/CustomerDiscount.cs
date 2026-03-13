@@ -4,12 +4,6 @@ namespace DiscountManagement.Domain.CustomerDiscountAgg;
 
 public class CustomerDiscount : EntityBase<long>
 {
-    public long ProductId { get; private set; }
-    public int DiscountRate { get; private set; }
-    public DateTime StartDate { get; private set; }
-    public DateTime EndDate { get; private set; }
-    public string Reason { get; private set; }
-
     public CustomerDiscount(long productId, int discountRate, DateTime startDate, DateTime endDate, string reason)
     {
         ProductId = productId;
@@ -18,6 +12,12 @@ public class CustomerDiscount : EntityBase<long>
         EndDate = endDate;
         Reason = reason;
     }
+
+    public long ProductId { get; private set; }
+    public int DiscountRate { get; private set; }
+    public DateTime StartDate { get; private set; }
+    public DateTime EndDate { get; private set; }
+    public string Reason { get; private set; }
 
     public void Edit(long productId, int discountRate, DateTime startDate, DateTime endDate, string reason)
     {

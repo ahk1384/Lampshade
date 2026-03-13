@@ -1,4 +1,3 @@
-using DiscountManagement.Application.Contracts.CustomerDiscount;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,18 +8,20 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Inventory;
 
 public class IndexModel : PageModel
 {
+    public static bool WatchDeleted;
     private readonly IInventoryApplication _inventoryApplication;
     private readonly IProductApplication _productApplication;
-    public SelectList Products;
     public List<InventoryViewModel> Inventories;
+    public SelectList Products;
     public InventorySearchModel SearchModel;
-    public static bool WatchDeleted = false;
-    public bool watch = false;
+    public bool watch;
+
     public IndexModel(IInventoryApplication inventoryApplication, IProductApplication productApplication)
     {
         _productApplication = productApplication;
         _inventoryApplication = inventoryApplication;
     }
+
     [TempData] public string Message { get; set; }
 
     //[NeedsPermission(ShopPermissions.ListProducts)]
@@ -37,17 +38,19 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetCreate()
     {
-        var command = new CreateInventory()
+        var command = new CreateInventory
         {
             Products = _productApplication.GetProducts()
         };
         return Partial("./Create", command);
     }
+
     public RedirectToPageResult OnGetDeleted()
     {
         WatchDeleted = true;
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetActive()
     {
         WatchDeleted = false;
@@ -74,16 +77,19 @@ public class IndexModel : PageModel
         var result = _inventoryApplication.Edit(command);
         return new JsonResult(result);
     }
+
     public RedirectToPageResult OnGetRemove(long id)
     {
         _inventoryApplication.Remove(id);
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetRestore(long id)
     {
         _inventoryApplication.Restore(id);
         return RedirectToPage("./Index", OnGetDeleted());
     }
+
     public IActionResult OnGetIncrease(long id)
     {
         var command = new IncreaseInventory

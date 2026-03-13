@@ -1,24 +1,23 @@
 using _01_LampshadeQuery.Contracts.Product;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ServiceHost.Pages
+namespace ServiceHost.Pages;
+
+public class SearchModel : PageModel
 {
-    public class SearchModel : PageModel
+    private readonly IProductQuery _productQuery;
+    public string Value;
+
+    public SearchModel(IProductQuery productQuery)
     {
-        private readonly IProductQuery _productQuery;
-        public List<ProductQueryModel> Products { get; set; }
-        public string Value;
+        _productQuery = productQuery;
+    }
 
-        public SearchModel(IProductQuery productQuery)
-        {
-            _productQuery = productQuery;
-        }
+    public List<ProductQueryModel> Products { get; set; }
 
-        public void OnGet(string value)
-        {
-            Products = _productQuery.Search(value);
-            Value = value;
-        }
+    public void OnGet(string value)
+    {
+        Products = _productQuery.Search(value);
+        Value = value;
     }
 }

@@ -21,7 +21,9 @@
     width: 45%;
 }
 
-.ms-container .ms-selection { float: right; }
+.ms-container .ms-selection {
+    float: right;
+}
 
 .ms-container .ms-list {
     -moz-border-radius: 3px;
@@ -57,7 +59,9 @@
     padding: 0;
 }
 
-.ms-container .ms-optgroup-container { width: 100%; }
+.ms-container .ms-optgroup-container {
+    width: 100%;
+}
 
 .ms-container .ms-optgroup-label {
     color: #999;

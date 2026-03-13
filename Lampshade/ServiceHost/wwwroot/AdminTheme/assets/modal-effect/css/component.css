@@ -18,7 +18,9 @@ perspective effects (not including the modals and the overlay).
     perspective: 600px;
 }
 
-.container { min-height: 100%; }
+.container {
+    min-height: 100%;
+}
 
 .md-modal {
     -moz-transform: translateX(-50%) translateY(-50%);
@@ -36,7 +38,9 @@ perspective effects (not including the modals and the overlay).
     z-index: 9999999;
 }
 
-.md-show { visibility: visible; }
+.md-show {
+    visibility: visible;
+}
 
 .md-overlay {
     -moz-transition: all 0.3s;
@@ -81,7 +85,9 @@ perspective effects (not including the modals and the overlay).
     cursor: pointer;
 }
 
-.md-content .md-close-btn a:hover { color: #212121; }
+.md-content .md-close-btn a:hover {
+    color: #212121;
+}
 
 .md-content .md-close {
     font-family: 'Nunito', sans-serif !important;
@@ -116,7 +122,9 @@ perspective effects (not including the modals and the overlay).
     padding: 0 0 30px 20px;
 }
 
-.md-content > div ul li { padding: 5px 0; }
+.md-content > div ul li {
+    padding: 5px 0;
+}
 
 
 /* Individual modal styles with animations/transitions */
@@ -426,10 +434,14 @@ perspective effects (not including the modals and the overlay).
     transition: all 0.3s;
 }
 
-.md-show.md-effect-12 ~ .md-overlay { background: rgba(255, 255, 255, 1); }
+.md-show.md-effect-12 ~ .md-overlay {
+    background: rgba(255, 255, 255, 1);
+}
 
 .md-effect-12 .md-content h3,
-.md-effect-12 .md-content { background: transparent; }
+.md-effect-12 .md-content {
+    background: transparent;
+}
 
 .md-show.md-effect-12 .md-content {
     -moz-transform: scale(1);
@@ -571,7 +583,9 @@ perspective effects (not including the modals and the overlay).
 
 /* Effect 16:  Blur */
 
-.md-show.md-effect-16 ~ .md-overlay { background: rgba(1, 1, 1, 0.6); }
+.md-show.md-effect-16 ~ .md-overlay {
+    background: rgba(1, 1, 1, 0.6);
+}
 
 .md-show.md-effect-16 ~ .container {
     -moz-filter: blur(3px);
@@ -678,7 +692,9 @@ perspective effects (not including the modals and the overlay).
         -webkit-transform: translateZ(-50px) rotateY(5deg);
     }
 
-    100% { -webkit-transform: translateZ(-200px); }
+    100% {
+        -webkit-transform: translateZ(-200px);
+    }
 }
 
 @-moz-keyframes rotateRightSideFirst {
@@ -687,7 +703,9 @@ perspective effects (not including the modals and the overlay).
         -moz-transform: translateZ(-50px) rotateY(5deg);
     }
 
-    100% { -moz-transform: translateZ(-200px); }
+    100% {
+        -moz-transform: translateZ(-200px);
+    }
 }
 
 @keyframes rotateRightSideFirst {
@@ -696,7 +714,9 @@ perspective effects (not including the modals and the overlay).
         transform: translateZ(-50px) rotateY(5deg);
     }
 
-    100% { transform: translateZ(-200px); }
+    100% {
+        transform: translateZ(-200px);
+    }
 }
 
 .md-effect-18 .md-content {
@@ -785,5 +805,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 @media screen and (max-width: 32em) {
-    body { font-size: 75%; }
+    body {
+        font-size: 75%;
+    }
 }

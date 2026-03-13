@@ -1,5 +1,4 @@
-﻿using System.Runtime.Intrinsics.X86;
-using AccountManagement.Domain.AccountAgg;
+﻿using AccountManagement.Domain.AccountAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,7 +17,7 @@ public class AccountMapping : IEntityTypeConfiguration<Account>
         builder.Property(x => x.Password).HasMaxLength(100).IsRequired();
 
         builder.HasOne(x => x.Role).WithMany(x => x.Accounts).HasForeignKey(x => x.RoleId);
-        
+
         builder.OwnsMany(x => x.Permissions, navigationBuilder =>
         {
             navigationBuilder.HasKey(x => x.Id);

@@ -1,15 +1,14 @@
 ﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using CommentManagement.Application.Contracts.Comment;
-using CommentManagement.Domain;
 using CommentManagement.Domain.CommentAgg;
-using Microsoft.EntityFrameworkCore;
 
 namespace CommentManagement.Infrastructure.EFCore.Repositories;
 
-public class CommentRepository : BaseRepository<long,Comment>,ICommentRepository
+public class CommentRepository : BaseRepository<long, Comment>, ICommentRepository
 {
     private readonly CommentContext _context;
+
     public CommentRepository(CommentContext context) : base(context)
     {
         _context = context;
@@ -40,5 +39,4 @@ public class CommentRepository : BaseRepository<long,Comment>,ICommentRepository
 
         return query.OrderByDescending(x => x.Id).ToList();
     }
-
 }

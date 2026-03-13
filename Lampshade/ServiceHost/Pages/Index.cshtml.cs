@@ -1,25 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
-using ShopManagementDomain.ProductCategoryAgg;
-using SM.Infrastructure.EFCore;
 
-namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories
+namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories;
+
+public class IndexModel : PageModel
 {
-    public partial class IndexModel : PageModel
+    private readonly IProductCategoryApplication _productCategoryApplication;
+
+    public IndexModel(IProductCategoryApplication productCategoryApplication)
     {
-        public List<ProductCategoryViewModel> ProductCategories { get; set; }
-        private readonly IProductCategoryApplication _productCategoryApplication;
+        _productCategoryApplication = productCategoryApplication;
+    }
 
-        public IndexModel(IProductCategoryApplication productCategoryApplication)
-        {
-            _productCategoryApplication = productCategoryApplication;
-        }
+    public List<ProductCategoryViewModel> ProductCategories { get; set; }
 
 
-        public void OnGet()
-        {
-            //ProductCategories = _productCategoryApplication.GetAll();
-        }
+    public void OnGet()
+    {
+        //ProductCategories = _productCategoryApplication.GetAll();
     }
 }

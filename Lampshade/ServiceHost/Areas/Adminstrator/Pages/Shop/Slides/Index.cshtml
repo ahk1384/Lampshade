@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>@item.Id</td>
                                     <td>
-                                            <img src="~/ProductPictures/@item.Picture" style="height: 70px; width: 70px;" />
+                                        <img src="~/ProductPictures/@item.Picture" style="height: 70px; width: 70px;"/>
                                     </td>
                                     <td>@item.Heading</td>
                                     <td>@item.Title</td>
@@ -54,7 +54,6 @@
                                         {
                                             <p style="visibility : hidden">0</p>
                                             <i class="fa fa-check fa-3x text-success"></i>
-                                            
                                         }
                                         else
                                         {
@@ -64,22 +63,25 @@
                                     </td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a permission="@ShopPermissions.EditSlide" class="btn btn-warning waves-effect waves-light m-b-5"
+                                        <a permission="@ShopPermissions.EditSlide"
+                                           class="btn btn-warning waves-effect waves-light m-b-5"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>
                                         @if (!item.IsDeleted)
                                         {
-                                            <a permission="@ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index" asp-page-handler="Remove" asp-route-id="@item.Id"
+                                            <a permission="@ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index"
+                                               asp-page-handler="Remove" asp-route-id="@item.Id"
                                                class="btn btn-danger waves-effect waves-light m-b-5">
-                                                    <i class="fa fa-remove"></i> حذف
+                                                <i class="fa fa-remove"></i> حذف
                                             </a>
                                         }
                                         else
                                         {
-                                            <a permission="@ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
+                                            <a permission="@ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index"
+                                               asp-page-handler="Restore" asp-route-id="@item.Id"
                                                class="btn btn-success waves-effect waves-light m-b-5">
-                                                    <i class="fa fa-refresh"></i> بازگردانی
+                                                <i class="fa fa-refresh"></i> بازگردانی
                                             </a>
                                         }
                                     </td>
@@ -99,7 +101,7 @@
     <script src="~/adminTheme/assets/datatables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').dataTable();
         });
     </script>

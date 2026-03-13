@@ -10,7 +10,9 @@
     text-align: left;
 }
 
-.fc-rtl { text-align: right; }
+.fc-rtl {
+    text-align: right;
+}
 
 body .fc { /* extra precedence to overcome jqui */
     font-size: 1em;
@@ -26,16 +28,26 @@ body .fc { /* extra precedence to overcome jqui */
 .fc-unthemed thead,
 .fc-unthemed tbody,
 .fc-unthemed .fc-row,
-.fc-unthemed .fc-popover { border-color: #ddd; }
+.fc-unthemed .fc-popover {
+    border-color: #ddd;
+}
 
-.fc-unthemed .fc-popover { background-color: #fff; }
+.fc-unthemed .fc-popover {
+    background-color: #fff;
+}
 
 .fc-unthemed hr,
-.fc-unthemed .fc-popover .fc-header { background: #eee; }
+.fc-unthemed .fc-popover .fc-header {
+    background: #eee;
+}
 
-.fc-unthemed .fc-popover .fc-header .fc-close { color: #666; }
+.fc-unthemed .fc-popover .fc-header .fc-close {
+    color: #666;
+}
 
-.fc-unthemed .fc-today { background: #fcf8e3; }
+.fc-unthemed .fc-today {
+    background: #fcf8e3;
+}
 
 .fc-highlight { /* when user is selecting cells */
     background: #bce8f1;
@@ -76,11 +88,17 @@ body .fc { /* extra precedence to overcome jqui */
     font-weight: bold;
 }
 
-.fc-icon-left-double-arrow:after { content: "\000AB"; }
+.fc-icon-left-double-arrow:after {
+    content: "\000AB";
+}
 
-.fc-icon-right-double-arrow:after { content: "\000BB"; }
+.fc-icon-right-double-arrow:after {
+    content: "\000BB";
+}
 
-.fc-icon-x:after { content: "\000D7"; }
+.fc-icon-x:after {
+    content: "\000D7";
+}
 
 
 /* Buttons (styled <button> tags, normalized to work cross-browser)
@@ -192,7 +210,9 @@ body .fc { /* extra precedence to overcome jqui */
 /* Buttons Groups
 --------------------------------------------------------------------------------------------------*/
 
-.fc-button-group { display: inline-block; }
+.fc-button-group {
+    display: inline-block;
+}
 
 /*
 every button that is not first in a button group should scootch over one pixel and cover the
@@ -217,17 +237,27 @@ previous button's border...
     position: absolute;
 }
 
-.fc-popover .fc-header { padding: 2px 4px; }
+.fc-popover .fc-header {
+    padding: 2px 4px;
+}
 
-.fc-popover .fc-header .fc-title { margin: 0 2px; }
+.fc-popover .fc-header .fc-title {
+    margin: 0 2px;
+}
 
-.fc-popover .fc-header .fc-close { cursor: pointer; }
+.fc-popover .fc-header .fc-close {
+    cursor: pointer;
+}
 
 .fc-ltr .fc-popover .fc-header .fc-title,
-.fc-rtl .fc-popover .fc-header .fc-close { float: left; }
+.fc-rtl .fc-popover .fc-header .fc-close {
+    float: left;
+}
 
 .fc-rtl .fc-popover .fc-header .fc-title,
-.fc-ltr .fc-popover .fc-header .fc-close { float: right; }
+.fc-ltr .fc-popover .fc-header .fc-close {
+    float: right;
+}
 
 /* unthemed */
 
@@ -259,7 +289,9 @@ previous button's border...
     padding: 0 0 2px; /* height is unreliable across browsers, so use padding */
 }
 
-.fc-clear { clear: both; }
+.fc-clear {
+    clear: both;
+}
 
 .fc-bg,
 .fc-bgevent-skeleton,
@@ -292,7 +324,9 @@ previous button's border...
     width: 100%;
 }
 
-.fc th { text-align: center; }
+.fc th {
+    text-align: center;
+}
 
 .fc th,
 .fc td {
@@ -334,9 +368,13 @@ previous button's border...
 /* Day Row (used within the header and the DayGrid)
 --------------------------------------------------------------------------------------------------*/
 
-.fc-row { position: relative; }
+.fc-row {
+    position: relative;
+}
 
-.fc-row .fc-bg { z-index: 1; }
+.fc-row .fc-bg {
+    z-index: 1;
+}
 
 /* highlighting cells & background event skeleton */
 
@@ -351,11 +389,17 @@ previous button's border...
 }
 
 .fc-row .fc-highlight-skeleton td,
-.fc-row .fc-bgevent-skeleton td { border-color: transparent; }
+.fc-row .fc-bgevent-skeleton td {
+    border-color: transparent;
+}
 
-.fc-row .fc-bgevent-skeleton { z-index: 2; }
+.fc-row .fc-bgevent-skeleton {
+    z-index: 2;
+}
 
-.fc-row .fc-highlight-skeleton { z-index: 3; }
+.fc-row .fc-highlight-skeleton {
+    z-index: 3;
+}
 
 /*
 row content (which contains day/week numbers and events) as well as "helper" (which contains
@@ -368,7 +412,9 @@ temporary rendered events).
     z-index: 4;
 }
 
-.fc-row .fc-helper-skeleton { z-index: 5; }
+.fc-row .fc-helper-skeleton {
+    z-index: 5;
+}
 
 .fc-row .fc-content-skeleton td,
 .fc-row .fc-helper-skeleton td {
@@ -475,7 +521,9 @@ be a descendant of the grid when it is being dragged.
     white-space: nowrap;
 }
 
-.fc-day-grid-event .fc-time { font-weight: bold; }
+.fc-day-grid-event .fc-time {
+    font-weight: bold;
+}
 
 /* resize handle (outside of fc-content, so can go outside of bounds) */
 
@@ -509,7 +557,9 @@ a.fc-more {
     text-decoration: none;
 }
 
-a.fc-more:hover { text-decoration: underline; }
+a.fc-more:hover {
+    text-decoration: underline;
+}
 
 .fc-limited { /* rows and cells that are hidden because of a "more" link */
     display: none;
@@ -526,7 +576,9 @@ a.fc-more:hover { text-decoration: underline; }
     z-index: 2;
 }
 
-.fc-more-popover .fc-event-container { padding: 10px; }
+.fc-more-popover .fc-event-container {
+    padding: 10px;
+}
 
 /* Toolbar
 --------------------------------------------------------------------------------------------------*/
@@ -536,11 +588,17 @@ a.fc-more:hover { text-decoration: underline; }
     text-align: center;
 }
 
-.fc-toolbar .fc-left { float: left; }
+.fc-toolbar .fc-left {
+    float: left;
+}
 
-.fc-toolbar .fc-right { float: right; }
+.fc-toolbar .fc-right {
+    float: right;
+}
 
-.fc-toolbar .fc-center { display: inline-block; }
+.fc-toolbar .fc-center {
+    display: inline-block;
+}
 
 /* the things within each left/right/center section */
 
@@ -557,21 +615,33 @@ a.fc-more:hover { text-decoration: underline; }
 
 /* title text */
 
-.fc-toolbar h2 { margin: 0; }
+.fc-toolbar h2 {
+    margin: 0;
+}
 
 /* button layering (for border precedence) */
 
-.fc-toolbar button { position: relative; }
+.fc-toolbar button {
+    position: relative;
+}
 
 .fc-toolbar .fc-state-hover,
-.fc-toolbar .ui-state-hover { z-index: 2; }
+.fc-toolbar .ui-state-hover {
+    z-index: 2;
+}
 
-.fc-toolbar .fc-state-down { z-index: 3; }
+.fc-toolbar .fc-state-down {
+    z-index: 3;
+}
 
 .fc-toolbar .fc-state-active,
-.fc-toolbar .ui-state-active { z-index: 4; }
+.fc-toolbar .ui-state-active {
+    z-index: 4;
+}
 
-.fc-toolbar button:focus { z-index: 5; }
+.fc-toolbar button:focus {
+    z-index: 5;
+}
 
 
 /* View Structure
@@ -613,7 +683,9 @@ a.fc-more:hover { text-decoration: underline; }
 
 /* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */
 
-.fc-row.fc-rigid { overflow: hidden; }
+.fc-row.fc-rigid {
+    overflow: hidden;
+}
 
 .fc-row.fc-rigid .fc-content-skeleton {
     left: 0;
@@ -625,7 +697,9 @@ a.fc-more:hover { text-decoration: underline; }
 /* week and day number styling */
 
 .fc-basic-view .fc-week-number,
-.fc-basic-view .fc-day-number { padding: 0 2px; }
+.fc-basic-view .fc-day-number {
+    padding: 0 2px;
+}
 
 .fc-basic-view td.fc-week-number span,
 .fc-basic-view td.fc-day-number {
@@ -633,7 +707,9 @@ a.fc-more:hover { text-decoration: underline; }
     padding-top: 2px;
 }
 
-.fc-basic-view .fc-week-number { text-align: center; }
+.fc-basic-view .fc-week-number {
+    text-align: center;
+}
 
 .fc-basic-view .fc-week-number span {
     /* work around the way we do column resizing and ensure a minimum width */
@@ -641,9 +717,13 @@ a.fc-more:hover { text-decoration: underline; }
     min-width: 1.25em;
 }
 
-.fc-ltr .fc-basic-view .fc-day-number { text-align: right; }
+.fc-ltr .fc-basic-view .fc-day-number {
+    text-align: right;
+}
 
-.fc-rtl .fc-basic-view .fc-day-number { text-align: left; }
+.fc-rtl .fc-basic-view .fc-day-number {
+    text-align: left;
+}
 
 .fc-day-number.fc-other-month {
     filter: alpha(opacity=30); /* for IE */
@@ -681,9 +761,13 @@ a.fc-more:hover { text-decoration: underline; }
     white-space: nowrap;
 }
 
-.fc-ltr .fc-axis { text-align: right; }
+.fc-ltr .fc-axis {
+    text-align: right;
+}
 
-.fc-rtl .fc-axis { text-align: left; }
+.fc-rtl .fc-axis {
+    text-align: left;
+}
 
 .ui-widget td.fc-axis {
     font-weight: normal; /* overcome jqui theme making it bold */
@@ -707,7 +791,9 @@ a.fc-more:hover { text-decoration: underline; }
     border: 0 hidden transparent;
 }
 
-.fc-time-grid > .fc-bg { z-index: 1; }
+.fc-time-grid > .fc-bg {
+    z-index: 1;
+}
 
 .fc-time-grid .fc-slats,
 .fc-time-grid > hr { /* the <hr> AgendaView injects when grid is shorter than scroller */
@@ -723,13 +809,21 @@ a.fc-more:hover { text-decoration: underline; }
     top: 0;
 }
 
-.fc-time-grid .fc-bgevent-skeleton { z-index: 3; }
+.fc-time-grid .fc-bgevent-skeleton {
+    z-index: 3;
+}
 
-.fc-time-grid .fc-highlight-skeleton { z-index: 4; }
+.fc-time-grid .fc-highlight-skeleton {
+    z-index: 4;
+}
 
-.fc-time-grid .fc-content-skeleton { z-index: 5; }
+.fc-time-grid .fc-content-skeleton {
+    z-index: 5;
+}
 
-.fc-time-grid .fc-helper-skeleton { z-index: 6; }
+.fc-time-grid .fc-helper-skeleton {
+    z-index: 6;
+}
 
 
 /* TimeGrid Slats (lines that run horizontally)
@@ -740,7 +834,9 @@ a.fc-more:hover { text-decoration: underline; }
     height: 1.5em;
 }
 
-.fc-slats .fc-minor td { border-top-style: dotted; }
+.fc-slats .fc-minor td {
+    border-top-style: dotted;
+}
 
 .fc-slats .ui-widget-content { /* for jqui theme */
     background: none; /* see through to fc-bg */
@@ -827,7 +923,9 @@ be a descendant of the grid when it is being dragged.
 }
 
 .fc-time-grid-event .fc-time,
-.fc-time-grid-event .fc-title { padding: 0 1px; }
+.fc-time-grid-event .fc-title {
+    padding: 0 1px;
+}
 
 .fc-time-grid-event .fc-time {
     font-size: .85em;
@@ -889,4 +987,6 @@ be a descendant of the grid when it is being dragged.
     z-index: 3; /* above content */
 }
 
-.fc-time-grid-event .fc-resizer:after { content: "="; }
+.fc-time-grid-event .fc-resizer:after {
+    content: "=";
+}

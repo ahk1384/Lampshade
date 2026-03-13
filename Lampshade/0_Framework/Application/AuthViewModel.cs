@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace _0_Framework.Application;
+﻿namespace _0_Framework.Application;
 
 public class AuthViewModel
 {
@@ -8,8 +6,8 @@ public class AuthViewModel
     {
     }
 
-    public AuthViewModel(long id, long roleId,string role, string fullname, string username, string mobile,
-        List<int> permissions , string profilePhotoUrl)
+    public AuthViewModel(long id, long roleId, string role, string fullname, string username, string mobile,
+        List<int> permissions, string profilePhotoUrl)
     {
         Id = id;
         RoleId = roleId;
@@ -27,7 +25,7 @@ public class AuthViewModel
     public string Fullname { get; set; }
     public string Username { get; set; }
     public string Mobile { get; set; }
-    
+
     public string ProfilePhoto { get; set; }
     public List<int> Permissions { get; set; }
 }

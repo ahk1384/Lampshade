@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using _01_LampshadeQuery.Contracts.Comment;
+﻿using _01_LampshadeQuery.Contracts.Comment;
 
 //using _01_LampshadeQuery.Contracts.Comment;
 

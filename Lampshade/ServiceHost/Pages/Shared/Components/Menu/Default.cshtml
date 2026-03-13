@@ -28,7 +28,8 @@
                                         @foreach (var category in Model.ProductCategories)
                                         {
                                             <li>
-                                                <a asp-page="./ProductCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                                <a asp-page="./ProductCategory"
+                                                   asp-route-id="@category.Slug">@category.Name</a>
                                             </li>
                                         }
                                     </ul>
@@ -38,9 +39,10 @@
                                     <ul class="sub-menu">
                                         @foreach (var category in Model.ArticleCategories)
                                         {
-                                        <li>
-                                            <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a>
-                                        </li>
+                                            <li>
+                                                <a asp-page="./ArticleCategory"
+                                                   asp-route-id="@category.Slug">@category.Name</a>
+                                            </li>
                                         }
                                     </ul>
                                 </li>
@@ -60,11 +62,11 @@
                                     </li>
                                 }
                                 else
-                                { 
-                                <li>
-                                    <a asp-page="/Login">ورود</a>
-                                </li>
-                                } 
+                                {
+                                    <li>
+                                        <a asp-page="/Login">ورود</a>
+                                    </li>
+                                }
                             </ul>
                         </nav>
                     </div>
@@ -265,7 +267,8 @@
                                 </a>
                             </li>
                             <li>
-                                <i class="ion-android-mail"></i> <a href="mailto:info@yourdomain.com">info@atriya.com</a>
+                                <i class="ion-android-mail"></i> <a
+                                    href="mailto:info@yourdomain.com">info@atriya.com</a>
                             </li>
                         </ul>
                     </div>

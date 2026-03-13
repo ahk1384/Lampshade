@@ -6,13 +6,13 @@ using CommentManagement.Infrastructure.EFCore;
 using CommnetManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace _01_LampshadeQuery.Query;
 
 public class ArticleQuery : IArticleQuery
 {
     private readonly BlogContext _blogContext;
     private readonly CommentContext _commentContext;
+
     public ArticleQuery(BlogContext blogContext, CommentContext commentContext)
     {
         _blogContext = blogContext;

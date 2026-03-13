@@ -21,32 +21,35 @@ public class DynamicAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     {
         using var scope = _scopeFactory.CreateScope();
         var authHelper = scope.ServiceProvider.GetRequiredService<IAuthHelper>();
-        int id = PermissionsCodes.GetCode(policyName);
-        AuthorizationPolicyBuilder policy = new AuthorizationPolicyBuilder();
-        var x  = authHelper.GetPermissionsStrings();
+        var id = PermissionsCodes.GetCode(policyName);
+        var policy = new AuthorizationPolicyBuilder();
+        var x = authHelper.GetPermissionsStrings();
         if (id == 1)
         {
             if (x.Count > 0)
-            {
                 // var name = authHelper.CurrentAccountInfo().Username;
-                return policy.RequireClaim(ClaimTypes.NameIdentifier , authHelper.CurrentAccountInfo().Id.ToString()).Build();
-            }
-            
+                return policy.RequireClaim(ClaimTypes.NameIdentifier, authHelper.CurrentAccountInfo().Id.ToString())
+                    .Build();
         }
         else
         {
             if (x.Contains(id.ToString()))
-            {
-                return policy.RequireClaim(ClaimTypes.NameIdentifier , authHelper.CurrentAccountInfo().Id.ToString()).Build();
-            }
+                return policy.RequireClaim(ClaimTypes.NameIdentifier, authHelper.CurrentAccountInfo().Id.ToString())
+                    .Build();
         }
+
         return new AuthorizationPolicyBuilder()
             .RequireAssertion(_ => false)
             .Build();
     }
 
     public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
-        => _fallbackPolicyProvider.GetDefaultPolicyAsync();
+    {
+        return _fallbackPolicyProvider.GetDefaultPolicyAsync();
+    }
+
     public Task<AuthorizationPolicy?> GetFallbackPolicyAsync()
-        => _fallbackPolicyProvider.GetFallbackPolicyAsync();
+    {
+        return _fallbackPolicyProvider.GetFallbackPolicyAsync();
+    }
 }

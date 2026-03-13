@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiscountManagement.Infrastructure.Configuration;
 
-public class DiscountManagementBootstrapper 
+public class DiscountManagementBootstrapper
 {
     public static void Configure(IServiceCollection services, string? connectionString)
     {

@@ -33,7 +33,9 @@ div.tagsinput span.tag a {
     text-decoration: none;
 }
 
-div.tagsinput span.tag a:hover { opacity: 1; }
+div.tagsinput span.tag a:hover {
+    opacity: 1;
+}
 
 div.tagsinput input {
     background: transparent;

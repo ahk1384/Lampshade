@@ -1,20 +1,15 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
-using System.Globalization;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application;
 
 public class ProductCategoryApplication(IProductCategoryRepository repository, IFileUploader fileUploader)
     : IProductCategoryApplication
 {
+    private readonly IFileUploader _fileUploader = fileUploader;
     private readonly IProductCategoryRepository _repository = repository;
 
-    private readonly IFileUploader _fileUploader = fileUploader;
-    
     public List<ProductCategoryViewModel> GetProductCategories()
     {
         return _repository.GetProductCategories();
@@ -32,7 +27,8 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
 
             var picturePath = $"{productCategory.Slug}";
             var pictureName = _fileUploader.Upload(productCategory.Picture, picturePath);
-            var p1 = new ProductCategory(productCategory.Title, pictureName, productCategory.Description, productCategory.PictureAlt,
+            var p1 = new ProductCategory(productCategory.Title, pictureName, productCategory.Description,
+                productCategory.PictureAlt,
                 productCategory.PictureTitle, productCategory.MetaDescription, productCategory.Keywords,
                 productCategory.Slug);
             _repository.Create(p1);
@@ -59,7 +55,7 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
             var picturePath = $"{productCategory.Slug}";
             var pictureName = _fileUploader.Upload(productCategory.Picture, picturePath);
 
-            p1.Edit(productCategory.Title, pictureName, productCategory.PictureAlt,productCategory.Description,
+            p1.Edit(productCategory.Title, pictureName, productCategory.PictureAlt, productCategory.Description,
                 productCategory.PictureTitle, productCategory.MetaDescription, productCategory.Keywords,
                 productCategory.Slug);
         }
@@ -119,8 +115,8 @@ public class ProductCategoryApplication(IProductCategoryRepository repository, I
         return _repository.GetDetails(id);
     }
 
-    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel,bool showDeleted =false)
+    public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel, bool showDeleted = false)
     {
-        return _repository.Search(searchModel,showDeleted);
+        return _repository.Search(searchModel, showDeleted);
     }
 }

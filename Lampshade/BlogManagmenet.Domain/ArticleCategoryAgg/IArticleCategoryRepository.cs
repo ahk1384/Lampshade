@@ -3,7 +3,7 @@ using BlogManagement_Application.Contract.ArticleCategoryAgg;
 
 namespace BlogManagement.Domain.ArticleCategoryAgg;
 
-public interface IArticleCategoryRepository : IRepository<long,ArticleCategory>
+public interface IArticleCategoryRepository : IRepository<long, ArticleCategory>
 {
     string GetBySlug(long id);
     EditArticleCategory GetDetails(long id);

@@ -1,18 +1,16 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using DiscountManagement.Application.Contracts.ColleagueDiscount;
-using DiscountManagement.Application.Contracts.CustomerDiscount;
 using DiscountManagement.Domain.ColleagueDiscountAgg;
-using Microsoft.EntityFrameworkCore;
 using SM.Infrastructure.EFCore;
 
 namespace DiscountManagement.Infrastructure.EFCore.Repositories;
 
-public class ColleagueDiscountRepository :BaseRepository<long,ColleagueDiscount> , IColleagueDiscountRepository
+public class ColleagueDiscountRepository : BaseRepository<long, ColleagueDiscount>, IColleagueDiscountRepository
 {
     private readonly DiscountContext _discountContext;
     private readonly ShopContext _shopContext;
+
     public ColleagueDiscountRepository(DiscountContext discountContext, ShopContext shopContext) : base(discountContext)
     {
         _discountContext = discountContext;
@@ -42,14 +40,12 @@ public class ColleagueDiscountRepository :BaseRepository<long,ColleagueDiscount>
             ProductId = x.ProductId,
             CreationDate = x.CreationDate.ToFarsi()
         });
-        if(searchModel.ProductId > 0)
+        if (searchModel.ProductId > 0)
             query = query.Where(x => x.ProductId.ToString().Contains(searchModel.ProductId.ToString()));
 
         var results = query.ToList();
         foreach (var discount in results)
-        {
             discount.Product = products.FirstOrDefault(c => c.Id == discount.ProductId)?.Name;
-        }
         if (!string.IsNullOrWhiteSpace(searchModel.Product))
             results = results.Where(x => x.Product.Contains(searchModel.Product)).ToList();
 

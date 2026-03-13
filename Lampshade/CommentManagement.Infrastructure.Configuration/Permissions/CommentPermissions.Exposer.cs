@@ -12,10 +12,10 @@ public class CommentPermissionsExposer : IPermissionExposer
             {
                 "Comment", new List<PermissionDto>
                 {
-                    new (CommentPermissions.CommentList,"Comment List"),
-                    new(CommentPermissions.SearchComment , "Search Comment"),
-                    new(CommentPermissions.CancelAndRestoreComment ,  "CancelAndRestore Comment"),
-                    new(CommentPermissions.ConfirmComment , "Confirm Comment"),
+                    new(CommentPermissions.CommentList, "Comment List"),
+                    new(CommentPermissions.SearchComment, "Search Comment"),
+                    new(CommentPermissions.CancelAndRestoreComment, "CancelAndRestore Comment"),
+                    new(CommentPermissions.ConfirmComment, "Confirm Comment")
                 }
             }
         };

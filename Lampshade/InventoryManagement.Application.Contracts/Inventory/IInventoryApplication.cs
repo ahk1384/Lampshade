@@ -12,6 +12,6 @@ public interface IInventoryApplication
     OperationResult Remove(long id);
     OperationResult Restore(long id);
     EditInventory GetDetails(long id);
-    List<InventoryViewModel> Search(InventorySearchModel searchModel,bool watchDeleted);
+    List<InventoryViewModel> Search(InventorySearchModel searchModel, bool watchDeleted);
     List<InventoryOperationViewModel> GetOperationLog(long inventoryId);
 }

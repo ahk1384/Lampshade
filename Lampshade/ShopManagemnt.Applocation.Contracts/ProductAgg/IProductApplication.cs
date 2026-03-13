@@ -4,7 +4,6 @@ namespace ShopManagement.Application.Contracts.ProductAgg;
 
 public interface IProductApplication
 {
-
     OperationResult Add(CreateProduct product);
 
     OperationResult Edit(EditProduct productCategory);
@@ -17,7 +16,7 @@ public interface IProductApplication
 
     EditProduct? GetDetails(long id);
 
-    List<ProductViewModel> Search(ProductSearchModel searchModel,bool showDeleted = false);
+    List<ProductViewModel> Search(ProductSearchModel searchModel, bool showDeleted = false);
 
 
     List<ProductViewModel> GetProducts();

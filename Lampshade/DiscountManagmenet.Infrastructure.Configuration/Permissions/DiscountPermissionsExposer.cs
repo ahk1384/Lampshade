@@ -11,7 +11,7 @@ public class DiscountPermissionsExposer : IPermissionExposer
             {
                 "Customer Discount", new List<PermissionDto>
                 {
-                    new (DiscountPermissions.CustomerDiscountList,"CustomerDiscount List"),
+                    new(DiscountPermissions.CustomerDiscountList, "CustomerDiscount List"),
                     new(DiscountPermissions.DefineCustomerDiscount, "DefineCustomerDiscount"),
                     new(DiscountPermissions.EditCustomerDiscount, "EditCustomerDiscount"),
                     new(DiscountPermissions.SearchCustomerDiscount, "SearchCustomerDiscount"),
@@ -21,13 +21,13 @@ public class DiscountPermissionsExposer : IPermissionExposer
             {
                 "Colleague Discount", new List<PermissionDto>
                 {
-                    new (DiscountPermissions.ColleagueDiscountList,"ColleagueDiscount List"),
+                    new(DiscountPermissions.ColleagueDiscountList, "ColleagueDiscount List"),
                     new(DiscountPermissions.DefineColleagueDiscount, "DefineColleagueDiscount"),
                     new(DiscountPermissions.EditColleagueDiscount, "EditColleagueDiscount"),
                     new(DiscountPermissions.SearchColleagueDiscount, "SearchColleagueDiscount"),
                     new(DiscountPermissions.RemoveAndRestoreColleagueDiscount, "RemoveAndRestoreColleagueDiscount")
                 }
-            },
+            }
         };
     }
 }

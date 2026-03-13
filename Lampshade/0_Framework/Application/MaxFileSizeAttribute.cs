@@ -1,9 +1,10 @@
-﻿    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
 namespace _0_Framework.Application;
 
-public class MaxFileSizeAttribute :ValidationAttribute, IClientModelValidator
+public class MaxFileSizeAttribute : ValidationAttribute, IClientModelValidator
 {
     private readonly int _maxSize;
 

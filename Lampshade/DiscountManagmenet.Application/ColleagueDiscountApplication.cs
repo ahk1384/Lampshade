@@ -1,8 +1,6 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using DiscountManagement.Application.Contracts.ColleagueDiscount;
 using DiscountManagement.Domain.ColleagueDiscountAgg;
-using DiscountManagement.Domain.CustomerDiscountAgg;
 
 namespace DiscountManagement.Application;
 
@@ -103,7 +101,7 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
         return _repository.GetDetails(id);
     }
 
-    public List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel , bool watchDeleted)
+    public List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel, bool watchDeleted)
     {
         return _repository.Search(searchModel, watchDeleted);
     }

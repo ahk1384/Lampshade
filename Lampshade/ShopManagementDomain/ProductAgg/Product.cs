@@ -10,7 +10,8 @@ public class Product : EntityBase<long>
     {
     }
 
-    public Product(string name, string code, string shortDescription,string description, string picture, string pictureAlt, string pictureTitle, string metaDescription, string keywords, string slug, long categoryId)
+    public Product(string name, string code, string shortDescription, string description, string picture,
+        string pictureAlt, string pictureTitle, string metaDescription, string keywords, string slug, long categoryId)
     {
         Name = name;
         Code = code;
@@ -24,6 +25,7 @@ public class Product : EntityBase<long>
         Keywords = keywords;
         MetaDescription = metaDescription;
     }
+
     public string Name { get; private set; }
 
     public string Code { get; private set; }
@@ -49,7 +51,8 @@ public class Product : EntityBase<long>
 
     public List<ProductPicture> ProductPictures { get; private set; }
 
-    public void Edit(string name, string code, string shortDescription,string description, string picture, string pictureAlt, string pictureTitle, string metaDescription, string keywords, string slug, long categoryId)
+    public void Edit(string name, string code, string shortDescription, string description, string picture,
+        string pictureAlt, string pictureTitle, string metaDescription, string keywords, string slug, long categoryId)
     {
         Name = name;
         Code = code;

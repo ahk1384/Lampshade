@@ -10,7 +10,7 @@ public class ColleagueDiscountMapping : IEntityTypeConfiguration<ColleagueDiscou
     {
         builder.ToTable("ColleagueDiscounts");
         builder.HasKey(x => x.Id);
-        
+
         builder.Property(x => x.ProductId).IsRequired();
         builder.Property(x => x.DiscountRate).IsRequired();
     }

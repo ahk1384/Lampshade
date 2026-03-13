@@ -40,5 +40,4 @@ public class Slide : EntityBase<long>
         BtnText = btnText;
         Link = link;
     }
-
 }

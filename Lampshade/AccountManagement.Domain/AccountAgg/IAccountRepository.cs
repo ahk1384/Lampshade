@@ -1,6 +1,5 @@
 ﻿using _0_Framework.Infrastructure;
 using AccountManagement.Application.Contract.Account;
-using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Domain.AccountAgg;
 

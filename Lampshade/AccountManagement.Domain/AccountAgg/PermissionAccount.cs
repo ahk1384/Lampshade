@@ -17,13 +17,12 @@ public class PermissionAccount
 
     protected PermissionAccount()
     {
-    
     }
 
     public long Id { get; private set; }
     public int Code { get; }
     public string Name { get; }
-    
+
     public long AccountId { get; private set; }
     public Account Account { get; private set; }
 }

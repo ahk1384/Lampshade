@@ -3,18 +3,17 @@ using _0_Framework.Infrastructure;
 using AccountManagement.Application.Contract.Role;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore.Repositories;
 
-public class RoleRepository : BaseRepository<long,Role> , IRoleRepository
+public class RoleRepository : BaseRepository<long, Role>, IRoleRepository
 {
     private readonly AccountContext _context;
+
     public RoleRepository(AccountContext context, IAccountRepository accountRepository) : base(context)
     {
         _context = context;
-    
     }
 
     public List<RoleViewModel> List()
@@ -43,28 +42,28 @@ public class RoleRepository : BaseRepository<long,Role> , IRoleRepository
 
         return role;
     }
+
+    public List<string> HasPermissions()
+    {
+        return _context.Roles
+            .Include(x => x.Permissions)
+            .Where(x => x.Permissions.Count > 0)
+            .Select(x => x.Id.ToString())
+            .ToList();
+    }
+
+    public Task<List<string>> GetPartValidRoles(int code)
+    {
+        var result = new List<string>();
+        var valid = _context.Roles.Include(permission => permission.Permissions);
+        foreach (var permission in valid)
+            if (permission.Permissions.Any(x => x.Code == code))
+                result.Add(permission.Id.ToString());
+        return Task.FromResult(result);
+    }
+
     private static List<PermissionDto> MapPermissions(IEnumerable<Permission> permissions)
     {
         return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();
-    }
-    public List<string> HasPermissions()
-    {
-        return  _context.Roles
-            .Include(x => x.Permissions)
-            .Where(x => x.Permissions.Count > 0)
-            .Select(x =>  x.Id.ToString())
-            .ToList();
-    }
-    
-    public Task<List<string>> GetPartValidRoles(int code)
-    {
-        List<string> result = new List<string>();
-        var valid = _context.Roles.Include(permission => permission.Permissions);
-        foreach (var permission in valid)
-        {
-            if(permission.Permissions.Any(x => x.Code == code))
-                result.Add(permission.Id.ToString());
-        }
-        return Task.FromResult(result);
     }
 }

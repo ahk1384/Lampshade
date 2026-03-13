@@ -100,8 +100,10 @@
                                             @foreach (var category in Model.ArticleCategories)
                                             {
                                                 <li>
-                                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug" class="active">
-                                                        @category.Name <span class="counter">@category.ArticlesCount</span>
+                                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug"
+                                                       class="active">
+                                                        @category.Name <span
+                                                            class="counter">@category.ArticlesCount</span>
                                                     </a>
                                                 </li>
                                             }

@@ -1,5 +1,4 @@
 using DiscountManagement.Application.Contracts.ColleagueDiscount;
-using DiscountManagement.Application.Contracts.CustomerDiscount;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,18 +8,21 @@ namespace ServiceHost.Areas.Adminstrator.Pages.Discounts.ColleagueDiscount;
 
 public class IndexModel : PageModel
 {
+    public static bool WatchDeleted;
     private readonly IColleagueDiscountApplication _colleagueDiscountApplication;
     private readonly IProductApplication _productApplication;
-    public SelectList Products;
     public List<ColleagueDiscountViewModel> ColleagueDiscounts;
+    public SelectList Products;
     public ColleagueDiscountSearchModel SearchModel;
-    public static bool WatchDeleted = false;
-    public bool watch = false;
-    public IndexModel(IColleagueDiscountApplication colleagueDiscountApplication, IProductApplication productApplication)
+    public bool watch;
+
+    public IndexModel(IColleagueDiscountApplication colleagueDiscountApplication,
+        IProductApplication productApplication)
     {
         _productApplication = productApplication;
         _colleagueDiscountApplication = colleagueDiscountApplication;
     }
+
     [TempData] public string Message { get; set; }
 
     //[NeedsPermission(ShopPermissions.ListProducts)]
@@ -36,17 +38,19 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetCreate()
     {
-        var command = new DefineColleagueDiscount()
+        var command = new DefineColleagueDiscount
         {
             Products = _productApplication.GetProducts()
         };
         return Partial("./Create", command);
     }
+
     public RedirectToPageResult OnGetDeleted()
     {
         WatchDeleted = true;
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetActive()
     {
         WatchDeleted = false;
@@ -73,11 +77,13 @@ public class IndexModel : PageModel
         var result = _colleagueDiscountApplication.Edit(command);
         return new JsonResult(result);
     }
+
     public RedirectToPageResult OnGetRemove(long id)
     {
         _colleagueDiscountApplication.Remove(id);
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetRestore(long id)
     {
         _colleagueDiscountApplication.Restore(id);

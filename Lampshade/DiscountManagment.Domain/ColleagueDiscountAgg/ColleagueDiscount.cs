@@ -9,6 +9,7 @@ public class ColleagueDiscount : EntityBase<long>
         ProductId = productId;
         DiscountRate = discountRate;
     }
+
     public long ProductId { get; private set; }
     public int DiscountRate { get; private set; }
 
@@ -17,5 +18,4 @@ public class ColleagueDiscount : EntityBase<long>
         ProductId = productId;
         DiscountRate = discountRate;
     }
-
 }

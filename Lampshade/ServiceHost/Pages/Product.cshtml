@@ -18,7 +18,8 @@
                                 <a asp-page="/Index">صفحه اصلی</a>
                             </li>
                             <li>
-                                <a asp-page="/ProductCategory" asp-route-id="@Model.Product.CategorySlug">@Model.Product.Category</a>
+                                <a asp-page="/ProductCategory"
+                                   asp-route-id="@Model.Product.CategorySlug">@Model.Product.Category</a>
                             </li>
                             <li class="active">@Model.Product.Name</li>
                         </ul>
@@ -40,8 +41,9 @@
                                 <div class="col-lg-6">
                                     <div class="product-details-slider-area">
                                         <div class="big-image-wrapper">
-                                            <div class="product-details-big-image-slider-wrapper product-details-big-image-slider-wrapper--bottom-space ht-slick-slider"
-                                                 data-slick-setting='{
+                                            <div
+                                                class="product-details-big-image-slider-wrapper product-details-big-image-slider-wrapper--bottom-space ht-slick-slider"
+                                                data-slick-setting='{
                                                     "slidesToShow": 1,
                                                     "slidesToScroll": 1,
                                                     "arrows": false,
@@ -61,7 +63,8 @@
                                                 ]'>
 
                                                 <div class="single-image">
-                                                    <img src="~/ProductPictures/@Model.Product.Picture" class="img-fluid"
+                                                    <img src="~/ProductPictures/@Model.Product.Picture"
+                                                         class="img-fluid"
                                                          alt="@Model.Product.Picture">
                                                 </div>
                                                 @foreach (var picture in Model.Product.Pictures)
@@ -75,8 +78,9 @@
                                         </div>
 
 
-                                        <div class="product-details-small-image-slider-wrapper product-details-small-image-slider-wrapper--horizontal-space ht-slick-slider"
-                                             data-slick-setting='{
+                                        <div
+                                            class="product-details-small-image-slider-wrapper product-details-small-image-slider-wrapper--horizontal-space ht-slick-slider"
+                                            data-slick-setting='{
                                                     "slidesToShow": 4,
                                                     "slidesToScroll": 1,
                                                     "arrows": true,
@@ -113,7 +117,8 @@
                                 <div class="col-lg-6">
                                     <div class="single-product-content-description">
                                         <p class="single-info">
-                                            <a asp-page="/ProductCategory" asp-route-id="@Model.Product.CategorySlug">@Model.Product.Category</a>
+                                            <a asp-page="/ProductCategory"
+                                               asp-route-id="@Model.Product.CategorySlug">@Model.Product.Category</a>
                                         </p>
                                         <h2 class="product-title">@Model.Product.Name</h2>
                                         <div class="product-rating">
@@ -134,7 +139,8 @@
                                             @if (Model.Product.HasDiscount)
                                             {
                                                 <span class="main-price discounted">@Model.Product.Price تومان</span>
-                                                <span class="discounted-price">@Model.Product.PriceWithDiscount تومان</span>
+                                                <span
+                                                    class="discounted-price">@Model.Product.PriceWithDiscount تومان</span>
                                             }
                                             else
                                             {
@@ -143,7 +149,8 @@
 
                                         </p>
 
-                                        <p class="single-info">کد محصول: <span class="value">@Model.Product.Code</span> </p>
+                                        <p class="single-info">کد محصول: <span class="value">@Model.Product.Code</span>
+                                        </p>
                                         <p class="single-info">
                                             @if (Model.Product.IsInStock)
                                             {
@@ -160,7 +167,8 @@
                                         </p>
                                         @if (Model.Product.HasDiscount)
                                         {
-                                            <div class="product-countdown" data-countdown="@Model.Product.DiscountExpireDate"></div>
+                                            <div class="product-countdown"
+                                                 data-countdown="@Model.Product.DiscountExpireDate"></div>
                                         }
 
                                         <div class="product-actions">
@@ -169,7 +177,8 @@
                                                 <input type="number" value="1" min="1" id="productCount">
                                             </div>
                                             <div class="product-buttons">
-                                                <a class="cart-btn" onclick="addToCart('@Model.Product.Id', '@Model.Product.Name', '@Model.Product.DoublePrice', '@Model.Product.Picture')">
+                                                <a class="cart-btn"
+                                                   onclick="addToCart('@Model.Product.Id', '@Model.Product.Name', '@Model.Product.DoublePrice', '@Model.Product.Picture')">
                                                     <i class="ion-bag"></i> افزودن به سبد خرید
                                                 </a>
                                             </div>
@@ -210,7 +219,8 @@
                         <div class="product-description-review-area">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="tab-slider-wrapper product-description-review-container  section-space--inner">
+                                    <div
+                                        class="tab-slider-wrapper product-description-review-container  section-space--inner">
                                         <nav>
                                             <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                  role="tablist">
@@ -303,19 +313,25 @@
                                                             <div class="rating-form row">
                                                                 <div class="col-md-6 col-12 form-group">
                                                                     <label for="name">نام:</label>
-                                                                    <input id="name" placeholder="مثال: علی علوی" name="name" type="text">
+                                                                    <input id="name" placeholder="مثال: علی علوی"
+                                                                           name="name" type="text">
                                                                 </div>
                                                                 <div class="col-md-6 col-12 form-group">
                                                                     <label for="email">ایمیل:</label>
-                                                                    <input id="email" placeholder="مثال: contact@atriya.com" name="email" type="text">
+                                                                    <input id="email"
+                                                                           placeholder="مثال: contact@atriya.com"
+                                                                           name="email" type="text">
                                                                 </div>
                                                                 <div class="col-12 form-group">
                                                                     <label for="your-review">نظر شما:</label>
-                                                                    <textarea name="message" id="message" placeholder="نظر خود را بنویسید ..."></textarea>
+                                                                    <textarea name="message" id="message"
+                                                                              placeholder="نظر خود را بنویسید ..."></textarea>
                                                                 </div>
-                                                                <input type="hidden" name="ownerRecordId" value="@Model.Product.Id" />
+                                                                <input type="hidden" name="ownerRecordId"
+                                                                       value="@Model.Product.Id"/>
                                                                 @*<input type="hidden" name="type" value="@CommnetManagement.Infrastructure.EFCore.CommentType.Product" />*@
-                                                                <input type="hidden" name="productSlug" value="@Model.Product.Slug" />
+                                                                <input type="hidden" name="productSlug"
+                                                                       value="@Model.Product.Slug"/>
                                                                 <div class="col-12">
                                                                     <input value="ارسال" type="submit">
                                                                 </div>

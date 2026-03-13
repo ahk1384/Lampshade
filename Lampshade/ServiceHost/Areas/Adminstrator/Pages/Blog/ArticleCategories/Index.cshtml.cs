@@ -15,9 +15,9 @@ public class IndexModel : PageModel
         _articleCategoryApplication = articleCategoryApplication;
     }
 
-    public void OnGet(ArticleCategorySearchModel searchModel ,bool showDeleted)
+    public void OnGet(ArticleCategorySearchModel searchModel, bool showDeleted)
     {
-        ArticleCategories = _articleCategoryApplication.Search(searchModel,showDeleted);
+        ArticleCategories = _articleCategoryApplication.Search(searchModel, showDeleted);
     }
 
     public IActionResult OnGetCreate()

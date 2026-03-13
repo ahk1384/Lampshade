@@ -5,7 +5,9 @@ namespace BlogManagement.Domain.ArticleAgg;
 
 public class Article : EntityBase<long>
 {
-    public Article(string title, string shortDescription, string description, string picture, string pictureAlt, string pictureTitle, DateTime publishDate, string slug, string keywords, string metaDescription, string canonicalAddress, long categoryId)
+    public Article(string title, string shortDescription, string description, string picture, string pictureAlt,
+        string pictureTitle, DateTime publishDate, string slug, string keywords, string metaDescription,
+        string canonicalAddress, long categoryId)
     {
         Title = title;
         ShortDescription = shortDescription;
@@ -20,6 +22,7 @@ public class Article : EntityBase<long>
         CanonicalAddress = canonicalAddress;
         CategoryId = categoryId;
     }
+
     public string Title { get; private set; }
     public string ShortDescription { get; private set; }
     public string Description { get; private set; }
@@ -41,7 +44,7 @@ public class Article : EntityBase<long>
         Title = title;
         ShortDescription = shortDescription;
         Description = description;
-        if(!string.IsNullOrWhiteSpace(picture))
+        if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;

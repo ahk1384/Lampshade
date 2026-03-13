@@ -1,5 +1,3 @@
-using _0_Framework.Infrastructure;
-using AccountManagement.Domain.RoleAgg;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
@@ -12,7 +10,6 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        
         BarLineDataSet = new List<Chart>
         {
             new()

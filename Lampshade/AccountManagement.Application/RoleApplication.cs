@@ -1,6 +1,5 @@
 ﻿using _0_Framework.Application;
 using AccountManagement.Application.Contract.Role;
-using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Application;
@@ -38,14 +37,14 @@ public class RoleApplication : IRoleApplication
     public OperationResult Edit(EditRole command)
     {
         var operationResult = new OperationResult();
-        if (_roleRepository.Exists(x => x.Name == command.Name &&  x.Id != command.Id))
+        if (_roleRepository.Exists(x => x.Name == command.Name && x.Id != command.Id))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _roleRepository.BeginTran();
         try
         {
             var role = _roleRepository.Get(command.Id);
             var permissions = SetPermissions(command.Permissions);
-            role.Edit(command.Name,command.Description,permissions);
+            role.Edit(command.Name, command.Description, permissions);
         }
         catch (Exception e)
         {
@@ -64,23 +63,21 @@ public class RoleApplication : IRoleApplication
 
     public EditRole GetDetails(long id)
     {
-        return _roleRepository.GetDetails(id);  
+        return _roleRepository.GetDetails(id);
     }
+
     public List<Permission> SetPermissions(List<int> permissions)
     {
-        List<Permission> permissionAccounts = new List<Permission>();
+        var permissionAccounts = new List<Permission>();
         foreach (var permission in permissions)
         {
-            if (!permissionAccounts.Any(x => x.Code == (permission/100)*100))
-            {
-                permissionAccounts.Add(new Permission((permission/100)*100));
-            }
-            if (!permissionAccounts.Any(x => x.Code == (permission/1000)*1000))
-            {
-                permissionAccounts.Add(new Permission((permission/1000)*1000));
-            }
+            if (!permissionAccounts.Any(x => x.Code == permission / 100 * 100))
+                permissionAccounts.Add(new Permission(permission / 100 * 100));
+            if (!permissionAccounts.Any(x => x.Code == permission / 1000 * 1000))
+                permissionAccounts.Add(new Permission(permission / 1000 * 1000));
             permissionAccounts.Add(new Permission(permission));
         }
+
         return permissionAccounts;
     }
 }

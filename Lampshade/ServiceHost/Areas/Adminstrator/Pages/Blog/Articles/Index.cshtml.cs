@@ -19,9 +19,9 @@ public class IndexModel : PageModel
         _articleCategoryApplication = articleCategoryApplication;
     }
 
-    public void OnGet(ArticleSearchModel searchModel,bool showDeleted)
+    public void OnGet(ArticleSearchModel searchModel, bool showDeleted)
     {
         ArticleCategories = new SelectList(_articleCategoryApplication.GetArticleCategories(), "Id", "Name");
-        Articles = _articleApplication.Search(searchModel,showDeleted);
+        Articles = _articleApplication.Search(searchModel, showDeleted);
     }
 }

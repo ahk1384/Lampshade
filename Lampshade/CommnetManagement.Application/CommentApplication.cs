@@ -19,7 +19,8 @@ public class CommentApplication : ICommentApplication
         _commentRepository.BeginTran();
         try
         {
-            var comment = new Comment(command.Name, command.Email, command.Website,command.Message, command.OwnerRecordId, command.Type,
+            var comment = new Comment(command.Name, command.Email, command.Website, command.Message,
+                command.OwnerRecordId, command.Type,
                 command.ParentId);
             _commentRepository.Create(comment);
         }
@@ -69,7 +70,6 @@ public class CommentApplication : ICommentApplication
 
         _commentRepository.CommitTran();
         return operationResult.Success();
-
     }
 
     public OperationResult Restore(long id)
@@ -91,7 +91,7 @@ public class CommentApplication : ICommentApplication
         return operationResult.Success();
     }
 
-    public List<CommentViewModel> Search(CommentSearchModel searchModel,bool showDeleted)
+    public List<CommentViewModel> Search(CommentSearchModel searchModel, bool showDeleted)
     {
         return _commentRepository.Search(searchModel, showDeleted);
     }

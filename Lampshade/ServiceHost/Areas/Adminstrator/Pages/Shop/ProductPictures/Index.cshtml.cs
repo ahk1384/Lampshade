@@ -3,22 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.ProductAgg;
-using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagement.Application.Contracts.ProductPicture;
-using ShopManagementDomain.ProductAgg;
-using ShopManagementDomain.ProductPictureAgg;
 
 namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductPictures;
 
 public class IndexModel : PageModel
 {
-    private readonly IProductPictureApplication _productPictureApplication;
+    public static bool WatchDeleted;
     private readonly IProductApplication _productApplication;
-    public SelectList Products;
+    private readonly IProductPictureApplication _productPictureApplication;
     public List<ProductPictureViewModel> ProductPictures;
+    public SelectList Products;
     public ProductPictureSearchModel SearchModel;
-    public static bool WatchDeleted = false;
-    public bool watch = false;
+    public bool watch;
+
     public IndexModel(IProductApplication productApplication, IProductPictureApplication productPictureApplication)
     {
         _productApplication = productApplication;
@@ -40,17 +38,19 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetCreate()
     {
-        var command = new CreateProductPicture()
+        var command = new CreateProductPicture
         {
             Products = _productApplication.GetProducts()
         };
         return Partial("./Create", command);
     }
+
     public RedirectToPageResult OnGetDeleted()
     {
         WatchDeleted = true;
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetActive()
     {
         WatchDeleted = false;
@@ -74,6 +74,7 @@ public class IndexModel : PageModel
 
             return new JsonResult(new OperationResult().Fail(message));
         }
+
         var result = _productPictureApplication.Create(command);
         return new JsonResult(result);
     }
@@ -102,14 +103,17 @@ public class IndexModel : PageModel
 
             return new JsonResult(new OperationResult().Fail(message));
         }
+
         var result = _productPictureApplication.Edit(command);
         return new JsonResult(result);
     }
+
     public RedirectToPageResult OnGetRemove(long id)
     {
         _productPictureApplication.Remove(id);
         return RedirectToPage();
     }
+
     public RedirectToPageResult OnGetRestore(long id)
     {
         _productPictureApplication.Restore(id);

@@ -19,7 +19,8 @@
                                 <a asp-page="/Index">صفحه اصلی</a>
                             </li>
                             <li>
-                                <a asp-page="/ArticleCategory" asp-route-id="@Model.Article.CategorySlug">@Model.Article.CategoryName</a>
+                                <a asp-page="/ArticleCategory"
+                                   asp-route-id="@Model.Article.CategorySlug">@Model.Article.CategoryName</a>
                             </li>
                             <li>@Model.Article.Title</li>
                         </ul>
@@ -52,7 +53,8 @@
 
                                         <div class="single-blog-post-media">
                                             <div class="image">
-                                                <img src="~/ProductPictures/@Model.Article.Picture" class="img-fluid" alt="@Model.Article.PictureAlt" title="@Model.Article.Title">
+                                                <img src="~/ProductPictures/@Model.Article.Picture" class="img-fluid"
+                                                     alt="@Model.Article.PictureAlt" title="@Model.Article.Title">
                                             </div>
                                         </div>
 
@@ -106,10 +108,12 @@
                                             {
                                                 <div class="single-comment" id="comment-@comment.Id">
                                                     <span class="reply-btn">
-                                                        <a href="#postComment" onclick='$("#commentParentId").val(@comment.Id)'>پاسخ</a>
+                                                        <a href="#postComment"
+                                                           onclick='$("#commentParentId").val(@comment.Id)'>پاسخ</a>
                                                     </span>
                                                     <div class="image">
-                                                        <img src="~/Theme/assets/img/blog/comment-icon.png" alt="" width="50" height="50">
+                                                        <img src="~/Theme/assets/img/blog/comment-icon.png" alt=""
+                                                             width="50" height="50">
                                                     </div>
                                                     <div class="content">
                                                         <h3 class="user">
@@ -121,7 +125,8 @@
                                                         @if (comment.ParentId > 0)
                                                         {
                                                             <p>
-                                                                <span>در پاسخ به: </span><a href="#comment-@comment.ParentId">@comment.parentName</a>
+                                                                <span>در پاسخ به: </span><a
+                                                                    href="#comment-@comment.ParentId">@comment.parentName</a>
                                                             </p>
                                                         }
                                                         <p class="comment-text">@comment.Message</p>
@@ -133,7 +138,8 @@
                                         <div class="comment-form-container">
                                             <h3 class="comment-form-title">نظر خود را با ما به اشتراک بگذارید</h3>
                                             <p>
-                                                ایمیل وارده شده توسط شما به صورت محرمانه است و به دیگران نمایش داده نخواهد شد.
+                                                ایمیل وارده شده توسط شما به صورت محرمانه است و به دیگران نمایش داده
+                                                نخواهد شد.
                                             </p>
                                             <div class="comment-form" id="postComment">
                                                 <form method="post">
@@ -141,30 +147,37 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
                                                                 <label>نظر شما</label>
-                                                                <textarea name="message" id="messaeg" placeholder="نظر خود را بنویسید..."></textarea>
+                                                                <textarea name="message" id="messaeg"
+                                                                          placeholder="نظر خود را بنویسید..."></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
                                                                 <label>نام <span class="required">*</span></label>
-                                                                <input type="text" name="name" placeholder="مثال: علی علوی">
+                                                                <input type="text" name="name"
+                                                                       placeholder="مثال: علی علوی">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
                                                                 <label>ایمیل <span class="required">*</span></label>
-                                                                <input type="text" name="email" placeholder="مثال: contact@atriya.com">
+                                                                <input type="text" name="email"
+                                                                       placeholder="مثال: contact@atriya.com">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
                                                                 <label>وبسایت</label>
-                                                                <input type="text" name="website" placeholder="مثال: http://www.atriya.com">
+                                                                <input type="text" name="website"
+                                                                       placeholder="مثال: http://www.atriya.com">
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="ownerRecordId" value="@Model.Article.Id" />
-                                                        <input type="hidden" name="articleSlug" value="@Model.Article.Slug" />
-                                                        <input type="hidden" name="parentId" id="commentParentId" value="" />
+                                                        <input type="hidden" name="ownerRecordId"
+                                                               value="@Model.Article.Id"/>
+                                                        <input type="hidden" name="articleSlug"
+                                                               value="@Model.Article.Slug"/>
+                                                        <input type="hidden" name="parentId" id="commentParentId"
+                                                               value=""/>
                                                         <div class="col-lg-12">
                                                             <button type="submit" class="comment-btn" name="submit">
                                                                 ارسال
@@ -186,8 +199,10 @@
                                             @foreach (var category in Model.ArticleCategories)
                                             {
                                                 <li>
-                                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug" class="active">
-                                                        @category.Name <span class="counter">@category.ArticlesCount</span>
+                                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug"
+                                                       class="active">
+                                                        @category.Name <span
+                                                            class="counter">@category.ArticlesCount</span>
                                                     </a>
                                                 </li>
                                             }

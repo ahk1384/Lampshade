@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using _0_Framework.Infrastructure;
+﻿using _0_Framework.Infrastructure;
 using _01_LampshadeQuery.Contracts.Article;
 using _01_LampshadeQuery.Contracts.ArticleCategory;
 using _01_LampshadeQuery.Query;
@@ -18,7 +17,7 @@ namespace BlogManagement.Infrastructure.Configuration;
 
 public class BlogManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services , string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString)
     {
         services.AddTransient<IArticleRepository, ArticleRepository>();
         services.AddTransient<IArticleApplication, ArticleApplication>();
@@ -29,8 +28,8 @@ public class BlogManagementBootstrapper
 
         services.AddTransient<IArticleQuery, ArticleQuery>();
         services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
-        
+
         services.AddTransient<IPermissionExposer, BlogPermissionsExposer>();
-        services.AddDbContext<BlogContext>(a=>a.UseSqlServer(connectionString));
+        services.AddDbContext<BlogContext>(a => a.UseSqlServer(connectionString));
     }
 }

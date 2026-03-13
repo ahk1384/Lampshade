@@ -9,8 +9,8 @@ public class DiscountContext : DbContext
 {
     public DiscountContext(DbContextOptions<DiscountContext> options) : base(options)
     {
-        
     }
+
     public DbSet<CustomerDiscount> CustomerDiscounts { get; set; }
 
     public DbSet<ColleagueDiscount> ColleagueDiscounts { get; set; }

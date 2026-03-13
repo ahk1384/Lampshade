@@ -1,18 +1,18 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagementDomain.ProductAgg;
-using ShopManagementDomain.ProductCategoryAgg;
 using ShopManagementDomain.ProductPictureAgg;
 
 namespace ShopManagement.Application;
 
 public class ProductPictureApplication : IProductPictureApplication
 {
-    private readonly IProductPictureRepository _pictureRepository;
     private readonly IFileUploader _fileUploader;
+    private readonly IProductPictureRepository _pictureRepository;
     private readonly IProductRepository _productRepository;
-    public ProductPictureApplication(IProductPictureRepository pictureRepository, IFileUploader fileUploader, IProductRepository productRepository)
+
+    public ProductPictureApplication(IProductPictureRepository pictureRepository, IFileUploader fileUploader,
+        IProductRepository productRepository)
     {
         _pictureRepository = pictureRepository;
         _fileUploader = fileUploader;
@@ -56,7 +56,7 @@ public class ProductPictureApplication : IProductPictureApplication
         _pictureRepository.BeginTran();
         try
         {
-            var productPicture= _pictureRepository.Get(command.Id);
+            var productPicture = _pictureRepository.Get(command.Id);
             productPicture.Edit(command.ProductId, picturePath, command.PictureAlt, command.PictureTitle);
         }
         catch (Exception e)
@@ -112,6 +112,6 @@ public class ProductPictureApplication : IProductPictureApplication
 
     public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel, bool showDeleted)
     {
-        return _pictureRepository.Search(searchModel,showDeleted);
+        return _pictureRepository.Search(searchModel, showDeleted);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using InventoryManagement.Domain.InventoryAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace InventoryManagement.Infrastructure.EFCore.Mapping;
 
@@ -28,6 +27,5 @@ public class InventoryMapping : IEntityTypeConfiguration<Inventory>
             modelbuilder.Property(x => x.InventoryId);
             modelbuilder.WithOwner(x => x.Inventory).HasForeignKey(x => x.InventoryId);
         });
-
     }
-}   
+}

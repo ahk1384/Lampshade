@@ -1,17 +1,15 @@
-﻿using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagementDomain.ProductPictureAgg;
 
 namespace SM.Infrastructure.EFCore.Repositories;
 
-public class ProductPictureRepository :BaseRepository<long,ProductPicture>,IProductPictureRepository
+public class ProductPictureRepository : BaseRepository<long, ProductPicture>, IProductPictureRepository
 {
     private readonly ShopContext _context;
+
     public ProductPictureRepository(ShopContext context) : base(context)
     {
         _context = context;
@@ -19,7 +17,7 @@ public class ProductPictureRepository :BaseRepository<long,ProductPicture>,IProd
 
     public EditProductPicture GetDetails(long id)
     {
-        return _context.ProductPictures.Select(x => new EditProductPicture()
+        return _context.ProductPictures.Select(x => new EditProductPicture
         {
             Id = x.Id,
             ProductId = x.ProductId,
@@ -31,18 +29,21 @@ public class ProductPictureRepository :BaseRepository<long,ProductPicture>,IProd
 
     public ProductPicture GetWithProductAndCategory(long id)
     {
-        return _context.ProductPictures.Include(x => x.Product).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == id);
+        return _context.ProductPictures.Include(x => x.Product).ThenInclude(x => x.Category)
+            .FirstOrDefault(x => x.Id == id);
     }
 
-    public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel,bool showDeleted = false)
+    public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel, bool showDeleted = false)
     {
-        var res = showDeleted ? _context.ProductPictures.Where(x => x.IsDeleted) : _context.ProductPictures.Where(x => !x.IsDeleted);
+        var res = showDeleted
+            ? _context.ProductPictures.Where(x => x.IsDeleted)
+            : _context.ProductPictures.Where(x => !x.IsDeleted);
 
         if (searchModel.ProductPictureId.HasValue && searchModel.ProductPictureId.Value > 0)
             res = res.Where(x => x.Id == searchModel.ProductPictureId.Value);
         if (!string.IsNullOrWhiteSpace(searchModel.ProductName))
             res = res.Where(x => x.Product.Name.Contains(searchModel.ProductName));
-        return res.Select(x => new ProductPictureViewModel()
+        return res.Select(x => new ProductPictureViewModel
         {
             Id = x.Id,
             ProductId = x.ProductId,

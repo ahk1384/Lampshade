@@ -1,6 +1,4 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
-
 
 namespace ShopManagement.Application.Contracts.ProductCategoryAgg;
 
@@ -20,8 +18,5 @@ public interface IProductCategoryApplication
 
     EditProductCategory GetDetails(long id);
 
-    List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel,bool showDeleted = false);
-
-
-
+    List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel, bool showDeleted = false);
 }

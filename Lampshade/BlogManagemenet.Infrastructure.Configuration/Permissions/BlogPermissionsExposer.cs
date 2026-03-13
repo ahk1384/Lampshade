@@ -8,25 +8,24 @@ public class BlogPermissionsExposer : IPermissionExposer
     {
         return new Dictionary<string, List<PermissionDto>>
         {
-            
             {
                 "Article", new List<PermissionDto>
                 {
-                    new (BlogPermissions.ArticleList,"Article List"),
+                    new(BlogPermissions.ArticleList, "Article List"),
                     new(BlogPermissions.CreateArticle, "Create Article"),
                     new(BlogPermissions.EditArticle, "Edit Article"),
-                    new(BlogPermissions.SearchArticle, "Search Article"),
+                    new(BlogPermissions.SearchArticle, "Search Article")
                 }
             },
             {
                 "ArticleCategory", new List<PermissionDto>
                 {
-                    new (BlogPermissions.ArticleCategoryList,"ArticleCategory List"),
+                    new(BlogPermissions.ArticleCategoryList, "ArticleCategory List"),
                     new(BlogPermissions.CreateArticleCategory, "Create ArticleCategory"),
                     new(BlogPermissions.EditArticleCategory, "Edit ArticleCategory"),
-                    new(BlogPermissions.SearchArticleCategory, "Search ArticleCategory"),
+                    new(BlogPermissions.SearchArticleCategory, "Search ArticleCategory")
                 }
-            },
+            }
         };
     }
 }

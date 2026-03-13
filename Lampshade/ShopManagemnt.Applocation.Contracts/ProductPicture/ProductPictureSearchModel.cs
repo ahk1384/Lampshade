@@ -2,7 +2,6 @@
 
 public class ProductPictureSearchModel
 {
-    public long?ProductPictureId { get; set; }
+    public long? ProductPictureId { get; set; }
     public string? ProductName { get; set; }
-
 }

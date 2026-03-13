@@ -17,7 +17,9 @@
   See: https://github.com/vitalets/x-editable/issues/393
 */
 
-.editableform .form-control { width: auto; }
+.editableform .form-control {
+    width: auto;
+}
 
 .editable-buttons {
     display: inline-block; /* should be inline to take effect of parent's white-space: nowrap */
@@ -44,7 +46,9 @@
     zoom: 1;
 }
 
-.editable-buttons .editable-cancel { margin-left: 7px; }
+.editable-buttons .editable-cancel {
+    margin-left: 7px;
+}
 
 /*for jquery-ui buttons need set height to look more pretty*/
 
@@ -60,7 +64,9 @@
     width: auto;
 }
 
-.editable-inline .editableform-loading { background-position: left 5px; }
+.editable-inline .editableform-loading {
+    background-position: left 5px;
+}
 
 .editable-error-block {
     margin: 5px 0 0 0;
@@ -71,9 +77,13 @@
 
 /*add padding for jquery ui*/
 
-.editable-error-block.ui-state-error { padding: 3px; }
+.editable-error-block.ui-state-error {
+    padding: 3px;
+}
 
-.editable-error { color: red; }
+.editable-error {
+    color: red;
+}
 
 /* ---- For specific types ---- */
 
@@ -99,7 +109,9 @@
     vertical-align: middle;
 }
 
-.editable-checklist label { white-space: nowrap; }
+.editable-checklist label {
+    white-space: nowrap;
+}
 
 /* set exact width of textarea to fit buttons toolbar */
 
@@ -127,15 +139,19 @@
     opacity: 0.6;
     position: absolute;
     right: 6px;
-   
+
     top: 50%;
     width: 13px;
-    z-index: 100;   
+    z-index: 100;
 }
 
-.editable-clear-x:hover { opacity: 1; }
+.editable-clear-x:hover {
+    opacity: 1;
+}
 
-.editable-pre-wrapped { white-space: pre-wrap; }
+.editable-pre-wrapped {
+    white-space: pre-wrap;
+}
 
 .editable-container.editable-popup {
     max-width: none !important; /* without this rule poshytip/tooltip does not stretch */
@@ -181,9 +197,12 @@ a.editable-click.editable-disabled:hover {
     text-decoration: none;
 }
 
-.editable-unsaved { font-weight: bold; }
+.editable-unsaved {
+    font-weight: bold;
+}
 
-.editable-unsaved:after { /*    content: '*'*/ }
+.editable-unsaved:after { /*    content: '*'*/
+}
 
 .editable-bg-transition {
     -moz-transition: background-color 1400ms ease-out;
@@ -222,11 +241,17 @@ a.editable-click.editable-disabled:hover {
 	}*/
 }
 
-.datepicker-inline { width: 220px; }
+.datepicker-inline {
+    width: 220px;
+}
 
-.datepicker.datepicker-rtl { direction: rtl; }
+.datepicker.datepicker-rtl {
+    direction: rtl;
+}
 
-.datepicker.datepicker-rtl table tr td span { float: right; }
+.datepicker.datepicker-rtl table tr td span {
+    float: right;
+}
 
 .datepicker-dropdown {
     left: 0;
@@ -256,15 +281,25 @@ a.editable-click.editable-disabled:hover {
     top: -6px;
 }
 
-.datepicker > div { display: none; }
+.datepicker > div {
+    display: none;
+}
 
-.datepicker.days div.datepicker-days { display: block; }
+.datepicker.days div.datepicker-days {
+    display: block;
+}
 
-.datepicker.months div.datepicker-months { display: block; }
+.datepicker.months div.datepicker-months {
+    display: block;
+}
 
-.datepicker.years div.datepicker-years { display: block; }
+.datepicker.years div.datepicker-years {
+    display: block;
+}
 
-.datepicker table { margin: 0; }
+.datepicker table {
+    margin: 0;
+}
 
 .datepicker td,
 .datepicker th {
@@ -278,7 +313,9 @@ a.editable-click.editable-disabled:hover {
 }
 
 .table-striped .datepicker table tr td,
-.table-striped .datepicker table tr th { background-color: transparent; }
+.table-striped .datepicker table tr th {
+    background-color: transparent;
+}
 
 .datepicker table tr td.day:hover {
     background: #eeeeee;
@@ -286,7 +323,9 @@ a.editable-click.editable-disabled:hover {
 }
 
 .datepicker table tr td.old,
-.datepicker table tr td.new { color: #999999; }
+.datepicker table tr td.new {
+    color: #999999;
+}
 
 .datepicker table tr td.disabled,
 .datepicker table tr td.disabled:hover {
@@ -333,7 +372,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.today[disabled],
 .datepicker table tr td.today:hover[disabled],
 .datepicker table tr td.today.disabled[disabled],
-.datepicker table tr td.today.disabled:hover[disabled] { background-color: #fdf59a; }
+.datepicker table tr td.today.disabled:hover[disabled] {
+    background-color: #fdf59a;
+}
 
 .datepicker table tr td.today:active,
 .datepicker table tr td.today:hover:active,
@@ -342,11 +383,17 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.today.active,
 .datepicker table tr td.today:hover.active,
 .datepicker table tr td.today.disabled.active,
-.datepicker table tr td.today.disabled:hover.active { background-color: #fbf069 \9; }
+.datepicker table tr td.today.disabled:hover.active {
+    background-color: #fbf069 \9;
+}
 
-.datepicker table tr td.today:hover:hover { color: #000; }
+.datepicker table tr td.today:hover:hover {
+    color: #000;
+}
 
-.datepicker table tr td.today.active:hover { color: #fff; }
+.datepicker table tr td.today.active:hover {
+    color: #fff;
+}
 
 .datepicker table tr td.range,
 .datepicker table tr td.range:hover,
@@ -398,7 +445,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.range.today[disabled],
 .datepicker table tr td.range.today:hover[disabled],
 .datepicker table tr td.range.today.disabled[disabled],
-.datepicker table tr td.range.today.disabled:hover[disabled] { background-color: #f3e97a; }
+.datepicker table tr td.range.today.disabled:hover[disabled] {
+    background-color: #f3e97a;
+}
 
 .datepicker table tr td.range.today:active,
 .datepicker table tr td.range.today:hover:active,
@@ -407,7 +456,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.range.today.active,
 .datepicker table tr td.range.today:hover.active,
 .datepicker table tr td.range.today.disabled.active,
-.datepicker table tr td.range.today.disabled:hover.active { background-color: #efe24b \9; }
+.datepicker table tr td.range.today.disabled:hover.active {
+    background-color: #efe24b \9;
+}
 
 .datepicker table tr td.selected,
 .datepicker table tr td.selected:hover,
@@ -448,7 +499,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.selected[disabled],
 .datepicker table tr td.selected:hover[disabled],
 .datepicker table tr td.selected.disabled[disabled],
-.datepicker table tr td.selected.disabled:hover[disabled] { background-color: #808080; }
+.datepicker table tr td.selected.disabled:hover[disabled] {
+    background-color: #808080;
+}
 
 .datepicker table tr td.selected:active,
 .datepicker table tr td.selected:hover:active,
@@ -457,7 +510,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.selected.active,
 .datepicker table tr td.selected:hover.active,
 .datepicker table tr td.selected.disabled.active,
-.datepicker table tr td.selected.disabled:hover.active { background-color: #666666 \9; }
+.datepicker table tr td.selected.disabled:hover.active {
+    background-color: #666666 \9;
+}
 
 .datepicker table tr td.active,
 .datepicker table tr td.active:hover,
@@ -498,7 +553,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.active[disabled],
 .datepicker table tr td.active:hover[disabled],
 .datepicker table tr td.active.disabled[disabled],
-.datepicker table tr td.active.disabled:hover[disabled] { background-color: #0044cc; }
+.datepicker table tr td.active.disabled:hover[disabled] {
+    background-color: #0044cc;
+}
 
 .datepicker table tr td.active:active,
 .datepicker table tr td.active:hover:active,
@@ -507,7 +564,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td.active.active,
 .datepicker table tr td.active:hover.active,
 .datepicker table tr td.active.disabled.active,
-.datepicker table tr td.active.disabled:hover.active { background-color: #003399 \9; }
+.datepicker table tr td.active.disabled:hover.active {
+    background-color: #003399 \9;
+}
 
 .datepicker table tr td span {
     -moz-border-radius: 4px;
@@ -522,7 +581,9 @@ a.editable-click.editable-disabled:hover {
     width: 23%;
 }
 
-.datepicker table tr td span:hover { background: #eeeeee; }
+.datepicker table tr td span:hover {
+    background: #eeeeee;
+}
 
 .datepicker table tr td span.disabled,
 .datepicker table tr td span.disabled:hover {
@@ -570,7 +631,9 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td span.active[disabled],
 .datepicker table tr td span.active:hover[disabled],
 .datepicker table tr td span.active.disabled[disabled],
-.datepicker table tr td span.active.disabled:hover[disabled] { background-color: #0044cc; }
+.datepicker table tr td span.active.disabled:hover[disabled] {
+    background-color: #0044cc;
+}
 
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover:active,
@@ -579,18 +642,28 @@ a.editable-click.editable-disabled:hover {
 .datepicker table tr td span.active.active,
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active.disabled.active,
-.datepicker table tr td span.active.disabled:hover.active { background-color: #003399 \9; }
+.datepicker table tr td span.active.disabled:hover.active {
+    background-color: #003399 \9;
+}
 
 .datepicker table tr td span.old,
-.datepicker table tr td span.new { color: #999999; }
+.datepicker table tr td span.new {
+    color: #999999;
+}
 
-.datepicker th.datepicker-switch { width: 145px; }
+.datepicker th.datepicker-switch {
+    width: 145px;
+}
 
 .datepicker thead tr:first-child th,
-.datepicker tfoot tr th { cursor: pointer; }
+.datepicker tfoot tr th {
+    cursor: pointer;
+}
 
 .datepicker thead tr:first-child th:hover,
-.datepicker tfoot tr th:hover { background: #eeeeee; }
+.datepicker tfoot tr th:hover {
+    background: #eeeeee;
+}
 
 .datepicker .cw {
     font-size: 10px;
@@ -612,7 +685,9 @@ a.editable-click.editable-disabled:hover {
     width: 16px;
 }
 
-.input-daterange input { text-align: center; }
+.input-daterange input {
+    text-align: center;
+}
 
 .input-daterange input:first-child {
     -moz-border-radius: 3px 0 0 3px;

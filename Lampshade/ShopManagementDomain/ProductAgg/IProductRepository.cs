@@ -3,7 +3,7 @@ using ShopManagement.Application.Contracts.ProductAgg;
 
 namespace ShopManagementDomain.ProductAgg;
 
-public interface IProductRepository : IRepository<long,Product>
+public interface IProductRepository : IRepository<long, Product>
 {
     EditProduct? GetDetails(long id);
 
@@ -12,6 +12,4 @@ public interface IProductRepository : IRepository<long,Product>
     Product GetProductWithCategory(long id);
 
     List<ProductViewModel> GetProducts();
-
-
 }

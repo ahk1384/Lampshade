@@ -73,15 +73,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 @-webkit-keyframes flash {
-    0%, 50%, 100% { opacity: 1; }
+    0%, 50%, 100% {
+        opacity: 1;
+    }
 
-    25%, 75% { opacity: 0; }
+    25%, 75% {
+        opacity: 0;
+    }
 }
 
 @keyframes flash {
-    0%, 50%, 100% { opacity: 1; }
+    0%, 50%, 100% {
+        opacity: 1;
+    }
 
-    25%, 75% { opacity: 0; }
+    25%, 75% {
+        opacity: 0;
+    }
 }
 
 .flash {
@@ -987,15 +995,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 @-webkit-keyframes fadeIn {
-    0% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
 
-    100% { opacity: 1; }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
 
-    100% { opacity: 1; }
+    100% {
+        opacity: 1;
+    }
 }
 
 .fadeIn {
@@ -1284,15 +1300,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 @-webkit-keyframes fadeOut {
-    0% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
 
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes fadeOut {
-    0% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
 
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 .fadeOut {
@@ -2864,7 +2888,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         transform: scale(.3);
     }
 
-    50% { opacity: 1; }
+    50% {
+        opacity: 1;
+    }
 }
 
 @keyframes zoomIn {
@@ -2875,7 +2901,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         transform: scale(.3);
     }
 
-    50% { opacity: 1; }
+    50% {
+        opacity: 1;
+    }
 }
 
 .zoomIn {
@@ -3068,7 +3096,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         transform: scale(.3);
     }
 
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes zoomOut {
@@ -3086,7 +3116,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         transform: scale(.3);
     }
 
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 .zoomOut {

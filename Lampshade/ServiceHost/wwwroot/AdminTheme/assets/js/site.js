@@ -16,8 +16,8 @@ SinglePage.LoadModal = function () {
             $.validator.unobtrusive.parse(newForm);
             showModal();
         }).fail(function (error) {
-            alert("خطایی رخ داده، لطفا با مدیر سیستم تماس بگیرید.");
-        });
+        alert("خطایی رخ داده، لطفا با مدیر سیستم تماس بگیرید.");
+    });
 };
 
 function showModal() {
@@ -93,19 +93,17 @@ function CallBackHandler(data, action, form) {
                 alert(data.message);
             }
             break;
-        case "RefereshList":
-            {
-                hideModal();
-                const refereshUrl = form.attr("data-refereshurl");
-                const refereshDiv = form.attr("data-refereshdiv");
-                get(refereshUrl, refereshDiv);
-            }
+        case "RefereshList": {
+            hideModal();
+            const refereshUrl = form.attr("data-refereshurl");
+            const refereshDiv = form.attr("data-refereshdiv");
+            get(refereshUrl, refereshDiv);
+        }
             break;
-        case "setValue":
-            {
-                const element = form.data("element");
-                $(`#${element}`).html(data);
-            }
+        case "setValue": {
+            const element = form.data("element");
+            $(`#${element}`).html(data);
+        }
             break;
         default:
     }
@@ -181,8 +179,8 @@ function handleAjaxCall(method, url, data) {
             function (data) {
 
             }).fail(function (error) {
-                alert("خطایی رخ داده است. لطفا با مدیر سیستم تماس بگیرید.");
-            });
+            alert("خطایی رخ داده است. لطفا با مدیر سیستم تماس بگیرید.");
+        });
     }
 }
 
@@ -202,7 +200,7 @@ jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
 jQuery.validator.addMethod("fileExtensionLimitation",
     function (value, element, params) {
         if (!element.files || element.files.length === 0) {
-            return true; 
+            return true;
         }
 
         var fileName = element.files[0].name;

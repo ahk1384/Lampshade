@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using _0_Framework.Application;
+﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
@@ -72,7 +71,7 @@ public class ProductCategoryRepository : BaseRepository<long, ProductCategory>, 
         var res = showDeleted
             ? _context.ProductCategories.Where(x => x.IsDeleted)
             : _context.ProductCategories.Where(x => !x.IsDeleted);
-       var query = res.Select(x => new ProductCategoryViewModel
+        var query = res.Select(x => new ProductCategoryViewModel
         {
             Id = x.Id,
             Title = x.Title,

@@ -1,12 +1,8 @@
-﻿using System.Globalization;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductAgg;
 using ShopManagementDomain.ProductAgg;
-using System.Linq.Expressions;
-using _0_Framework.Application;
-using _0_Framework.Infrastructure;
-using Microsoft.AspNetCore.Http.Internal;
-using ShopManagement.Application.Contracts.ProductCategoryAgg;
 using ShopManagementDomain.ProductCategoryAgg;
 
 namespace SM.Infrastructure.EFCore.Repositories;
@@ -15,6 +11,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
 {
     private readonly ShopContext _context;
     private readonly IProductCategoryRepository _productCategoryRepository;
+
     public ProductRepository(ShopContext context, IProductCategoryRepository productCategoryRepository) : base(context)
     {
         _context = context;
@@ -24,7 +21,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
 
     public EditProduct GetDetails(long id)
     {
-        return _context.Products.Select(x => new EditProduct()
+        return _context.Products.Select(x => new EditProduct
         {
             Id = x.Id,
             Name = x.Name,
@@ -38,7 +35,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             Description = x.Description,
             Categories = _productCategoryRepository.GetProductCategories(),
             ShortDescription = x.ShortDescription
-        }).FirstOrDefault(x => x.Id== id);
+        }).FirstOrDefault(x => x.Id == id);
     }
 
     public List<ProductViewModel> Search(ProductSearchModel searchModel, bool showDeleted)
@@ -47,15 +44,15 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             ? _context.Products.Where(x => x.IsDeleted)
             : _context.Products.Where(x => !x.IsDeleted);
         var query = res.Include(x => x.Category).Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Category = x.Category.Title,
-                CategoryId = x.CategoryId,
-                Code = x.Code,
-                Picture = x.Picture,
-                CreationDate = x.CreationDate.ToFarsi()
-            });
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Category = x.Category.Title,
+            CategoryId = x.CategoryId,
+            Code = x.Code,
+            Picture = x.Picture,
+            CreationDate = x.CreationDate.ToFarsi()
+        });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
             query = query.Where(x => x.Name.Contains(searchModel.Name));
@@ -76,7 +73,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
 
     public List<ProductViewModel> GetProducts()
     {
-        return _context.Products.Include(x => x.Category).Select(x => new ProductViewModel()
+        return _context.Products.Include(x => x.Category).Select(x => new ProductViewModel
         {
             Id = x.Id,
             Name = x.Name,

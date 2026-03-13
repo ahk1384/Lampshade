@@ -1,6 +1,6 @@
-﻿using AccountManagement.Application.Contract.Role;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using _0_Framework.Application;
+using AccountManagement.Application.Contract.Role;
 using Microsoft.AspNetCore.Http;
 
 namespace AccountManagement.Application.Contract.Account;

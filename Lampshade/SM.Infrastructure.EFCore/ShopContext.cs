@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShopManagement.Infrastructure.EFCore.Mapping;
 using ShopManagementDomain.ProductAgg;
 using ShopManagementDomain.ProductCategoryAgg;
 using ShopManagementDomain.ProductPictureAgg;

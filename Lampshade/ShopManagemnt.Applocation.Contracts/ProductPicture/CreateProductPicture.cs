@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
 using ShopManagement.Application.Contracts.ProductAgg;
@@ -20,5 +19,6 @@ public class CreateProductPicture
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string PictureTitle { get; set; }
+
     public List<ProductViewModel>? Products { get; set; }
 }

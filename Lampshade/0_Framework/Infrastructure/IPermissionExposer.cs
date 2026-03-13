@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace _0_Framework.Infrastructure;
+﻿namespace _0_Framework.Infrastructure;
 
 public interface IPermissionExposer
 {
-    Dictionary<String, List<PermissionDto>> Expose();
+    Dictionary<string, List<PermissionDto>> Expose();
 }

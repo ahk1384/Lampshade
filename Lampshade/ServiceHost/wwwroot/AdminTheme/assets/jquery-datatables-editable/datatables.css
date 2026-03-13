@@ -9,7 +9,9 @@ div.dataTables_length select {
     width: 75px;
 }
 
-div.dataTables_filter { text-align: right; }
+div.dataTables_filter {
+    text-align: right;
+}
 
 div.dataTables_filter label {
     font-weight: normal;
@@ -42,7 +44,9 @@ div.dataTables_paginate ul.pagination {
     div.dataTables_length,
     div.dataTables_filter,
     div.dataTables_info,
-    div.dataTables_paginate { text-align: center; }
+    div.dataTables_paginate {
+        text-align: center;
+    }
 }
 
 
@@ -95,14 +99,18 @@ table.dataTable thead .sorting_desc:after {
 }
 
 table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:after { color: #eee; }
+table.dataTable thead .sorting_desc_disabled:after {
+    color: #eee;
+}
 
 table.dataTable thead > tr > th {
     padding-left: 8px;
     padding-right: 30px;
 }
 
-table.dataTable th:active { outline: none; }
+table.dataTable th:active {
+    outline: none;
+}
 
 /* Scrolling */
 
@@ -125,7 +133,9 @@ div.dataTables_scrollBody table {
 }
 
 div.dataTables_scrollBody tbody tr:first-child th,
-div.dataTables_scrollBody tbody tr:first-child td { border-top: none; }
+div.dataTables_scrollBody tbody tr:first-child td {
+    border-top: none;
+}
 
 div.dataTables_scrollFoot table {
     border-top: none;
@@ -137,7 +147,9 @@ div.dataTables_scrollFoot table {
    to use separate
  */
 
-table.table-bordered.dataTable { border-collapse: separate !important; }
+table.table-bordered.dataTable {
+    border-collapse: separate !important;
+}
 
 table.table-bordered thead th,
 table.table-bordered thead td {
@@ -152,11 +164,13 @@ table.table-bordered tbody td {
 }
 
 table.table-bordered th:last-child,
-table.table-bordered td:last-child { border-right-width: 0; }
+table.table-bordered td:last-child {
+    border-right-width: 0;
+}
 
-div.dataTables_scrollHead table.table-bordered { border-bottom-width: 0; }
-
-
+div.dataTables_scrollHead table.table-bordered {
+    border-bottom-width: 0;
+}
 
 
 /*
@@ -170,32 +184,48 @@ div.dataTables_scrollHead table.table-bordered { border-bottom-width: 0; }
 }
 
 .table.dataTable tbody tr.active:hover td,
-.table.dataTable tbody tr.active:hover th { background-color: #0075b0 !important; }
+.table.dataTable tbody tr.active:hover th {
+    background-color: #0075b0 !important;
+}
 
 .table.dataTable tbody tr.active th > a,
-.table.dataTable tbody tr.active td > a { color: white; }
+.table.dataTable tbody tr.active td > a {
+    color: white;
+}
 
 .table-striped.dataTable tbody tr.active:nth-child(odd) td,
-.table-striped.dataTable tbody tr.active:nth-child(odd) th { background-color: #017ebc; }
+.table-striped.dataTable tbody tr.active:nth-child(odd) th {
+    background-color: #017ebc;
+}
 
-table.DTTT_selectable tbody tr { cursor: pointer; }
+table.DTTT_selectable tbody tr {
+    cursor: pointer;
+}
 
-div.DTTT .btn:hover { text-decoration: none !important; }
+div.DTTT .btn:hover {
+    text-decoration: none !important;
+}
 
-ul.DTTT_dropdown.dropdown-menu { z-index: 2003; }
+ul.DTTT_dropdown.dropdown-menu {
+    z-index: 2003;
+}
 
 ul.DTTT_dropdown.dropdown-menu a {
     color: #333 !important; /* needed only when demo_page.css is included */
 }
 
-ul.DTTT_dropdown.dropdown-menu li { position: relative; }
+ul.DTTT_dropdown.dropdown-menu li {
+    position: relative;
+}
 
 ul.DTTT_dropdown.dropdown-menu li:hover a {
     background-color: #0088cc;
     color: white !important;
 }
 
-div.DTTT_collection_background { z-index: 2002; }
+div.DTTT_collection_background {
+    z-index: 2002;
+}
 
 /* TableTools information display */
 
@@ -215,7 +245,7 @@ div.DTTT_print_info {
     padding: 10px 30px;
     position: fixed;
     text-align: center;
-	
+
     top: 50%;
     width: 400px;
 }
@@ -252,7 +282,6 @@ div.dataTables_processing {
     top: 50%;
     width: 100%;
 }
-
 
 
 /*
@@ -294,7 +323,9 @@ div.DTFC_LeftBodyWrapper table {
 div.DTFC_RightBodyWrapper tbody tr:first-child th,
 div.DTFC_RightBodyWrapper tbody tr:first-child td,
 div.DTFC_LeftBodyWrapper tbody tr:first-child th,
-div.DTFC_LeftBodyWrapper tbody tr:first-child td { border-top: none; }
+div.DTFC_LeftBodyWrapper tbody tr:first-child td {
+    border-top: none;
+}
 
 div.DTFC_RightFootWrapper table,
 div.DTFC_LeftFootWrapper table {
@@ -307,4 +338,6 @@ div.DTFC_LeftFootWrapper table {
  * FixedHeader styles
  */
 
-div.FixedHeader_Cloned table { margin: 0 !important }
+div.FixedHeader_Cloned table {
+    margin: 0 !important
+}

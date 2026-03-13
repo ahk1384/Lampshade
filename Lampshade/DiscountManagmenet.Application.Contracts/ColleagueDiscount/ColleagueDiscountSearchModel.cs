@@ -5,5 +5,4 @@ public class ColleagueDiscountSearchModel
     public long? ProductId { get; set; }
 
     public string? Product { get; set; }
-
 }

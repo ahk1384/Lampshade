@@ -81,7 +81,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
                 Products = MapProducts(x.Products),
-                Slug = x.Slug,
+                Slug = x.Slug
             }).AsNoTracking().ToList();
     }
 
@@ -92,19 +92,21 @@ public class ProductCategoryQuery : IProductCategoryQuery
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
-        var categories = _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x => new ProductCategoryQueryModel
-        {
-            Id = x.Id,
-            Description = x.Description,
-            Keywords = x.Keywords,
-            MetaDescription = x.MetaDescription,
-            Name = x.Title,
-            Picture = x.Picture,
-            PictureAlt = x.PictureAlt,
-            PictureTitle = x.PictureTitle,
-            Slug = x.Slug,
-            Products = MapProducts(x.Products)
-        }).AsNoTracking().ToList(); ;
+        var categories = _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x =>
+            new ProductCategoryQueryModel
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Keywords = x.Keywords,
+                MetaDescription = x.MetaDescription,
+                Name = x.Title,
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                Slug = x.Slug,
+                Products = MapProducts(x.Products)
+            }).AsNoTracking().ToList();
+        ;
         foreach (var category in categories)
         foreach (var product in category.Products)
         {

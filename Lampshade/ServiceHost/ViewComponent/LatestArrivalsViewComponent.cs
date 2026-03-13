@@ -1,11 +1,9 @@
-﻿
-using _01_LampshadeQuery.Contracts.Product;
-using _01_LampshadeQuery.Contracts.ProductCategory;
+﻿using _01_LampshadeQuery.Contracts.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.ViewComponent;
 
-public class LatestArrivalsViewComponent  : Microsoft.AspNetCore.Mvc.ViewComponent
+public class LatestArrivalsViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
 {
     private readonly IProductQuery _productQuery;
 

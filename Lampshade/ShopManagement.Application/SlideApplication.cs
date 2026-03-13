@@ -1,20 +1,18 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using ShopManagement.Application.Contracts.SlideAgg;
 using ShopManagementDomain.ProductAgg;
-using ShopManagementDomain.ProductCategoryAgg;
 using ShopManagementDomain.SlideAgg;
-using System.Collections.Generic;
 
 namespace ShopManagement.Application;
 
 public class SlideApplication : ISlideApplication
 {
     private readonly IFileUploader _fileUploader;
-    private readonly ISlideRepository _slideRepository;
     private readonly IProductRepository _productRepository;
+    private readonly ISlideRepository _slideRepository;
 
-    public SlideApplication(ISlideRepository slideRepository, IFileUploader fileUploader, IProductRepository productRepository)
+    public SlideApplication(ISlideRepository slideRepository, IFileUploader fileUploader,
+        IProductRepository productRepository)
     {
         _slideRepository = slideRepository;
         _fileUploader = fileUploader;
@@ -31,7 +29,8 @@ public class SlideApplication : ISlideApplication
         try
         {
             var pictureName = _fileUploader.Upload(command.Picture, "slides");
-            var p1 = new Slide(pictureName,command.PictureAlt,command.PictureTitle,command.Heading,command.Title,command.BtnText,command.Link,command.BtnText);
+            var p1 = new Slide(pictureName, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
+                command.BtnText, command.Link, command.BtnText);
             _slideRepository.Create(p1);
         }
         catch (Exception e)
@@ -54,7 +53,8 @@ public class SlideApplication : ISlideApplication
         try
         {
             var p1 = _slideRepository.Get(command.Id);
-            p1.Edit(pictureName, command.PictureAlt, command.PictureTitle, command.Heading, command.Title, command.BtnText, command.Link, command.BtnText);
+            p1.Edit(pictureName, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
+                command.BtnText, command.Link, command.BtnText);
         }
         catch (Exception e)
         {
@@ -104,7 +104,7 @@ public class SlideApplication : ISlideApplication
 
     public EditSlide GetDetails(long id)
     {
-        return _slideRepository.GetDetails(id); 
+        return _slideRepository.GetDetails(id);
     }
 
     public List<SlideViewModel> GetList()

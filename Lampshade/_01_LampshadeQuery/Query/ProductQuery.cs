@@ -1,23 +1,25 @@
 ﻿using _0_Framework.Application;
+using _01_LampshadeQuery.Contracts.Comment;
 using _01_LampshadeQuery.Contracts.Product;
+using CommentManagement.Infrastructure.EFCore;
+using CommnetManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using ShopManagementDomain.ProductPictureAgg;
 using SM.Infrastructure.EFCore;
-using _01_LampshadeQuery.Contracts.Comment;
-using CommentManagement.Infrastructure.EFCore;
-using CommnetManagement.Infrastructure.EFCore;
 
 namespace _01_LampshadeQuery.Query;
 
 public class ProductQuery : IProductQuery
 {
+    private readonly CommentContext _commentContext;
     private readonly ShopContext _context;
     private readonly DiscountContext _discountContext;
     private readonly InventoryContext _inventoryContext;
-    private readonly CommentContext _commentContext;
-    public ProductQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext, CommentContext commentContext)
+
+    public ProductQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext,
+        CommentContext commentContext)
     {
         _context = context;
         _discountContext = discountContext;
@@ -28,7 +30,7 @@ public class ProductQuery : IProductQuery
     public ProductQueryModel GetProductDetails(string slug)
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
+            new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -49,42 +51,43 @@ public class ProductQuery : IProductQuery
                 MetaDescription = product.MetaDescription,
                 CategorySlug = product.Category.Slug,
                 Pictures = MapProductPicture(product.ProductPictures),
-                Slug = product.Slug,
-            }).AsNoTracking().FirstOrDefault(x =>x.Slug == slug);
+                Slug = product.Slug
+            }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
-        
-            var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
-            if (productInventory != null)
+
+        var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+        if (productInventory != null)
+        {
+            var price = productInventory.UnitPrice;
+            product.Price = price.ToMoney();
+            product.IsInStock = productInventory.InStock;
+            var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+            if (discount != null)
             {
-                var price = productInventory.UnitPrice;
-                product.Price = price.ToMoney();
-                product.IsInStock = productInventory.InStock;
-                var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
-                if (discount != null)
-                {
-                    var discountRate = discount.DiscountRate;
-                    product.DiscountRate = discountRate;
-                    product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
-                    product.HasDiscount = discountRate > 0;
-                    var discountAmount = Math.Round(price * discountRate / 100);
-                    product.PriceWithDiscount = (price - discountAmount).ToMoney();
-                }
+                var discountRate = discount.DiscountRate;
+                product.DiscountRate = discountRate;
+                product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
+                product.HasDiscount = discountRate > 0;
+                var discountAmount = Math.Round(price * discountRate / 100);
+                product.PriceWithDiscount = (price - discountAmount).ToMoney();
             }
-            product.Comments = _commentContext.Comments
-                .Where(x => !x.IsDeleted)
-                .Where(x => x.IsConfirmed)
-                .Where(x => x.Type == CommentType.Product)
-                .Where(x => x.OwnerRecordId == product.Id)
-                .Select(x => new CommentQueryModel
-                {
-                    Id = x.Id,
-                    Message = x.Message,
-                    Name = x.Name,
-                    Type = x.Type,
-                    CreationDate = x.CreationDate.ToFarsi()
-                })
-                .OrderByDescending(x => x.Id)
-                .ToList();
+        }
+
+        product.Comments = _commentContext.Comments
+            .Where(x => !x.IsDeleted)
+            .Where(x => x.IsConfirmed)
+            .Where(x => x.Type == CommentType.Product)
+            .Where(x => x.OwnerRecordId == product.Id)
+            .Select(x => new CommentQueryModel
+            {
+                Id = x.Id,
+                Message = x.Message,
+                Name = x.Name,
+                Type = x.Type,
+                CreationDate = x.CreationDate.ToFarsi()
+            })
+            .OrderByDescending(x => x.Id)
+            .ToList();
 
         return product;
     }
@@ -128,6 +131,7 @@ public class ProductQuery : IProductQuery
                 }
             }
         }
+
         return products;
     }
 
@@ -177,6 +181,7 @@ public class ProductQuery : IProductQuery
 
         return finalproducts;
     }
+
     private static List<ProductPictureQueryModel> MapProductPicture(List<ProductPicture> pictures)
     {
         var res = new List<ProductPictureQueryModel>();

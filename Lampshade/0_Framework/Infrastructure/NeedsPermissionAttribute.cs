@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace _0_Framework.Infrastructure;
+﻿namespace _0_Framework.Infrastructure;
 
 public class NeedsPermissionAttribute : Attribute
 {

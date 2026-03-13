@@ -7,14 +7,16 @@ namespace ServiceHost.ViewComponent;
 
 public class Menu : Microsoft.AspNetCore.Mvc.ViewComponent
 {
-    private readonly IProductCategoryQuery _productCategory;
     private readonly IArticleCategoryQuery _articleCategory;
-    public MenuModel Model { get; set; } = new MenuModel();
+    private readonly IProductCategoryQuery _productCategory;
+
     public Menu(IProductCategoryQuery productCategory, IArticleCategoryQuery articleCategory)
     {
         _productCategory = productCategory;
         _articleCategory = articleCategory;
     }
+
+    public MenuModel Model { get; set; } = new();
 
     public IViewComponentResult Invoke()
     {

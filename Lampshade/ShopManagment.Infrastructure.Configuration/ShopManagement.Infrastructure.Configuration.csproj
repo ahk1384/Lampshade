@@ -1,28 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj" />
-    <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj" />
-    <ProjectReference Include="..\ShopManagementDomain\ShopManagementDomain.csproj" />
-    <ProjectReference Include="..\ShopManagemnt.Applocation.Contracts\ShopManagement.Application.Contracts.csproj" />
-    <ProjectReference Include="..\SM.Infrastructure.EFCore\SM.Infrastructure.EFCore.csproj" />
-    <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj"/>
+        <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj"/>
+        <ProjectReference Include="..\ShopManagementDomain\ShopManagementDomain.csproj"/>
+        <ProjectReference Include="..\ShopManagemnt.Applocation.Contracts\ShopManagement.Application.Contracts.csproj"/>
+        <ProjectReference Include="..\SM.Infrastructure.EFCore\SM.Infrastructure.EFCore.csproj"/>
+        <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore">
-      <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.22\Microsoft.AspNetCore.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Microsoft.AspNetCore">
+            <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.22\Microsoft.AspNetCore.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
 </Project>

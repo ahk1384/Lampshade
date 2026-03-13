@@ -74,7 +74,8 @@
                                     <td>@item.ArticlesCount</td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a permission="@BlogPermissions.EditArticleCategory" class="btn btn-warning pull-right m-rl-5"
+                                        <a permission="@BlogPermissions.EditArticleCategory"
+                                           class="btn btn-warning pull-right m-rl-5"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>
@@ -95,7 +96,7 @@
     <script src="~/adminTheme/assets/datatables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').dataTable();
         });
     </script>

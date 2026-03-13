@@ -15,7 +15,6 @@ public class Permission
 
     protected Permission()
     {
-    
     }
 
     public long Id { get; private set; }

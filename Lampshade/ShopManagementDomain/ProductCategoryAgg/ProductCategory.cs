@@ -10,7 +10,8 @@ public class ProductCategory : EntityBase<long>
         Products = new List<Product>();
     }
 
-    public ProductCategory(string title, string picture, string description, string pictureAlt, string pictureTitle, string metaDescription,
+    public ProductCategory(string title, string picture, string description, string pictureAlt, string pictureTitle,
+        string metaDescription,
         string keywords, string slug)
     {
         Title = title;
@@ -40,7 +41,8 @@ public class ProductCategory : EntityBase<long>
 
     public List<Product> Products { get; }
 
-    public void Edit(string title, string picture, string description, string pictureAlt, string pictureTitle, string metaDescription,
+    public void Edit(string title, string picture, string description, string pictureAlt, string pictureTitle,
+        string metaDescription,
         string keywords, string slug)
     {
         Title = title;

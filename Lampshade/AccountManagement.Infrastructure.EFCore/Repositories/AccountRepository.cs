@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore.Repositories;
 
-public class AccountRepository : BaseRepository<long,Account> , IAccountRepository 
+public class AccountRepository : BaseRepository<long, Account>, IAccountRepository
 {
     private readonly AccountContext _context;
+
     public AccountRepository(AccountContext context) : base(context)
     {
         _context = context;
@@ -31,9 +32,9 @@ public class AccountRepository : BaseRepository<long,Account> , IAccountReposito
             RoleId = x.RoleId,
             MappedPermissions = MapPermissions(x.Permissions)
         }).AsNoTracking().FirstOrDefault(x => x.Id == id);
-        
+
         account.Permissions = account.MappedPermissions.Select(x => x.Code).ToList();
-        
+
         return account;
     }
 
@@ -74,10 +75,7 @@ public class AccountRepository : BaseRepository<long,Account> , IAccountReposito
 
         return query.OrderByDescending(x => x.Id).ToList();
     }
-    private static List<PermissionDto> MapPermissions(IEnumerable<PermissionAccount> permissions)
-    {
-        return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();
-    }
+
     public List<int> GetRolePermissions(long id)
     {
         return _context.Roles
@@ -85,5 +83,10 @@ public class AccountRepository : BaseRepository<long,Account> , IAccountReposito
             .FirstOrDefault(x => x.Id == id)
             ?.Permissions.Select(x => x.Code)
             .ToList();
+    }
+
+    private static List<PermissionDto> MapPermissions(IEnumerable<PermissionAccount> permissions)
+    {
+        return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();
     }
 }

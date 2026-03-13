@@ -1,18 +1,18 @@
 ﻿using _0_Framework.Application;
+using BlogManagement_Application.Contract.ArticleAgg;
 using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
-using BlogManagement_Application.Contract.ArticleAgg;
-using Microsoft.AspNetCore.JsonPatch.Operations;
-using Microsoft.CodeAnalysis;
 
 namespace BlogManagement.Application;
 
 public class ArticleApplication : IArticleApplication
 {
-    private readonly IArticleRepository _articleRepository;
     private readonly IArticleCategoryRepository _articleCategoryRepository;
+    private readonly IArticleRepository _articleRepository;
     private readonly IFileUploader _fileUploader;
-    public ArticleApplication(IArticleRepository articleRepository, IFileUploader fileUploader, IArticleCategoryRepository articleCategoryRepository)
+
+    public ArticleApplication(IArticleRepository articleRepository, IFileUploader fileUploader,
+        IArticleCategoryRepository articleCategoryRepository)
     {
         _articleRepository = articleRepository;
         _fileUploader = fileUploader;
@@ -33,7 +33,9 @@ public class ArticleApplication : IArticleApplication
             var pictureName = _fileUploader.Upload(command.Picture, picturePath);
             var publishDate = command.PublishDate.ToGeorgianDateTime();
 
-            var p1 = new Article(command.Title,command.ShortDescription,command.Description,pictureName,command.PictureAlt,command.PictureTitle,publishDate,command.Slug,command.Keywords,command.MetaDescription,command.CanonicalAddress,command.CategoryId);
+            var p1 = new Article(command.Title, command.ShortDescription, command.Description, pictureName,
+                command.PictureAlt, command.PictureTitle, publishDate, command.Slug, command.Keywords,
+                command.MetaDescription, command.CanonicalAddress, command.CategoryId);
             _articleRepository.Create(p1);
         }
         catch (Exception e)
