@@ -1,6 +1,9 @@
-﻿namespace CommentManagement.Infrastructure.Configuration.Permissions;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 
-public class CommentPermissions
+namespace CommentManagement.Infrastructure.Configuration.Permissions;
+
+public class CommentPermissions : IPermissions
 {
     public const int CommentBase = 4000;
 
@@ -8,4 +11,8 @@ public class CommentPermissions
     public const int CancelAndRestoreComment = CommentBase + 03;
     public const int SearchComment = CommentBase + 04;
     public const int CommentList = CommentBase + 05;
+    public static void Configure()
+    {
+        PermissionsCodes.AddCode("comment", CommentBase);
+    }
 }

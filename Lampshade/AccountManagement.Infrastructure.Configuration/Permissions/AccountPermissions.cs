@@ -1,9 +1,17 @@
-﻿namespace AccountManagement.Infrastructure.Configuration.Permissions;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 
-public class AccountPermissions
+namespace AccountManagement.Infrastructure.Configuration.Permissions;
+
+public class AccountPermissions : IPermissions
 {
+    public static void Configure()
+    {
+        PermissionsCodes.AddCode("account",AccountsBase);
+        PermissionsCodes.AddCode("accountManagement",AccountBase);
+        PermissionsCodes.AddCode("role",RoleBase);
+    }
     public const int AccountsBase = 6000;
-
     public const int AccountBase = AccountsBase + 100;
 
     public const int CreateAccount = AccountBase + 01;
@@ -19,3 +27,5 @@ public class AccountPermissions
     public const int EditRole = RoleBase + 02;
     public const int RoleList = RoleBase + 03;
 }
+
+

@@ -1,6 +1,9 @@
-﻿namespace BlogManagement.Infrastructure.Configuration.Permissions;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 
-public class BlogPermissions
+namespace BlogManagement.Infrastructure.Configuration.Permissions;
+
+public class BlogPermissions : IPermissions
 {
     public const int BlogBase = 5000;
     public const int ArticleBase = BlogBase + 100;
@@ -14,5 +17,11 @@ public class BlogPermissions
     public const int CreateArticleCategory = ArticleCategoryBase + 01;
     public const int EditArticleCategory = ArticleCategoryBase + 02;
     public const int SearchArticleCategory = ArticleCategoryBase + 03;
-    public const int ArticleCategoryList = ArticleBase + 04;
+    public const int ArticleCategoryList = ArticleCategoryBase+ 04;
+    public static void Configure()
+    {
+        PermissionsCodes.AddCode("blog", BlogBase);
+        PermissionsCodes.AddCode("article", ArticleBase);
+        PermissionsCodes.AddCode("articleCategories", ArticleCategoryBase);
+    }
 }

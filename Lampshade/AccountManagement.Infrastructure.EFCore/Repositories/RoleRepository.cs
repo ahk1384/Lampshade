@@ -43,25 +43,6 @@ public class RoleRepository : BaseRepository<long, Role>, IRoleRepository
         return role;
     }
 
-    public List<string> HasPermissions()
-    {
-        return _context.Roles
-            .Include(x => x.Permissions)
-            .Where(x => x.Permissions.Count > 0)
-            .Select(x => x.Id.ToString())
-            .ToList();
-    }
-
-    public Task<List<string>> GetPartValidRoles(int code)
-    {
-        var result = new List<string>();
-        var valid = _context.Roles.Include(permission => permission.Permissions);
-        foreach (var permission in valid)
-            if (permission.Permissions.Any(x => x.Code == code))
-                result.Add(permission.Id.ToString());
-        return Task.FromResult(result);
-    }
-
     private static List<PermissionDto> MapPermissions(IEnumerable<Permission> permissions)
     {
         return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();

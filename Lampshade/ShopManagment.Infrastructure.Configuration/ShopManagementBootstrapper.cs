@@ -43,6 +43,7 @@ public class ShopManagementBootstrapper
 
         services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
 
+        ShopPermissions.Configure();
         services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
     }
 }

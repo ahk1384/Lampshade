@@ -75,16 +75,7 @@ public class AccountRepository : BaseRepository<long, Account>, IAccountReposito
 
         return query.OrderByDescending(x => x.Id).ToList();
     }
-
-    public List<int> GetRolePermissions(long id)
-    {
-        return _context.Roles
-            .Include(x => x.Permissions)
-            .FirstOrDefault(x => x.Id == id)
-            ?.Permissions.Select(x => x.Code)
-            .ToList();
-    }
-
+    
     private static List<PermissionDto> MapPermissions(IEnumerable<PermissionAccount> permissions)
     {
         return permissions.Select(x => new PermissionDto(x.Code, x.Name)).ToList();

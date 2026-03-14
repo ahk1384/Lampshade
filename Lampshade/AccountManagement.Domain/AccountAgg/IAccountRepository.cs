@@ -9,5 +9,4 @@ public interface IAccountRepository : IRepository<long, Account>
     EditAccount GetDetails(long id);
     List<AccountViewModel> GetAccounts();
     List<AccountViewModel> Search(AccountSearchModel searchModel);
-    public List<int> GetRolePermissions(long id);
 }

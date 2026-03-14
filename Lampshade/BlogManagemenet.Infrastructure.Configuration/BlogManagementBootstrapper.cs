@@ -30,6 +30,8 @@ public class BlogManagementBootstrapper
         services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
 
         services.AddTransient<IPermissionExposer, BlogPermissionsExposer>();
+        
+        BlogPermissions.Configure();
         services.AddDbContext<BlogContext>(a => a.UseSqlServer(connectionString));
     }
 }

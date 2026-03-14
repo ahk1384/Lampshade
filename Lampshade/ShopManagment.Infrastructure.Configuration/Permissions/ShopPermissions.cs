@@ -1,6 +1,9 @@
-﻿namespace ShopManagement.Infrastructure.Configuration.Permissions;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 
-public class ShopPermissions
+namespace ShopManagement.Infrastructure.Configuration.Permissions;
+
+public class ShopPermissions : IPermissions
 {
     //Product
     public const int BaseShop = 1000;
@@ -20,7 +23,6 @@ public class ShopPermissions
     public const int CreateProductCategory = BaseProductCategory + 22;
     public const int EditProductCategory = BaseProductCategory + 23;
     public const int RemoveAndRestoreProductCategory = BaseProductCategory + 24;
-
     public const int ProductCategoryList = BaseProductCategory + 25;
 
     //ProductPicture
@@ -38,4 +40,12 @@ public class ShopPermissions
     public const int EditSlide = BaseSlide + 42;
     public const int RemoveAndRestoreSlide = BaseSlide + 43;
     public const int SlideList = BaseSlide + 44;
+    public static void Configure()
+    {
+        PermissionsCodes.AddCode("shop", BaseShop);
+        PermissionsCodes.AddCode("product", BaseProduct);
+        PermissionsCodes.AddCode("productCategory", BaseProductCategory);
+        PermissionsCodes.AddCode("productPictures", BaseProductPicture);
+        PermissionsCodes.AddCode("slide", BaseSlide);
+    }
 }

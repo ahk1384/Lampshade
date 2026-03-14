@@ -2,6 +2,7 @@
 using CommentManagement.Application;
 using CommentManagement.Application.Contracts.Comment;
 using CommentManagement.Domain.CommentAgg;
+using CommentManagement.Infrastructure.Configuration.Permissions;
 using CommentManagement.Infrastructure.EFCore;
 using CommentManagement.Infrastructure.EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ public class CommentManagementBootstrapper
         services.AddTransient<ICommentApplication, CommentApplication>();
 
         services.AddTransient<IPermissionExposer, CommentPermissionsExposer>();
+        
+        CommentPermissions.Configure();
         services.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
     }
 }

@@ -18,7 +18,8 @@ public class InventoryManagementBootstrapper
         services.AddTransient<IInventoryApplication, InventoryApplication>();
 
         services.AddTransient<IPermissionExposer, InventoryPermissionsExposer>();
-
+        
+        InventoryPermissions.Configure();
         services.AddDbContext<InventoryContext>(x => x.UseSqlServer(connectionString));
     }
 }

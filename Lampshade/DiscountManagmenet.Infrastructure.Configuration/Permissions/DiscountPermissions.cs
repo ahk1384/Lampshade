@@ -1,6 +1,9 @@
-﻿namespace DiscountManagement.Infrastructure.Configuration.Permissions;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 
-public class DiscountPermissions
+namespace DiscountManagement.Infrastructure.Configuration.Permissions;
+
+public class DiscountPermissions : IPermissions
 {
     public const int DiscountBase = 3000;
 
@@ -20,4 +23,10 @@ public class DiscountPermissions
     public const int SearchColleagueDiscount = ColleagueDiscountBase + 03;
     public const int RemoveAndRestoreColleagueDiscount = ColleagueDiscountBase + 04;
     public const int ColleagueDiscountList = ColleagueDiscountBase + 05;
+    public static void Configure()
+    {
+        PermissionsCodes.AddCode("discount", DiscountBase);
+        PermissionsCodes.AddCode("customerDiscount", CustomerDiscountBase);
+        PermissionsCodes.AddCode("colleagueDiscount", ColleagueDiscountBase);
+    }
 }
