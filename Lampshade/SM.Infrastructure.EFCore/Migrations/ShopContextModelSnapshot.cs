@@ -22,6 +22,88 @@ namespace SM.Infrastructure.EFCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ShopManagementDomain.CartAgg.Cart", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("PayAmount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts", (string)null);
+                });
+
+            modelBuilder.Entity("ShopManagementDomain.OrderAgg.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IssueTrackingNo")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<double>("PayAmount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<long>("RefId")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders", (string)null);
+                });
+
             modelBuilder.Entity("ShopManagementDomain.ProductAgg.Product", b =>
                 {
                     b.Property<long>("Id")
@@ -199,14 +281,16 @@ namespace SM.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("BtnText")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Heading")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -217,27 +301,138 @@ namespace SM.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("Picture")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("PictureAlt")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PictureTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slides");
+                    b.ToTable("Slides", (string)null);
+                });
+
+            modelBuilder.Entity("ShopManagementDomain.CartAgg.Cart", b =>
+                {
+                    b.OwnsMany("ShopManagementDomain.CartAgg.CartItem", "Items", b1 =>
+                        {
+                            b1.Property<long>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"));
+
+                            b1.Property<long>("CartId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<int>("Count")
+                                .HasColumnType("int");
+
+                            b1.Property<double>("DiscountAmount")
+                                .HasColumnType("float");
+
+                            b1.Property<int>("DiscountRate")
+                                .HasColumnType("int");
+
+                            b1.Property<bool>("IsInStock")
+                                .HasColumnType("bit");
+
+                            b1.Property<double>("ItemPayAmount")
+                                .HasColumnType("float");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Picture")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<double>("TotalItemPrice")
+                                .HasColumnType("float");
+
+                            b1.Property<double>("UnitPrice")
+                                .HasColumnType("float");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("CartId");
+
+                            b1.ToTable("CartItems", (string)null);
+
+                            b1.WithOwner("Cart")
+                                .HasForeignKey("CartId");
+
+                            b1.Navigation("Cart");
+                        });
+
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("ShopManagementDomain.OrderAgg.Order", b =>
+                {
+                    b.OwnsMany("ShopManagementDomain.OrderAgg.OrderItem", "Items", b1 =>
+                        {
+                            b1.Property<long>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"));
+
+                            b1.Property<int>("Count")
+                                .HasColumnType("int");
+
+                            b1.Property<DateTime>("CreationDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<int>("DiscountRate")
+                                .HasColumnType("int");
+
+                            b1.Property<bool>("IsDeleted")
+                                .HasColumnType("bit");
+
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<double>("UnitPrice")
+                                .HasColumnType("float");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("OrderId");
+
+                            b1.ToTable("OrderItems", (string)null);
+
+                            b1.WithOwner("Order")
+                                .HasForeignKey("OrderId");
+
+                            b1.Navigation("Order");
+                        });
+
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("ShopManagementDomain.ProductAgg.Product", b =>

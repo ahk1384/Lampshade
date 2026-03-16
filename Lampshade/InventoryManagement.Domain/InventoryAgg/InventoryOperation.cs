@@ -13,6 +13,7 @@ public class InventoryOperation
         Count = count;
         OperatorId = operatorId;
         CurrentCount = currentCount;
+        OperationDate = DateTime.Now;
         Description = description;
         OrderId = orderId;
         InventoryId = inventoryId;

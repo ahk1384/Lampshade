@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
+using AccountManagement.Infrastructure.EFCore;
 using InventoryManagement.Application.Contracts.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
 using SM.Infrastructure.EFCore;
@@ -10,11 +11,12 @@ public class InventoryRepository : BaseRepository<long, Inventory>, IInventoryRe
 {
     private readonly InventoryContext _context;
     private readonly ShopContext _shopContext;
-
-    public InventoryRepository(InventoryContext context, ShopContext shopContext) : base(context)
+    private readonly AccountContext _accountContext;
+    public InventoryRepository(InventoryContext context, ShopContext shopContext, AccountContext accountContext) : base(context)
     {
         _context = context;
         _shopContext = shopContext;
+        _accountContext = accountContext;
     }
 
     public EditInventory GetDetails(long id)
@@ -37,11 +39,17 @@ public class InventoryRepository : BaseRepository<long, Inventory>, IInventoryRe
             CurrentCount = x.CurrentCount,
             Description = x.Description,
             Operation = x.Operation,
-            OperationDate = x.OperationDate.ToFarsi(),
+            OperationDate = x.OperationDate.ToFarsiFull(),
             OperatorId = x.OperatorId,
-            OrderId = x.OrderId
-        }).OrderByDescending(x => x.Id).ToList();
-        return operations;
+            OrderId = x.OrderId,
+            Operator = _accountContext.Accounts.FirstOrDefault(w => w.Id == x.OperatorId).Username
+        });
+        return operations.OrderByDescending(x => x.Id).ToList();
+    }
+
+    public long GetInventoryId(long productId)
+    {
+        return _context.Inventories.FirstOrDefault(x => x.ProductId == productId).Id;
     }
 
     public List<InventoryViewModel> Search(InventorySearchModel searchModel, bool watchDeleted)
@@ -65,11 +73,12 @@ public class InventoryRepository : BaseRepository<long, Inventory>, IInventoryRe
 
         query = query.Where(x => x.InStock != searchModel.InStock);
 
-        var inventory = query.OrderByDescending(x => x.Id).ToList();
+        var inventory = query.OrderBy(x => x.Id).ToList();
 
         inventory.ForEach(item =>
             item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name);
 
         return inventory;
     }
+    
 }

@@ -23,9 +23,9 @@ public class AuthHelper : IAuthHelper
 
         var claims = _contextAccessor.HttpContext.User.Claims.ToList();
         result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        result.Username = claims.FirstOrDefault(x => x.Type == "UserName").Value;
+        result.Username = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
         result.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
-        result.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+        result.Fullname = claims.FirstOrDefault(x => x.Type == "FullName").Value;
         result.Role = claims.FirstOrDefault(x => x.Type == "RoleName").Value;
         result.ProfilePhoto = claims.FirstOrDefault(x => x.Type == ClaimTypes.Upn)?.Value;
         return result;
@@ -72,31 +72,29 @@ public class AuthHelper : IAuthHelper
         return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
     }
 
-    public void Signin(AuthViewModel account)
+    public async void Signin(AuthViewModel account)
     {
         var permissions = JsonConvert.SerializeObject(account.Permissions);
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, account.Id.ToString()),
-            new(ClaimTypes.Name, account.Fullname),
+            new(ClaimTypes.Name, account.Username),
             new(ClaimTypes.Role, account.RoleId.ToString()),
             new("RoleName", account.Role),
             new(ClaimTypes.Upn, account.ProfilePhoto),
-            new("UserName", account.Username), // Or Use ClaimTypes.NameIdentifier
+            new("FullName", account.Username), // Or Use ClaimTypes.NameIdentifier
             new("permissions", permissions),
             new("Mobile", account.Mobile)
         };
-
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
         var authProperties = new AuthenticationProperties
         {
             ExpiresUtc = DateTimeOffset.UtcNow.AddDays(2)
         };
 
-        _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+        await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity),
-            authProperties);
+             authProperties);
     }
 
     public void SignOut()

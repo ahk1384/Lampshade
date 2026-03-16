@@ -1,24 +1,28 @@
+using _0_Framework.Application;
 using InventoryManagement.Application.Contracts.Inventory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.ProductAgg;
 
 namespace ServiceHost.Areas.Adminstrator.Pages.Inventory;
-
+[Authorize]
 public class IndexModel : PageModel
 {
     public static bool WatchDeleted;
     private readonly IInventoryApplication _inventoryApplication;
     private readonly IProductApplication _productApplication;
+    private readonly IAuthHelper _authHelper;
     public List<InventoryViewModel> Inventories;
     public SelectList Products;
     public InventorySearchModel SearchModel;
     public bool watch;
 
-    public IndexModel(IInventoryApplication inventoryApplication, IProductApplication productApplication)
+    public IndexModel(IInventoryApplication inventoryApplication, IProductApplication productApplication, IAuthHelper authHelper)
     {
         _productApplication = productApplication;
+        _authHelper = authHelper;
         _inventoryApplication = inventoryApplication;
     }
 
@@ -94,7 +98,8 @@ public class IndexModel : PageModel
     {
         var command = new IncreaseInventory
         {
-            InventoryId = id
+            InventoryId = id,
+            OperatorId = _authHelper.CurrentAccountInfo().Id
         };
         return Partial("Increase", command);
     }
@@ -107,9 +112,11 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetReduce(long id)
     {
+        
         var command = new ReduceInventory
         {
-            InventoryId = id
+            InventoryId = id,
+            OperatorId = _authHelper.CurrentAccountInfo().Id
         };
         return Partial("Reduce", command);
     }

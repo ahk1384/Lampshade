@@ -1,7 +1,8 @@
 ﻿@using _0_Framework.Application
+@using _01_LampshadeQuery.Contracts.Cart
 @model _01_LampshadeQuery.MenuModel
 @inject IAuthHelper AuthHelper
-
+@inject ICartQuery _CartQuery
 <div class="header-area header-sticky">
     <div class="container">
         <div class="row">
@@ -52,21 +53,10 @@
                                 @if (AuthHelper.GetPermissions().Count > 0)
                                 {
                                     <li>
-                                        <a asp-area="Adminstrator" asp-page="/Index">ادمین</a>
+                                        <a asp-area="Adminstrator" asp-page="/Index">مدیریت</a>
                                     </li>
                                 }
-                                @if (AuthHelper.IsAuthenticated())
-                                {
-                                    <li>
-                                        <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li>
-                                        <a asp-page="/Login">ورود</a>
-                                    </li>
-                                }
+
                             </ul>
                         </nav>
                     </div>
@@ -85,11 +75,14 @@
                                         <span class="counter" id="cart_items_count">0</span>
                                     </a>
                                     <div class="mini-cart" id="mini-cart">
-                                        <div class="cart-items-wrapper ps-scroll" id="cart_items_wrapper">
-                                        </div>
-                                        <div class="cart-buttons">
+                                        <div class="cart-items-wrapper" id="cart_items_wrapper"></div>
+                                        
+                                        <div class="cart-buttons" id="cart_buttons">
                                             <a asp-page="/Cart">مشاهده سبد خرید</a>
                                         </div>
+                                        <h5 class="text-danger text-center" id="empty_cart_text" style="display: none;">
+                                            سبد خرید شما خالی است
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
@@ -107,14 +100,25 @@
                                     <div class="settings-menu-wrapper" id="settings-menu-wrapper">
                                         <div class="single-settings-block">
                                             <h4 class="title">پروفایل من </h4>
-                                            <ul>
-                                                <li>
-                                                    <a asp-page="/Account">ثبت نام</a>
-                                                </li>
-                                                <li>
-                                                    <a asp-page="/Account">ورود</a>
-                                                </li>
-                                            </ul>
+                                            @if (AuthHelper.IsAuthenticated())
+                                            {
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
+                                                    </li>
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a asp-page="/Register">ثبت نام</a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-page="/Login">ورود</a>
+                                                    </li>
+                                                </ul>
+                                            }
                                         </div>
                                         @*<div class="single-settings-block">
                                                     <h4 class="title">CURRENCY: USD </h4>
@@ -242,14 +246,23 @@
                     <ul>
                         <li class="menu-item-has-children">
                             <a href="#">پروفایل من </a>
-                            <ul class="sub-menu">
+                            @if (AuthHelper.IsAuthenticated())
+                            {
                                 <li>
-                                    <a href="login-register.html">ثبت نام</a>
+                                    <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
                                 </li>
-                                <li>
-                                    <a href="login-register.html">ورود</a>
-                                </li>
-                            </ul>
+                            }
+                            else
+                            {
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a asp-page="/Register">ثبت نام</a>
+                                    </li>
+                                    <li>
+                                        <a asp-page="/Login">ورود</a>
+                                    </li>
+                                </ul>
+                            }
                         </li>
                     </ul>
                 </nav>
@@ -268,7 +281,7 @@
                             </li>
                             <li>
                                 <i class="ion-android-mail"></i> <a
-                                    href="mailto:info@yourdomain.com">info@atriya.com</a>
+                                                                     href="mailto:info@yourdomain.com">info@atriya.com</a>
                             </li>
                         </ul>
                     </div>
@@ -296,3 +309,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateCartButton() {
+        const cartWrapper = document.getElementById('cart_items_wrapper');
+        const cartButtons = document.getElementById('cart_buttons');
+        const emptyText = document.getElementById('empty_cart_text');
+        // Check if cart wrapper has any child elements
+        const hasItems = cartWrapper.children.length > 0;
+
+        if (hasItems) {
+            cartButtons.style.display = 'block';
+            emptyText.style.display = 'none';
+        } else {
+            cartButtons.style.display = 'none';
+            emptyText.style.display = 'block';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", updateCartButton);
+    // Watch for any DOM changes (items added/removed)
+    const observer = new MutationObserver(updateCartButton);
+    observer.observe(document.getElementById("cart_items_wrapper"), {childList: true});
+</script>

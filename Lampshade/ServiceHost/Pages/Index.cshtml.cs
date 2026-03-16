@@ -1,22 +1,23 @@
+using _0_Framework.Application;
+using _01_LampshadeQuery.Contracts.Cart;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Nancy.Json;
 using ShopManagement.Application.Contracts.ProductCategoryAgg;
 
-namespace ServiceHost.Areas.Adminstrator.Pages.Shop.ProductCategories;
+namespace ServiceHost.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly IProductCategoryApplication _productCategoryApplication;
 
-    public IndexModel(IProductCategoryApplication productCategoryApplication)
+    public IndexModel()
     {
-        _productCategoryApplication = productCategoryApplication;
     }
 
     public List<ProductCategoryViewModel> ProductCategories { get; set; }
 
 
-    public void OnGet()
+    public void OnGet(int run)
     {
-        //ProductCategories = _productCategoryApplication.GetAll();
     }
 }

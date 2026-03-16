@@ -1,5 +1,7 @@
 ﻿@page "{id}"
+@using _0_Framework.Application
 @model ProductModel
+@inject IAuthHelper _authHelper 
 @{
     ViewData["Title"] = Model.Product.Name;
     ViewData["keywords"] = Model.Product.Keywords;
@@ -134,21 +136,22 @@
                                                 <a href="#">(2 reviews)</a> | <a href="#">نظر دهید</a>
                                             </span>
                                         </div>
+                                        @if (Model.Product.IsInStock)
+                                        {
+                                            <p class="single-grid-product__price" style="direction: rtl">
+                                                @if (Model.Product.HasDiscount)
+                                                {
+                                                    <span class="main-price discounted">@Model.Product.Price تومان</span>
+                                                    <span
+                                                        class="discounted-price">@Model.Product.PriceWithDiscount تومان</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="main-price">@Model.Product.Price تومان</span>
+                                                }
 
-                                        <p class="single-grid-product__price" style="direction: rtl">
-                                            @if (Model.Product.HasDiscount)
-                                            {
-                                                <span class="main-price discounted">@Model.Product.Price تومان</span>
-                                                <span
-                                                    class="discounted-price">@Model.Product.PriceWithDiscount تومان</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="main-price">@Model.Product.Price تومان</span>
-                                            }
-
-                                        </p>
-
+                                            </p>
+                                        }
                                         <p class="single-info">کد محصول: <span class="value">@Model.Product.Code</span>
                                         </p>
                                         <p class="single-info">
@@ -165,25 +168,36 @@
                                         <p class="product-description">
                                             @Model.Product.ShortDescription
                                         </p>
-                                        @if (Model.Product.HasDiscount)
+                                        @if (Model.Product.IsInStock)
                                         {
-                                            <div class="product-countdown"
-                                                 data-countdown="@Model.Product.DiscountExpireDate"></div>
+                                            @if (Model.Product.HasDiscount)
+                                            {
+                                                <div class="product-countdown"
+                                                     data-countdown="@Model.Product.DiscountExpireDate"></div>
+                                            }
+                                            <form method="post" asp-page="/Product" asp-page-handler="AddToCart">
+                                                <input type="hidden" name="id" value="@Model.Product.Slug" />
+                                                <div class="product-actions">
+                                                    <div class="quantity-selection">
+                                                        <label>تعداد</label>
+                                                        <input type="number" value="1" min="1" id="productCount" name="count">
+                                                    </div>
+                                                    <div class="product-buttons">
+                                                        <button type="submit" class="cart-btn">
+                                                            @if (_authHelper.IsAuthenticated())
+                                                            {
+                                                                <i class="ion-bag">افزودن به سبد خرید</i> 
+                                                            }
+                                                            else
+                                                            {
+                                                            
+                                                                <i class="ion-bag" onclick="addToCart('@Model.Product.Id', '@Model.Product.Name', '@Model.Product.DoublePrice', '@Model.Product.Picture','@Model.Product.IsInStock','@Model.Product.DiscountRate')">افزودن به سبد خرید</i> 
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         }
-
-                                        <div class="product-actions">
-                                            <div class="quantity-selection">
-                                                <label>تعداد</label>
-                                                <input type="number" value="1" min="1" id="productCount">
-                                            </div>
-                                            <div class="product-buttons">
-                                                <a class="cart-btn"
-                                                   onclick="addToCart('@Model.Product.Id', '@Model.Product.Name', '@Model.Product.DoublePrice', '@Model.Product.Picture')">
-                                                    <i class="ion-bag"></i> افزودن به سبد خرید
-                                                </a>
-                                            </div>
-                                        </div>
-
                                         <div class="social-share-buttons mt-20">
                                             <h5>این محصول را به اشتراک بگذارید</h5>
                                             <ul>
@@ -311,11 +325,14 @@
                                                         <h3>نظر خود را به ما بگویید</h3>
                                                         <form method="post">
                                                             <div class="rating-form row">
-                                                                <div class="col-md-6 col-12 form-group">
-                                                                    <label for="name">نام:</label>
-                                                                    <input id="name" placeholder="مثال: علی علوی"
-                                                                           name="name" type="text">
-                                                                </div>
+                                                                @if (!_authHelper.IsAuthenticated())
+                                                                {
+                                                                    <div class="col-md-6 col-12 form-group">
+                                                                        <label for="name">نام:</label>
+                                                                        <input id="name" placeholder="مثال: علی علوی"
+                                                                               name="name" type="text">
+                                                                    </div>
+                                                                }
                                                                 <div class="col-md-6 col-12 form-group">
                                                                     <label for="email">ایمیل:</label>
                                                                     <input id="email"
@@ -351,3 +368,6 @@
         </div>
     </div>
 </div>
+<section>
+    
+</section>

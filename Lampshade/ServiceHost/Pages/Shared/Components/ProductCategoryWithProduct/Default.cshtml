@@ -59,7 +59,7 @@
                                             <div>
                                                 <div class="single-grid-product">
                                                     <div class="single-grid-product__image">
-                                                        @if (product.HasDiscount)
+                                                        @if (product.HasDiscount && product.IsInStock)
                                                         {
                                                             <div class="single-grid-product__label">
                                                                 <span class="sale">-@product.DiscountRate%</span>
@@ -92,19 +92,29 @@
                                                                 @product.Name
                                                             </a>
                                                         </h3>
-                                                        <p class="single-grid-product__price">
-                                                            @if (product.HasDiscount)
-                                                            {
-                                                                <span
-                                                                    class="discounted-price">@product.PriceWithDiscount تومان</span>
-                                                                <span
-                                                                    class="main-price discounted">@product.Price تومان</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="main-price">@product.Price تومان</span>
-                                                            }
-                                                        </p>
+                                                        @if (product.IsInStock)
+                                                        {
+                                                            <p class="single-grid-product__price">
+                                                                @if (product.HasDiscount)
+                                                                {
+                                                                    <span
+                                                                        class="discounted-price">@product.PriceWithDiscount تومان</span>
+                                                                    <span
+                                                                        class="main-price discounted">@product.Price تومان</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="main-price">@product.Price تومان</span>
+                                                                }
+                                                            </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="single-grid-product__price">
+                                                                ناموجود
+                                                            </p>
+                                                        }
+
                                                     </div>
                                                 </div>
                                             </div>

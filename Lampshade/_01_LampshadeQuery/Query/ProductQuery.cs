@@ -1,11 +1,15 @@
 ﻿using _0_Framework.Application;
+using _01_LampshadeQuery.Contracts.Cart;
 using _01_LampshadeQuery.Contracts.Comment;
 using _01_LampshadeQuery.Contracts.Product;
 using CommentManagement.Infrastructure.EFCore;
 using CommnetManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
+using InventoryManagement.Domain.InventoryAgg;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
+using ShopManagement.Application.Contracts.Cart;
+using ShopManagementDomain.CartAgg;
 using ShopManagementDomain.ProductPictureAgg;
 using SM.Infrastructure.EFCore;
 
@@ -59,6 +63,7 @@ public class ProductQuery : IProductQuery
         if (productInventory != null)
         {
             var price = productInventory.UnitPrice;
+            product.DoublePrice = price;
             product.Price = price.ToMoney();
             product.IsInStock = productInventory.InStock;
             var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
@@ -95,7 +100,7 @@ public class ProductQuery : IProductQuery
     public List<ProductQueryModel> GetLatestArrivals()
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice }).ToList();
+            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -110,7 +115,7 @@ public class ProductQuery : IProductQuery
                 PictureAlt = product.PictureAlt,
                 PictureTitle = product.PictureTitle,
                 Slug = product.Slug
-            }).AsNoTracking().OrderByDescending(x => x.Id).Take(6).ToList();
+            }).AsNoTracking().OrderByDescending(x => x.Id).Take(400).ToList();
 
         foreach (var product in products)
         {
@@ -119,6 +124,7 @@ public class ProductQuery : IProductQuery
             {
                 var price = productInventory.UnitPrice;
                 product.Price = price.ToMoney();
+                product.IsInStock = productInventory.InStock;
                 var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                 if (discount != null)
                 {
@@ -132,7 +138,7 @@ public class ProductQuery : IProductQuery
             }
         }
 
-        return products;
+        return products.Where(x => x.IsInStock).Take(8).ToList();
     }
 
     public List<ProductQueryModel> Search(string value)
@@ -193,6 +199,23 @@ public class ProductQuery : IProductQuery
             ProductId = x.ProductId,
             IsRemoved = x.IsDeleted
         }));
+        return res;
+    }
+    public List<CartItemViewModel> CheckInventoryStatus(List<CartItemViewModel> cartItems)
+    {
+        var inventory = _inventoryContext.Inventories.ToList();
+        var res = new List<CartItemViewModel>();
+        if (cartItems.Count > 0)
+        {
+            foreach (var cartItem in cartItems.Where(cartItem =>
+                         inventory.Any(x => x.ProductId == cartItem.ProductId)))
+            {
+                var itemInventory = inventory.Find(x => x.ProductId == cartItem.ProductId);
+                cartItem.IsInStock = itemInventory.CalculateCurrentCount() >= cartItem.Count;
+                res.Add(new CartItemViewModel(cartItem.ProductId,cartItem.Name, cartItem.UnitPrice,cartItem.Picture,cartItem.Count,cartItem.IsInStock,cartItem.DiscountRate));
+            }
+            
+        }
         return res;
     }
 }

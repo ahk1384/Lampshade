@@ -67,8 +67,7 @@ public class InventoryApplication : IInventoryApplication
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory == null)
                 return operationResult.Fail(ApplicationMessages.RecordNotFound);
-            const long operatorId = 1;
-            inventory.Increase(command.Count, operatorId, command.Description);
+            inventory.Increase(command.Count,command.OperatorId , command.Description);
         }
         catch (Exception e)
         {
@@ -89,8 +88,7 @@ public class InventoryApplication : IInventoryApplication
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory == null)
                 return operationResult.Fail(ApplicationMessages.RecordNotFound);
-            const long operatorId = 1;
-            inventory.Reduce(command.Count, operatorId, command.Description);
+            inventory.Reduce(command.Count, command.OperatorId, command.Description);
         }
         catch (Exception e)
         {
@@ -170,5 +168,10 @@ public class InventoryApplication : IInventoryApplication
     public List<InventoryOperationViewModel> GetOperationLog(long inventoryId)
     {
         return _inventoryRepository.GetOperationLog(inventoryId);
+    }
+
+    public long GetInventoryId(long productId)
+    {
+        return _inventoryRepository.GetInventoryId(productId);
     }
 }

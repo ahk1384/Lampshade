@@ -84,6 +84,7 @@ body {
 .navigation-menu-wrapper .sub-menu {
     left: unset;
     right: -20px;
+    border-radius: 4%;
 }
 
 .navigation-menu-wrapper .sub-menu li.menu-item-has-children > a::after {

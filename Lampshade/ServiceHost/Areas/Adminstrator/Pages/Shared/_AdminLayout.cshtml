@@ -50,7 +50,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a asp-area="Adminstrator" asp-page="Shop/Product/index" class="logo">
+                <a asp-area="" asp-page="/index" class="logo">
                     <i class="md md-terrain"></i> <span> Lampshade </span>
                 </a>
             </div>
@@ -156,9 +156,9 @@
 <script src="~/AdminTheme/assets/js/persian-date.min.js"></script>
 <script src="~/AdminTheme/assets/js/persian-datepicker.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
-        integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" *@
+@*         integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" *@
+@*         crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
 
 @RenderSection("Scripts", false)
 
@@ -171,14 +171,13 @@
     });
 </script>
 
-<script src="https://lib.arvancloud.ir/tinymce/6.3.2/icons/default/icons.min.js" crossorigin="anonymous"
-        referrerpolicy="no-referrer"></script>
-<script>
-    tinymce.init({
-        selector: '#BodyContent',
-        plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        toolbar_mode: 'floating',
-    });
-</script>
+@* <script src="https://lib.arvancloud.ir/jquery.dirtyforms.helpers.tinymce/2.0.0-beta00008/jquery.dirtyforms.helpers.tinymce.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>                                                                                                                *@
+@* <script> *@
+@*     tinymce.init({ *@
+@*         selector: '#BodyContent', *@
+@*         plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak', *@
+@*         toolbar_mode: 'floating', *@
+@*     }); *@
+@* </script> *@
 </body>
 </html>

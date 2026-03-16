@@ -1,6 +1,9 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Infrastructure;
+using _01_LampshadeQuery;
+using _01_LampshadeQuery.Contracts.Cart;
 using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
@@ -8,7 +11,10 @@ using DiscountManagement.Infrastructure.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using ServiceHost.Pages;
+using ServiceHost.ViewComponent;
 using ShopManagement.Infrastructure.Configuration;
+using ICookieManager = _01_LampshadeQuery.ICookieManager;
 
 namespace ServiceHost;
 
@@ -35,7 +41,9 @@ public class Program
         builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
         builder.Services.AddTransient<IFileUploader, FileUploader>();
         builder.Services.AddTransient<IAuthHelper, AuthHelper>();
+        builder.Services.AddTransient<ICookieManager, CookieManager>();
         builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
+  
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {

@@ -58,7 +58,7 @@ body {
 }
 
 body {
-    background-color: #fff;
+    background-color: #fafafa;
     color: #000;
     font-family: 'IranSans', sans-serif;
     font-size: 15px;
@@ -67,6 +67,7 @@ body {
     line-height: 2.4;
     position: relative;
     visibility: visible;
+    
 }
 
 body.grey-bg {
@@ -136,6 +137,7 @@ button {
     display: inline-block;
     line-height: inherit;
     text-decoration: none;
+    
 }
 
 a,
@@ -489,6 +491,7 @@ select {
 /* navigation menu */
 
 .navigation-menu-wrapper {
+    
     -ms-flex-preferred-size: 60%;
     -webkit-flex-basis: 60%;
     flex-basis: 60%; /* separate menu style *//*----------  submenu  ----------*/
@@ -528,6 +531,7 @@ select {
     line-height: 26px;
     line-height: 55px;
     padding: 20px 0;
+    border-radius: 0.7rem;
 }
 
 .navigation-menu-wrapper nav > ul > li:hover > .sub-menu,
@@ -583,6 +587,7 @@ select {
     line-height: 18px;
     padding: 10px 15px;
     text-transform: uppercase;
+    border-radius: 0.7rem;
 }
 
 .navigation-menu-wrapper .sub-menu li a:hover {
@@ -788,6 +793,8 @@ select {
     position: relative;
     width: 350px;
     z-index: 9999;
+    border-radius: 4%;
+    
 }
 
 .mini-cart.active {
@@ -926,6 +933,7 @@ select {
     text-align: center;
     text-transform: uppercase;
     transition: .3s;
+    border-radius: 0.7rem
 }
 
 .mini-cart .cart-buttons a:last-child {
@@ -1006,6 +1014,7 @@ select {
     top: 100%;
     width: 300px;
     z-index: 9999;
+    border-radius: 4%;
 }
 
 .settings-menu-wrapper.active {
@@ -1055,6 +1064,7 @@ select {
     display: inline-block;
     margin-right: 30px;
     position: relative;
+    border-radius: 4%;
 }
 
 .settings-dropdown-list > li:last-child {
@@ -1120,6 +1130,7 @@ select {
 
 .header-mobile-navigation {
     padding: 20px 0;
+    border-radius: 4%;
 }
 
 .header-mobile-navigation .mobile-navigation .header-cart-icon a span {
@@ -1129,6 +1140,7 @@ select {
 .offcanvas-widget-area {
     margin-bottom: 35px;
     margin-top: auto;
+    border-radius: 4%;
 }
 
 .off-canvas-contact-widget {
@@ -1179,6 +1191,7 @@ select {
     transition: .6s;
     width: 400px;
     z-index: 9999;
+    border-radius: 4%;
 }
 
 .offcanvas-mobile-menu.active {
@@ -1615,6 +1628,7 @@ select {
     margin-top: -130px;
     padding: 30px;
     padding-bottom: 0;
+    border-radius: 0.7rem;
 }
 
 .page-content-wrapper {
@@ -1637,6 +1651,7 @@ select {
     top: 0;
     width: 100%;
     z-index: 999999;
+    
 }
 
 .search-form {
@@ -2085,6 +2100,7 @@ select {
 .single-category-item {
     margin-bottom: 20px;
     position: relative;
+    border-radius: 0.7rem;
 }
 
 .single-category-item--style2 {
@@ -2094,10 +2110,12 @@ select {
 .single-category-item__image a {
     display: block;
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .single-category-item__image a img {
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .single-category-item__image a:hover img {
@@ -2108,6 +2126,7 @@ select {
     left: 30px;
     position: absolute;
     top: 38px;
+    border-radius: 0.7rem;
 }
 
 .single-category-item__content--style2 {
@@ -2212,6 +2231,7 @@ select {
 .single-grid-product {
     -webkit-transition: .6s;
     transition: .6s;
+    border-radius: 0.7rem;
 }
 
 .single-grid-product__label span {
@@ -3262,6 +3282,7 @@ select {
 .breadcrumb-wrapper {
     padding-bottom: 210px;
     padding-top: 130px;
+    border-radius: 0.7rem;
 }
 
 .breadcrumb-bg {
@@ -3269,6 +3290,7 @@ select {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 0.7rem;
 }
 
 /*=====  End of breadcrumb  ======*/
@@ -3809,6 +3831,7 @@ select {
 
 .product-details-big-image-slider-wrapper .single-image img {
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .product-details-big-image-slider-wrapper--bottom-space {
@@ -3906,10 +3929,12 @@ select {
 
 .product-details-small-image-slider-wrapper .slick-list .slick-active.slick-current .single-image img {
     border: 1px solid #e33;
+    border-radius: 0.7rem;
 }
 
 .product-details-small-image-slider-wrapper .single-image {
     cursor: pointer;
+    border-radius: 0.7rem;
 }
 
 /*----------  product description  ----------*/
@@ -4044,6 +4069,7 @@ select {
 
 .group-product-form {
     margin-bottom: 20px;
+    border-radius: 0.8rem;
 }
 
 .group-product-form .table-content table {
@@ -4089,6 +4115,7 @@ select {
     line-height: 54px;
     margin-bottom: 0;
     margin-right: 20px;
+    border-radius: 4%;
 }
 
 .quantity-selection input {
@@ -4102,6 +4129,8 @@ select {
     padding: 0 20px;
     text-align: center;
     width: 100px;
+    border-radius: 0.8rem;
+    
 }
 
 .quantity-selection input[type=number]::-webkit-inner-spin-button,
@@ -4128,6 +4157,7 @@ select {
 .product-actions .product-buttons {
     line-height: 1;
     margin-left: 15px;
+    
 }
 
 .product-actions .product-buttons .cart-btn {
@@ -4143,6 +4173,7 @@ select {
     padding: 0 35px;
     transition: .3s;
     vertical-align: middle;
+    border-radius: 0.8rem;
 }
 
 .cart-btn i {
@@ -4161,6 +4192,7 @@ select {
     border: 2px solid #ebebeb;
     display: inline-block;
     margin-left: 15px;
+    border-radius: 0.7rem;
 }
 
 .wishlist-compare-btn a {
@@ -4200,6 +4232,8 @@ select {
 
 .social-share-buttons {
     margin-top: 20px;
+    border-radius: 4%;
+    border-radius: 0.8rem;
 }
 
 .social-share-buttons h5 {
@@ -4275,6 +4309,7 @@ select {
 .product-description-review-container {
     border-bottom: 1px solid #ebebeb;
     border-top: 1px solid #ebebeb;
+    border-radius: 0.8rem;
 }
 
 .product-description-review-container nav .nav-tabs {
@@ -4329,6 +4364,7 @@ select {
 
 .product-rating-wrap {
     overflow: hidden;
+    border-radius: 0.7rem;
 }
 
 .pro-avg-rating {
@@ -4478,6 +4514,7 @@ select {
     line-height: 24px;
     padding: 8px 15px;
     width: 100%;
+    border-radius: 0.8rem;
 }
 
 .rating-form input[type='submit'] {
@@ -4488,6 +4525,7 @@ select {
     padding: 8px 30px;
     text-transform: uppercase;
     width: auto;
+    border-radius: 0.8rem;
 }
 
 .rating-form input[type='submit']:hover {
@@ -4506,6 +4544,7 @@ select {
     padding: 8px 15px;
     resize: none;
     width: 100%;
+    border-radius: 0.8rem;
 }
 
 /*=====  End of single product  ======*/
@@ -4736,6 +4775,7 @@ select {
     margin-left: auto;
     max-width: 410px;
     width: 100%;
+    border-radius: 0.8rem;
 }
 
 .cart-summary .cart-summary-wrap {
@@ -4854,6 +4894,7 @@ select {
     margin-bottom: 30px;
     text-decoration: underline;
     text-transform: capitalize;
+    border-radius: 0.7rem;
 }
 
 /*-- Checkout Form --*/
@@ -5059,6 +5100,7 @@ select {
 
 .single-method {
     margin-bottom: 20px;
+    border-radius: 0.7rem;
 }
 
 .single-method:last-child {
@@ -5206,6 +5248,7 @@ select {
     -webkit-flex-direction: column;
     background-color: #fff;
     flex-direction: column;
+    border-radius: 0.7rem;
 }
 
 .myaccount-tab-menu a {
@@ -5363,6 +5406,7 @@ select {
     margin-bottom: 30px;
     text-decoration: underline;
     text-transform: capitalize;
+    
 }
 
 /*-- Login Form --*/
@@ -5372,6 +5416,7 @@ select {
     background-color: #fff;
     box-shadow: 0 5px 4px 0 rgba(0, 0, 0, .1);
     padding: 30px;
+    border-radius: 0.7rem;
 }
 
 .login-form label {
@@ -5424,10 +5469,12 @@ select {
     margin-bottom: 15px;
     padding: 10px 20px;
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .login-form input[type='checkbox'] {
     width: auto;
+    
 }
 
 .login-form .check-box {
@@ -5506,6 +5553,7 @@ select {
     padding: 6px 20px;
     text-transform: uppercase;
     width: 140px;
+    border-radius: 0.7rem;
 }
 
 .register-button:hover {
@@ -5530,6 +5578,7 @@ select {
 .faq-wrapper .card,
 .faq-wrapper .card-header {
     border-radius: 0;
+    
 }
 
 .faq-wrapper .card {
@@ -5772,6 +5821,7 @@ h3.contact-page-title {
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 20px;
     padding-bottom: 20px;
+    border-radius: 0.7rem;
 }
 
 .single-contact-block:last-child {
@@ -5867,6 +5917,7 @@ span.required {
     padding: 10px 20px;
     text-transform: uppercase;
     width: 140px;
+    border-radius: 0.7rem;
 }
 
 .contact-button:hover {
@@ -5886,6 +5937,7 @@ span.required {
 
 .single-banner {
     margin-bottom: 15px;
+    border-radius: 0.7rem;
 }
 
 /*-- About Image --*/
@@ -6007,6 +6059,7 @@ span.required {
 .feature-image {
     position: relative;
     z-index: 2;
+    border-radius: 0.7rem;
 }
 
 .feature-image::before {
@@ -6037,6 +6090,7 @@ span.required {
 
 .single-blog-post {
     margin-bottom: 50px;
+    border-radius: 0.7rem;
 }
 
 .single-blog-post__image {
@@ -6072,6 +6126,7 @@ span.required {
     visibility: hidden;
     width: 40px;
     z-index: 9;
+    border-radius: 0.7rem;
 }
 
 .single-blog-post__image .slick-next {
@@ -6126,6 +6181,7 @@ span.required {
     text-align: center;
     top: 20px;
     width: 62px;
+    border-radius: 0.7rem;
 }
 
 .single-blog-post__date-sticker span {
@@ -6201,10 +6257,12 @@ span.required {
 .block-container {
     margin-bottom: -15px;
     margin-top: -5px;
+    border-radius: 0.7rem;
 }
 
 .single-block {
     margin-bottom: 15px;
+    border-radius: 0.7rem;
 }
 
 .single-block:first-child {
@@ -6295,6 +6353,7 @@ span.required {
     border: 1px solid #efefef;
     margin-bottom: 30px;
     padding: 35px 25px;
+    border-radius: 0.7rem;
 }
 
 .blog-single-post-container h3.post-title {
@@ -6340,6 +6399,7 @@ span.required {
 
 .blog-single-post-container .single-blog-post-media .blog-image-gallery .single-image img {
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .blog-single-post-container .single-blog-post-media .blog-categories {
@@ -6576,6 +6636,7 @@ h3.comment-counter {
 
 .comment-container {
     margin-bottom: 30px;
+    border-radius: 0.7rem;
 }
 
 .comment-container .single-comment {
@@ -6591,11 +6652,13 @@ h3.comment-counter {
     padding: 30px;
     position: relative;
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .comment-container .single-comment.reply-comment {
     margin-left: 10%;
     width: 90%;
+    border-radius: 0.7rem;
 }
 
 .comment-container .single-comment:last-child {
@@ -6692,6 +6755,7 @@ h3.comment-counter {
     height: 130px;
     padding: 15px;
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .comment-form input {
@@ -6703,6 +6767,7 @@ h3.comment-counter {
     padding: 0 15px;
     vertical-align: middle;
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .comment-btn {
@@ -6714,6 +6779,7 @@ h3.comment-counter {
     padding: 10px 20px;
     text-transform: uppercase;
     width: 140px;
+    border-radius: 0.7rem;
 }
 
 .comment-btn:hover {
@@ -6752,10 +6818,12 @@ h3.comment-counter {
 
     .page-content-wrapper {
         padding-bottom: 80px;
+        border-radius: 0.7rem;
     }
 
     .search-form {
         width: 650px;
+        border-radius: 0.7rem;
     }
 
     .search-form form input {
@@ -6769,6 +6837,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper--fullwidth--fixed-height .hero-slider-content p.slider-title--big-light {
         font-size: 35px;
         line-height: 35px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--fullwidth--fixed-height {
@@ -6784,6 +6853,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper {
         background-position-x: 50%;
         height: 500px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--minimal-height .hero-slider-content {
@@ -6811,6 +6881,7 @@ h3.comment-counter {
 
     .hero-slider-button {
         padding: 10px 25px;
+        border-radius: 0.7rem;
     }
 
     .single-category-item__content--style2 {
@@ -6951,10 +7022,12 @@ h3.comment-counter {
 
     .social-share-buttons ul li a {
         margin-bottom: 5px;
+        border-radius: 0.7rem;
     }
 
     .cart-summary {
         margin-left: 0;
+        border-radius: 0.7rem;
     }
 
     .cart-summary .cart-summary-button {
@@ -6979,6 +7052,7 @@ h3.comment-counter {
 
     .login-form {
         margin-bottom: 30px;
+        border-radius: 0.7rem;
     }
 
     .login-form {
@@ -7118,6 +7192,7 @@ h3.comment-counter {
 
     .hero-slider-item-wrapper--fullwidth {
         background-position-x: 50%;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--fullwidth--fixed-height .hero-slider-content p.slider-title--big-light {
@@ -7138,6 +7213,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper {
         background-position-x: 50%;
         height: 550px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--minimal-height {
@@ -7333,6 +7409,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper {
         background-position-x: 50%;
         height: 650px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--minimal-height {
@@ -7525,6 +7602,7 @@ h3.comment-counter {
 
     .search-form {
         width: 400px;
+        
     }
 
     .search-form form input {
@@ -7537,6 +7615,7 @@ h3.comment-counter {
 
     .hero-slider-item-wrapper--fullwidth {
         background-position-x: 25%;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--fullwidth--fixed-height .hero-slider-content p.slider-title--big-light {
@@ -7547,6 +7626,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper--fullwidth--fixed-height {
         background-position-x: 15%;
         height: 400px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--fullwidth .hero-slider-content p.slider-title--big-light {
@@ -7557,6 +7637,7 @@ h3.comment-counter {
     .hero-slider-item-wrapper {
         background-position-x: 15%;
         height: 400px;
+        border-radius: 0.7rem;
     }
 
     .hero-slider-item-wrapper--minimal-height .hero-slider-content {
@@ -7584,6 +7665,7 @@ h3.comment-counter {
 
     .hero-slider-button {
         padding: 10px 25px;
+        border-radius: 0.7rem;
     }
 
     .single-category-item__content--style2 {
@@ -7692,6 +7774,7 @@ h3.comment-counter {
 
     .newsletter-form button {
         width: 150px;
+        border-radius: 0.7rem;
     }
 
     #scroll-top {
@@ -7766,6 +7849,7 @@ h3.comment-counter {
 
     .product-details-small-image-slider-wrapper--vertical-space .single-image {
         padding: 0 5px;
+        border-radius: 0.7rem;
     }
 
     .product-actions--quick-view {
@@ -7820,6 +7904,7 @@ h3.comment-counter {
 
     .cart-summary {
         margin-left: 0;
+        border-radius: 0.7rem;
     }
 
     .cart-summary .cart-summary-button {
@@ -7848,6 +7933,7 @@ h3.comment-counter {
 
     .about-image {
         margin-bottom: 15px;
+        border-radius: 0.7rem;  
     }
 
     .about-content h1 {
@@ -8357,4 +8443,52 @@ h3.comment-counter {
     50% {
         opacity: 1;
     }
+}
+/* =========================================
+   Modern Rounded Corners - 0.7rem
+========================================= */
+
+/* استایل‌دهی به تمامی دکمه‌ها و فیلدهای ورودی */
+button,
+.btn,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="submit"],
+select,
+textarea,
+.search-form form input,
+.newsletter-form input,
+.offcanvas-mobile-search-area input {
+    border-radius: 0.7rem !important;
+    transition: all 0.3s ease !important; /* برای نرم‌تر شدن انیمیشن‌های هاور */
+}
+
+/* استایل‌دهی به کارت‌های محصول، سبد خرید و تصاویر */
+.single-grid-product,
+.single-grid-product .image img,
+.product-badge-wrapper,
+.mini-cart,
+.single-cart-item,
+.product-details-slider-area {
+    border-radius: 0.7rem !important;
+    overflow: hidden !important; /* جلوگیری از بیرون زدن محتوا از لبه‌های گرد */
+}
+
+/* استایل‌دهی به تایمرها، برچسب‌ها و مگامنو */
+.product-countdown .single-countdown,
+.badge,
+.mega-menu,
+.sub-menu {
+    border-radius: 0.7rem !important;
+}
+
+
+/* گرد کردن گوشه‌های بنرها در صورت وجود */
+.banner-area img,
+.hero-slider-area img {
+    border-radius: 0.7rem !important;
 }

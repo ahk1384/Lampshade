@@ -25,7 +25,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
     public ProductCategoryQueryModel GetProductCategoryWithProducstsBy(string slug)
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice }).ToList();
+            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -50,7 +50,9 @@ public class ProductCategoryQuery : IProductCategoryQuery
             if (productInventory != null)
             {
                 var price = productInventory.UnitPrice;
+                product.DoublePrice = price;
                 product.Price = price.ToMoney();
+                product.IsInStock = productInventory.InStock;
                 var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                 if (discount != null)
                 {
@@ -88,7 +90,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice }).ToList();
+            new { x.ProductId, x.UnitPrice,x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
@@ -108,24 +110,29 @@ public class ProductCategoryQuery : IProductCategoryQuery
             }).AsNoTracking().ToList();
         ;
         foreach (var category in categories)
-        foreach (var product in category.Products)
         {
-            var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
-            if (productInventory != null)
+            foreach (var product in category.Products)
             {
-                var price = productInventory.UnitPrice;
-                product.Price = price.ToMoney();
-                var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
-                if (discount != null)
+                var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+                if (productInventory != null)
                 {
-                    var discountRate = discount.DiscountRate;
-                    product.DiscountRate = discountRate;
-                    product.HasDiscount = discountRate > 0;
-                    var discountAmount = Math.Round(price * discountRate / 100);
-                    product.PriceWithDiscount = (price - discountAmount).ToMoney();
+                    var price = productInventory.UnitPrice;
+                    product.Price = price.ToMoney();
+                    product.IsInStock = productInventory.InStock;
+                    var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+                    if (discount != null)
+                    {
+                        var discountRate = discount.DiscountRate;
+                        product.DiscountRate = discountRate;
+                        product.HasDiscount = discountRate > 0;
+                        var discountAmount = Math.Round(price * discountRate / 100);
+                        product.PriceWithDiscount = (price - discountAmount).ToMoney();
+                    }
                 }
             }
+            category.Products = category.Products.OrderBy(x => x.IsInStock).ToList();
         }
+        
 
         return categories;
     }

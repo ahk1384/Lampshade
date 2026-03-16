@@ -104,7 +104,7 @@ public class AccountApplication : IAccountApplication
         return operationResult.Success();
     }
 
-    public OperationResult Login(Login command)
+    public async Task<OperationResult> Login(Login command)
     {
         var operationResult = new OperationResult();
         try
