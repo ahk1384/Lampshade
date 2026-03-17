@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using _0_Framework.Application;
-// using _0_Framework.Application.ZarinPal;
+﻿using _0_Framework.Application;
 using _01_LampshadeQuery;
-using _01_LampshadeQuery.Contracts;
 using _01_LampshadeQuery.Contracts.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nancy.Json;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Application.Contracts.Order;
-using ShopManagementDomain.CartAgg;
+
+// using _0_Framework.Application.ZarinPal;
 
 namespace ServiceHost.Pages;
 
@@ -24,7 +20,9 @@ public class CheckoutModel : PageModel
     private readonly ICartCalculatorService _cartCalculatorService;
     private readonly ICartService _cartService;
     private readonly IOrderApplication _orderApplication;
+
     private readonly IProductQuery _productQuery;
+
     // private readonly IZarinPalFactory _zarinPalFactory;
     public CartViewModel Cart;
 

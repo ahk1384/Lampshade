@@ -230,6 +230,7 @@
 
 .fa-star-o:before {
     content: "\f006";
+    color: gold;
 }
 
 .fa-user:before {

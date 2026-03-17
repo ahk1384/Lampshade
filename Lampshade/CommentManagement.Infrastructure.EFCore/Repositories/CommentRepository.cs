@@ -28,6 +28,7 @@ public class CommentRepository : BaseRepository<long, Comment>, ICommentReposito
                 Type = x.Type,
                 IsCanceled = x.IsDeleted,
                 IsConfirmed = x.IsConfirmed,
+                Rating = x.Rating,
                 CommentDate = x.CreationDate.ToFarsi()
             });
 
@@ -38,5 +39,14 @@ public class CommentRepository : BaseRepository<long, Comment>, ICommentReposito
             query = query.Where(x => x.Email.Contains(searchModel.Email));
 
         return query.OrderByDescending(x => x.Id).ToList();
+    }
+
+    public double GetRating(long id)
+    {
+        var comments = _context.Comments.Where(x => x.OwnerRecordId == id);
+        var count = comments.Count();
+        if (count == 0) return 0;
+        var sum = comments.Sum(x => x.Rating);
+        return sum / count;
     }
 }

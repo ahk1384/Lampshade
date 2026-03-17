@@ -67,7 +67,7 @@ public class InventoryApplication : IInventoryApplication
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory == null)
                 return operationResult.Fail(ApplicationMessages.RecordNotFound);
-            inventory.Increase(command.Count,command.OperatorId , command.Description);
+            inventory.Increase(command.Count, command.OperatorId, command.Description);
         }
         catch (Exception e)
         {

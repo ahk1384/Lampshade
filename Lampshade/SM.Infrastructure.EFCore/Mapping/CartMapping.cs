@@ -4,7 +4,7 @@ using ShopManagementDomain.CartAgg;
 
 namespace SM.Infrastructure.EFCore.Mapping;
 
-public class CartMapping :  IEntityTypeConfiguration<Cart>
+public class CartMapping : IEntityTypeConfiguration<Cart>
 {
     public void Configure(EntityTypeBuilder<Cart> builder)
     {
@@ -23,9 +23,9 @@ public class CartMapping :  IEntityTypeConfiguration<Cart>
             navigationBuilder.Property(x => x.Count);
             navigationBuilder.Property(x => x.UnitPrice);
             navigationBuilder.Property(x => x.DiscountRate);
+            navigationBuilder.Property(x => x.ProductSlug).HasMaxLength(200);
             navigationBuilder.Property(x => x.CartId);
             navigationBuilder.WithOwner(x => x.Cart).HasForeignKey(x => x.CartId);
         });
     }
-    
 }

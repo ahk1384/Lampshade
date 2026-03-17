@@ -21,5 +21,6 @@ public class CommentMapping : IEntityTypeConfiguration<Comment>
         builder.Property(x => x.Website).HasMaxLength(500).IsRequired(false);
         builder.Property(x => x.Message).HasMaxLength(1000);
         builder.Property(x => x.CreationDate);
+        builder.Property(x => x.Rating);
     }
 }

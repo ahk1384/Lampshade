@@ -14,7 +14,6 @@ public class OrderItem : EntityBase<long>
 
     protected OrderItem()
     {
-        
     }
 
     public long ProductId { get; }

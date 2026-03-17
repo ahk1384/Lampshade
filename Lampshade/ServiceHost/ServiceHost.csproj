@@ -9,11 +9,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.24">
-            
+
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Nancy" Version="2.0.0" />
+        <PackageReference Include="Nancy" Version="2.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -34,8 +34,8 @@
 
     <ItemGroup>
         <_ContentIncludedByDefault Remove="wwwroot\ProductPictures\ProfilePhoto\Admin\2026-03-12-16-15-03-profile.jpg"/>
-        <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Index.cshtml" />
-        <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Items.cshtml" />
+        <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Index.cshtml"/>
+        <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Items.cshtml"/>
     </ItemGroup>
 
 </Project>

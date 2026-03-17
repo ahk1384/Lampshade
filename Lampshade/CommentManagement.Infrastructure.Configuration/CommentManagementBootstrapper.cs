@@ -18,7 +18,7 @@ public class CommentManagementBootstrapper
         services.AddTransient<ICommentApplication, CommentApplication>();
 
         services.AddTransient<IPermissionExposer, CommentPermissionsExposer>();
-        
+
         CommentPermissions.Configure();
         services.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
     }

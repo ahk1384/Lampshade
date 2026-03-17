@@ -1,25 +1,19 @@
-using System.Net;
-using System.Security.Claims;
 using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.Cart;
 using AccountManagement.Application.Contract.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Nancy.Json;
-using ServiceHost.ViewComponent;
-using ShopManagementDomain.CartAgg;
 
 namespace ServiceHost.Pages;
 
 public class LoginModel : PageModel
 {
-    private readonly IAccountApplication _accountApplication;
-    private readonly ICartQuery _cartQuery;
-    private readonly IAuthHelper _authHelper;
-    private readonly ICookieManager _cookieManager;
     public const string CookieName = "cart-items";
+    private readonly IAccountApplication _accountApplication;
+    private readonly IAuthHelper _authHelper;
+    private readonly ICartQuery _cartQuery;
+    private readonly ICookieManager _cookieManager;
 
     public LoginModel(IAccountApplication accountApplication, ICartQuery cartQuery, IAuthHelper authHelper,
         ICookieManager cookieManager)
@@ -50,7 +44,7 @@ public class LoginModel : PageModel
     {
         if (_authHelper.IsAuthenticated())
         {
-            _cartQuery.AddAllToCart(_cookieManager.GetCartItems(Request),_authHelper.CurrentAccountInfo().Id);
+            _cartQuery.AddAllToCart(_cookieManager.GetCartItems(Request), _authHelper.CurrentAccountInfo().Id);
             _cookieManager.Merge(HttpContext.Response);
         }
 

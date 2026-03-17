@@ -7,19 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.ProductAgg;
 
 namespace ServiceHost.Areas.Adminstrator.Pages.Inventory;
+
 [Authorize]
 public class IndexModel : PageModel
 {
     public static bool WatchDeleted;
+    private readonly IAuthHelper _authHelper;
     private readonly IInventoryApplication _inventoryApplication;
     private readonly IProductApplication _productApplication;
-    private readonly IAuthHelper _authHelper;
     public List<InventoryViewModel> Inventories;
     public SelectList Products;
     public InventorySearchModel SearchModel;
     public bool watch;
 
-    public IndexModel(IInventoryApplication inventoryApplication, IProductApplication productApplication, IAuthHelper authHelper)
+    public IndexModel(IInventoryApplication inventoryApplication, IProductApplication productApplication,
+        IAuthHelper authHelper)
     {
         _productApplication = productApplication;
         _authHelper = authHelper;
@@ -112,7 +114,6 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetReduce(long id)
     {
-        
         var command = new ReduceInventory
         {
             InventoryId = id,

@@ -67,7 +67,7 @@ body {
     line-height: 2.4;
     position: relative;
     visibility: visible;
-    
+
 }
 
 body.grey-bg {
@@ -137,7 +137,7 @@ button {
     display: inline-block;
     line-height: inherit;
     text-decoration: none;
-    
+
 }
 
 a,
@@ -491,7 +491,7 @@ select {
 /* navigation menu */
 
 .navigation-menu-wrapper {
-    
+
     -ms-flex-preferred-size: 60%;
     -webkit-flex-basis: 60%;
     flex-basis: 60%; /* separate menu style *//*----------  submenu  ----------*/
@@ -789,12 +789,13 @@ select {
 .mini-cart {
     background-color: #fff;
     display: none;
-    padding: 30px;
+    padding: 22px;
     position: relative;
-    width: 350px;
+    width: 22rem;
     z-index: 9999;
     border-radius: 4%;
-    
+    touch-action: auto;
+
 }
 
 .mini-cart.active {
@@ -802,11 +803,12 @@ select {
 }
 
 .mini-cart .cart-items-wrapper {
-    /*max-height: 280px;*/
+    max-height: 23rem;
     margin: 0 -30px;
-    overflow: hidden;
     padding: 0 30px;
     position: relative;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 .mini-cart .single-cart-item {
@@ -1651,7 +1653,7 @@ select {
     top: 0;
     width: 100%;
     z-index: 999999;
-    
+
 }
 
 .search-form {
@@ -2349,7 +2351,7 @@ select {
 }
 
 .single-grid-product__category-rating .rating {
-    float: right;
+    float: left;
     margin-top: -3px;
 }
 
@@ -3979,6 +3981,7 @@ select {
 
 .single-product-content-description .product-rating {
     margin-bottom: 20px;
+    float: left;
 }
 
 .single-product-content-description .rating i {
@@ -4130,7 +4133,7 @@ select {
     text-align: center;
     width: 100px;
     border-radius: 0.8rem;
-    
+
 }
 
 .quantity-selection input[type=number]::-webkit-inner-spin-button,
@@ -4157,7 +4160,7 @@ select {
 .product-actions .product-buttons {
     line-height: 1;
     margin-left: 15px;
-    
+
 }
 
 .product-actions .product-buttons .cart-btn {
@@ -4447,10 +4450,14 @@ select {
 
 .sin-ratings .rating-author .rating-star i,
 .sin-ratings .rating-author .rating-star span {
-    color: #707070;
+    color: #676767;
     float: left;
     font-size: 12px;
     line-height: 18px;
+}
+
+.rating-star.active span {
+    color: gold;
 }
 
 .sin-ratings .rating-author .rating-star span {
@@ -5406,7 +5413,7 @@ select {
     margin-bottom: 30px;
     text-decoration: underline;
     text-transform: capitalize;
-    
+
 }
 
 /*-- Login Form --*/
@@ -5474,7 +5481,7 @@ select {
 
 .login-form input[type='checkbox'] {
     width: auto;
-    
+
 }
 
 .login-form .check-box {
@@ -5578,7 +5585,7 @@ select {
 .faq-wrapper .card,
 .faq-wrapper .card-header {
     border-radius: 0;
-    
+
 }
 
 .faq-wrapper .card {
@@ -7523,7 +7530,7 @@ h3.comment-counter {
     .container.wide {
         margin-left: auto;
         margin-right: auto;
-        max-width: 1140px;
+        max-width: 1340px;
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -7602,7 +7609,7 @@ h3.comment-counter {
 
     .search-form {
         width: 400px;
-        
+
     }
 
     .search-form form input {
@@ -7933,7 +7940,7 @@ h3.comment-counter {
 
     .about-image {
         margin-bottom: 15px;
-        border-radius: 0.7rem;  
+        border-radius: 0.7rem;
     }
 
     .about-content h1 {
@@ -8444,6 +8451,7 @@ h3.comment-counter {
         opacity: 1;
     }
 }
+
 /* =========================================
    Modern Rounded Corners - 0.7rem
 ========================================= */

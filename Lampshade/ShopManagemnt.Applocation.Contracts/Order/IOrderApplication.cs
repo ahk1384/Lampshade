@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ShopManagement.Application.Contracts.Cart;
+﻿using ShopManagement.Application.Contracts.Cart;
 
 namespace ShopManagement.Application.Contracts.Order;
 

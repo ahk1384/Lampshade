@@ -8,5 +8,7 @@ public class CommentQueryModel
     public string CreationDate { get; set; }
     public long ParentId { get; set; }
     public string parentName { get; set; }
+
+    public double Rating { get; set; }
     public int Type { get; set; }
 }

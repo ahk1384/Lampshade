@@ -76,7 +76,7 @@
                                     </a>
                                     <div class="mini-cart" id="mini-cart">
                                         <div class="cart-items-wrapper" id="cart_items_wrapper"></div>
-                                        
+
                                         <div class="cart-buttons" id="cart_buttons">
                                             <a asp-page="/Cart">مشاهده سبد خرید</a>
                                         </div>
@@ -248,21 +248,21 @@
                             <a href="#">پروفایل من </a>
                             @if (AuthHelper.IsAuthenticated())
                             {
+                            <li>
+                                <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <ul class="sub-menu">
                                 <li>
-                                    <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
+                                    <a asp-page="/Register">ثبت نام</a>
                                 </li>
-                            }
-                            else
-                            {
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a asp-page="/Register">ثبت نام</a>
-                                    </li>
-                                    <li>
-                                        <a asp-page="/Login">ورود</a>
-                                    </li>
-                                </ul>
-                            }
+                                <li>
+                                    <a asp-page="/Login">ورود</a>
+                                </li>
+                            </ul>
+                        }
                         </li>
                     </ul>
                 </nav>
@@ -281,7 +281,7 @@
                             </li>
                             <li>
                                 <i class="ion-android-mail"></i> <a
-                                                                     href="mailto:info@yourdomain.com">info@atriya.com</a>
+                                    href="mailto:info@yourdomain.com">info@atriya.com</a>
                             </li>
                         </ul>
                     </div>

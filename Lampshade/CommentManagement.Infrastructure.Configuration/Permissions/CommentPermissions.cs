@@ -11,6 +11,7 @@ public class CommentPermissions : IPermissions
     public const int CancelAndRestoreComment = CommentBase + 03;
     public const int SearchComment = CommentBase + 04;
     public const int CommentList = CommentBase + 05;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("comment", CommentBase);

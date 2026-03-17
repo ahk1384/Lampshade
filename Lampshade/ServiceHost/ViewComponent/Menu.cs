@@ -1,10 +1,6 @@
-﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
-using _01_LampshadeQuery;
+﻿using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.ArticleCategory;
-using _01_LampshadeQuery.Contracts.Cart;
 using _01_LampshadeQuery.Contracts.ProductCategory;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using ICookieManager = _01_LampshadeQuery.ICookieManager;
 
@@ -12,12 +8,13 @@ namespace ServiceHost.ViewComponent;
 
 public class Menu : Microsoft.AspNetCore.Mvc.ViewComponent
 {
-    private readonly IArticleCategoryQuery _articleCategory;
-    private readonly IProductCategoryQuery _productCategory;
-    private readonly ICookieManager _cookieManager;
     public const string CookieName = "cart-items";
+    private readonly IArticleCategoryQuery _articleCategory;
+    private readonly ICookieManager _cookieManager;
+    private readonly IProductCategoryQuery _productCategory;
 
-    public Menu(IProductCategoryQuery productCategory, IArticleCategoryQuery articleCategory, ICookieManager cookieManager)
+    public Menu(IProductCategoryQuery productCategory, IArticleCategoryQuery articleCategory,
+        ICookieManager cookieManager)
     {
         _productCategory = productCategory;
         _articleCategory = articleCategory;

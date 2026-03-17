@@ -36,6 +36,7 @@ public class DynamicAuthorizationPolicyProvider : IAuthorizationPolicyProvider
                 return policy.RequireClaim(ClaimTypes.NameIdentifier, authHelper.CurrentAccountInfo().Id.ToString())
                     .Build();
         }
+
         return new AuthorizationPolicyBuilder()
             .RequireAssertion(_ => false)
             .Build();

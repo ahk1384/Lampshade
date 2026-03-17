@@ -6,4 +6,5 @@ namespace CommentManagement.Domain.CommentAgg;
 public interface ICommentRepository : IRepository<long, Comment>
 {
     List<CommentViewModel> Search(CommentSearchModel searchModel, bool showDeleted);
+    double GetRating(long id);
 }

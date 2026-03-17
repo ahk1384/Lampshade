@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace ShopManagement.Application.Contracts;
+﻿namespace ShopManagement.Application.Contracts;
 
 public class PaymentMethod
 {

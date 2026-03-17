@@ -1,6 +1,7 @@
 ﻿using _0_Framework.Application;
 using _01_LampshadeQuery.Contracts.Product;
 using _01_LampshadeQuery.Contracts.ProductCategory;
+using CommentManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,21 +12,25 @@ namespace _01_LampshadeQuery.Query;
 
 public class ProductCategoryQuery : IProductCategoryQuery
 {
+    private readonly CommentContext _commentContext;
     private readonly ShopContext _context;
     private readonly DiscountContext _discountContext;
     private readonly InventoryContext _inventoryContext;
 
-    public ProductCategoryQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext)
+    public ProductCategoryQuery(ShopContext context, DiscountContext discountContext, InventoryContext inventoryContext,
+        CommentContext commentContext)
     {
         _context = context;
         _discountContext = discountContext;
         _inventoryContext = inventoryContext;
+        _commentContext = commentContext;
     }
 
     public ProductCategoryQueryModel GetProductCategoryWithProducstsBy(string slug)
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
+            new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
+
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -50,6 +55,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
             if (productInventory != null)
             {
                 var price = productInventory.UnitPrice;
+                product.Rating = GetRating(product.Id);
                 product.DoublePrice = price;
                 product.Price = price.ToMoney();
                 product.IsInStock = productInventory.InStock;
@@ -90,7 +96,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice,x.InStock }).ToList();
+            new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
@@ -118,6 +124,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 {
                     var price = productInventory.UnitPrice;
                     product.Price = price.ToMoney();
+                    product.Rating = GetRating(product.Id);
                     product.IsInStock = productInventory.InStock;
                     var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                     if (discount != null)
@@ -130,9 +137,10 @@ public class ProductCategoryQuery : IProductCategoryQuery
                     }
                 }
             }
+
             category.Products = category.Products.OrderBy(x => x.IsInStock).ToList();
         }
-        
+
 
         return categories;
     }
@@ -152,5 +160,15 @@ public class ProductCategoryQuery : IProductCategoryQuery
             Slug = x.Slug
         }));
         return res;
+    }
+
+    private double GetRating(long productId)
+    {
+        var comments = _commentContext.Comments
+            .Where(x => x.OwnerRecordId == productId && x.IsConfirmed && !x.IsDeleted).ToList();
+        var count = comments.Count();
+        if (count == 0) return 0;
+        var sum = comments.Sum(x => x.Rating);
+        return sum / count;
     }
 }

@@ -4,7 +4,7 @@ using ShopManagementDomain.OrderAgg;
 
 namespace SM.Infrastructure.EFCore.Mapping;
 
-public class OrderMapping :  IEntityTypeConfiguration<Order>
+public class OrderMapping : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
@@ -33,5 +33,4 @@ public class OrderMapping :  IEntityTypeConfiguration<Order>
             navigationBuilder.WithOwner(x => x.Order).HasForeignKey(x => x.OrderId);
         });
     }
-    
 }

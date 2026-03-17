@@ -8,7 +8,7 @@ public class CartViewModel
     public double DiscountAmount { get; set; }
     public double PayAmount { get; set; }
     public int PaymentMethod { get; set; }
-    public List<CartItemViewModel> Items { get; set; } = new List<CartItemViewModel>();
+    public List<CartItemViewModel> Items { get; set; } = new();
 
     public void SetPaymentMethod(int paymentMethod)
     {

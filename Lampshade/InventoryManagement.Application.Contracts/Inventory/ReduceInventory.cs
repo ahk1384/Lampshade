@@ -6,7 +6,7 @@ public class ReduceInventory
     {
     }
 
-    public ReduceInventory(long productId, long count, string description, long orderId,long operatorId)
+    public ReduceInventory(long productId, long count, string description, long orderId, long operatorId)
     {
         ProductId = productId;
         Count = count;
@@ -15,7 +15,8 @@ public class ReduceInventory
         OperatorId = operatorId;
     }
 
-    public ReduceInventory(long inventoryId, long productId, long count, string description, long orderId, long operatorId)
+    public ReduceInventory(long inventoryId, long productId, long count, string description, long orderId,
+        long operatorId)
     {
         InventoryId = inventoryId;
         ProductId = productId;
@@ -30,6 +31,6 @@ public class ReduceInventory
     public long Count { get; set; }
     public string Description { get; set; }
     public long OrderId { get; set; }
-    
+
     public long OperatorId { get; set; }
 }

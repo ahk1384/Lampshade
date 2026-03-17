@@ -1,6 +1,4 @@
 ﻿using ShopManagement.Application.Contracts.Cart;
-using ShopManagement.Application.Contracts.Order;
-using ShopManagementDomain.CartAgg;
 
 namespace ShopManagement.Application;
 

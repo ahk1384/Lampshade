@@ -52,13 +52,13 @@
                                     {
                                         <tr>
                                             <td class="pro-thumbnail">
-                                                <a>
+                                                <a asp-page="/Product" asp-route-id="@item.ProductSlug">
                                                     <img src="~/ProductPictures/@item.Picture" class="img-fluid"
                                                          alt="@item.Name">
                                                 </a>
                                             </td>
                                             <td class="pro-title">
-                                                <a>@item.Name</a>
+                                                <a asp-page="/Product" asp-route-id="@item.ProductSlug">@item.Name</a>
                                             </td>
                                             <td class="pro-price">
                                                 <span>@item.UnitPrice.ToMoney() تومان</span>
@@ -91,9 +91,12 @@
                                         @foreach (var method in PaymentMethod.GetList())
                                         {
                                             <div class="single-method">
-                                                <input type="radio" id="payment_@method.Id" name="paymentMethod" value="@method.Id" @(PaymentMethod.GetList().First().Id == method.Id ? "checked" : "")>
+                                                <input type="radio" id="payment_@method.Id" name="paymentMethod"
+                                                       value="@method.Id"
+                                                       @(PaymentMethod.GetList().First().Id == method.Id ? "checked" : "")>
                                                 <label for="payment_@method.Id">@method.Name</label>
-                                                <p data-method="@method.Id" style="display: @(PaymentMethod.GetList().First().Id == method.Id ? "block" : "none")">@method.Description</p>
+                                                <p data-method="@method.Id"
+                                                   style="display: @(PaymentMethod.GetList().First().Id == method.Id ? "block" : "none")">@method.Description</p>
                                             </div>
                                         }
                                     </div>

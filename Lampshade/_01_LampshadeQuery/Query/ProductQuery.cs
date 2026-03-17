@@ -1,15 +1,12 @@
 ﻿using _0_Framework.Application;
-using _01_LampshadeQuery.Contracts.Cart;
 using _01_LampshadeQuery.Contracts.Comment;
 using _01_LampshadeQuery.Contracts.Product;
 using CommentManagement.Infrastructure.EFCore;
 using CommnetManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
-using InventoryManagement.Domain.InventoryAgg;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.Cart;
-using ShopManagementDomain.CartAgg;
 using ShopManagementDomain.ProductPictureAgg;
 using SM.Infrastructure.EFCore;
 
@@ -62,6 +59,7 @@ public class ProductQuery : IProductQuery
         var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
         if (productInventory != null)
         {
+            product.Rating = GetRating(product.Id);
             var price = productInventory.UnitPrice;
             product.DoublePrice = price;
             product.Price = price.ToMoney();
@@ -89,6 +87,7 @@ public class ProductQuery : IProductQuery
                 Message = x.Message,
                 Name = x.Name,
                 Type = x.Type,
+                Rating = x.Rating,
                 CreationDate = x.CreationDate.ToFarsi()
             })
             .OrderByDescending(x => x.Id)
@@ -100,7 +99,7 @@ public class ProductQuery : IProductQuery
     public List<ProductQueryModel> GetLatestArrivals()
     {
         var inventory = _inventoryContext.Inventories.Select(x =>
-            new { x.ProductId, x.UnitPrice ,x.InStock}).ToList();
+            new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
@@ -119,6 +118,7 @@ public class ProductQuery : IProductQuery
 
         foreach (var product in products)
         {
+            product.Rating = GetRating(product.Id);
             var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
             if (productInventory != null)
             {
@@ -167,6 +167,7 @@ public class ProductQuery : IProductQuery
 
         foreach (var product in finalproducts)
         {
+            product.Rating = GetRating(product.Id);
             var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
             if (productInventory != null)
             {
@@ -188,6 +189,23 @@ public class ProductQuery : IProductQuery
         return finalproducts;
     }
 
+    public List<CartItemViewModel> CheckInventoryStatus(List<CartItemViewModel> cartItems)
+    {
+        var inventory = _inventoryContext.Inventories.ToList();
+        var res = new List<CartItemViewModel>();
+        if (cartItems.Count > 0)
+            foreach (var cartItem in cartItems.Where(cartItem =>
+                         inventory.Any(x => x.ProductId == cartItem.ProductId)))
+            {
+                var itemInventory = inventory.Find(x => x.ProductId == cartItem.ProductId);
+                cartItem.IsInStock = itemInventory.CalculateCurrentCount() >= cartItem.Count;
+                res.Add(new CartItemViewModel(cartItem.ProductId, cartItem.Name, cartItem.UnitPrice, cartItem.Picture,
+                    cartItem.Count, cartItem.IsInStock, cartItem.DiscountRate, cartItem.ProductSlug));
+            }
+
+        return res;
+    }
+
     private static List<ProductPictureQueryModel> MapProductPicture(List<ProductPicture> pictures)
     {
         var res = new List<ProductPictureQueryModel>();
@@ -201,21 +219,14 @@ public class ProductQuery : IProductQuery
         }));
         return res;
     }
-    public List<CartItemViewModel> CheckInventoryStatus(List<CartItemViewModel> cartItems)
+
+    public double GetRating(long productId)
     {
-        var inventory = _inventoryContext.Inventories.ToList();
-        var res = new List<CartItemViewModel>();
-        if (cartItems.Count > 0)
-        {
-            foreach (var cartItem in cartItems.Where(cartItem =>
-                         inventory.Any(x => x.ProductId == cartItem.ProductId)))
-            {
-                var itemInventory = inventory.Find(x => x.ProductId == cartItem.ProductId);
-                cartItem.IsInStock = itemInventory.CalculateCurrentCount() >= cartItem.Count;
-                res.Add(new CartItemViewModel(cartItem.ProductId,cartItem.Name, cartItem.UnitPrice,cartItem.Picture,cartItem.Count,cartItem.IsInStock,cartItem.DiscountRate));
-            }
-            
-        }
-        return res;
+        var comments = _commentContext.Comments
+            .Where(x => x.OwnerRecordId == productId && x.IsConfirmed && !x.IsDeleted).ToList();
+        var count = comments.Count();
+        if (count == 0) return 0;
+        var sum = comments.Sum(x => x.Rating);
+        return sum / count;
     }
 }

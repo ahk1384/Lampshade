@@ -14,6 +14,7 @@ public class InventoryPermissions : IPermissions
     public const int SearchInventory = BaseInventory + 06;
     public const int OperationLog = BaseInventory + 07;
     public const int InventoryList = BaseInventory + 08;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("inventory", BaseInventory);

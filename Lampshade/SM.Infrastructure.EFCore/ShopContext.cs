@@ -22,6 +22,7 @@ public class ShopContext : DbContext
     public DbSet<Slide> Slides { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<Cart> Carts { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var assembly = typeof(ProductCategoryMapping).Assembly;

@@ -1,6 +1,6 @@
 ﻿const cookieName = "cart-items";
 
-function addToCart(productId, name, unitPrice, picture, isInStock, discountRate) {
+function addToCart(productId, name, unitPrice, picture, isInStock, discountRate, productSlug) {
     let products = $.cookie(cookieName);
     if (products === undefined) {
         products = [];
@@ -14,8 +14,7 @@ function addToCart(productId, name, unitPrice, picture, isInStock, discountRate)
     const currentProduct = products.find(x => x.productId === productId);
     if (currentProduct !== undefined) {
         products.find(x => x.productId === productId).count = parseInt(currentProduct.count) + parseInt(count);
-    } 
-    else {
+    } else {
         const product = {
             productId,
             name,
@@ -25,6 +24,7 @@ function addToCart(productId, name, unitPrice, picture, isInStock, discountRate)
             totalItemPrice,
             isInStock,
             discountRate,
+            productSlug,
             discountAmount,
             itemPayAmount
         }
@@ -42,17 +42,17 @@ function updateCart() {
     const cartItemsWrapper = $("#cart_items_wrapper");
     cartItemsWrapper.html('');
     products.forEach(x => {
-        const total = (x.unitPrice-x.discountAmount) * x.count
+        const total = (x.unitPrice - x.discountAmount) * x.count
         const product = `
             <div class="single-cart-item">
                 <div class="image">
-                    <a href="single-product.html">
+                    <a href="/Product/${x.productSlug}">
                         <img src="/ProductPictures/${x.picture}" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="content">
                     <p class="product-title">
-                        <a href="single-product.html">محصول: ${x.name}</a>
+                        <a href="/Product/${x.productSlug}">محصول: ${x.name}</a>
                     </p>
                     <p class="count">تعداد: ${x.count}</p>
                     <p class="count">قیمت : ${x.unitPrice - x.discountAmount}</p>

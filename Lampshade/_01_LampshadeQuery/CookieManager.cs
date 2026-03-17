@@ -1,5 +1,4 @@
 ﻿using _0_Framework.Application;
-using _0_Framework.Infrastructure;
 using _01_LampshadeQuery.Contracts.Cart;
 using Microsoft.AspNetCore.Http;
 using Nancy.Json;
@@ -9,9 +8,9 @@ namespace _01_LampshadeQuery;
 
 public class CookieManager : ICookieManager
 {
-    private readonly ICartQuery _cartQuery;
-    private readonly IAuthHelper _authHelper;
     public const string CookieName = "cart-items";
+    private readonly IAuthHelper _authHelper;
+    private readonly ICartQuery _cartQuery;
 
     public CookieManager(ICartQuery cartQuery, IAuthHelper authHelper)
     {
@@ -46,9 +45,8 @@ public class CookieManager : ICookieManager
         var serializer = new JavaScriptSerializer();
         var value = request.Cookies[CookieName];
         var cartItems = serializer.Deserialize<List<CartItemViewModel>>(value);
-        if(cartItems != null && cartItems.Count > 0)
+        if (cartItems != null && cartItems.Count > 0)
             return cartItems;
         return new List<CartItemViewModel>();
     }
-    
 }

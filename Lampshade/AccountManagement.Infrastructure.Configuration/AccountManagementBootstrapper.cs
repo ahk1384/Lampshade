@@ -23,7 +23,7 @@ public class AccountManagementBootstrapper
         services.AddTransient<IRoleApplication, RoleApplication>();
 
         services.AddTransient<IPermissionExposer, AccountPermissionsExposer>();
-        
+
         AccountPermissions.Configure();
         services.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString));
     }

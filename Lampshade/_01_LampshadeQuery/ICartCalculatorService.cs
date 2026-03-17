@@ -1,9 +1,11 @@
 ﻿using ShopManagement.Application.Contracts.Cart;
-using ShopManagementDomain.CartAgg;
 
 namespace _01_LampshadeQuery;
 
 public interface ICartCalculatorService
 {
     CartViewModel ComputeCart(List<CartItemViewModel> cartItems);
+
+    // Cart ComputeCart(List<CartItem> cartItems);
+    CartItemViewModel ComputeCartItem(CartItemViewModel cartItemViewModel);
 }

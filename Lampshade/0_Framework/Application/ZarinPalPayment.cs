@@ -1,7 +1,5 @@
-﻿
-namespace _0_Framework.Application;
+﻿namespace _0_Framework.Application;
 
 public class ZarinPalPayment
 {
-    
 }

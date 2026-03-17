@@ -32,7 +32,7 @@ public class Order : EntityBase<long>
     public string IssueTrackingNo { get; private set; }
     public long RefId { get; private set; }
     public List<OrderItem> Items { get; }
-    
+
     public void PaymentSucceeded(long refId)
     {
         IsPaid = true;

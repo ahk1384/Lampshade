@@ -16,5 +16,4 @@ public static class PermissionsCodes
     {
         Codes.Add(policyName, code);
     }
-    
 }

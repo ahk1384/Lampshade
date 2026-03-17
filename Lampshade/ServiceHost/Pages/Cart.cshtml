@@ -64,13 +64,13 @@
                                     {
                                         <tr>
                                             <td class="pro-thumbnail">
-                                                <a href="single-product.html">
+                                                <a asp-page="/Product" asp-route-id="@item.ProductSlug">
                                                     <img src="~/ProductPictures/@item.Picture" class="img-fluid"
                                                          alt="@item.Name">
                                                 </a>
                                             </td>
                                             <td class="pro-title">
-                                                <a href="single-product.html">@item.Name</a>
+                                                <a asp-page="/Product" asp-route-id="@item.ProductSlug">@item.Name</a>
                                             </td>
                                             <td class="pro-price">
                                                 <span>@item.UnitPrice.ToMoney()</span>
@@ -80,8 +80,12 @@
                                             </td>
                                             <td class="pro-quantity">
                                                 <div class="quantity-selection">
-                                                    <a asp-page-handler="ChangeItemCount" asp-route-productId="@item.ProductId" asp-route-count="@(item.Count+1)">+</a>
-                                                    <a asp-page-handler="ChangeItemCount" asp-route-productId="@item.ProductId" asp-route-count="@(item.Count-1)">-</a>
+                                                    <a asp-page-handler="ChangeItemCount"
+                                                       asp-route-productId="@item.ProductId"
+                                                       asp-route-count="@(item.Count + 1)">+</a>
+                                                    <a asp-page-handler="ChangeItemCount"
+                                                       asp-route-productId="@item.ProductId"
+                                                       asp-route-count="@(item.Count - 1)">-</a>
                                                     <input type="number" value="@item.Count" min="1"
                                                            onchange="changeCartItemCount(@item.ProductId,this.value)">
                                                 </div>
@@ -109,10 +113,19 @@
                             <div class="row">
                                 <div class="col-lg-6 col-12 d-flex">
                                     <div class="cart-summary">
-                                        <div class="cart-summary-button">
-                                            <a class="checkout-btn" asp-page-handler="GoToCheckOut">تکمیل فرایند
-                                                خرید</a>
+
+                                        <div class="cart-summary-wrap">
+                                            <h4>خلاصه وضعیت فاکتور</h4>
+                                            <p>مبلغ نهایی <span>@Model.Cart.TotalAmount.ToMoney() تومان</span></p>
+                                            <p>مبلغ تخفیف <span>@Model.Cart.DiscountAmount.ToMoney() تومان</span></p>
+                                            <h2>مبلغ قابل پرداخت <span>@Model.Cart.PayAmount.ToMoney() تومان</span></h2>
                                         </div>
+                                        <div class="cart-summary-button">
+                                            <a asp-page-handler="GoToCheckOut" class="checkout-btn">تکمیل فرایند
+                                                خرید
+                                            </a>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -125,21 +138,19 @@
 }
 else
 {
-    
-
     <script>
         window.location.href = '@Url.Page("/Index")';
     </script>
 }
 <script>
-function changeCartItemCount(productId, quantity) {
+    function changeCartItemCount(productId, quantity) {
 
-    fetch(`/Cart?handler=ChangeItemCount&productId=${productId}&count=${quantity}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Cart updated");
-        })
-        .catch(error => console.error(error));
+        fetch(`/Cart?handler=ChangeItemCount&productId=${productId}&count=${quantity}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Cart updated");
+            })
+            .catch(error => console.error(error));
 
-}
+    }
 </script>

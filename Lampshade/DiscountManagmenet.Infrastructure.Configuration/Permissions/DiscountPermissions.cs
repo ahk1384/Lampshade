@@ -23,6 +23,7 @@ public class DiscountPermissions : IPermissions
     public const int SearchColleagueDiscount = ColleagueDiscountBase + 03;
     public const int RemoveAndRestoreColleagueDiscount = ColleagueDiscountBase + 04;
     public const int ColleagueDiscountList = ColleagueDiscountBase + 05;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("discount", DiscountBase);

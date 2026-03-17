@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Application.Contracts.Order;
 using ShopManagement.Domain.Services;
-using ShopManagementDomain.CartAgg;
 using ShopManagementDomain.OrderAgg;
 using ShopManagementDomain.Services;
 
@@ -15,10 +14,12 @@ public class OrderApplication : IOrderApplication
     private readonly IConfiguration _configuration;
     private readonly IOrderRepository _orderRepository;
     private readonly IShopAccountAcl _shopAccountAcl;
+
     private readonly IShopInventoryAcl _shopInventoryAcl;
     // private readonly ISmsService _smsService;
 
-    public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration , IShopInventoryAcl shopInventoryAcl, IShopAccountAcl shopAccountAcl)
+    public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration,
+        IShopInventoryAcl shopInventoryAcl, IShopAccountAcl shopAccountAcl)
     {
         _orderRepository = orderRepository;
         _authHelper = authHelper;
@@ -36,18 +37,18 @@ public class OrderApplication : IOrderApplication
 
         foreach (var cartItem in cart.Items)
         {
-            var orderItem = new OrderItem(cartItem.ProductId, cartItem.Count, cartItem.UnitPrice, cartItem.DiscountRate);
+            var orderItem = new OrderItem(cartItem.ProductId, cartItem.Count, cartItem.UnitPrice,
+                cartItem.DiscountRate);
             order.AddItem(orderItem);
         }
 
         _orderRepository.Create(order);
-        if (!_shopInventoryAcl.ReduceFromInventory(order.Items)) 
+        if (!_shopInventoryAcl.ReduceFromInventory(order.Items))
             return 0;
         _orderRepository.CommitTran();
         return order.Id;
     }
 
-    
 
     public double GetAmountBy(long id)
     {
@@ -73,7 +74,7 @@ public class OrderApplication : IOrderApplication
         var symbol = _configuration.GetSection("Symbol").Value;
         var issueTrackingNo = CodeGenerator.Generate(symbol);
         order.SetIssueTrackingNo(issueTrackingNo);
-            
+
         if (!_shopInventoryAcl.ReduceFromInventory(order.Items)) return "";
 
         _orderRepository.CommitTran();

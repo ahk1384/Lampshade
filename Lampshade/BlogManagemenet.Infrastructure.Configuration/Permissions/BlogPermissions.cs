@@ -17,7 +17,8 @@ public class BlogPermissions : IPermissions
     public const int CreateArticleCategory = ArticleCategoryBase + 01;
     public const int EditArticleCategory = ArticleCategoryBase + 02;
     public const int SearchArticleCategory = ArticleCategoryBase + 03;
-    public const int ArticleCategoryList = ArticleCategoryBase+ 04;
+    public const int ArticleCategoryList = ArticleCategoryBase + 04;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("blog", BlogBase);

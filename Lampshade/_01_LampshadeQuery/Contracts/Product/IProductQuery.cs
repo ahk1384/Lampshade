@@ -1,7 +1,5 @@
-﻿
-//using ShopManagement.Application.Contracts.Order;
+﻿//using ShopManagement.Application.Contracts.Order;
 
-using _01_LampshadeQuery.Contracts.Cart;
 using ShopManagement.Application.Contracts.Cart;
 
 namespace _01_LampshadeQuery.Contracts.Product;
@@ -12,6 +10,6 @@ public interface IProductQuery
     List<ProductQueryModel> GetLatestArrivals();
 
     List<ProductQueryModel> Search(string value);
-    
+
     List<CartItemViewModel> CheckInventoryStatus(List<CartItemViewModel> cartItems);
 }

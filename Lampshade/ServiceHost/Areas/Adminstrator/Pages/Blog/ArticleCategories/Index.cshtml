@@ -96,8 +96,8 @@
     <script src="~/adminTheme/assets/datatables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#datatable').dataTable();
+        $('#datatable').DataTable({
+            "order": [[0, "desc"]]
         });
     </script>
 }

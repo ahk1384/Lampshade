@@ -40,6 +40,7 @@ public class ShopPermissions : IPermissions
     public const int EditSlide = BaseSlide + 42;
     public const int RemoveAndRestoreSlide = BaseSlide + 43;
     public const int SlideList = BaseSlide + 44;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("shop", BaseShop);

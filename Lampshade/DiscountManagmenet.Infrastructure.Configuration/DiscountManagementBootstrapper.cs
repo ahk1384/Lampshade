@@ -23,7 +23,7 @@ public class DiscountManagementBootstrapper
         services.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
 
         services.AddTransient<IPermissionExposer, DiscountPermissionsExposer>();
-        
+
         DiscountPermissions.Configure();
         services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
     }

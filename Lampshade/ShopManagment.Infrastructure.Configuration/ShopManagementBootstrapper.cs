@@ -45,18 +45,18 @@ public class ShopManagementBootstrapper
 
         services.AddTransient<ISlideApplication, SlideApplication>();
         services.AddTransient<ISlideRepository, SlideRepository>();
-        
+
         services.AddTransient<IOrderRepository, OrderRepository>();
         services.AddTransient<IOrderApplication, OrderApplication>();
-        
+
         services.AddTransient<IShopInventoryAcl, ShopInventoryAcl>();
         services.AddTransient<IShopAccountAcl, ShopAccountAcl>();
-        
+
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         services.AddTransient<IProductQuery, ProductQuery>();
         services.AddTransient<ICartQuery, CartQuery>();
-        
+
         services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
         services.AddTransient<ICartCalculatorService, CartCalculatorService>();
         services.AddSingleton<ICartService, CartService>();
@@ -64,4 +64,3 @@ public class ShopManagementBootstrapper
         services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
     }
 }
-

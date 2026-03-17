@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Application;
 using _0_Framework.Infrastructure;
+using CommentManagement.Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts.ProductAgg;
 using ShopManagementDomain.ProductAgg;
@@ -9,13 +10,16 @@ namespace SM.Infrastructure.EFCore.Repositories;
 
 public class ProductRepository : BaseRepository<long, Product>, IProductRepository
 {
+    private readonly ICommentRepository _commentRepository;
     private readonly ShopContext _context;
     private readonly IProductCategoryRepository _productCategoryRepository;
 
-    public ProductRepository(ShopContext context, IProductCategoryRepository productCategoryRepository) : base(context)
+    public ProductRepository(ShopContext context, IProductCategoryRepository productCategoryRepository,
+        ICommentRepository commentRepository) : base(context)
     {
         _context = context;
         _productCategoryRepository = productCategoryRepository;
+        _commentRepository = commentRepository;
     }
 
 
@@ -43,6 +47,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
         var res = showDeleted
             ? _context.Products.Where(x => x.IsDeleted)
             : _context.Products.Where(x => !x.IsDeleted);
+
         var query = res.Include(x => x.Category).Select(x => new ProductViewModel
         {
             Id = x.Id,
@@ -51,6 +56,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             CategoryId = x.CategoryId,
             Code = x.Code,
             Picture = x.Picture,
+            Rating = _commentRepository.GetRating(x.Id),
             CreationDate = x.CreationDate.ToFarsi()
         });
 
@@ -81,6 +87,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
             CategoryId = x.CategoryId,
             Code = x.Code,
             Picture = x.Picture,
+            Rating = _commentRepository.GetRating(x.Id),
             CreationDate = x.CreationDate.ToFarsi()
         }).ToList();
     }

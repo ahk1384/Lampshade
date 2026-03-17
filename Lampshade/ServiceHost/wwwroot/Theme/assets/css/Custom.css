@@ -41,6 +41,7 @@ body {
 
 .single-grid-product__category-rating .rating {
     float: left;
+    direction: ltr;
 }
 
 .single-grid-product__price .discounted-price {

@@ -94,7 +94,7 @@ public class AuthHelper : IAuthHelper
 
         await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity),
-             authProperties);
+            authProperties);
     }
 
     public void SignOut()
