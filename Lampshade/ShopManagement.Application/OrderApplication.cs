@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Application;
+using _0_Framework.Application.Sms;
 using Microsoft.Extensions.Configuration;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Application.Contracts.Order;
@@ -14,24 +15,27 @@ public class OrderApplication : IOrderApplication
     private readonly IConfiguration _configuration;
     private readonly IOrderRepository _orderRepository;
     private readonly IShopAccountAcl _shopAccountAcl;
-
+    private readonly ISmsService _smsService;
     private readonly IShopInventoryAcl _shopInventoryAcl;
     // private readonly ISmsService _smsService;
 
     public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration,
-        IShopInventoryAcl shopInventoryAcl, IShopAccountAcl shopAccountAcl)
+        IShopInventoryAcl shopInventoryAcl, IShopAccountAcl shopAccountAcl, ISmsService smsService)
     {
         _orderRepository = orderRepository;
         _authHelper = authHelper;
         _configuration = configuration;
         _shopInventoryAcl = shopInventoryAcl;
         _shopAccountAcl = shopAccountAcl;
+        _smsService = smsService;
     }
 
     public long PlaceOrder(CartViewModel cart)
     {
         _orderRepository.BeginTran();
         var currentAccountId = _authHelper.CurrentAccountInfo().Id;
+
+
         var order = new Order(currentAccountId, cart.PaymentMethod, cart.TotalAmount, cart.DiscountAmount,
             cart.PayAmount);
 
@@ -68,8 +72,6 @@ public class OrderApplication : IOrderApplication
         _orderRepository.BeginTran();
         var order = _orderRepository.Get(orderId);
         order.PaymentSucceeded(refId);
-
-        //var symbol = _configuration.GetValue<string>("Symbol");
 
         var symbol = _configuration.GetSection("Symbol").Value;
         var issueTrackingNo = CodeGenerator.Generate(symbol);

@@ -47,7 +47,6 @@ public class CartItemViewModel
     public double TotalItemPrice { get; set; }
     public bool IsInStock { get; set; }
     public int DiscountRate { get; set; }
-
     public string ProductSlug { get; set; }
     public double DiscountAmount { get; set; }
     public double ItemPayAmount { get; set; }

@@ -23,10 +23,10 @@ public class Order : EntityBase<long>
     }
 
     public long AccountId { get; }
-    public int PaymentMethod { get; }
-    public double TotalAmount { get; }
-    public double DiscountAmount { get; }
-    public double PayAmount { get; }
+    public int PaymentMethod { get; set; }
+    public double TotalAmount { get; set; }
+    public double DiscountAmount { get; set; }
+    public double PayAmount { get; set; }
     public bool IsPaid { get; private set; }
     public bool IsCanceled { get; private set; }
     public string IssueTrackingNo { get; private set; }
@@ -41,6 +41,10 @@ public class Order : EntityBase<long>
             RefId = refId;
     }
 
+    public void SetPaymenMethod(int paymentMethod)
+    {
+        PaymentMethod = paymentMethod;
+    }
     public void Cancel()
     {
         IsCanceled = true;

@@ -10,4 +10,5 @@ public interface ICartQuery
     OperationResult AddAllToCart(List<CartItemViewModel> item, long accountId);
     OperationResult ChangeItemCount(CartItemViewModel item, long accountId);
     OperationResult RemoveFromCart(long productId, long accountId);
+    OperationResult RemoveCart(long accountId);
 }

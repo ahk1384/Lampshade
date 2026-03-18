@@ -1,6 +1,8 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Application.Sms;
+using _0_Framework.Application.ZarinPal;
 using _01_LampshadeQuery;
 using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
@@ -37,14 +39,11 @@ public class Program
         builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
         builder.Services.AddTransient<IFileUploader, FileUploader>();
         builder.Services.AddTransient<IAuthHelper, AuthHelper>();
+        builder.Services.AddTransient<IZarinPalFactory, ZarinPalFactory>();
         builder.Services.AddTransient<ICookieManager, CookieManager>();
         builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
-
-        builder.Services.Configure<CookiePolicyOptions>(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = SameSiteMode.Lax;
-        });
+        builder.Services.AddSingleton<ISmsService, SmsService>();
+        
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {

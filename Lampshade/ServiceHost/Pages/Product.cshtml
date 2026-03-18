@@ -377,27 +377,7 @@
 </div>
 
 <script>
-    $("#contactForm").submit(function (e) {
-
-        const email = $("#email").val().trim();
-        const message = $("#message").val().trim();
-
-        $("#error").text("");
-
-        if (email === "") {
-            e.preventDefault();
-            $("#error").text("Email is required");
-            return;
-        }
-
-        if (message === "") {
-            e.preventDefault();
-            $("#error").text("Message cannot be empty");
-
-        }
-
-    });
-
+    
     function activeComments() {
         const des = document.getElementById("description-tab");
         const tabdes = document.getElementById("product-description");

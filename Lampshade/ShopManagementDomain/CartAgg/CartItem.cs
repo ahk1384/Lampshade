@@ -14,7 +14,6 @@ public class CartItem
         IsInStock = isInStock;
         DiscountRate = discountRate;
         ProductSlug = productSlug;
-
         DiscountAmount = count * unitPrice * discountRate / 100;
         TotalItemPrice = UnitPrice * Count;
         ItemPayAmount = TotalItemPrice - DiscountAmount;

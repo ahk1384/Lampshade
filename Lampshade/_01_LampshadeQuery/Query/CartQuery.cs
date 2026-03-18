@@ -21,7 +21,7 @@ public class CartQuery : ICartQuery
 
     public CartViewModel GetCart(long accountId)
     {
-        return _shopContext.Carts.Select(x => new CartViewModel
+        return _shopContext.Carts.Where(x => !x.IsDeleted).Select(x => new CartViewModel
         {
             CartId = x.Id,
             AccountId = x.AccountId,
@@ -35,7 +35,7 @@ public class CartQuery : ICartQuery
     public OperationResult ChangeItemCount(CartItemViewModel item, long accountId)
     {
         var operationResult = new OperationResult();
-        var cart = _shopContext.Carts.FirstOrDefault(x => x.AccountId == accountId);
+        var cart = _shopContext.Carts.FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
 
         if (cart != null)
         {
@@ -52,7 +52,7 @@ public class CartQuery : ICartQuery
     public OperationResult AddToCart(CartItemViewModel item, long accountId)
     {
         var operationResult = new OperationResult();
-        var cart = _shopContext.Carts.FirstOrDefault(x => x.AccountId == accountId);
+        var cart = _shopContext.Carts.FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
 
         if (cart != null)
         {
@@ -97,10 +97,24 @@ public class CartQuery : ICartQuery
     public OperationResult RemoveFromCart(long productId, long accountId)
     {
         var operationResult = new OperationResult();
-        var cart = _shopContext.Carts.Include(x => x.Items).FirstOrDefault(x => x.AccountId == accountId);
+        var cart = _shopContext.Carts.Include(x => x.Items).FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
         if (cart != null && cart.Items.Any(x => x.ProductId == productId))
         {
             cart.Items.Remove(cart.Items.FirstOrDefault(x => x.ProductId == productId));
+            _shopContext.SaveChanges();
+            return operationResult.Success();
+        }
+
+        return operationResult.Fail();
+    }
+
+    public OperationResult RemoveCart(long accountId)
+    {
+        var operationResult = new OperationResult();
+        var cart = _shopContext.Carts.FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
+        if (cart != null)
+        {
+            cart.Remove();
             _shopContext.SaveChanges();
             return operationResult.Success();
         }

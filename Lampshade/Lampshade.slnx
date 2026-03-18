@@ -1,113 +1,82 @@
 <Solution>
-    <Folder Name="/AccountManagement/"/>
-    <Folder Name="/AccountManagement/AM.Application/">
-        <Project Path="AccountManagement.Application.Contract/AccountManagement.Application.Contract.csproj"
-                 Id="48431d31-b985-4113-a424-ebda55f0c0f6"/>
-        <Project Path="AccountManagement.Application/AccountManagement.Application.csproj"
-                 Id="134eebf5-8f69-4449-b99e-b95467979fac"/>
-    </Folder>
-    <Folder Name="/AccountManagement/AM.Domain/">
-        <Project Path="AccountManagement.Domain/AccountManagement.Domain.csproj"
-                 Id="c1276e55-f33a-462f-a18b-e8a1a027f063"/>
-    </Folder>
-    <Folder Name="/AccountManagement/AM.Infratructure/">
-        <Project
-                Path="AccountManagement.Infrastructure.Configuration/AccountManagement.Infrastructure.Configuration.csproj"
-                Id="caa834e2-507b-46ae-86fa-6d63342b9907"/>
-        <Project Path="AccountManagement.Infrastructure.EFCore/AccountManagement.Infrastructure.EFCore.csproj"
-                 Id="bd769e4b-dd0a-449c-96f1-4694b264e0ed"/>
-    </Folder>
-    <Folder Name="/BlogManagement/"/>
-    <Folder Name="/BlogManagement/BM.Application/">
-        <Project Path="BlogManagement,Application.Contract/BlogManagement.Application.Contract.csproj"
-                 Id="dbae0a7e-07d2-45ef-a485-7fc1f6751c16"/>
-        <Project Path="BlogManagement.Application/BlogManagement.Application.csproj"
-                 Id="f3928290-73a6-4db9-88b8-b0a23436c4c7"/>
-    </Folder>
-    <Folder Name="/BlogManagement/BM.Domain/">
-        <Project Path="BlogManagmenet.Domain/BlogManagement.Domain.csproj" Id="9d4acc75-b58e-4ef7-9a97-d9f39573aa11"/>
-    </Folder>
-    <Folder Name="/BlogManagement/BM.Infrastructure/">
-        <Project Path="BlogManagemenet.Infrastructure.Configuration/BlogManagement.Infrastructure.Configuration.csproj"
-                 Id="e1fdb250-c98c-4cd3-a7c4-29346a68b7e7"/>
-        <Project Path="BlogManagement.Infrastructure/BlogManagement.Infrastructure.EFCore.csproj"
-                 Id="1fec703f-a087-4696-a154-5f482a71d46b"/>
-    </Folder>
-    <Folder Name="/CommentManagement/"/>
-    <Folder Name="/CommentManagement/CM.Application/">
-        <Project Path="CommnetManagement.Application.Contracts/CommentManagement.Application.Contracts.csproj"
-                 Id="49299fde-308f-41cd-bb75-c225ec47e78d"/>
-        <Project Path="CommnetManagement.Application/CommentManagement.Application.csproj"
-                 Id="7a8332c8-23f2-4669-930b-2dc17658c081"/>
-    </Folder>
-    <Folder Name="/CommentManagement/CM.Domain/">
-        <Project Path="CommentManagement.Domain/CommentManagement.Domain.csproj"
-                 Id="53ed56de-7226-4694-a8bd-3bf5502833ba"/>
-    </Folder>
-    <Folder Name="/CommentManagement/CM.Infrastructure/">
-        <Project
-                Path="CommentManagement.Infrastructure.Configuration/CommentManagement.Infrastructure.Configuration.csproj"
-                Id="f682500b-324b-4602-bccd-f54396cba3ba"/>
-        <Project Path="CommentManagement.Infrastructure.EFCore/CommentManagement.Infrastructure.EFCore.csproj"
-                 Id="37b22637-46b8-44bf-a9e5-13d996042227"/>
-    </Folder>
-    <Folder Name="/DiscoutManagement/"/>
-    <Folder Name="/DiscoutManagement/Dm.Application/">
-        <Project Path="DiscountManagmenet.Application.Contracts/DiscountManagement.Application.Contracts.csproj"
-                 Id="2e8e66fb-8612-45a5-8fa3-f8a7478bc4cc"/>
-        <Project Path="DiscountManagmenet.Application/DiscountManagement.Application.csproj"
-                 Id="602f8f3f-0b99-47e0-9011-c8976f98c59e"/>
-    </Folder>
-    <Folder Name="/DiscoutManagement/DM.Domain/">
-        <Project Path="DiscountManagment.Domain/DiscountManagement.Domain.csproj"
-                 Id="cc6a286e-055f-4645-adcd-b3093184b52f"/>
-    </Folder>
-    <Folder Name="/DiscoutManagement/DM.Infrastructure/">
-        <Project
-                Path="DiscountManagmenet.Infrastructure.Configuration/DiscountManagement.Infrastructure.Configuration.csproj"
-                Id="b88d18fe-2ecc-46c4-b3e8-bc9fe3e66f4d"/>
-        <Project Path="DiscountManagmenet.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj"
-                 Id="7316b6ae-cf53-4cf7-90c4-6c609331c9b7"/>
-    </Folder>
-    <Folder Name="/InventoryManagement/"/>
-    <Folder Name="/InventoryManagement/IM.Application/">
-        <Project Path="InventoryManagement.Application.Contracts/InventoryManagement.Application.Contracts.csproj"
-                 Id="bc08c15c-ce95-4bf1-a8b7-3c12d7e56167"/>
-        <Project Path="InventoryManagement.Application/InventoryManagement.Application.csproj"
-                 Id="b971b61d-604c-4090-927c-97116e35282c"/>
-    </Folder>
-    <Folder Name="/InventoryManagement/IM.Domain/">
-        <Project Path="InventoryManagement.Domain/InventoryManagement.Domain.csproj"
-                 Id="0648b140-2a26-4dfe-9af4-d0f13585f8ef"/>
-    </Folder>
-    <Folder Name="/InventoryManagement/IM.Infrastructure/">
-        <Project
-                Path="InventoryManagement.Infrastructure.Configuration/InventoryManagement.Infrastructure.Configuration.csproj"
-                Id="40f0ff92-2450-4e87-84f8-cc5e5aef4156"/>
-        <Project Path="InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj"
-                 Id="d868b480-a0f7-4f06-be48-63c9ae294c82"/>
-    </Folder>
-    <Folder Name="/ShopManagement/"/>
-    <Folder Name="/ShopManagement/SM.Application/">
-        <Project Path="ShopManagement.Application/ShopManagement.Application.csproj"
-                 Id="0b176390-35cb-417c-b6c3-3685bdaf0448"/>
-        <Project Path="ShopManagemnt.Applocation.Contracts/ShopManagement.Application.Contracts.csproj"
-                 Id="8747746d-4c9b-473d-93d3-f0a15e95dcc9"/>
-    </Folder>
-    <Folder Name="/ShopManagement/SM.Domain/">
-        <Project Path="ShopManagementDomain/ShopManagementDomain.csproj" Id="a52c4c2a-9b8e-4f23-8c4e-7a4d4af2c9b0"/>
-    </Folder>
-    <Folder Name="/ShopManagement/SM.Infrastructure/">
-        <Project Path="ShopManagement.Infrastructure.AccountAcl/ShopManagement.Infrastructure.AccountAcl.csproj"
-                 Id="a161b4b1-2bf2-425f-8a34-5ce77e9cab46"/>
-        <Project Path="ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj"
-                 Id="cb502075-cbf5-4979-be53-2fe55b63f39e"/>
-        <Project Path="ShopManagment.Infrastructure.Configuration/ShopManagement.Infrastructure.Configuration.csproj"
-                 Id="90786e2c-dc7c-4dc1-8351-c9bf98a8a1ae"/>
-        <Project Path="SM.Infrastructure.EFCore/SM.Infrastructure.EFCore.csproj"
-                 Id="c6c78871-babb-464c-ba3d-62d324926fc0"/>
-    </Folder>
-    <Project Path="0_Framework/0_Framework.csproj" Id="b0e41d42-ca5d-4f01-a13a-8ee57cb1aab6"/>
-    <Project Path="ServiceHost/ServiceHost.csproj" Id="b07a53f5-82a0-4539-a548-53c15dcdbd18"/>
-    <Project Path="_01_LampshadeQuery/_01_LampshadeQuery.csproj" Id="05ef78c6-d94a-443b-8c4b-614f87b599c9"/>
+  <Folder Name="/AccountManagement/" />
+  <Folder Name="/AccountManagement/AM.Application/">
+    <Project Path="AccountManagement.Application.Contract/AccountManagement.Application.Contract.csproj" />
+    <Project Path="AccountManagement.Application/AccountManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/AccountManagement/AM.Domain/">
+    <Project Path="AccountManagement.Domain/AccountManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/AccountManagement/AM.Infratructure/">
+    <Project Path="AccountManagement.Infrastructure.Configuration/AccountManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="AccountManagement.Infrastructure.EFCore/AccountManagement.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/BlogManagement/" />
+  <Folder Name="/BlogManagement/BM.Application/">
+    <Project Path="BlogManagement,Application.Contract/BlogManagement.Application.Contract.csproj" />
+    <Project Path="BlogManagement.Application/BlogManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/BlogManagement/BM.Domain/">
+    <Project Path="BlogManagmenet.Domain/BlogManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/BlogManagement/BM.Infrastructure/">
+    <Project Path="BlogManagemenet.Infrastructure.Configuration/BlogManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="BlogManagement.Infrastructure/BlogManagement.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/CommentManagement/" />
+  <Folder Name="/CommentManagement/CM.Application/">
+    <Project Path="CommnetManagement.Application.Contracts/CommentManagement.Application.Contracts.csproj" />
+    <Project Path="CommnetManagement.Application/CommentManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/CommentManagement/CM.Domain/">
+    <Project Path="CommentManagement.Domain/CommentManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/CommentManagement/CM.Infrastructure/">
+    <Project Path="CommentManagement.Infrastructure.Configuration/CommentManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="CommentManagement.Infrastructure.EFCore/CommentManagement.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/DiscoutManagement/" />
+  <Folder Name="/DiscoutManagement/Dm.Application/">
+    <Project Path="DiscountManagmenet.Application.Contracts/DiscountManagement.Application.Contracts.csproj" />
+    <Project Path="DiscountManagmenet.Application/DiscountManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/DiscoutManagement/DM.Domain/">
+    <Project Path="DiscountManagment.Domain/DiscountManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/DiscoutManagement/DM.Infrastructure/">
+    <Project Path="DiscountManagmenet.Infrastructure.Configuration/DiscountManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="DiscountManagmenet.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/InventoryManagement/" />
+  <Folder Name="/InventoryManagement/IM.Application/">
+    <Project Path="InventoryManagement.Application.Contracts/InventoryManagement.Application.Contracts.csproj" />
+    <Project Path="InventoryManagement.Application/InventoryManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/InventoryManagement/IM.Domain/">
+    <Project Path="InventoryManagement.Domain/InventoryManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/InventoryManagement/IM.Infrastructure/">
+    <Project Path="InventoryManagement.Infrastructure.Configuration/InventoryManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/ShopManagement/" />
+  <Folder Name="/ShopManagement/SM.Application/">
+    <Project Path="ShopManagement.Application/ShopManagement.Application.csproj" />
+    <Project Path="ShopManagemnt.Applocation.Contracts/ShopManagement.Application.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/ShopManagement/SM.Domain/">
+    <Project Path="ShopManagementDomain/ShopManagementDomain.csproj" />
+  </Folder>
+  <Folder Name="/ShopManagement/SM.Infrastructure/">
+    <Project Path="ShopManagement.Infrastructure.AccountAcl/ShopManagement.Infrastructure.AccountAcl.csproj" />
+    <Project Path="ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj" />
+    <Project Path="ShopManagment.Infrastructure.Configuration/ShopManagement.Infrastructure.Configuration.csproj" />
+    <Project Path="SM.Infrastructure.EFCore/SM.Infrastructure.EFCore.csproj" />
+  </Folder>
+  <Folder Name="/ShopManagement/SM.Presentation/">
+    <Project Path="ShopPresentation/ShopPresentation.csproj" Id="f4e96c0d-df22-4c1f-b394-69bd2030d84d" />
+  </Folder>
+  <Project Path="0_Framework/0_Framework.csproj" />
+  <Project Path="ServiceHost/ServiceHost.csproj" />
+  <Project Path="_01_LampshadeQuery/_01_LampshadeQuery.csproj" />
 </Solution>
