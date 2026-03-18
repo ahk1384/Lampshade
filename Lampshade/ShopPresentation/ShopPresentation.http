@@ -1,0 +1,6 @@
+@ShopPresentation_HostAddress = http://localhost:5063
+
+GET {{ShopPresentation_HostAddress}}/api/
+Accept: application/json
+
+###

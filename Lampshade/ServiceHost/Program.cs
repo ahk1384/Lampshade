@@ -25,7 +25,7 @@ public class Program
         // Add services to the container.
         DiscountManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
-        ShopManagementBootstrapper.Configure(builder.Services,
+                ShopManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
         InventoryManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
