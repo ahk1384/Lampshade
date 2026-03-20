@@ -4,7 +4,13 @@ using _0_Framework.Application;
 using _0_Framework.Application.Email;
 using _0_Framework.Application.Sms;
 using _0_Framework.Application.ZarinPal;
+using _0_Framework.Infrastructure;
 using _01_LampshadeQuery;
+using _01_LampshadeQuery.Contracts.Cart;
+using _01_LampshadeQuery.Contracts.Product;
+using _01_LampshadeQuery.Contracts.ProductCategory;
+using _01_LampshadeQuery.Contracts.Slide;
+using _01_LampshadeQuery.Query;
 using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
@@ -12,7 +18,10 @@ using DiscountManagement.Infrastructure.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using ShopManagement.Application;
+using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Infrastructure.Configuration;
+using ShopManagement.Infrastructure.Configuration.Permissions;
 using ICookieManager = _01_LampshadeQuery.ICookieManager;
 
 namespace ServiceHost;
@@ -45,6 +54,13 @@ public class Program
         builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
         builder.Services.AddSingleton<ISmsService, SmsService>();
         builder.Services.AddSingleton<IEmailService, EmailService>();
+        builder.Services.AddTransient<ISlideQuery, SlideQuery>();
+        builder.Services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
+        builder.Services.AddTransient<IProductQuery, ProductQuery>();
+        builder.Services.AddTransient<ICartQuery, CartQuery>();
+        builder.Services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
+        builder.Services.AddTransient<ICartCalculatorService, CartCalculatorService>();
+        builder.Services.AddSingleton<ICartService, CartService>();
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
