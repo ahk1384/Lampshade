@@ -49,6 +49,15 @@ public class ShopPermissionsExposer : IPermissionExposer
                     new(ShopPermissions.SearchSlide, "SearchSlide"),
                     new(ShopPermissions.RemoveAndRestoreSlide, "RemoveAndRestoreSlide")
                 }
+            },
+            {
+                "Order", new List<PermissionDto>
+                {
+                    new(ShopPermissions.ListOrders, "List Orders"),
+                    new(ShopPermissions.ConfirmOrder, "Confirm Order"),
+                    new(ShopPermissions.CancelOrder, "Cancel Order"),
+                    new(ShopPermissions.SearchOrders, "Search Orders")
+                }
             }
         };
     }

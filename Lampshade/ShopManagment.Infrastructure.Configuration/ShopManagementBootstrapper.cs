@@ -59,8 +59,11 @@ public class ShopManagementBootstrapper
 
         services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
         services.AddTransient<ICartCalculatorService, CartCalculatorService>();
+
         services.AddSingleton<ICartService, CartService>();
+
         ShopPermissions.Configure();
-        services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+        services.AddDbContext<ShopContext>(x => x.UseMySql(connectionString, serverVersion));
     }
 }

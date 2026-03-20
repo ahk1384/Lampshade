@@ -1,15 +1,15 @@
 ﻿namespace _0_Framework.Application.Sms.Models;
 
-public class BulkRecieveModel
+public class BulkSendModel
 {
-    public long lineNumber { get; set; }
-    public string MessageText { get; set; }
-    public string[] Mobiles { get; set; }
-
-    public BulkRecieveModel(long lineNumber, string messageText, string[] mobiles)
+    public BulkSendModel(long lineNumber, string messageText, string[] mobiles)
     {
         this.lineNumber = lineNumber;
         MessageText = messageText;
         Mobiles = mobiles;
     }
+
+    public long lineNumber { get; set; }
+    public string MessageText { get; set; }
+    public string[] Mobiles { get; set; }
 }

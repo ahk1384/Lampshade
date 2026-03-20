@@ -11,5 +11,6 @@ public interface IArticleCategoryApplication
     EditArticleCategory GetDetails(long id);
 
     List<ArticleCategoryViewModel> GetArticleCategories();
+
     List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel, bool showDeleted);
 }

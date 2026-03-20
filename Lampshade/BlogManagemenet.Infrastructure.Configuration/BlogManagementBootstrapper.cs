@@ -32,6 +32,7 @@ public class BlogManagementBootstrapper
         services.AddTransient<IPermissionExposer, BlogPermissionsExposer>();
 
         BlogPermissions.Configure();
-        services.AddDbContext<BlogContext>(a => a.UseSqlServer(connectionString));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+        services.AddDbContext<BlogContext>(a => a.UseMySql(connectionString, serverVersion));
     }
 }

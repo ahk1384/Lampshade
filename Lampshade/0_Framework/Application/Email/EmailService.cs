@@ -1,15 +1,24 @@
 ﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 
 namespace _0_Framework.Application.Email;
 
 public class EmailService : IEmailService
 {
+    private readonly IConfiguration _configuration;
+
+    public EmailService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     public void SendEmail(string title, string messageBody, string destination)
     {
         var message = new MimeMessage();
-
-        var from = new MailboxAddress("Atriya", "test@atriya.com");
+        var settings = _configuration.GetSection("EmailSettings");
+        var from = new MailboxAddress(settings["SenderName"], settings["SenderAddress"]);
         message.From.Add(from);
 
         var to = new MailboxAddress("User", destination);
@@ -24,8 +33,8 @@ public class EmailService : IEmailService
         message.Body = bodyBuilder.ToMessageBody();
 
         var client = new SmtpClient();
-        client.Connect("185.88.152.251", 25, false);
-        client.Authenticate("test@atriya.com", "Atriya.123456");
+        client.Connect(settings["Host"], int.Parse(settings["HostPort"]), SecureSocketOptions.StartTls);
+        client.Authenticate(settings["Username"], settings["Password"]);
         client.Send(message);
         client.Disconnect(true);
         client.Dispose();

@@ -60,11 +60,22 @@
                                                    asp-route-id="@product.CategorySlug">@product.Category</a>
                                             </span>
                                             <span class="rating">
-                                                <i class="ion-android-star active"></i>
-                                                <i class="ion-android-star active"></i>
-                                                <i class="ion-android-star active"></i>
-                                                <i class="ion-android-star active"></i>
-                                                <i class="ion-android-star-outline"></i>
+                                                @for (var i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= product.Rating)
+                                                    {
+                                                        <i class="ion-android-star active"></i>
+                                                    }
+                                                    else if (1 > i - product.Rating && i - product.Rating >= 0.3)
+                                                    {
+                                                        <i class="ion-android-star-half"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="ion-android-star-outline"></i>
+                                                    }
+                                                }
+                                                <label class="single-info">@product.Rating</label>
                                             </span>
                                         </div>
 

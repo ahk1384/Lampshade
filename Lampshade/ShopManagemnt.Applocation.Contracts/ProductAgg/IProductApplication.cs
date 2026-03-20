@@ -12,12 +12,9 @@ public interface IProductApplication
 
     OperationResult Restore(long id);
 
-    //List<EditProduct> GetList();
-
     EditProduct? GetDetails(long id);
 
     List<ProductViewModel> Search(ProductSearchModel searchModel, bool showDeleted = false);
-
 
     List<ProductViewModel> GetProducts();
 }

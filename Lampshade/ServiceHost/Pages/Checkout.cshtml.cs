@@ -4,14 +4,12 @@ using _0_Framework.Application.ZarinPal;
 using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.Cart;
 using _01_LampshadeQuery.Contracts.Product;
-using Dto.Payment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nancy.Json;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Application.Contracts.Order;
-using ZarinPal.Class;
 
 // using _0_Framework.Application.ZarinPal;
 
@@ -23,9 +21,9 @@ public class CheckoutModel : PageModel
     public const string CookieName = "cart-items";
     private readonly IAuthHelper _authHelper;
     private readonly ICartCalculatorService _cartCalculatorService;
+    private readonly ICartQuery _cartQuery;
     private readonly ICartService _cartService;
     private readonly IOrderApplication _orderApplication;
-    private readonly ICartQuery _cartQuery;
     private readonly IProductQuery _productQuery;
 
     private readonly IZarinPalFactory _zarinPalFactory;
@@ -71,6 +69,8 @@ public class CheckoutModel : PageModel
         var des =
             $"پرداخت سفارش کاربر {orderId} به شماره سفارش {cart.PayAmount} به مبلغ {userName} برای خرید از سایت لمپ شید";
         _cartService.Set(new CartViewModel());
+        _cartQuery.RemoveCart(_authHelper.CurrentAccountInfo().Id);
+        Response.Cookies.Delete("cart-items");
         if (paymentMethod == 1)
         {
             var paymentResponse = _zarinPalFactory.CreatePaymentRequest(
@@ -79,6 +79,7 @@ public class CheckoutModel : PageModel
             return Redirect(
                 $"https://sandbox.zarinpal.com/pg/StartPay/{paymentResponse.data.authority}");
         }
+
         var paymentResult = new PaymentResult();
         return RedirectToPage("/PaymentResult",
             paymentResult.Succeeded(
@@ -97,8 +98,7 @@ public class CheckoutModel : PageModel
         if (status == "OK" && verificationResponse.data.code >= 100)
         {
             var issueTrackingNo = _orderApplication.PaymentSucceeded(oId, verificationResponse.data.ref_id);
-            _cartQuery.RemoveCart(_authHelper.CurrentAccountInfo().Id);
-            Response.Cookies.Delete("cart-items");
+
             result = result.Succeeded("پرداخت با موفقیت انجام شد.", issueTrackingNo);
             return RedirectToPage("/PaymentResult", result);
         }

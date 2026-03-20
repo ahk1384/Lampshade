@@ -1,4 +1,5 @@
 using _0_Framework.Application;
+using _0_Framework.Application.Sms;
 using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.Cart;
 using AccountManagement.Application.Contract.Account;
@@ -16,7 +17,7 @@ public class LoginModel : PageModel
     private readonly ICookieManager _cookieManager;
 
     public LoginModel(IAccountApplication accountApplication, ICartQuery cartQuery, IAuthHelper authHelper,
-        ICookieManager cookieManager)
+        ICookieManager cookieManager, ISmsService smsService)
     {
         _accountApplication = accountApplication;
         _cartQuery = cartQuery;

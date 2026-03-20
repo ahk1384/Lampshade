@@ -104,6 +104,13 @@
                                             {
                                                 <ul class="sub-menu">
                                                     <li>
+                                                        <a style="font-size: 18px; color: #232323" asp-page=""
+                                                           asp-page-handler="">@AuthHelper.CurrentAccountInfo().Fullname</a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-page="" asp-page-handler="">تنظیمات</a>
+                                                    </li>
+                                                    <li>
                                                         <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
                                                     </li>
                                                 </ul>
@@ -248,6 +255,12 @@
                             <a href="#">پروفایل من </a>
                             @if (AuthHelper.IsAuthenticated())
                             {
+                            <li>
+                                <a asp-page="" asp-page-handler="Logout">@AuthHelper.CurrentAccountInfo().Fullname</a>
+                            </li>
+                            <li>
+                                <a asp-page="/Login" asp-page-handler="Logout">تنظیمات</a>
+                            </li>
                             <li>
                                 <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
                             </li>

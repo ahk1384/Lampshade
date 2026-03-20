@@ -2,8 +2,6 @@
 
 public class VerifyReceiveDataModel
 {
-
     public int messageId { get; set; }
-    public Decimal cost { get; set; }
-
+    public decimal cost { get; set; }
 }

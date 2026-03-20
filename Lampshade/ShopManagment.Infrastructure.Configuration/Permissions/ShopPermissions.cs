@@ -41,6 +41,13 @@ public class ShopPermissions : IPermissions
     public const int RemoveAndRestoreSlide = BaseSlide + 43;
     public const int SlideList = BaseSlide + 44;
 
+    //Order
+    public const int BaseOrder = 7000 + 500;
+    public const int ListOrders = BaseOrder + 01;
+    public const int SearchOrders = BaseOrder + 02;
+    public const int ConfirmOrder = BaseOrder + 03;
+    public const int CancelOrder = BaseOrder + 04;
+
     public static void Configure()
     {
         PermissionsCodes.AddCode("shop", BaseShop);
@@ -48,5 +55,6 @@ public class ShopPermissions : IPermissions
         PermissionsCodes.AddCode("productCategory", BaseProductCategory);
         PermissionsCodes.AddCode("productPictures", BaseProductPicture);
         PermissionsCodes.AddCode("slide", BaseSlide);
+        PermissionsCodes.AddCode("orders", BaseOrder);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using _0_Framework.Application;
+using _0_Framework.Application.Email;
+using _0_Framework.Application.Sms;
 using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
@@ -9,18 +11,23 @@ public class AccountApplication : IAccountApplication
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IAuthHelper _authHelper;
+    private readonly IEmailService _emailService;
     private readonly IFileUploader _fileUploader;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IRoleRepository _roleRepository;
+    private readonly ISmsService _smsService;
 
     public AccountApplication(IAccountRepository accountRepository, IFileUploader fileUploader, IAuthHelper authHelper,
-        IPasswordHasher passwordHasher, IRoleRepository roleRepository)
+        IPasswordHasher passwordHasher, IRoleRepository roleRepository, ISmsService smsService,
+        IEmailService emailService)
     {
         _accountRepository = accountRepository;
         _fileUploader = fileUploader;
         _authHelper = authHelper;
         _passwordHasher = passwordHasher;
         _roleRepository = roleRepository;
+        _smsService = smsService;
+        _emailService = emailService;
     }
 
     public AccountViewModel GetAccountBy(long id)
@@ -127,6 +134,8 @@ public class AccountApplication : IAccountApplication
                 , account.Username, account.Mobile, permissions, account.ProfilePhoto);
 
             _authHelper.Signin(authViewModel);
+            var resultestatus = _smsService.SendAd(new[] { account.Mobile }, "سایت لمپ شید\nکد ورود شما : 564892");
+            // _emailService.SendEmail("Welcome", "Hellow Welcome To LampShade", "amirhkz1384@gmail.com");
             account.ChangePassword(command.Password);
         }
         catch (Exception e)

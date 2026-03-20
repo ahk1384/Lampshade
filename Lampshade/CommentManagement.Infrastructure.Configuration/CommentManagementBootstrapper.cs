@@ -20,6 +20,7 @@ public class CommentManagementBootstrapper
         services.AddTransient<IPermissionExposer, CommentPermissionsExposer>();
 
         CommentPermissions.Configure();
-        services.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+        services.AddDbContext<CommentContext>(x => x.UseMySql(connectionString, serverVersion));
     }
 }

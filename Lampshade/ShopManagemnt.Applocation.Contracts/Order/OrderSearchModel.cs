@@ -2,6 +2,10 @@
 
 public class OrderSearchModel
 {
-    public long AccountId { get; set; }
+    public long? AccountId { get; set; }
+
+    public string? IssueTrackingNo { get; set; }
+
+    public long? RefId { get; set; }
     public bool IsCanceled { get; set; }
 }

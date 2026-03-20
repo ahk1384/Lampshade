@@ -45,9 +45,16 @@ public class Order : EntityBase<long>
     {
         PaymentMethod = paymentMethod;
     }
+
     public void Cancel()
     {
         IsCanceled = true;
+    }
+
+    public void Confirm()
+    {
+        IsPaid = true;
+        IsCanceled = false;
     }
 
     public void SetIssueTrackingNo(string number)

@@ -82,7 +82,7 @@ public class AuthHelper : IAuthHelper
             new(ClaimTypes.Role, account.RoleId.ToString()),
             new("RoleName", account.Role),
             new(ClaimTypes.Upn, account.ProfilePhoto),
-            new("FullName", account.Username), // Or Use ClaimTypes.NameIdentifier
+            new("FullName", account.Fullname), // Or Use ClaimTypes.NameIdentifier
             new("permissions", permissions),
             new("Mobile", account.Mobile)
         };

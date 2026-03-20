@@ -8,6 +8,5 @@ public interface IInventoryRepository : IRepository<long, Inventory>
     EditInventory GetDetails(long id);
     List<InventoryViewModel> Search(InventorySearchModel searchModel, bool watchDeleted);
     List<InventoryOperationViewModel> GetOperationLog(long inventoryId);
-
     long GetInventoryId(long productId);
 }

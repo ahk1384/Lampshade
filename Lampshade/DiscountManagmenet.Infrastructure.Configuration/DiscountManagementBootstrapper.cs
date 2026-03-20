@@ -25,6 +25,7 @@ public class DiscountManagementBootstrapper
         services.AddTransient<IPermissionExposer, DiscountPermissionsExposer>();
 
         DiscountPermissions.Configure();
-        services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+        services.AddDbContext<DiscountContext>(x => x.UseMySql(connectionString, serverVersion));
     }
 }

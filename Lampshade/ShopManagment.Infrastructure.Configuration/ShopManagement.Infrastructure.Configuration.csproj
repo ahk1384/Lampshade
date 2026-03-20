@@ -7,18 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj"/>
-        <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj"/>
-        <ProjectReference Include="..\ShopManagement.Infrastructure.AccountAcl\ShopManagement.Infrastructure.AccountAcl.csproj"/>
-        <ProjectReference Include="..\ShopManagement.Infrastructure.InventoryAcl\ShopManagement.Infrastructure.InventoryAcl.csproj"/>
-        <ProjectReference Include="..\ShopManagementDomain\ShopManagementDomain.csproj"/>
-        <ProjectReference Include="..\ShopManagemnt.Applocation.Contracts\ShopManagement.Application.Contracts.csproj"/>
-        <ProjectReference Include="..\SM.Infrastructure.EFCore\SM.Infrastructure.EFCore.csproj"/>
-        <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj"/>
+        <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj" />
+        <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj" />
+        <ProjectReference Include="..\ShopManagement.Infrastructure.AccountAcl\ShopManagement.Infrastructure.AccountAcl.csproj" />
+        <ProjectReference Include="..\ShopManagement.Infrastructure.InventoryAcl\ShopManagement.Infrastructure.InventoryAcl.csproj" />
+        <ProjectReference Include="..\ShopManagementDomain\ShopManagementDomain.csproj" />
+        <ProjectReference Include="..\ShopManagemnt.Applocation.Contracts\ShopManagement.Application.Contracts.csproj" />
+        <ProjectReference Include="..\SM.Infrastructure.EFCore\SM.Infrastructure.EFCore.csproj" />
+        <ProjectReference Include="..\_01_LampshadeQuery\_01_LampshadeQuery.csproj" />
     </ItemGroup>
 
     <ItemGroup>

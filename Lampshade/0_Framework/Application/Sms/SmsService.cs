@@ -1,50 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Text;
+using System.Text.Json;
+using _0_Framework.Application.Sms.Models;
 using Microsoft.Extensions.Configuration;
-using SmsIrRestful;
 
 namespace _0_Framework.Application.Sms;
 
 public class SmsService : ISmsService
 {
+    private readonly string _apiKey;
     private readonly IConfiguration _configuration;
+    private readonly HttpClient httpClient;
 
     public SmsService(IConfiguration configuration)
     {
         _configuration = configuration;
+        _apiKey = _configuration.GetSection("SmsSecrets")["APIKey"];
+        httpClient = new HttpClient();
     }
 
-    public void Send(string number, string message)
+    public async Task<VerifyReceiveModel?> SendOtp(string number, string code)
     {
-        var token = GetToken();
-        var lines = new SmsLine().GetSmsLines(token);
-        if (lines == null) return;
+        httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
 
-        var line = lines.SMSLines.Last().LineNumber.ToString();
-        var data = new MessageSendObject
+        var model = new VerifySendModel
         {
-            Messages = new List<string>
-                { message }.ToArray(),
-            MobileNumbers = new List<string> { number }.ToArray(),
-            LineNumber = line,
-            SendDateTime = DateTime.Now,
-            CanContinueInCaseOfError = true
+            Mobile = number,
+            TemplateId = Convert.ToInt32(_configuration.GetSection("SmsTemplateId")["OTP"]),
+            Parameters = new[]
+            {
+                new VerifySendParameterModel
+                {
+                    Name = "OTP", Value = code
+                }
+            }
         };
-        var messageSendResponseObject =
-            new MessageSend().Send(token, data);
 
-        if (messageSendResponseObject.IsSuccessful) return;
+        var payload = JsonSerializer.Serialize(model);
+        StringContent stringContent = new(payload, Encoding.UTF8, "application/json");
 
-        line = lines.SMSLines.First().LineNumber.ToString();
-        data.LineNumber = line;
-        new MessageSend().Send(token, data);
+        var response =
+            await httpClient.PostAsync(_configuration.GetSection("SmsConnectionUrls")["Verify"], stringContent);
+        var result = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<VerifyReceiveModel>(result);
     }
 
-    private string GetToken()
+
+    public async Task<VerifyReceiveModel?> SendFactor(string number, string Code)
     {
-        var smsSecrets = _configuration.GetSection("SmsSecrets");
-        var tokenService = new Token();
-        return tokenService.GetToken(smsSecrets["ApiKey"], smsSecrets["SecretKey"]);
+        throw new NotImplementedException();
+    }
+
+    public async Task<VerifyReceiveModel?> SendLoginMessage(string number, string userName)
+    {
+        httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+
+        var model = new VerifySendModel
+        {
+            Mobile = number,
+            TemplateId = Convert.ToInt32(_configuration.GetSection("SmsTemplateId")["Login"]),
+            Parameters = new[]
+            {
+                new VerifySendParameterModel
+                {
+                    Name = "NAME", Value = userName
+                },
+                new VerifySendParameterModel
+                {
+                    Name = "DATE", Value = DateTime.Now.ToFarsi()
+                }
+            }
+        };
+
+        var payload = JsonSerializer.Serialize(model);
+        StringContent stringContent = new(payload, Encoding.UTF8, "application/json");
+
+        var response =
+            await httpClient.PostAsync(_configuration.GetSection("SmsConnectionUrls")["Verify"], stringContent);
+        var result = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<VerifyReceiveModel>(result);
+    }
+
+    public async Task<VerifyReceiveModel?> SendLogoutMessage(string number, string userName)
+    {
+        httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+
+        var model = new VerifySendModel
+        {
+            Mobile = number,
+            TemplateId = Convert.ToInt32(_configuration.GetSection("SmsTemplateId")["Logout"]),
+            Parameters = new[]
+            {
+                new VerifySendParameterModel
+                {
+                    Name = "NAME", Value = userName
+                },
+                new VerifySendParameterModel
+                {
+                    Name = "DATE", Value = DateTime.Now.ToFarsi()
+                }
+            }
+        };
+
+        var payload = JsonSerializer.Serialize(model);
+        StringContent stringContent = new(payload, Encoding.UTF8, "application/json");
+
+        var response =
+            await httpClient.PostAsync(_configuration.GetSection("SmsConnectionUrls")["Verify"], stringContent);
+        var result = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<VerifyReceiveModel>(result);
+    }
+
+    public async Task<BulkReceiveModel?> SendAd(string[] number, string message)
+    {
+        httpClient.DefaultRequestHeaders.Add("x-api-key",
+            _apiKey);
+        var model = new BulkSendModel(Convert.ToInt64(_configuration.GetSection("SmsSecrets")["BulkLineNumber"]),
+            message, number);
+        var payload = JsonSerializer.Serialize(model);
+
+        StringContent stringContent = new(payload, Encoding.UTF8, "application/json");
+        var response =
+            await httpClient.PostAsync(_configuration.GetSection("SmsConnectionUrls")["Bulk"], stringContent);
+        var result = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<BulkReceiveModel>(result);
     }
 }

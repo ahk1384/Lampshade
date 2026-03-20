@@ -25,6 +25,7 @@ public class AccountManagementBootstrapper
         services.AddTransient<IPermissionExposer, AccountPermissionsExposer>();
 
         AccountPermissions.Configure();
-        services.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+        services.AddDbContext<AccountContext>(x => x.UseMySql(connectionString, serverVersion));
     }
 }

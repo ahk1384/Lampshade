@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
+
 namespace _0_Framework.Application.ZarinPal;
 
 public class ZarinPalFactory : IZarinPalFactory
@@ -13,7 +14,7 @@ public class ZarinPalFactory : IZarinPalFactory
         _configuration = configuration;
         Prefix = _configuration.GetSection("payment")["method"];
         MerchantId = _configuration.GetSection("payment")["merchant"];
-        _baseUrl = $"https://sandbox.zarinpal.com/pg/v4/payment";
+        _baseUrl = "https://sandbox.zarinpal.com/pg/v4/payment";
     }
 
     private string MerchantId { get; }

@@ -15,8 +15,9 @@ public class OrderApplication : IOrderApplication
     private readonly IConfiguration _configuration;
     private readonly IOrderRepository _orderRepository;
     private readonly IShopAccountAcl _shopAccountAcl;
-    private readonly ISmsService _smsService;
     private readonly IShopInventoryAcl _shopInventoryAcl;
+
+    private readonly ISmsService _smsService;
     // private readonly ISmsService _smsService;
 
     public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration,
@@ -72,11 +73,11 @@ public class OrderApplication : IOrderApplication
         _orderRepository.BeginTran();
         var order = _orderRepository.Get(orderId);
         order.PaymentSucceeded(refId);
-
+        order.Confirm();
         var symbol = _configuration.GetSection("Symbol").Value;
         var issueTrackingNo = CodeGenerator.Generate(symbol);
         order.SetIssueTrackingNo(issueTrackingNo);
-
+        order.Restore();
         if (!_shopInventoryAcl.ReduceFromInventory(order.Items)) return "";
 
         _orderRepository.CommitTran();

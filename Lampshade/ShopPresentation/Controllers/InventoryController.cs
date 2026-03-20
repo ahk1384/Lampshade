@@ -2,6 +2,7 @@
 using ShopManagement.Application.Contracts.ProductAgg;
 
 namespace ShopPresentation.Controllers;
+
 [ApiController]
 [Route("[controller]")]
 public class InventoryController : ControllerBase

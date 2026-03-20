@@ -97,7 +97,8 @@ public class CartQuery : ICartQuery
     public OperationResult RemoveFromCart(long productId, long accountId)
     {
         var operationResult = new OperationResult();
-        var cart = _shopContext.Carts.Include(x => x.Items).FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
+        var cart = _shopContext.Carts.Include(x => x.Items)
+            .FirstOrDefault(x => x.AccountId == accountId && !x.IsDeleted);
         if (cart != null && cart.Items.Any(x => x.ProductId == productId))
         {
             cart.Items.Remove(cart.Items.FirstOrDefault(x => x.ProductId == productId));

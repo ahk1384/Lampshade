@@ -72,6 +72,11 @@ public class OrderRepository : BaseRepository<long, Order>, IOrderRepository
 
         if (searchModel.AccountId > 0) query = query.Where(x => x.AccountId == searchModel.AccountId);
 
+        if (!string.IsNullOrWhiteSpace(searchModel.IssueTrackingNo))
+            query = query.Where(x => x.IssueTrackingNo.Contains(searchModel.IssueTrackingNo));
+
+        if (searchModel.RefId > 0) query = query.Where(x => x.RefId == searchModel.RefId);
+
         var orders = query.OrderByDescending(x => x.Id).ToList();
         foreach (var order in orders)
         {

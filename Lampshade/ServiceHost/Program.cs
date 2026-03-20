@@ -1,6 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Application.Email;
 using _0_Framework.Application.Sms;
 using _0_Framework.Application.ZarinPal;
 using _01_LampshadeQuery;
@@ -25,7 +26,7 @@ public class Program
         // Add services to the container.
         DiscountManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
-                ShopManagementBootstrapper.Configure(builder.Services,
+        ShopManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
         InventoryManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
@@ -43,7 +44,7 @@ public class Program
         builder.Services.AddTransient<ICookieManager, CookieManager>();
         builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
         builder.Services.AddSingleton<ISmsService, SmsService>();
-        
+        builder.Services.AddSingleton<IEmailService, EmailService>();
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
@@ -66,21 +67,26 @@ public class Program
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/", "Admin");
-                options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop", "shop");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop/Product", "product");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop/ProductCategories", "productCategory");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop/ProductPictures", "productPictures");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop/Slides", "slide");
+                options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Shop/Orders", "orders");
+
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Inventory", "inventory");
+
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Discounts", "discount");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Discounts/CustomerDiscount",
                     "customerDiscount");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Discounts/ColleagueDiscount",
                     "colleagueDiscount");
+
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Comments", "comment");
+
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Blog", "blog");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Blog/Articles", "article");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Blog/ArticleCategories", "articleCategories");
+
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Accounts", "account");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Accounts/Account", "accountManagement");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Accounts/Role", "role");
