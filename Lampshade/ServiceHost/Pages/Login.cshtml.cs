@@ -14,7 +14,8 @@ public class LoginModel : PageModel
     private readonly IAccountApplication _accountApplication;
     private readonly IAuthHelper _authHelper;
     private readonly ICartQuery _cartQuery;
-    private readonly ICookieManager _cookieManager;
+    private readonly ICookieManager _cookieManager; 
+    [BindProperty] public Login command {get; set; }
 
     public LoginModel(IAccountApplication accountApplication, ICartQuery cartQuery, IAuthHelper authHelper,
         ICookieManager cookieManager, ISmsService smsService)
@@ -31,14 +32,14 @@ public class LoginModel : PageModel
     {
     }
 
-    public async Task<IActionResult> OnPostLogin(Login command)
+    public async Task<IActionResult> OnPostLogin()
     {
         var result = await _accountApplication.Login(command);
         if (result.IsSuccess)
             return RedirectToPage("/Login", "MergeCookies");
 
         LoginMessage = result.Message;
-        return RedirectToPage("/Login");
+        return Page();
     }
 
     public IActionResult OnGetMergeCookies()

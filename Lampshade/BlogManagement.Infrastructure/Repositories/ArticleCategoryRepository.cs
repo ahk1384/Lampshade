@@ -56,7 +56,7 @@ public class ArticleCategoryRepository : BaseRepository<long, ArticleCategory>, 
             .Select(x => new ArticleCategoryViewModel
             {
                 Id = x.Id,
-                Description = x.Description,
+                Description = x.Description.Substring(0, Math.Min(x.Description.Length, 50)) + " ...",
                 Name = x.Name,
                 Picture = x.Picture,
                 ShowOrder = x.ShowOrder,

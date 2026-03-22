@@ -51,7 +51,7 @@ public class CartModel : PageModel
         cartItem?.Count = count;
         _cartQuery.ChangeItemCount(cartItem, id);
         _cookieManager.Merge(Response);
-        return Redirect("https://localhost:7199/Cart");
+        return RedirectToPage("/Cart");
     }
 
     public IActionResult OnGetRemoveFromCart(long id)

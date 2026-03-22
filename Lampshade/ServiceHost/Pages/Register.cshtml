@@ -41,28 +41,32 @@
                                         <h4 class="login-title">ثبت نام</h4>
                                         <div class="row">
                                             <div class="col-md-6 col-12 mb-20">
-                                                <label>نام کامل</label>
-                                                <input type="text" name="fullname" placeholder="نام کامل">
+                                                <label >نام کامل</label>
+                                                <input required minlength="5" type="text" asp-for="command.Fullname"  placeholder="نام کامل">
+                                                <span asp-validation-for="command.Fullname" class="error"></span>
                                             </div>
                                             <div class="col-md-6 col-12 mb-20">
-                                                <label>نام کاربری</label>
-                                                <input type="text" name="username" placeholder="نام کاربری">
+                                                <label >نام کاربری</label>
+                                                <input required minlength="5" type="text" asp-for="command.Username"  placeholder="نام کاربری">
+                                                <span asp-validation-for="command.Username" class="error"></span>
                                             </div>
                                             <div class="col-md-12 mb-20">
-                                                <label>موبایل</label>
-                                                <input type="number" name="mobile" placeholder="موبایل">
+                                                <label >موبایل</label>
+                                                <input required minlength="10" type="number" asp-for="command.Mobile"  placeholder="موبایل">
+                                                <span asp-validation-for="command.Mobile" class="error"></span>
                                             </div>
                                             <div class="col-md-6 mb-20">
                                                 <label>کلمه رمز</label>
-                                                <input type="password" name="password" placeholder="کلمه رمز">
+                                                <input required minlength="8" type="password" asp-for="command.Password" placeholder="کلمه رمز">
+                                                <span asp-validation-for="command.Password" class="error"></span>
                                             </div>
                                             <div class="col-md-6 mb-20">
                                                 <label>تایید کلمه رمز</label>
-                                                <input type="password" name="rePassword" placeholder="تایید کلمه رمز">
+                                                <input required minlength="8" type="password" name="rePassword" placeholder="تایید کلمه رمز">
                                             </div>
                                             <div class="col-12">
                                                 <a asp-page="/Login" class="login-title">ورود</a>
-                                                <button class="register-button mt-0">ثبت نام</button>
+                                                <button type="submit"class="register-button mt-0">ثبت نام</button>
                                             </div>
                                         </div>
                                     </div>

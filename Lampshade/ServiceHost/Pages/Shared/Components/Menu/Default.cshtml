@@ -164,7 +164,7 @@
                     <div class="row align-items-center">
                         <div class="col-6 col-md-6">
                             <div class="header-logo">
-                                <a href="index.html">
+                                <a asp-page="/ّIndex">
                                     <img src="~/Theme/assets/img/logo.png" class="img-fluid" alt="">
                                 </a>
                             </div>
@@ -175,9 +175,9 @@
                                     <ul class="icon-list justify-content-end">
                                         <li>
                                             <div class="header-cart-icon">
-                                                <a href="cart.html">
+                                                <a asp-page="/Cart">
                                                     <i class="ion-bag"></i>
-                                                    <span class="counter">3</span>
+                                                    <span class="counter" id="mobile-menu-counter">0</span>
                                                 </a>
                                             </div>
                                         </li>
@@ -207,10 +207,10 @@
 
         <div class="offcanvas-inner-content">
             <div class="offcanvas-mobile-search-area">
-                <form action="#">
-                    <input type="search" placeholder="جستجو ...">
+                <form method="get" asp-page="/Search">
+                    <input type="search" name="value" id="value" placeholder=" جستوجو ...">
                     <button type="submit">
-                        <i class="fa fa-search"></i>
+                        <i class="ion-android-search"></i>
                     </button>
                 </form>
             </div>
@@ -242,9 +242,15 @@
                             }
                         </ul>
                     </li>
-                    <li class="">
-                        <a asp-page="/Contact">تماس با ما</a>
-                    </li>
+                    @if (AuthHelper.GetPermissions().Count > 0)
+                    {
+                        <li>
+                            <a asp-area="Adminstrator" asp-page="/Index">مدیریت</a>
+                        </li>
+                    }
+                    @* <li class=""> *@
+                    @*     <a asp-page="/Contact">تماس با ما</a> *@
+                    @* </li> *@
                 </ul>
             </nav>
 
@@ -256,10 +262,10 @@
                             @if (AuthHelper.IsAuthenticated())
                             {
                             <li>
-                                <a asp-page="" asp-page-handler="Logout">@AuthHelper.CurrentAccountInfo().Fullname</a>
+                                <a asp-page="" asp-page-handler="">@AuthHelper.CurrentAccountInfo().Fullname</a>
                             </li>
                             <li>
-                                <a asp-page="/Login" asp-page-handler="Logout">تنظیمات</a>
+                                <a asp-page="" asp-page-handler="">تنظیمات</a>
                             </li>
                             <li>
                                 <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
@@ -287,36 +293,35 @@
                         <ul class="header-contact-info__list">
                             <li>
                                 <i class="ion-android-phone-portrait"></i>
-                                <a href="tel://12452456012">
-                                    (1245) 2456
-                                    012
+                                <a href="tel://09379384214">
+                                    09379384214
                                 </a>
                             </li>
                             <li>
                                 <i class="ion-android-mail"></i> <a
-                                    href="mailto:info@yourdomain.com">info@atriya.com</a>
+                                    href="mailto:support@amirkz.ir">support@amirhkz.ir</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <!--Off Canvas Widget Social Start-->
-                <div class="off-canvas-widget-social">
-                    <a href="#" title="Facebook">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a href="#" title="Twitter">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="#" title="LinkedIn">
-                        <i class="fa fa-linkedin"></i>
-                    </a>
-                    <a href="#" title="Youtube">
-                        <i class="fa fa-youtube-play"></i>
-                    </a>
-                    <a href="#" title="Vimeo">
-                        <i class="fa fa-vimeo-square"></i>
-                    </a>
-                </div>
+                @* <!--Off Canvas Widget Social Start--> *@
+                @* <div class="off-canvas-widget-social"> *@
+                @*     <a href="#" title="Facebook"> *@
+                @*         <i class="fa fa-facebook"></i> *@
+                @*     </a> *@
+                @*     <a href="#" title="Twitter"> *@
+                @*         <i class="fa fa-twitter"></i> *@
+                @*     </a> *@
+                @*     <a href="#" title="LinkedIn"> *@
+                @*         <i class="fa fa-linkedin"></i> *@
+                @*     </a> *@
+                @*     <a href="#" title="Youtube"> *@
+                @*         <i class="fa fa-youtube-play"></i> *@
+                @*     </a> *@
+                @*     <a href="#" title="Vimeo"> *@
+                @*         <i class="fa fa-vimeo-square"></i> *@
+                @*     </a> *@
+                @* </div> *@
                 <!--Off Canvas Widget Social End-->
             </div>
         </div>
@@ -327,15 +332,18 @@
     function updateCartButton() {
         const cartWrapper = document.getElementById('cart_items_wrapper');
         const cartButtons = document.getElementById('cart_buttons');
+        const cartButton = document.getElementById('header-cart-icon');
         const emptyText = document.getElementById('empty_cart_text');
         // Check if cart wrapper has any child elements
         const hasItems = cartWrapper.children.length > 0;
 
         if (hasItems) {
             cartButtons.style.display = 'block';
+            cartButton.style.display = 'block';
             emptyText.style.display = 'none';
         } else {
             cartButtons.style.display = 'none';
+            cartButton.style.display = 'none';
             emptyText.style.display = 'block';
         }
     }

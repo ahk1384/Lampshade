@@ -1,5 +1,4 @@
 ﻿const cookieName = "cart-items";
-
 function addToCart(productId, name, unitPrice, picture, isInStock, discountRate, productSlug) {
     let products = $.cookie(cookieName);
     if (products === undefined) {
@@ -39,6 +38,7 @@ function updateCart() {
     let products = $.cookie(cookieName);
     products = JSON.parse(products);
     $("#cart_items_count").text(products.length);
+    $("#mobile-menu-counter").text(products.length);
     const cartItemsWrapper = $("#cart_items_wrapper");
     cartItemsWrapper.html('');
     products.forEach(x => {

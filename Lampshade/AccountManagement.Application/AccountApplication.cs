@@ -49,6 +49,7 @@ public class AccountApplication : IAccountApplication
         try
         {
             var password = _passwordHasher.Hash(command.Password);
+            var check = _passwordHasher.Check(password,command.Password);
             var account = new Account(command.Fullname, command.Username, password, command.Mobile, command.RoleId,
                 " ");
             _accountRepository.Create(account);

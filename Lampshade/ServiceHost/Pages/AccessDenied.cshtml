@@ -1,17 +1,63 @@
 ﻿@page
 @model AccessDenied
-
 <!DOCTYPE html>
 
-<html>
+<html lang="fa" dir="rtl">
 <head>
-    <title>404 NotFound</title>
+    <meta charset="utf-8" />
+    <title>عدم دسترسی</title>
+
+    <style>
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #222;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #000;
+        }
+
+    </style>
 </head>
+
 <body>
-<div>
-    <h1>
-        404 Not Found
-    </h1>
+
+<div class="container">
+
+    <div class="icon">🚫</div>
+
+    <h1>دسترسی غیر مجاز</h1>
+
+    <p>
+        شما اجازه دسترسی به این بخش را ندارید.
+    </p>
+
+    <a asp-page="/Index" class="btn">بازگشت به صفحه اصلی</a>
+
 </div>
+
 </body>
 </html>

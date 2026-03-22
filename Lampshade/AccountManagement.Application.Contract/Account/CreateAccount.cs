@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using _0_Framework.Application;
 using AccountManagement.Application.Contract.Role;
 using Microsoft.AspNetCore.Http;
@@ -12,8 +14,9 @@ public class CreateAccount
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string Username { get; set; }
-
-    [Required(ErrorMessage = ValidationMessages.IsRequired)]
+    
+    [DataType(DataType.Password)]
+    [StrongPassword(ErrorMessage = ValidationMessages.PasswordWeak)]
     public string Password { get; set; }
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
@@ -23,5 +26,6 @@ public class CreateAccount
 
     public List<int>? Permissions { get; set; }
     public IFormFile? ProfilePhoto { get; set; }
+    [AllowNull]
     public List<RoleViewModel> Roles { get; set; }
 }
