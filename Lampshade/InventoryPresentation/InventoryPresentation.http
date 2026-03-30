@@ -1,0 +1,6 @@
+@InventoryPresentation_HostAddress = http://localhost:5086
+
+GET {{InventoryPresentation_HostAddress}}
+Accept: application/json
+
+###

@@ -780,8 +780,9 @@ select {
 .header-cart-icon .mini-cart {
     margin-top: 34px;
     position: absolute;
-    right: 0;
     top: 100%;
+    left: 75%;
+    transform: translateX(-25%);
 }
 
 /* minicart */
@@ -1012,11 +1013,12 @@ select {
     margin-top: 34px;
     padding: 35px 40px 32px 40px;
     position: absolute;
-    right: 0;
     top: 100%;
     width: 300px;
     z-index: 9999;
     border-radius: 4%;
+    left: 88%;
+    transform: translateX(-12%);
 }
 
 .settings-menu-wrapper.active {
@@ -3580,6 +3582,7 @@ select {
     margin-bottom: 10px;
     margin-right: 7px;
     padding: 0 18px;
+    border-radius: 0.5rem;
 }
 
 .single-sidebar-widget__tag-list li a:hover {
@@ -4310,7 +4313,7 @@ select {
 /*----------  product description tab  ----------*/
 
 .product-description-review-container {
-    border-bottom: 1px solid #ebebeb;
+    /*border-bottom: 1px solid #ebebeb;*/
     border-top: 1px solid #ebebeb;
     border-radius: 0.8rem;
 }
@@ -6111,6 +6114,8 @@ span.required {
 
 .single-blog-post__image a img {
     width: 100%;
+    border-radius: 0.7rem;
+    margin: 1rem;
 }
 
 .single-blog-post__image a:hover img {
@@ -6215,6 +6220,7 @@ span.required {
     line-height: 18px;
     margin-bottom: 15px;
     margin-top: 20px;
+    margin-right: 1rem;
 }
 
 .single-blog-post__content .title a:hover {
@@ -6226,6 +6232,7 @@ span.required {
     font-weight: 400;
     line-height: 17px;
     margin-bottom: 10px;
+    margin-right: 1rem;
 }
 
 .single-blog-post__content .post-meta a {
@@ -6235,6 +6242,7 @@ span.required {
 
 .single-blog-post__content .post-meta .date {
     color: #292929;
+    margin-right: 1rem;
 }
 
 .single-blog-post__content .post-meta .separator {
@@ -6244,6 +6252,7 @@ span.required {
 .single-blog-post__content .short-desc {
     line-height: 24px;
     margin-bottom: 0;
+    margin-right: 1rem;
 }
 
 .single-blog-post__content .blog-post-link {
@@ -6253,6 +6262,7 @@ span.required {
     font-weight: 500;
     line-height: 25px;
     margin-top: 10px;
+    margin-right: 1rem;
 }
 
 .single-blog-post__content .blog-post-link:hover {
@@ -6295,6 +6305,7 @@ span.required {
 
 .single-block .image a img {
     width: 100%;
+    border-radius: 0.4rem
 }
 
 .single-block .image a:hover {
@@ -6402,6 +6413,7 @@ span.required {
 
 .blog-single-post-container .single-blog-post-media .image img {
     width: 100%;
+    border-radius: 0.7rem;
 }
 
 .blog-single-post-container .single-blog-post-media .blog-image-gallery .single-image img {

@@ -288,8 +288,9 @@
                                                     <div class="ratings-wrapper">
                                                         <div class="sin-ratings">
                                                             <div class="rating-author">
-                                                                <h3>@comment.Name</h3>
-                                                                <div class="sin-list float-right" id="ratingStar">
+                                                                <h3 style="font-weight: 650 ; margin-top: 0.4rem ">@comment.Name</h3>
+                                                                <div class="sin-list float-right"
+                                                                     style="margin-right: 1rem " id="ratingStar">
                                                                     @for (var i = 1; i <= 5; i++)
                                                                     {
                                                                         if (i <= comment.Rating)
@@ -306,7 +307,7 @@
                                                                 </div>
 
                                                             </div>
-                                                            <p>@comment.Message</p>
+                                                            <p style="margin-right: 3.5rem">@comment.Message</p>
                                                         </div>
                                                     </div>
                                                 }

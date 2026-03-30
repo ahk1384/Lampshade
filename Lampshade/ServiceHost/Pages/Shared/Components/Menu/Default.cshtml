@@ -258,7 +258,7 @@
                 <nav class="offcanvas-navigation">
                     <ul>
                         <li class="menu-item-has-children">
-                            <a href="#">پروفایل من </a>
+                            <a style="font-size: 15px;font-weight: 600;" href="#">پروفایل من </a>
                             @if (AuthHelper.IsAuthenticated())
                             {
                             <li>
@@ -339,11 +339,11 @@
 
         if (hasItems) {
             cartButtons.style.display = 'block';
-            cartButton.style.display = 'block';
+            // cartButton.style.display = 'block';
             emptyText.style.display = 'none';
         } else {
             cartButtons.style.display = 'none';
-            cartButton.style.display = 'none';
+            // cartButton.style.display = 'none';
             emptyText.style.display = 'block';
         }
     }

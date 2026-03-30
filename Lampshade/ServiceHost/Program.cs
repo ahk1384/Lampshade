@@ -4,9 +4,9 @@ using _0_Framework.Application;
 using _0_Framework.Application.Email;
 using _0_Framework.Application.Sms;
 using _0_Framework.Application.ZarinPal;
-using _0_Framework.Infrastructure;
 using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.Cart;
+using _01_LampshadeQuery.Contracts.Inventory;
 using _01_LampshadeQuery.Contracts.Product;
 using _01_LampshadeQuery.Contracts.ProductCategory;
 using _01_LampshadeQuery.Contracts.Slide;
@@ -21,7 +21,6 @@ using Microsoft.AspNetCore.Authorization;
 using ShopManagement.Application;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Infrastructure.Configuration;
-using ShopManagement.Infrastructure.Configuration.Permissions;
 using ICookieManager = _01_LampshadeQuery.ICookieManager;
 
 namespace ServiceHost;
@@ -45,6 +44,7 @@ public class Program
             builder.Configuration.GetConnectionString("LampShadeDB"));
         AccountManagementBootstrapper.Configure(builder.Services,
             builder.Configuration.GetConnectionString("LampShadeDB"));
+
         builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
         builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
         builder.Services.AddTransient<IFileUploader, FileUploader>();
@@ -58,7 +58,7 @@ public class Program
         builder.Services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         builder.Services.AddTransient<IProductQuery, ProductQuery>();
         builder.Services.AddTransient<ICartQuery, CartQuery>();
-        builder.Services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
+        builder.Services.AddTransient<IInventoryQuery, InventoryQuery>();
         builder.Services.AddTransient<ICartCalculatorService, CartCalculatorService>();
         builder.Services.AddSingleton<ICartService, CartService>();
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -68,7 +68,6 @@ public class Program
                 o.LogoutPath = new PathString("/Logout");
                 o.AccessDeniedPath = new PathString("/AccessDenied");
             });
-
         builder.Services.AddAuthorization();
 
         builder.Services.AddCors(options => options.AddPolicy("MyPolicy", builder =>
@@ -107,9 +106,6 @@ public class Program
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Accounts/Account", "accountManagement");
                 options.Conventions.AuthorizeAreaFolder("Adminstrator", "/Accounts/Role", "role");
             });
-        // .AddApplicationPart(typeof(ProductController).Assembly)
-        // .AddApplicationPart(typeof(InventoryController).Assembly)
-        // .AddNewtonsoftJson();
 
         builder.Services.AddRazorPages();
 
@@ -130,7 +126,6 @@ public class Program
 
         app.UseCookiePolicy();
         app.UseRouting();
-
         app.UseAuthorization();
 
         app.MapRazorPages();

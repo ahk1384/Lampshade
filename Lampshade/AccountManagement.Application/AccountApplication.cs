@@ -43,13 +43,18 @@ public class AccountApplication : IAccountApplication
     public OperationResult Register(CreateAccount command)
     {
         var operationResult = new OperationResult();
-        if (_accountRepository.Exists(x => x.Username == command.Username || x.Mobile == command.Mobile))
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+        if (_accountRepository.Exists(x => x.Username == command.Username))
+            return operationResult.Fail(ApplicationMessages.DuplicatedUserName);
+        if (_accountRepository.Exists(x => x.Mobile == command.Mobile))
+        {
+            return operationResult.Fail(ApplicationMessages.DuplicatedMobile);
+        }
+
         _accountRepository.BeginTran();
         try
         {
             var password = _passwordHasher.Hash(command.Password);
-            var check = _passwordHasher.Check(password,command.Password);
+            var check = _passwordHasher.Check(password, command.Password);
             var account = new Account(command.Fullname, command.Username, password, command.Mobile, command.RoleId,
                 " ");
             _accountRepository.Create(account);

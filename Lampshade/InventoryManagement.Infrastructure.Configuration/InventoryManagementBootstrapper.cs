@@ -18,6 +18,7 @@ public class InventoryManagementBootstrapper
         services.AddTransient<IInventoryApplication, InventoryApplication>();
 
         services.AddTransient<IPermissionExposer, InventoryPermissionsExposer>();
+
         InventoryPermissions.Configure();
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
         services.AddDbContext<InventoryContext>(x => x.UseMySql(connectionString, serverVersion));

@@ -1,6 +1,7 @@
-﻿namespace _0_Framework.Application;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+
+namespace _0_Framework.Application;
 
 public class StrongPasswordAttribute : ValidationAttribute
 {
@@ -11,22 +12,22 @@ public class StrongPasswordAttribute : ValidationAttribute
         var password = value as string;
 
         if (string.IsNullOrEmpty(password))
-            return new ValidationResult("Password is required.");
+            return new ValidationResult("پسورد الزامی است .");
 
         if (password.Length < MinimumLength)
-            return new ValidationResult($"Password must be at least {MinimumLength} characters long.");
+            return new ValidationResult($"پسورد با حداقل دارای طول {MinimumLength} باشد");
 
         if (!Regex.IsMatch(password, "[A-Z]"))
-            return new ValidationResult("Password must contain at least one uppercase letter.");
+            return new ValidationResult("پسورد باید دارای حداقل یک حرف بزرگ انگلیسی باشد .");
 
         if (!Regex.IsMatch(password, "[a-z]"))
-            return new ValidationResult("Password must contain at least one lowercase letter.");
+            return new ValidationResult("پسورد باید دارای حداقل یک حرف کوچک انگلیسی باشد .");
 
         if (!Regex.IsMatch(password, "[0-9]"))
-            return new ValidationResult("Password must contain at least one number.");
+            return new ValidationResult("پسورد باید دارای اعداد باشد .");
 
         if (!Regex.IsMatch(password, "[^a-zA-Z0-9]"))
-            return new ValidationResult("Password must contain at least one special character.");
+            return new ValidationResult("پسورد بای حداقل دارای یک علامت خاص باشد .");
 
         return ValidationResult.Success;
     }

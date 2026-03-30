@@ -142,13 +142,3 @@ else
         window.location.href = '@Url.Page("/Index")';
     </script>
 }
-<script>
-    function changeCartItemCount(productId, quantity) {
-        fetch(`/Cart?handler=ChangeItemCount&productId=${productId}&count=${quantity}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("Cart updated");
-            })
-            .catch(error => console.error(error));
-    }
-</script>

@@ -50,10 +50,8 @@
                                                             <a asp-page="./Article" asp-route-id="@article.Slug">
                                                                 @article.Title
                                                             </a>
+                                                            <span class="date float-left">@article.PublishDate</span>
                                                         </h3>
-                                                        <p class="post-meta">
-                                                            <span class="date">@article.PublishDate</span>
-                                                        </p>
                                                         <p class="short-desc">
                                                             @article.ShortDescription
                                                         </p>

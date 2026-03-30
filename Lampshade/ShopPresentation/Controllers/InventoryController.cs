@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _01_LampshadeQuery.Contracts.Inventory;
+using Microsoft.AspNetCore.Mvc;
 using ShopManagement.Application.Contracts.ProductAgg;
 
 namespace ShopPresentation.Controllers;

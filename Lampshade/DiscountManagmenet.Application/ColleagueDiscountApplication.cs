@@ -40,7 +40,7 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
     {
         var operationResult = new OperationResult();
         if (_repository.Exists(x =>
-                x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
+                x.ProductId == command.ProductId && x.Id != command.Id))
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
         _repository.BeginTran();
         try

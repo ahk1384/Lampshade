@@ -1,9 +1,14 @@
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Application.Email;
 using _0_Framework.Application.Sms;
 using _0_Framework.Application.ZarinPal;
 using _01_LampshadeQuery;
+using _01_LampshadeQuery.Contracts.Cart;
+using _01_LampshadeQuery.Contracts.Inventory;
+using _01_LampshadeQuery.Contracts.Product;
+using _01_LampshadeQuery.Contracts.ProductCategory;
+using _01_LampshadeQuery.Contracts.Slide;
+using _01_LampshadeQuery.Query;
 using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
@@ -11,7 +16,11 @@ using DiscountManagement.Infrastructure.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using ServiceHost;
+using ShopManagement.Application;
+using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Infrastructure.Configuration;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace ShopPresentation;
 
@@ -42,6 +51,14 @@ public class Program
         builder.Services.AddTransient<ICookieManager, CookieManager>();
         builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
         builder.Services.AddSingleton<ISmsService, SmsService>();
+        builder.Services.AddSingleton<IEmailService, EmailService>();
+        builder.Services.AddTransient<ICartCalculatorService, CartCalculatorService>();
+        builder.Services.AddSingleton<ICartService, CartService>();
+        builder.Services.AddTransient<ISlideQuery, SlideQuery>();
+        builder.Services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
+        builder.Services.AddTransient<IProductQuery, ProductQuery>();
+        builder.Services.AddTransient<ICartQuery, CartQuery>();
+        builder.Services.AddTransient<IInventoryQuery, InventoryQuery>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

@@ -3,19 +3,20 @@ using _0_Framework.Application.Sms;
 using _01_LampshadeQuery;
 using _01_LampshadeQuery.Contracts.Cart;
 using AccountManagement.Application.Contract.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ServiceHost.Pages;
 
+[AllowAnonymous]
 public class LoginModel : PageModel
 {
     public const string CookieName = "cart-items";
     private readonly IAccountApplication _accountApplication;
     private readonly IAuthHelper _authHelper;
     private readonly ICartQuery _cartQuery;
-    private readonly ICookieManager _cookieManager; 
-    [BindProperty] public Login command {get; set; }
+    private readonly ICookieManager _cookieManager;
 
     public LoginModel(IAccountApplication accountApplication, ICartQuery cartQuery, IAuthHelper authHelper,
         ICookieManager cookieManager, ISmsService smsService)
@@ -26,17 +27,28 @@ public class LoginModel : PageModel
         _cookieManager = cookieManager;
     }
 
+    [BindProperty] public Login command { get; set; }
+
     [TempData] public string LoginMessage { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
+        if (_authHelper.IsAuthenticated())
+        {
+            return RedirectToPage("/Index");
+        }
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostLogin()
     {
         var result = await _accountApplication.Login(command);
         if (result.IsSuccess)
+        {
+            LoginMessage = null;
             return RedirectToPage("/Login", "MergeCookies");
+        }
 
         LoginMessage = result.Message;
         return Page();

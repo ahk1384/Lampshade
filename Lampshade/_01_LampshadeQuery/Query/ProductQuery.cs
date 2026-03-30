@@ -220,7 +220,7 @@ public class ProductQuery : IProductQuery
         return res;
     }
 
-    public double GetRating(long productId)
+    private double GetRating(long productId)
     {
         var comments = _commentContext.Comments
             .Where(x => x.OwnerRecordId == productId && x.IsConfirmed && !x.IsDeleted).ToList();

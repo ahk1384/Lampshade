@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _0_Framework.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
 using ShopManagement.Application.Contracts.Order;
@@ -43,6 +44,8 @@ public class ShopManagementBootstrapper
 
         services.AddTransient<IShopInventoryAcl, ShopInventoryAcl>();
         services.AddTransient<IShopAccountAcl, ShopAccountAcl>();
+
+        services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
 
         ShopPermissions.Configure();
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));

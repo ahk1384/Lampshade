@@ -40,7 +40,7 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
     {
         var operationResult = new OperationResult();
         if (_customerDiscountRepository.Exists(x =>
-                x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
+                x.ProductId == command.ProductId && x.Id != command.Id))
 
             return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
 
