@@ -33,19 +33,14 @@ namespace Web_API
             // Add services to the container.
 
             builder.Services.AddHttpContextAccessor();
-
-            DiscountManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
-            ShopManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
-            InventoryManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
-            BlogManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
-            CommentManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
-            AccountManagementBootstrapper.Configure(builder.Services,
-                builder.Configuration.GetConnectionString("LampShadeDB"));
+            string? databaseType = builder.Configuration["DatabaseType"];
+            string? connectionString = builder.Configuration.GetConnectionString("LampShadeDB");
+            DiscountManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+            ShopManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+            InventoryManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+            BlogManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+            CommentManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+            AccountManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
 
             builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
             builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();

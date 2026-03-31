@@ -17,7 +17,7 @@ namespace BlogManagement.Infrastructure.Configuration;
 
 public class BlogManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services, string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString, string? databaseType)
     {
         services.AddTransient<IArticleRepository, ArticleRepository>();
         services.AddTransient<IArticleApplication, ArticleApplication>();
@@ -32,7 +32,14 @@ public class BlogManagementBootstrapper
         services.AddTransient<IPermissionExposer, BlogPermissionsExposer>();
 
         BlogPermissions.Configure();
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
-        services.AddDbContext<BlogContext>(a => a.UseMySql(connectionString, serverVersion));
+        if (databaseType == "SqlServer")
+        {
+            services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
+        }
+        else if (databaseType == "Mysql")
+        {
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            services.AddDbContext<BlogContext>(a => a.UseMySql(connectionString, serverVersion));
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace CommentManagement.Infrastructure.Configuration;
 
 public class CommentManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services, string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString, string? databaseType)
     {
         services.AddTransient<ICommentRepository, CommentRepository>();
         services.AddTransient<ICommentApplication, CommentApplication>();
@@ -20,7 +20,14 @@ public class CommentManagementBootstrapper
         services.AddTransient<IPermissionExposer, CommentPermissionsExposer>();
 
         CommentPermissions.Configure();
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
-        services.AddDbContext<CommentContext>(x => x.UseMySql(connectionString, serverVersion));
+        if (databaseType == "SqlServer")
+        {
+            services.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
+        }
+        else if (databaseType == "Mysql")
+        {
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            services.AddDbContext<CommentContext>(x => x.UseMySql(connectionString, serverVersion));
+        }
     }
 }

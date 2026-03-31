@@ -14,7 +14,7 @@ namespace AccountManagement.Infrastructure.Configuration;
 
 public class AccountManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services, string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString, string? databaseType)
     {
         services.AddTransient<IAccountRepository, AccountRepository>();
         services.AddTransient<IAccountApplication, AccountApplication>();
@@ -25,7 +25,14 @@ public class AccountManagementBootstrapper
         services.AddTransient<IPermissionExposer, AccountPermissionsExposer>();
 
         AccountPermissions.Configure();
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
-        services.AddDbContext<AccountContext>(x => x.UseMySql(connectionString, serverVersion));
+        if (databaseType == "SqlServer")
+        {
+            services.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString));
+        }
+        else if (databaseType == "Mysql")
+        {
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            services.AddDbContext<AccountContext>(a => a.UseMySql(connectionString, serverVersion));
+        }
     }
 }

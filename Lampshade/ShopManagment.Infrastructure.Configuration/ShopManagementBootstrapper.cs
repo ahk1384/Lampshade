@@ -25,7 +25,7 @@ namespace ShopManagement.Infrastructure.Configuration;
 
 public class ShopManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services, string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString, string? databaseType)
     {
         services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
         services.AddTransient<IProductCategoryApplication, ProductCategoryApplication>();
@@ -48,7 +48,14 @@ public class ShopManagementBootstrapper
         services.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
 
         ShopPermissions.Configure();
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
-        services.AddDbContext<ShopContext>(x => x.UseMySql(connectionString, serverVersion));
+        if (databaseType == "SqlServer")
+        {
+            services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
+        }
+        else if (databaseType == "Mysql")
+        {
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            services.AddDbContext<ShopContext>(x => x.UseMySql(connectionString, serverVersion));
+        }
     }
 }

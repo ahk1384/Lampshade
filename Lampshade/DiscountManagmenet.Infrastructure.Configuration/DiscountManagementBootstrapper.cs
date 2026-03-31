@@ -14,7 +14,7 @@ namespace DiscountManagement.Infrastructure.Configuration;
 
 public class DiscountManagementBootstrapper
 {
-    public static void Configure(IServiceCollection services, string? connectionString)
+    public static void Configure(IServiceCollection services, string? connectionString, string? databaseType)
     {
         services.AddTransient<ICustomerDiscountRepository, CustomerDiscountRepository>();
         services.AddTransient<ICustomerDiscountApplication, CustomerDiscountApplication>();
@@ -25,7 +25,14 @@ public class DiscountManagementBootstrapper
         services.AddTransient<IPermissionExposer, DiscountPermissionsExposer>();
 
         DiscountPermissions.Configure();
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
-        services.AddDbContext<DiscountContext>(x => x.UseMySql(connectionString, serverVersion));
+        if (databaseType == "SqlServer")
+        {
+            services.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
+        }
+        else if (databaseType == "Mysql")
+        {
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            services.AddDbContext<DiscountContext>(x => x.UseMySql(connectionString, serverVersion));
+        }
     }
 }
