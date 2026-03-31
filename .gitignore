@@ -433,3 +433,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+sql server use password .txt
