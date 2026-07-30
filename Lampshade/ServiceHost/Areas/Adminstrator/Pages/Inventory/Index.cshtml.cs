@@ -30,10 +30,8 @@ public class IndexModel : PageModel
 
     [TempData] public string Message { get; set; }
 
-    //[NeedsPermission(ShopPermissions.ListProducts)]
     public void OnGet(InventorySearchModel searchModel)
     {
-        // Ensure SearchModel is not null so the view's asp-for bindings work even when user leaves fields empty
         SearchModel = searchModel ?? new InventorySearchModel();
 
         var allProducts = _productApplication.GetProducts();
@@ -63,7 +61,7 @@ public class IndexModel : PageModel
         return RedirectToPage();
     }
 
-    //[NeedsPermission(ShopPermissions.CreateProduct)]
+
     public JsonResult OnPostCreate(CreateInventory command)
     {
         var result = _inventoryApplication.Create(command);
@@ -77,7 +75,6 @@ public class IndexModel : PageModel
         return Partial("Edit", product);
     }
 
-    //[NeedsPermission(ShopPermissions.EditProduct)]
     public JsonResult OnPostEdit(EditInventory command)
     {
         var result = _inventoryApplication.Edit(command);
@@ -98,11 +95,7 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetIncrease(long id)
     {
-        var command = new IncreaseInventory
-        {
-            InventoryId = id,
-            OperatorId = _authHelper.CurrentAccountInfo().Id
-        };
+        var command = new IncreaseInventory(id, _authHelper.CurrentAccountInfo().Id);
         return Partial("Increase", command);
     }
 

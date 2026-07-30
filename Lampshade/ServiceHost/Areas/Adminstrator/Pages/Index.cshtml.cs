@@ -1,58 +1,73 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
+using ShopManagement.Application.Contracts.Report;
 
 namespace ServiceHost.Areas.Adminstrator.Pages;
 
 public class IndexModel : PageModel
 {
+    private IReportQuery _reportQuery;
+
+    public IndexModel(IReportQuery reportQuery)
+    {
+        _reportQuery = reportQuery;
+    }
+
     public Chart DoughnutDataSet { get; set; }
-    public List<Chart> BarLineDataSet { get; set; }
+    public Chart BarLineDataSet { get; set; }
+
+    public double totalSale { get; set; }
+    public int newOrders { get; set; }
+    public int newUsers { get; set; }
+    public double precentsell { get; set; }
+
+    public double totalBuy { get; set; }
 
     public void OnGet()
     {
-        BarLineDataSet = new List<Chart>
+        totalSale = _reportQuery.GetTotalSell();
+        precentsell = _reportQuery.GetPrecentSell();
+        newOrders = _reportQuery.NewOrders();
+        newUsers = _reportQuery.NewUsers();
+        totalBuy = _reportQuery.GetTotalBuy();
+        BarLineDataSet = new Chart();
+        DoughnutDataSet = new Chart();
+        BarLineDataSet.labels.AddRange([
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", " دی", "بهمن", "اسفند"
+        ]);
+        BarLineDataSet.Items.Add(new chartItem()
         {
-            new()
-            {
-                Label = "Apple",
-                Data = new List<int> { 100, 200, 250, 170, 50 },
-                BackgroundColor = new[] { "#ffcdb2" },
-                BorderColor = "#b5838d"
-            },
-            new()
-            {
-                Label = "Samsung",
-                Data = new List<int> { 200, 300, 350, 270, 100 },
-                BackgroundColor = new[] { "#ffc8dd" },
-                BorderColor = "#ffafcc"
-            },
-            new()
-            {
-                Label = "Total",
-                Data = new List<int> { 300, 500, 600, 440, 150 },
-                BackgroundColor = new[] { "#0077b6" },
-                BorderColor = "#023e8a"
-            }
-        };
-        DoughnutDataSet = new Chart
+            Label = "فروش",
+            Data = _reportQuery.SellPerMounths(),
+            BackgroundColor = new[] { "##D7ECFB" },
+            BorderColor = new[] { "#2196f3" },
+            fill = false,
+            tension = 0.4
+        });
+        // BarLineDataSet.Items.Add(new chartItem()
+        // {
+        //     Label = "Samsung",
+        //     Data = new List<double> { 200, 300, 350, 270, 100 },
+        //     BackgroundColor = new[] { "#ffc8dd" },
+        //     BorderColor = new[] { "#ffafcc" },
+        //     fill = false,
+        //     tension = 0.4
+        // });
+        // BarLineDataSet.Items.Add(new chartItem()
+        // {
+        //     Label = "Total",
+        //     Data = new List<double> { 300, 500, 600, 440, 150 },
+        //     BackgroundColor = new[] { "#0077b6" },
+        //     BorderColor = new[]{"#023e8a"},
+        //     fill = false,
+        //     tension = 0.4
+        // });
+        DoughnutDataSet.labels.Add("Apple");
+        DoughnutDataSet.Items.Add(new chartItem
         {
             Label = "Apple",
-            Data = new List<int> { 100, 200, 250, 170, 50 },
-            BorderColor = "#ffcdb2",
+            Data = new List<double> { 100, 200, 250, 170, 50 },
+            BorderColor = new[] { "#ffcdb2" },
             BackgroundColor = new[] { "#b5838d", "#ffd166", "#7f4f24", "#ef233c", "#003049" }
-        };
+        });
     }
-}
-
-public class Chart
-{
-    [JsonProperty(PropertyName = "label")] public string Label { get; set; }
-
-    [JsonProperty(PropertyName = "data")] public List<int> Data { get; set; }
-
-    [JsonProperty(PropertyName = "backgroundColor")]
-    public string[] BackgroundColor { get; set; }
-
-    [JsonProperty(PropertyName = "borderColor")]
-    public string BorderColor { get; set; }
 }

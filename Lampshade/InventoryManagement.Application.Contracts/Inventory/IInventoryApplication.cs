@@ -7,6 +7,7 @@ public interface IInventoryApplication
     OperationResult Create(CreateInventory command);
     OperationResult Edit(EditInventory command);
     OperationResult Increase(IncreaseInventory command);
+    OperationResult Increase(List<IncreaseInventory> commands);
     OperationResult Reduce(ReduceInventory command);
     OperationResult Reduce(List<ReduceInventory> command);
     OperationResult Remove(long id);

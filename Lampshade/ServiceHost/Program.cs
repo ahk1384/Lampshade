@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using ShopManagement.Application;
 using ShopManagement.Application.Contracts.Cart;
+using ShopManagement.Application.Contracts.Report;
 using ShopManagement.Infrastructure.Configuration;
 using ICookieManager = _01_LampshadeQuery.ICookieManager;
 
@@ -54,6 +55,7 @@ public class Program
         builder.Services.AddTransient<ISlideQuery, SlideQuery>();
         builder.Services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         builder.Services.AddTransient<IProductQuery, ProductQuery>();
+        builder.Services.AddTransient<IReportQuery, ReportQuery>();
         builder.Services.AddTransient<ICartQuery, CartQuery>();
         builder.Services.AddTransient<IInventoryQuery, InventoryQuery>();
         builder.Services.AddTransient<ICartCalculatorService, CartCalculatorService>();

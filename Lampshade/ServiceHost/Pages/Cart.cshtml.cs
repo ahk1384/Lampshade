@@ -48,7 +48,7 @@ public class CartModel : PageModel
         var items = _cookieManager.GetCartItems(Request);
         var id = _authHelper.CurrentAccountInfo().Id;
         var cartItem = items.FirstOrDefault(x => x.ProductId == productId);
-        cartItem?.Count = count;
+        cartItem.Count = count;
         _cartQuery.ChangeItemCount(cartItem, id);
         _cookieManager.Merge(Response);
         return RedirectToPage("/Cart");

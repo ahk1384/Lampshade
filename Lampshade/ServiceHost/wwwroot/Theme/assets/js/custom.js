@@ -121,3 +121,29 @@ function changeCartItemCount(id, quantity) {
     });
 }
 
+//the share logic
+document.getElementById('shareBtn').addEventListener('click', async () => {
+    const shareData = {
+        title: document.title,
+        text: 'Check this out',
+        url: window.location.href
+    };
+
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            console.log('Share cancelled or failed', err);
+        }
+    } else {
+        // Fallback for desktop browsers without Web Share API
+        copyToClipboard(shareData.url);
+    }
+});
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Link copied to clipboard!');
+    });
+}
+

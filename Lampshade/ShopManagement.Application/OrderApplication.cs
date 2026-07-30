@@ -65,6 +65,8 @@ public class OrderApplication : IOrderApplication
         _orderRepository.BeginTran();
         var order = _orderRepository.Get(id);
         order.Cancel();
+        var items = order.Items;
+        _shopInventoryAcl.IncreaseFromInventory(items);
         _orderRepository.CommitTran();
     }
 

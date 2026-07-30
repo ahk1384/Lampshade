@@ -194,8 +194,15 @@
                                             }
 
                                             <form method="post" asp-page="/Product" asp-page-handler="AddToCart">
+
                                                 <input type="hidden" name="id" value="@Model.Product.Slug"/>
                                                 <div class="product-actions">
+
+                                                    <button id="shareBtn" class="share-btn" style="margin-right: auto"
+                                                            aria-label="Share">
+                                                        <i class="fa fa-share-alt"></i>
+                                                    </button>
+
                                                     <div class="quantity-selection">
                                                         <label>تعداد</label>
                                                         <input type="number" value="1" min="1" id="productCount"
@@ -215,34 +222,10 @@
                                                             }
                                                         </button>
                                                     </div>
+
                                                 </div>
                                             </form>
                                         }
-                                        <div class="social-share-buttons mt-20">
-                                            <h5>این محصول را به اشتراک بگذارید</h5>
-                                            <ul>
-                                                <li>
-                                                    <a class="twitter" href="#">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="facebook" href="#">
-                                                        <i class="fa fa-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="google-plus" href="#">
-                                                        <i class="fa fa-google-plus"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="pinterest" href="#">
-                                                        <i class="fa fa-pinterest"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                         <p class="single-info mb-0">
                                             تگ ها: @Model.Product.Keywords
                                         </p>

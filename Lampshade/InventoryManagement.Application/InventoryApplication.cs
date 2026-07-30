@@ -79,6 +79,19 @@ public class InventoryApplication : IInventoryApplication
         return operationResult.Success();
     }
 
+    public OperationResult Increase(List<IncreaseInventory> commands)
+    {
+        var operationResult = new OperationResult();
+
+        foreach (var inventory in commands)
+        {
+            operationResult = Increase(inventory);
+            if (!operationResult.IsSuccess) return operationResult;
+        }
+
+        return operationResult.Success();
+    }
+
     public OperationResult Reduce(ReduceInventory command)
     {
         var operationResult = new OperationResult();

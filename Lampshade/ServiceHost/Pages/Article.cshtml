@@ -43,14 +43,24 @@
                             <div class="col-lg-9 order-1 order-lg-1">
                                 <div class="blog-page-content">
                                     <div class="blog-single-post-container">
-                                        <h3 class="post-title">@Model.Article.Title</h3>
+                                        <div class="row" style="padding:20px;display: flex; align-items: center;">
+                                            <h3 class="post-title"
+                                                style="text-align: center; flex: 1; margin: 0;">@Model.Article.Title</h3>
+                                            <button id="shareBtn" class="share-btn" style="margin-left: auto"
+                                                    aria-label="Share">
+                                                <i class="fa fa-share-alt"></i>
+                                            </button>
+                                        </div>
+
                                         <div class="post-meta">
                                             <p>
                                                 <span>
                                                     <i class="fa fa-calendar"></i> نوشته شده در:
                                                     @Model.Article.PublishDate
                                                 </span>
+
                                             </p>
+
                                         </div>
 
                                         <div class="single-blog-post-media">
@@ -76,31 +86,7 @@
                                             </ul>
                                         </div>
 
-                                        <div class="social-share-buttons">
-                                            <h3>share this post</h3>
-                                            <ul>
-                                                <li>
-                                                    <a class="twitter" href="#">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="facebook" href="#">
-                                                        <i class="fa fa-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="google-plus" href="#">
-                                                        <i class="fa fa-google-plus"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="pinterest" href="#">
-                                                        <i class="fa fa-pinterest"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+
                                     </div>
 
                                     <div class="comment-section">
