@@ -61,21 +61,16 @@ public class ReportQuery : IReportQuery
 
     public List<double> SellPerMounths()
     {
-        int sdf = DateTime.Now.Month;
-        List<double> list = new List<double>();
-        for (int i = 0; i < 12; i++)
-        {
-            list.Add(0);
-        }
-
+        double[] list = new Double[14];
+        var items = _shopContext.Orders.Where(x => x.CreationDate <= DateTime.Now &&
+                                                   x.CreationDate >= DateTime.Now.AddYears(-1)).ToList();
         for (int i = 0; i < 12; i++)
         {
             int x = (i + 10) % 12;
-            list[x] = (_shopContext.Orders.Where(x =>
-                x.CreationDate.Month > i && x.CreationDate.Month <= i + 1 && x.CreationDate <= DateTime.Now &&
-                x.CreationDate >= DateTime.Now.AddYears(-1)).Count());
+            list[x] = items.Where(x =>
+                x.CreationDate.Month > i && x.CreationDate.Month <= i + 1).Count();
         }
 
-        return list;
+        return list.ToList();
     }
 }

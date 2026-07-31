@@ -84,10 +84,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group no-margin">
+                            <div id="editor" class="form-group no-margin" dir="rtl">
                                 <label asp-for="Command.Description" class="control-label">توضیحات</label>
+                                <div id="quill-container" style="height: 250px"></div>
                                 <textarea class="form-control" id="BodyContent"
-                                          asp-for="Command.Description"></textarea>
+                                          asp-for="Command.Description"
+                                          style="display:none;"></textarea>
                                 <span asp-validation-for="Command.Description" class="error"></span>
                             </div>
                         </div>
@@ -127,3 +129,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/AdminTheme/assets/js/quill.js"></script>
+}

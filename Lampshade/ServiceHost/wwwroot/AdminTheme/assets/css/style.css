@@ -194,6 +194,23 @@ a:focus {
     margin-right: -10px;
 }
 
+.row-special {
+    margin-left: -10px;
+    margin-right: -10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row-special > [class*="col-"] {
+    display: flex;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4,
 .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10,
 .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
@@ -270,6 +287,9 @@ a:focus {
 
 .panel .panel-body {
     padding: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 99%;
 }
 
 .panel .panel-body p {
@@ -462,6 +482,7 @@ a:focus {
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     font-family: IranSans;
     letter-spacing: 0.2px;
+    margin: 1rem 0 0 0;
     opacity: 0.93;
 }
 
@@ -478,22 +499,26 @@ a:focus {
 
 .btn-default:hover, .btn-default:focus, .btn-default:active {
     background-color: #f9f9f9;
+
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
 .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+
     background-color: #1e88e5;
     border: 1px solid #1e88e5;
 }
 
 .btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active,
 .btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
+
     background-color: #33b86c;
     border: 1px solid #33b86c;
 }
 
 .btn-info, .btn-info:hover, .btn-info:focus, .btn-info:active,
 .btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
+
     background-color: #29b6f6;
     border: 1px solid #29b6f6;
 }
@@ -507,24 +532,28 @@ a:focus {
 
 .btn-danger, .btn-danger:active, .btn-danger:focus, .btn-danger:hover,
 .btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open > .dropdown-toggle.btn-danger {
+
     background-color: #ef5350;
     border: 1px solid #ef5350;
 }
 
 .btn-inverse, .btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active,
 .btn-inverse.active, .btn-inverse.focus, .btn-inverse:active, .btn-inverse:focus, .btn-inverse:hover, .open > .dropdown-toggle.btn-inverse {
+
     background-color: #212121;
     border: 1px solid #212121;
     color: #FFFFFF;
 }
 
 .btn-purple, .btn-purple:hover, .btn-purple:focus, .btn-purple:active {
+
     background-color: #7e57c2;
     border: 1px solid #7e57c2;
     color: #FFFFFF;
 }
 
 .btn-pink, .btn-pink:hover, .btn-pink:focus, .btn-pink:active {
+
     background-color: #ec407a;
     border: 1px solid #ec407a;
     color: #FFFFFF;
@@ -696,10 +725,14 @@ a:focus {
     color: #797979 !important;
 }
 
-
+#quill-container .ql-editor {
+    direction: rtl !important;
+    text-align: right !important;
+}
 /*2.6 text input*/
 
 .form-control {
+    margin-top: 1rem !important;
     -moz-border-radius: 2px;
     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     -webkit-border-radius: 2px;
@@ -1448,7 +1481,7 @@ lesshat-selector {
     float: right;
     height: 70px;
     position: relative;
-    width: 240px;
+    width: 170px;
     z-index: 1;
 }
 
@@ -1627,7 +1660,7 @@ body.fixed-left .side-menu.left {
     color: #fff;
     font-size: 21px;
     line-height: 70px;
-    padding: 0px 15px;
+    padding: 0px 5px;
 }
 
 .button-menu-mobile:hover {
@@ -1850,9 +1883,19 @@ body.fixed-left .side-menu.left {
 }
 
 #wrapper.enlarged .left.side-menu {
-    padding-top: 80px;
+    padding-top: 30px;
 }
 
+#wrapper.enlarged .user-info img {
+    margin: 15px 0 !important;
+    float: none;
+    display: inline-block;
+}
+
+#wrapper.enlarged .user-info a,
+#wrapper.enlarged .user-info p {
+    display: none;
+}
 .user-details {
     min-height: 80px;
     padding: 20px;
@@ -2360,6 +2403,8 @@ body.fixed-left .side-menu.left {
 }
 
 .mini-stat {
+    flex: 1 1 auto;
+    width: 100%;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     background: #fff;

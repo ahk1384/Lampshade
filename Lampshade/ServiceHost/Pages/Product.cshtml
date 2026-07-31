@@ -259,44 +259,7 @@
                                                     @Model.Product.Description
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="review" role="tabpanel"
-                                                 aria-labelledby="review-tab">
-                                                @if (Model.Product.Comments.Count == 0)
-                                                {
-                                                    <h3 style="margin-bottom:3rem ; color: rgba(217,35,95,0.89)">اولین
-                                                        نفر باشید ...</h3>
-                                                }
-                                                @foreach (var comment in Model.Product.Comments)
-                                                {
-                                                    <div class="ratings-wrapper">
-                                                        <div class="sin-ratings">
-                                                            <div class="rating-author">
-                                                                <h3 style="font-weight: 650 ; margin-top: 0.4rem ">@comment.Name</h3>
-                                                                <div class="sin-list float-right"
-                                                                     style="margin-right: 1rem " id="ratingStar">
-                                                                    @for (var i = 1; i <= 5; i++)
-                                                                    {
-                                                                        if (i <= comment.Rating)
-                                                                        {
-                                                                            <i class="fa fa-star active"></i>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <i class="fa fa-star"></i>
-                                                                        }
-                                                                    }
-                                                                    <label
-                                                                        id="ratingCommentLabel">@comment.Rating</label>
-                                                                </div>
-
-                                                            </div>
-                                                            <p style="margin-right: 3.5rem">@comment.Message</p>
-                                                        </div>
-                                                    </div>
-                                                }
-
-
-                                                <div class="rating-form-wrapper fix">
+                                            <div class="rating-form-wrapper fix">
 
                                                     <h3>نظر خود را به ما بگویید</h3>
                                                     <form method="post">
@@ -341,12 +304,50 @@
                                                                    value="@CommentType.Product"/>
                                                             <input type="hidden" name="productSlug"
                                                                    value="@Model.Product.Slug"/>
-                                                            <div class="col-12">
+                                                            <div class="col-12" style="padding-bottom: 20px">
                                                                 <input value="ارسال" type="submit">
                                                             </div>
                                                         </div>
                                                     </form>
                                                 </div>
+                                            <div class="tab-pane fade" id="review" role="tabpanel"
+                                                 aria-labelledby="review-tab">
+                                                @if (Model.Product.Comments.Count == 0)
+                                                {
+                                                    <h3 style="margin-bottom:3rem ; color: rgba(217,35,95,0.89)">اولین
+                                                        نفر باشید ...</h3>
+                                                }
+                                                @foreach (var comment in Model.Product.Comments)
+                                                {
+                                                    <div class="ratings-wrapper">
+                                                        <div class="sin-ratings">
+                                                            <div class="rating-author">
+                                                                <h3 style="font-weight: 650 ; margin-top: 0.4rem ">@comment.Name</h3>
+                                                                <div class="sin-list float-right"
+                                                                     style="margin-right: 1rem " id="ratingStar">
+                                                                    @for (var i = 1; i <= 5; i++)
+                                                                    {
+                                                                        if (i <= comment.Rating)
+                                                                        {
+                                                                            <i class="fa fa-star active"></i>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                    }
+                                                                    <label
+                                                                            id="ratingCommentLabel">@comment.Rating</label>
+                                                                </div>
+
+                                                            </div>
+                                                            <p style="margin-right: 3.5rem">@comment.Message</p>
+                                                        </div>
+                                                    </div>
+                                                }
+
+
+                                                
                                             </div>
                                         </div>
                                     </div>

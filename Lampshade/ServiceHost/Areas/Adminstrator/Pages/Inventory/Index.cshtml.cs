@@ -1,4 +1,5 @@
 using _0_Framework.Application;
+using ClosedXML.Excel;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -125,5 +126,70 @@ public class IndexModel : PageModel
     {
         var log = _inventoryApplication.GetOperationLog(id);
         return Partial("OperationLog", log);
+    }
+
+    public IActionResult OnGetExportExcel(InventorySearchModel searchModel)
+    {
+        var data = _inventoryApplication.Search(searchModel, WatchDeleted);
+
+        using var workbook = new XLWorkbook();
+        var worksheet = workbook.Worksheets.Add("All Inventories");
+
+        worksheet.Cell(1, 1).Value = "Id";
+        worksheet.Cell(1, 2).Value = "ProductName";
+        worksheet.Cell(1, 3).Value = "CreationDate";
+        worksheet.Cell(1, 4).Value = "UnitPrice";
+        worksheet.Cell(1, 5).Value = "CurrentCount";
+
+        var headerRow = worksheet.Row(1);
+        headerRow.Style.Font.Bold = true;
+
+        for (int i = 0; i < data.Count; i++)
+        {
+            var row = i + 2;
+            worksheet.Cell(row, 1).Value = data[i].Id;
+            worksheet.Cell(row, 2).Value = data[i].Product;
+            worksheet.Cell(row, 3).Value = data[i].CreationDate;
+            worksheet.Cell(row, 3).Style.DateFormat.Format = "yyyy-mm-dd";
+            worksheet.Cell(row, 4).Value = data[i].UnitPrice;
+            worksheet.Cell(row, 5).Value = data[i].CurrentCount;
+        }
+
+        worksheet.Columns().AdjustToContents();
+        for (int i = 0; i < data.Count; i++)
+        {
+            var worksheet2 = workbook.Worksheets.Add(data[i].Product);
+            var log = _inventoryApplication.GetOperationLog(data[i].Id);
+            worksheet2.Cell(1, 1).Value = "OrderId";
+            worksheet2.Cell(1, 2).Value = "Count";
+            worksheet2.Cell(1, 3).Value = "OperationDate";
+            worksheet2.Cell(1, 4).Value = "OperationType";
+            worksheet2.Cell(1, 5).Value = "CurrentCount";
+            worksheet2.Cell(1, 6).Value = "OperatorId";
+            worksheet2.Cell(1, 7).Value = "Description";
+            var headerRow2 = worksheet2.Row(1);
+            headerRow2.Style.Font.Bold = true;
+            for (int j = 0; j < log.Count; j++)
+            {
+                var row = j + 2;
+                worksheet2.Cell(row, 1).Value = log[j].OrderId;
+                worksheet2.Cell(row, 2).Value = log[j].Count;
+                worksheet2.Cell(row, 3).Value = log[j].OperationDate;
+                worksheet2.Cell(row, 3).Style.DateFormat.Format = "yyyy-mm-dd";
+                worksheet2.Cell(row, 4).Value = log[j].Operation ? "Increase" : "Decrease";
+                worksheet2.Cell(row, 5).Value = log[j].CurrentCount;
+                worksheet2.Cell(row, 6).Value = log[j].OperatorId;
+                worksheet2.Cell(row, 7).Value = log[j].Description;
+            }
+
+            worksheet2.Columns().AdjustToContents();
+        }
+
+        using var stream = new MemoryStream();
+        workbook.SaveAs(stream);
+
+        return File(stream.ToArray(),
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            $"export_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
     }
 }

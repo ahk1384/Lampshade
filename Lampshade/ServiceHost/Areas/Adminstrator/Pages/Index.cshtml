@@ -11,11 +11,15 @@
         <h4 class="page-title">داشبورد گزارشات</h4>
     </div>
 </div>
-
 <div class="row">
+    <div class="col-sm-12">
+        <h5 class="page-title">گزارشات ۱۵ روز گذشته</h5>
+    </div>
+</div>
+<div class="row-special">
     <div class="col-md-6 col-sm-6 col-lg-4">
         <div class="mini-stat clearfix bx-shadow">
-            <span class="mini-stat-icon bg-info">
+            <span class="mini-stat-icon bg-success">
                 <i class="ion-social-usd"></i>
             </span>
             <div class="mini-stat-info text-right text-muted">
@@ -36,13 +40,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-6 col-lg-4">
+    <div class="col-md-3 col-sm-3 col-lg-3">
         <div class="mini-stat clearfix bx-shadow">
-            <span class="mini-stat-icon bg-info">
+            <span class="mini-stat-icon bg-danger">
                 <i class="ion-social-usd"></i>
             </span>
             <div class="mini-stat-info text-right text-muted">
-                <span class="counter">@Model.totalBuy.ToMoney()</span>
+                <span class="counter" style="padding-top: 15px">@Model.totalBuy.ToMoney()</span>
                 کل خریدها
             </div>
             @* <div class="tiles-progress"> *@
@@ -58,8 +62,8 @@
             @* </div> *@
         </div>
     </div>
-    <div class="col-md-6 col-sm-6 col-lg-2">
-        <div class="mini-stat clearfix bx-shadow">
+    <div class="col-md-3 col-sm-3 col-lg-3">
+        <div class="mini-stat clearfix bx-shadow" style="padding-top: 25px">
             <span class="mini-stat-icon bg-purple">
                 <i class="ion-ios7-cart"></i>
             </span>
@@ -104,8 +108,8 @@
     @*     </div> *@
     @* </div> *@
 
-    <div class="col-md-6 col-sm-6 col-lg-2">
-        <div class="mini-stat clearfix bx-shadow">
+    <div class="col-md-2 col-sm-2 col-lg-2">
+        <div class="mini-stat mini-stat-withoutbar clearfix bx-shadow" style="padding-top: 25px">
             <span class="mini-stat-icon bg-primary">
                 <i class="ion-android-contacts"></i>
             </span>
