@@ -78,6 +78,9 @@
         <Project Path="ShopManagment.Infrastructure.Configuration/ShopManagement.Infrastructure.Configuration.csproj"/>
         <Project Path="SM.Infrastructure.EFCore/SM.Infrastructure.EFCore.csproj"/>
     </Folder>
+    <Folder Name="/Solution Items/">
+        <File Path="compose.yaml"/>
+    </Folder>
     <Project Path="0_Framework/0_Framework.csproj"/>
     <Project Path="ServiceHost/ServiceHost.csproj"/>
     <Project Path="Web_API/Web_API.csproj" Id="5056b7c3-4c54-4fe6-ae0b-e3826b763c91"/>

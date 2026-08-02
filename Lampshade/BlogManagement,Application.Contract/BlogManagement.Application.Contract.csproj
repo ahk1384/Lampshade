@@ -5,6 +5,7 @@
         <RootNamespace>BlogManagement_Application.Contract</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,6 +13,11 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\0_Framework\0_Framework.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

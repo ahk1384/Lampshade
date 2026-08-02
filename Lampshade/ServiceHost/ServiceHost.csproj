@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>preview</LangVersion>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -39,6 +40,12 @@
         <_ContentIncludedByDefault Remove="wwwroot\ProductPictures\ProfilePhoto\Admin\2026-03-12-16-15-03-profile.jpg"/>
         <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Index.cshtml"/>
         <_ContentIncludedByDefault Remove="Areas\Adminstrator\Pages\Shop\Orders\Items.cshtml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>
