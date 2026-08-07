@@ -9,5 +9,6 @@ public class AddComment
     public double Rating { get; set; }
     public long OwnerRecordId { get; set; }
     public int Type { get; set; }
-    public long ParentId { get; set; }
+
+    public long? ParentId { get; set; }
 }

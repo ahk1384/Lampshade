@@ -42,8 +42,9 @@
                        asp-page-handler="Active">مشاهده همه</a>
                     <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index"
                        asp-page-handler="Deleted">مشاهده حذف شده ها</a>
-                    <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index"
-                       asp-page-handler="ExportExcel">دریافت خروجی اکسل <i class="fa fa-file-excel-o"></i></a>
+                    <a permission="@InventoryPermissions.OperationLog"
+                       class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index"
+                       asp-page-handler="ExportExcelAll">دریافت خروجی اکسل <i class="fa fa-file-excel-o"></i></a>
                 </form>
             </div>
         </div>
@@ -116,6 +117,11 @@
                                            href="#showmodal=@Url.Page("./Index", "Log", new { id = item.Id })"
                                            onclick="$('.modal-dialog').css('width', '60%')">
                                             <i class="fa fa-recycle"></i> مشاهده گردنش انبار
+                                        </a>
+                                        <a permission="@InventoryPermissions.OperationLog"
+                                           class="btn btn-primary waves-effect waves-light m-b-5"
+                                           asp-page-handler="ExportExcel" , asp-route-id="@item.Id">
+                                            <i class="fa fa-file"></i> دریافت فایل
                                         </a>
                                     </td>
                                 </tr>

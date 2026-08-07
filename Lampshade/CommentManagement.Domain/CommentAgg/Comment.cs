@@ -5,7 +5,7 @@ namespace CommentManagement.Domain.CommentAgg;
 public class Comment : EntityBase<long>
 {
     public Comment(string name, string email, string website, string message, long ownerRecordId, int type,
-        long parentId)
+        long? parentId)
     {
         Name = name;
         Email = email;
@@ -19,7 +19,7 @@ public class Comment : EntityBase<long>
     }
 
     public Comment(string name, string email, string website, string message, long ownerRecordId, int type,
-        long parentId, double rating)
+        long? parentId, double rating)
     {
         Name = name;
         Email = email;
@@ -40,7 +40,7 @@ public class Comment : EntityBase<long>
     public bool IsConfirmed { get; private set; }
     public long OwnerRecordId { get; private set; }
     public int Type { get; private set; }
-    public long parentId { get; private set; }
+    public long? parentId { get; private set; }
 
     public Comment Parent { get; private set; }
 

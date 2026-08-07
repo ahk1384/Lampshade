@@ -12,10 +12,4 @@
         <ProjectReference Include="..\DiscountManagmenet.Application.Contracts\DiscountManagement.Application.Contracts.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
-
 </Project>

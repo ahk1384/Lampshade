@@ -21,7 +21,7 @@ public class CommentApplication : ICommentApplication
         {
             var comment = new Comment(command.Name, command.Email, command.Website, command.Message,
                 command.OwnerRecordId, command.Type,
-                command.ParentId, command.Rating);
+                command.ParentId == 0 ? null : command.ParentId, command.Rating);
             _commentRepository.Create(comment);
         }
         catch (Exception e)

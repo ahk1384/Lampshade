@@ -33,6 +33,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddHttpContextAccessor();
         // Add services to the container.
+
         string? databaseType = builder.Configuration["DatabaseType"];
         string? connectionString = builder.Configuration.GetConnectionString("LampShadeDB");
 
@@ -42,6 +43,7 @@ public class Program
         BlogManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
         CommentManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
         AccountManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
+
 
         builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
         builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
@@ -109,6 +111,28 @@ public class Program
         builder.Services.AddRazorPages();
 
         var app = builder.Build();
+
+        /*using (var scope = app.Services.CreateScope())
+        {
+            var accountContext = scope.ServiceProvider.GetRequiredService<AccountContext>();
+            accountContext.Database.Migrate();
+
+            var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
+            shopContext.Database.Migrate();
+
+            var inventoryContext = scope.ServiceProvider.GetRequiredService<InventoryContext>();
+            inventoryContext.Database.Migrate();
+
+            var blogContext = scope.ServiceProvider.GetRequiredService<BlogContext>();
+            blogContext.Database.Migrate();
+
+            var commentContext = scope.ServiceProvider.GetRequiredService<CommentContext>();
+            commentContext.Database.Migrate();
+
+            var discountContext = scope.ServiceProvider.GetRequiredService<DiscountContext>();
+            discountContext.Database.Migrate();
+        }*/
+
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())

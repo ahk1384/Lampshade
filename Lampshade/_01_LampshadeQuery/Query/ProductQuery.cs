@@ -30,7 +30,7 @@ public class ProductQuery : IProductQuery
 
     public ProductQueryModel GetProductDetails(string slug)
     {
-        var inventory = _inventoryContext.Inventories.Select(x =>
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted).Select(x =>
             new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
@@ -75,6 +75,10 @@ public class ProductQuery : IProductQuery
                 product.PriceWithDiscount = (price - discountAmount).ToMoney();
             }
         }
+        else
+        {
+            product.IsInStock = false;
+        }
 
         product.Comments = _commentContext.Comments
             .Where(x => !x.IsDeleted)
@@ -98,7 +102,7 @@ public class ProductQuery : IProductQuery
 
     public List<ProductQueryModel> GetLatestArrivals()
     {
-        var inventory = _inventoryContext.Inventories.Select(x =>
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted).Select(x =>
             new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
@@ -136,6 +140,10 @@ public class ProductQuery : IProductQuery
                     product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
             }
+            else
+            {
+                product.IsInStock = false;
+            }
         }
 
         return products.Where(x => x.IsInStock).Take(8).ToList();
@@ -143,7 +151,7 @@ public class ProductQuery : IProductQuery
 
     public List<ProductQueryModel> Search(string value)
     {
-        var inventory = _inventoryContext.Inventories.Select(x =>
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted).Select(x =>
             new { x.ProductId, x.UnitPrice }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
@@ -183,6 +191,10 @@ public class ProductQuery : IProductQuery
                     var discountAmount = Math.Round(price * discountRate / 100);
                     product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
+            }
+            else
+            {
+                product.IsInStock = false;
             }
         }
 

@@ -19,14 +19,15 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.9"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24"/>
         <PackageReference Include="MimeKit" Version="4.15.1"/>
+        <PackageReference Include="MiniExcel" Version="1.45.0"/>
         <PackageReference Include="Nancy" Version="2.0.0"/>
         <PackageReference Include="RestSharp" Version="114.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
+        <Reference Include="ClosedXML">
+            <HintPath>..\..\..\..\..\..\..\home\amirhossein\.nuget\packages\closedxml\0.105.1\lib\netstandard2.1\ClosedXML.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 </Project>

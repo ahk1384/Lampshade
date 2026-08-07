@@ -31,7 +31,7 @@ public class AccountManagementBootstrapper
         }
         else if (databaseType == "Mysql")
         {
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
             services.AddDbContext<AccountContext>(a => a.UseMySql(connectionString, serverVersion));
         }
     }

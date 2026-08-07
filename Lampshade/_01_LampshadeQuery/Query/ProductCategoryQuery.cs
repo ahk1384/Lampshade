@@ -28,7 +28,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
     public ProductCategoryQueryModel GetProductCategoryWithProducstsBy(string slug)
     {
-        var inventory = _inventoryContext.Inventories.Select(x =>
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted).Select(x =>
             new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
 
         var discounts = _discountContext.CustomerDiscounts
@@ -70,6 +70,10 @@ public class ProductCategoryQuery : IProductCategoryQuery
                     product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
             }
+            else
+            {
+                product.IsInStock = false;
+            }
         }
 
         return catetory;
@@ -95,7 +99,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
     {
-        var inventory = _inventoryContext.Inventories.Select(x =>
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted).Select(x =>
             new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
@@ -135,6 +139,10 @@ public class ProductCategoryQuery : IProductCategoryQuery
                         var discountAmount = Math.Round(price * discountRate / 100);
                         product.PriceWithDiscount = (price - discountAmount).ToMoney();
                     }
+                }
+                else
+                {
+                    product.IsInStock = false;
                 }
             }
 

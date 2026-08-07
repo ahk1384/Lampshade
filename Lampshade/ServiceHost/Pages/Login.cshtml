@@ -34,8 +34,10 @@
                             <div class="col-12">
                                 @if (Model.LoginMessage != null)
                                 {
-                                    <div class="alert alert-danger">@Model.LoginMessage</div>
+                                    <div id="alertDiv" class="alert alert-danger">@Model.LoginMessage</div>
+                                    Model.LoginMessage = null;
                                 }
+
                                 <form method="post" asp-page-handler="Login">
                                     <div class="login-form">
                                         <h4 class="login-title">ورود</h4>
@@ -75,3 +77,14 @@
         </div>
     </div>
 </div>
+<script>
+    setTimeout(() => {
+        const div = document.getElementById("alertDiv");
+        div.style.transition = "opacity 0.5s";
+        div.style.opacity = "0";
+        // Optional: remove from layout after fade
+        setTimeout(() => {
+            div.style.display = "none";
+        }, 500);
+    }, 3000);
+</script>

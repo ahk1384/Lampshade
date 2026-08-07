@@ -44,6 +44,7 @@ public class ProductModel : PageModel
     {
         command.Type = CommentType.Product;
         if (_authHelper.IsAuthenticated()) command.Name = _authHelper.CurrentAccountInfo().Username;
+        command.Rating = command.Rating == 0 ? 1 : command.Rating;
         var result = _commentApplication.Add(command);
         return RedirectToPage("/Product", new { Id = productSlug });
     }

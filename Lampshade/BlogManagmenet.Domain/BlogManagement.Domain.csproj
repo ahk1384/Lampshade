@@ -12,10 +12,4 @@
         <ProjectReference Include="..\BlogManagement,Application.Contract\BlogManagement.Application.Contract.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
-
 </Project>

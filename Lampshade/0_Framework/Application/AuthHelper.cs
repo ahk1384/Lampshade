@@ -89,6 +89,7 @@ public class AuthHelper : IAuthHelper
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var authProperties = new AuthenticationProperties
         {
+            IsPersistent = true,
             ExpiresUtc = DateTimeOffset.UtcNow.AddDays(2)
         };
 

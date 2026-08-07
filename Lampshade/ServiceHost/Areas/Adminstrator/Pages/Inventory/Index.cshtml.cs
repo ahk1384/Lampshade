@@ -1,5 +1,4 @@
 using _0_Framework.Application;
-using ClosedXML.Excel;
 using InventoryManagement.Application.Contracts.Inventory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +15,7 @@ public class IndexModel : PageModel
     private readonly IAuthHelper _authHelper;
     private readonly IInventoryApplication _inventoryApplication;
     private readonly IProductApplication _productApplication;
+    public ExportExcel Exporter;
     public List<InventoryViewModel> Inventories;
     public SelectList Products;
     public InventorySearchModel SearchModel;
@@ -27,6 +27,7 @@ public class IndexModel : PageModel
         _productApplication = productApplication;
         _authHelper = authHelper;
         _inventoryApplication = inventoryApplication;
+        Exporter = new ExportExcel();
     }
 
     [TempData] public string Message { get; set; }
@@ -128,68 +129,112 @@ public class IndexModel : PageModel
         return Partial("OperationLog", log);
     }
 
-    public IActionResult OnGetExportExcel(InventorySearchModel searchModel)
+    public IActionResult OnGetExportExcelAll(InventorySearchModel searchModel)
     {
-        var data = _inventoryApplication.Search(searchModel, WatchDeleted);
+        var inventories = _inventoryApplication.Search(searchModel, WatchDeleted);
+        List<List<InventoryOperationViewModel>> operations =
+            inventories.Select(inventory => _inventoryApplication.GetOperationLog(inventory.Id)).ToList();
+        var formtedData = formatter(inventories, operations);
+        var resultFile = Exporter.ExportExcelResult(formtedData);
+        return File(
+            resultFile,
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            $"export_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+        );
+    }
 
-        using var workbook = new XLWorkbook();
-        var worksheet = workbook.Worksheets.Add("All Inventories");
+    public IActionResult OnGetExportExcel(int id)
+    {
+        List<InventoryOperationViewModel> operations =
+            _inventoryApplication.GetOperationLog(id);
+        var name = _productApplication.GetDetails(_inventoryApplication.GetDetails(id).ProductId).Name;
+        var formtedData = formatter(name, operations);
+        var resultFile = Exporter.ExportExcelResult(formtedData);
+        return File(
+            resultFile,
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            $"export_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+        );
+    }
 
-        worksheet.Cell(1, 1).Value = "Id";
-        worksheet.Cell(1, 2).Value = "ProductName";
-        worksheet.Cell(1, 3).Value = "CreationDate";
-        worksheet.Cell(1, 4).Value = "UnitPrice";
-        worksheet.Cell(1, 5).Value = "CurrentCount";
-
-        var headerRow = worksheet.Row(1);
-        headerRow.Style.Font.Bold = true;
-
-        for (int i = 0; i < data.Count; i++)
+    private List<ExcelTable> formatter(List<InventoryViewModel> inventories,
+        List<List<InventoryOperationViewModel>> operations)
+    {
+        List<ExcelTable> Table = new List<ExcelTable>();
+        var columns = new List<string>() { "Id", "ProductName", "CreationDate", "UnitPrice", "CurrentCount" };
+        var rows = new List<ExcelTable.Row>();
+        for (int i = 0; i < inventories.Count; i++)
         {
-            var row = i + 2;
-            worksheet.Cell(row, 1).Value = data[i].Id;
-            worksheet.Cell(row, 2).Value = data[i].Product;
-            worksheet.Cell(row, 3).Value = data[i].CreationDate;
-            worksheet.Cell(row, 3).Style.DateFormat.Format = "yyyy-mm-dd";
-            worksheet.Cell(row, 4).Value = data[i].UnitPrice;
-            worksheet.Cell(row, 5).Value = data[i].CurrentCount;
+            var item3 = new ExcelTable.Row();
+            item3.row.Add(inventories[i].Id.ToString());
+            item3.row.Add(inventories[i].Product);
+            item3.row.Add(inventories[i].CreationDate);
+            item3.row.Add(inventories[i].UnitPrice.ToString());
+            item3.row.Add(inventories[i].CurrentCount.ToString());
+            rows.Add(item3);
         }
 
-        worksheet.Columns().AdjustToContents();
-        for (int i = 0; i < data.Count; i++)
+        var item = new ExcelTable("Inventories", rows, columns, 3);
+        Table.Add(item);
+        for (int z = 0; z < operations.Count; z++)
         {
-            var worksheet2 = workbook.Worksheets.Add(data[i].Product);
-            var log = _inventoryApplication.GetOperationLog(data[i].Id);
-            worksheet2.Cell(1, 1).Value = "OrderId";
-            worksheet2.Cell(1, 2).Value = "Count";
-            worksheet2.Cell(1, 3).Value = "OperationDate";
-            worksheet2.Cell(1, 4).Value = "OperationType";
-            worksheet2.Cell(1, 5).Value = "CurrentCount";
-            worksheet2.Cell(1, 6).Value = "OperatorId";
-            worksheet2.Cell(1, 7).Value = "Description";
-            var headerRow2 = worksheet2.Row(1);
-            headerRow2.Style.Font.Bold = true;
-            for (int j = 0; j < log.Count; j++)
+            var coluns = new List<string>()
             {
-                var row = j + 2;
-                worksheet2.Cell(row, 1).Value = log[j].OrderId;
-                worksheet2.Cell(row, 2).Value = log[j].Count;
-                worksheet2.Cell(row, 3).Value = log[j].OperationDate;
-                worksheet2.Cell(row, 3).Style.DateFormat.Format = "yyyy-mm-dd";
-                worksheet2.Cell(row, 4).Value = log[j].Operation ? "Increase" : "Decrease";
-                worksheet2.Cell(row, 5).Value = log[j].CurrentCount;
-                worksheet2.Cell(row, 6).Value = log[j].OperatorId;
-                worksheet2.Cell(row, 7).Value = log[j].Description;
+                "Order Id", "Count", "Operation Date", "Operation Type", "CurrentCount", "Operator Id", "Description"
+            };
+            var ros = new List<ExcelTable.Row>();
+            for (int j = 0; j < operations[z].Count; j++)
+            {
+                // for (int i = 0; i < operations[z][j].Count; i++)
+                // {
+                var item3 = new ExcelTable.Row();
+                item3.row.Add(operations[z][j].OrderId.ToString());
+                item3.row.Add(operations[z][j].Count.ToString());
+                item3.row.Add(operations[z][j].OperationDate);
+                item3.row.Add(operations[z][j].Operation ? "Increase" : "Decrease");
+                item3.row.Add(operations[z][j].CurrentCount.ToString());
+                item3.row.Add(operations[z][j].OperatorId.ToString());
+                item3.row.Add(operations[z][j].Description);
+                ros.Add(item3);
+                // }
             }
 
-            worksheet2.Columns().AdjustToContents();
+            var item2 = new ExcelTable(inventories[z].Product, ros, coluns, 3);
+            Table.Add(item2);
         }
 
-        using var stream = new MemoryStream();
-        workbook.SaveAs(stream);
+        return Table;
+    }
 
-        return File(stream.ToArray(),
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            $"export_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
+    private List<ExcelTable> formatter(
+        string name, List<InventoryOperationViewModel> operations)
+    {
+        List<ExcelTable> Table = new List<ExcelTable>();
+
+        var coluns = new List<string>()
+        {
+            "Order Id", "Count", "Operation Date", "Operation Type", "CurrentCount", "Operator Id", "Description"
+        };
+        var ros = new List<ExcelTable.Row>();
+        for (int j = 0; j < operations.Count; j++)
+        {
+            // for (int i = 0; i < operations[z][j].Count; i++)
+            // {
+            var item3 = new ExcelTable.Row();
+            item3.row.Add(operations[j].OrderId.ToString());
+            item3.row.Add(operations[j].Count.ToString());
+            item3.row.Add(operations[j].OperationDate);
+            item3.row.Add(operations[j].Operation ? "Increase" : "Decrease");
+            item3.row.Add(operations[j].CurrentCount.ToString());
+            item3.row.Add(operations[j].OperatorId.ToString());
+            item3.row.Add(operations[j].Description);
+            ros.Add(item3);
+            // }
+        }
+
+        var item2 = new ExcelTable(name, ros, coluns, 3);
+        Table.Add(item2);
+
+        return Table;
     }
 }

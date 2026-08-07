@@ -107,9 +107,9 @@
                                                         <a style="font-size: 18px; color: #232323" asp-page=""
                                                            asp-page-handler="">@AuthHelper.CurrentAccountInfo().Fullname</a>
                                                     </li>
-                                                    <li>
-                                                        <a asp-page="" asp-page-handler="">تنظیمات</a>
-                                                    </li>
+                                                    @* <li> *@
+                                                    @*     <a asp-page="" asp-page-handler="">تنظیمات</a> *@
+                                                    @* </li> *@
                                                     <li>
                                                         <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
                                                     </li>
@@ -264,9 +264,9 @@
                             <li>
                                 <a asp-page="" asp-page-handler="">@AuthHelper.CurrentAccountInfo().Fullname</a>
                             </li>
-                            <li>
-                                <a asp-page="" asp-page-handler="">تنظیمات</a>
-                            </li>
+                            @* <li> *@
+                            @*     <a asp-page="" asp-page-handler="">تنظیمات</a> *@
+                            @* </li> *@
                             <li>
                                 <a asp-page="/Login" asp-page-handler="Logout">خروج</a>
                             </li>

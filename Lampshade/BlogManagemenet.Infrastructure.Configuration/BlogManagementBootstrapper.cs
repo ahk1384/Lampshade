@@ -38,7 +38,7 @@ public class BlogManagementBootstrapper
         }
         else if (databaseType == "Mysql")
         {
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 42));
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
             services.AddDbContext<BlogContext>(a => a.UseMySql(connectionString, serverVersion));
         }
     }

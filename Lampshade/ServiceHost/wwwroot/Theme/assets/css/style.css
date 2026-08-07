@@ -3178,7 +3178,7 @@ select {
     -webkit-transform: rotate(-90deg);
     background: rgba(255, 255, 255, .9);
     border: 2px solid #ebebeb;
-    bottom: 210px;
+    bottom: 3%;
     color: #292929;
     cursor: pointer;
     display: none;
@@ -7005,7 +7005,7 @@ h3.comment-counter {
     }
 
     #scroll-top {
-        bottom: 30px;
+        bottom: 3%;
     }
 
     .quick-view-modal-container .modal-dialog {
@@ -7341,7 +7341,7 @@ h3.comment-counter {
     }
 
     #scroll-top {
-        bottom: 130px;
+        bottom: 4%;
     }
 
     .quick-view-modal-container .modal-dialog {
@@ -7512,7 +7512,7 @@ h3.comment-counter {
     }
 
     #scroll-top {
-        bottom: 130px;
+        bottom: 4%;
     }
 
     .quick-view-modal-container .modal-dialog {
@@ -7827,7 +7827,7 @@ h3.comment-counter {
     }
 
     #scroll-top {
-        bottom: 50px;
+        bottom: 4%;
     }
 
     #scroll-top span {

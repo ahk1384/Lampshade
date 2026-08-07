@@ -4,30 +4,26 @@
     build:
       context: .
       dockerfile: ServiceHost/Dockerfile
-
+    
     container_name: servicehost
-
+    
     ports:
       - "8080:8080"
-
+    
     depends_on:
-      - mysql
-
+      mysql:
+        condition: service_healthy
+    
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
 
   mysql:
     image: mysql:8.4
 
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      timeout: 20s
-      retries: 10
-          
     container_name: mysql
 
     environment:
-      MYSQL_ROOT_PASSWORD: "@Amir1384"
+      MYSQL_ROOT_PASSWORD: "1384"
       MYSQL_DATABASE: LampshadeTest
 
     ports:
@@ -35,6 +31,11 @@
 
     volumes:
       - mysql-data:/var/lib/mysql
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
 volumes:
   mysql-data:
