@@ -46,7 +46,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 MetaDescription = x.MetaDescription,
                 Keywords = x.Keywords,
                 Slug = x.Slug,
-                Products = MapProducts(x.Products)
+                Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList())
             }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         foreach (var product in catetory.Products)
@@ -81,7 +81,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
     public List<ProductCategoryQueryModel> GetProductCategories()
     {
-        return _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x =>
+        var res = _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x =>
             new ProductCategoryQueryModel
             {
                 Id = x.Id,
@@ -92,9 +92,10 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 Picture = x.Picture,
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
-                Products = MapProducts(x.Products),
+                Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList()),
                 Slug = x.Slug
             }).AsNoTracking().ToList();
+        return res == null ? new List<ProductCategoryQueryModel>() : res;
     }
 
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
@@ -116,7 +117,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 PictureAlt = x.PictureAlt,
                 PictureTitle = x.PictureTitle,
                 Slug = x.Slug,
-                Products = MapProducts(x.Products)
+                Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList())
             }).AsNoTracking().ToList();
         ;
         foreach (var category in categories)
@@ -156,7 +157,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
     private static List<ProductQueryModel> MapProducts(List<Product> products)
     {
         var res = new List<ProductQueryModel>();
-        products.ForEach(x => res.Add(new ProductQueryModel
+        products.ToList().ForEach(x => res.Add(new ProductQueryModel
         {
             Id = x.Id,
             Category = x.Category.Title,

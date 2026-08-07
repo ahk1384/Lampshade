@@ -17,7 +17,8 @@ public class InventoryQuery : IInventoryQuery
 
     public StockStatus CheckStock(IsInStock command)
     {
-        var inventory = _inventoryContext.Inventories.FirstOrDefault(x => x.ProductId == command.ProductId);
+        var inventory = _inventoryContext.Inventories.Where(x => !x.IsDeleted)
+            .FirstOrDefault(x => x.ProductId == command.ProductId);
         if (inventory == null || inventory.CalculateCurrentCount() < command.Count)
         {
             var product = _shopContext.Products.Select(x => new { x.Id, x.Name })

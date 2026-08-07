@@ -79,7 +79,7 @@ public class ProductRepository : BaseRepository<long, Product>, IProductReposito
 
     public List<ProductViewModel> GetProducts()
     {
-        return _context.Products.Include(x => x.Category).Select(x => new ProductViewModel
+        return _context.Products.Where(x => !x.IsDeleted).Include(x => x.Category).Select(x => new ProductViewModel
         {
             Id = x.Id,
             Name = x.Name,

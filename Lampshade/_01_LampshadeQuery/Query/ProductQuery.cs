@@ -36,7 +36,7 @@ public class ProductQuery : IProductQuery
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
 
-        var product = _context.Products
+        var product = _context.Products.Where(x => !x.IsDeleted)
             .Include(a => a.Category).Select(product => new ProductQueryModel
             {
                 Id = product.Id,
@@ -55,47 +55,49 @@ public class ProductQuery : IProductQuery
                 Slug = product.Slug
             }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
-
-        var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
-        if (productInventory != null)
+        if (product != null)
         {
-            product.Rating = GetRating(product.Id);
-            var price = productInventory.UnitPrice;
-            product.DoublePrice = price;
-            product.Price = price.ToMoney();
-            product.IsInStock = productInventory.InStock;
-            var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
-            if (discount != null)
+            var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+            if (productInventory != null)
             {
-                var discountRate = discount.DiscountRate;
-                product.DiscountRate = discountRate;
-                product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
-                product.HasDiscount = discountRate > 0;
-                var discountAmount = Math.Round(price * discountRate / 100);
-                product.PriceWithDiscount = (price - discountAmount).ToMoney();
+                product.Rating = GetRating(product.Id);
+                var price = productInventory.UnitPrice;
+                product.DoublePrice = price;
+                product.Price = price.ToMoney();
+                product.IsInStock = productInventory.InStock;
+                var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+                if (discount != null)
+                {
+                    var discountRate = discount.DiscountRate;
+                    product.DiscountRate = discountRate;
+                    product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
+                    product.HasDiscount = discountRate > 0;
+                    var discountAmount = Math.Round(price * discountRate / 100);
+                    product.PriceWithDiscount = (price - discountAmount).ToMoney();
+                }
             }
-        }
-        else
-        {
-            product.IsInStock = false;
-        }
-
-        product.Comments = _commentContext.Comments
-            .Where(x => !x.IsDeleted)
-            .Where(x => x.IsConfirmed)
-            .Where(x => x.Type == CommentType.Product)
-            .Where(x => x.OwnerRecordId == product.Id)
-            .Select(x => new CommentQueryModel
+            else
             {
-                Id = x.Id,
-                Message = x.Message,
-                Name = x.Name,
-                Type = x.Type,
-                Rating = x.Rating,
-                CreationDate = x.CreationDate.ToFarsi()
-            })
-            .OrderByDescending(x => x.Id)
-            .ToList();
+                product.IsInStock = false;
+            }
+
+            product.Comments = _commentContext.Comments
+                .Where(x => !x.IsDeleted)
+                .Where(x => x.IsConfirmed)
+                .Where(x => x.Type == CommentType.Product)
+                .Where(x => x.OwnerRecordId == product.Id)
+                .Select(x => new CommentQueryModel
+                {
+                    Id = x.Id,
+                    Message = x.Message,
+                    Name = x.Name,
+                    Type = x.Type,
+                    Rating = x.Rating,
+                    CreationDate = x.CreationDate.ToFarsi()
+                })
+                .OrderByDescending(x => x.Id)
+                .ToList();
+        }
 
         return product;
     }
@@ -108,7 +110,7 @@ public class ProductQuery : IProductQuery
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
 
-        var products = _context.Products
+        var products = _context.Products.Where(x => !x.IsDeleted)
             .Include(a => a.Category).Select(product => new ProductQueryModel
             {
                 Id = product.Id,
@@ -157,7 +159,7 @@ public class ProductQuery : IProductQuery
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate }).ToList();
 
-        var products = _context.Products
+        var products = _context.Products.Where(x => !x.IsDeleted)
             .Include(a => a.Category).Select(product => new ProductQueryModel
             {
                 Id = product.Id,

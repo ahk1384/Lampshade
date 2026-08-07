@@ -35,9 +35,15 @@ public class ProductModel : PageModel
     }
 
 
-    public void OnGet(string id)
+    public IActionResult OnGet(string id)
     {
         Product = _productQuery.GetProductDetails(id);
+        if (Product == null)
+        {
+            return RedirectToPage("/Index");
+        }
+
+        return null;
     }
 
     public IActionResult OnPost(AddComment command, string productSlug)
