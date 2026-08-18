@@ -62,7 +62,9 @@
 
                             <div class="col-lg-12">
                                 <div class="shop-page-content">
-                                    <div class="row shop-product-wrap grid three-column">
+                                    @if (Model.ProductCategory.Products.Count > 0)
+                                    {
+                                        <div class="row shop-product-wrap grid three-column">
                                         @foreach (var product in Model.ProductCategory.Products)
                                         {
                                             <div class="col-12 col-lg-4 col-md-4 col-sm-6">
@@ -143,6 +145,14 @@
                                             </div>
                                         }
                                     </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <h2 class="text-danger" style="text-align: center"> محصولی وجود ندارد </h2>
+                                        </div>
+                                    }
+
                                 </div>
 
                                 <div class="pagination-area">

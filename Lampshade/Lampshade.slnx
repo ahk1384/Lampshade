@@ -79,6 +79,7 @@
         <Project Path="SM.Infrastructure.EFCore/SM.Infrastructure.EFCore.csproj"/>
     </Folder>
     <Folder Name="/Solution Items/">
+        <File Path="compose.prod.yml"/>
         <File Path="compose.yaml"/>
     </Folder>
     <Project Path="0_Framework/0_Framework.csproj"/>

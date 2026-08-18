@@ -16,9 +16,17 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
     public OperationResult Define(DefineCustomerDiscount command)
     {
         var operationResult = new OperationResult();
-        if (_customerDiscountRepository.Exists(x =>
-                x.DiscountRate == command.DiscountRate && x.ProductId == command.ProductId))
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+        if (_customerDiscountRepository.Exists(x => !x.IsDeleted &&
+                                                    ((x.StartDate < command.EndDate.ToGeorgianDateTime() &&
+                                                      command.EndDate.ToGeorgianDateTime() < x.EndDate) ||
+                                                     (command.StartDate.ToGeorgianDateTime() > x.StartDate &&
+                                                      command.StartDate.ToGeorgianDateTime() < x.EndDate)) &&
+                                                    x.ProductId == command.ProductId))
+            return operationResult.Fail(ApplicationMessages.CofilictInDate);
+
+        if (command.StartDate.ToGeorgianDateTime() > command.EndDate.ToGeorgianDateTime())
+            return operationResult.Fail(ApplicationMessages.InvalidDateRange);
+
         _customerDiscountRepository.BeginTran();
         try
         {
@@ -40,9 +48,12 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
     {
         var operationResult = new OperationResult();
         if (_customerDiscountRepository.Exists(x =>
-                x.ProductId == command.ProductId && x.Id != command.Id))
+                !x.IsDeleted && x.Id == command.Id && x.ProductId == command.ProductId &&
+                x.DiscountRate == command.DiscountRate &&
+                x.StartDate == command.StartDate.ToGeorgianDateTime() &&
+                x.EndDate == command.EndDate.ToGeorgianDateTime()))
 
-            return operationResult.Fail(ApplicationMessages.DuplicatedRecord);
+            return operationResult.Fail(ApplicationMessages.NotChanged);
 
         if (command.StartDate.ToGeorgianDateTime() > command.EndDate.ToGeorgianDateTime())
 
@@ -101,6 +112,11 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
         try
         {
             var discount = _customerDiscountRepository.Get(id);
+            if (_customerDiscountRepository.Exists(x => !x.IsDeleted &&
+                                                        (x.EndDate > discount.StartDate ||
+                                                         x.StartDate < discount.EndDate) &&
+                                                        x.ProductId == discount.ProductId))
+                return operationResult.Fail(ApplicationMessages.CofilictInDate);
             discount.Restore();
         }
         catch (Exception e)
@@ -111,5 +127,12 @@ public class CustomerDiscountApplication : ICustomerDiscountApplication
 
         _customerDiscountRepository.CommitTran();
         return operationResult.Success();
+    }
+
+    private bool IsDateConfilicted(DateTime startDateA, DateTime endDateA, DateTime startDateB, DateTime endDateB)
+    {
+        if (startDateA < endDateB && endDateB < endDateA) return false;
+        if (startDateB > startDateA && startDateB < endDateA) return false;
+        return true;
     }
 }

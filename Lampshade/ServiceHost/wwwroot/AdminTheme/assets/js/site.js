@@ -210,3 +210,9 @@ jQuery.validator.addMethod("fileExtensionLimitation",
         return validExtensions.indexOf(extension) !== -1;
     });
 jQuery.validator.unobtrusive.adapters.addBool("fileExtensionLimitation");
+
+function reloadPage() {
+    setTimeout(() => {
+        location.reload();
+    }, 2000)
+}

@@ -1,4 +1,5 @@
 ﻿const cookieName = "cart-items";
+
 function addToCart(productId, name, unitPrice, picture, isInStock, discountRate, productSlug) {
     let products = $.cookie(cookieName);
     if (products === undefined) {
@@ -147,3 +148,8 @@ function copyToClipboard(text) {
     });
 }
 
+function reloadPage() {
+    setTimeout(() => {
+        location.reload();
+    }, 2000)
+}

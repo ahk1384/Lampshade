@@ -5,9 +5,15 @@
     src: url('../fonts/IranianSans.eot'), url('../fonts/IranianSans.eot') format('embedded-opentype'), url('../fonts/IranianSans.woff') format('woff'), url('../fonts/IranianSans.ttf') format('truetype'), url('../fonts/IranianSans.svg') format('svg');
 }
 
+@font-face {
+    font-family: 'VazirMatn';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../../fonts/VazirMatn.eot'), url('../../fonts/VazirMatn.eot') format('embedded-opentype'), url('../../fonts/VazirMatn.woff') format('woff'), url('../../fonts/VazirMatn.ttf') format('truetype'), url('../../fonts/VazirMatn.svg') format('svg');
+}
 body {
     direction: rtl;
-    font-family: 'IranSans';
+    font-family: 'VazirMatn';
     text-align: right;
 }
 

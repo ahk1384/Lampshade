@@ -36,7 +36,7 @@ public class Program
 
         string? databaseType = builder.Configuration["DatabaseType"];
         string? connectionString = builder.Configuration.GetConnectionString("LampShadeDB");
-
+        Console.WriteLine(connectionString);
         DiscountManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
         ShopManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
         InventoryManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
@@ -112,33 +112,10 @@ public class Program
 
         var app = builder.Build();
 
-        /*using (var scope = app.Services.CreateScope())
-        {
-            var accountContext = scope.ServiceProvider.GetRequiredService<AccountContext>();
-            accountContext.Database.Migrate();
-
-            var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
-            shopContext.Database.Migrate();
-
-            var inventoryContext = scope.ServiceProvider.GetRequiredService<InventoryContext>();
-            inventoryContext.Database.Migrate();
-
-            var blogContext = scope.ServiceProvider.GetRequiredService<BlogContext>();
-            blogContext.Database.Migrate();
-
-            var commentContext = scope.ServiceProvider.GetRequiredService<CommentContext>();
-            commentContext.Database.Migrate();
-
-            var discountContext = scope.ServiceProvider.GetRequiredService<DiscountContext>();
-            discountContext.Database.Migrate();
-        }*/
-
-
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
@@ -153,6 +130,7 @@ public class Program
 
         app.MapRazorPages();
         app.MapDefaultControllerRoute();
+
         app.Run();
     }
 }

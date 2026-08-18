@@ -1,0 +1,64 @@
+﻿services:
+  servicehost:
+    image: registry-1.docker.io/amirhkz84/servicehost:latest
+    
+    .env_file: .env
+
+    container_name: servicehost
+
+    expose:
+      - "8080"
+
+    ports:
+      - "8084:8080"
+
+    restart: unless-stopped
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    volumes:
+      - ./ProductPictures:/app/wwwroot/ProductPictures
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__LampshadeDB=Server=mysql;Port=3306;Database=${MYSQL_DB};User=${MYSQL_USER};Password=${MYSQL_PASSWORD};AllowPublicKeyRetrieval=True;SslMode=None;Connect Timeout=120;Default Command Timeout=120;Keepalive=60;Connection Idle Timeout=300;Pooling=True;Min Pool Size=1;Max Pool Size=20;
+
+    networks:
+      - shared_network
+
+  mysql:
+
+    image: mysql:8.4
+
+    container_name: mysql
+
+    .env_file: .env
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
+
+    restart: always
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+    
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_PASSWORD}" ]
+      timeout: 20s
+      retries: 10
+
+    ports:
+      - "127.0.0.1:3306:3306"
+
+    networks:
+      - shared_network
+
+volumes:
+  mysql-data:
+
+networks:
+  shared_network:
+    external: true

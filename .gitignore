@@ -435,3 +435,4 @@ testem.log
 Thumbs.db
 sql server use password .txt
 /Assests/
+/Lampshade/ServiceHost/.env

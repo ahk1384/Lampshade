@@ -123,7 +123,9 @@
                         </div>
                     </div>
                     <input type="hidden" asp-for="Command.Id" value="@Model.Command.Id"/>
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">ویرایش</button>
+                    <button type="submit" onclick="reloadPage()" class="btn btn-success waves-effect waves-light m-b-5">
+                        ویرایش
+                    </button>
                     <a asp-page="./Index" class="btn btn-dark waves-effect waves-light m-b-5">بازگشت</a>
                 </form>
             </div>
