@@ -21,7 +21,8 @@ jobs:
     - name: Build and Push Docker image
       uses: docker/build-push-action@v6
       with:
-        context: .
+        context: ./Lampshade
+        file: ./Lampshade/ServiceHost/Dockerfile
         push: true
         tags: |
           amirhkz84/servicehost:1.${{ github.run_number }}
