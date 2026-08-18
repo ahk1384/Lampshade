@@ -1,11 +1,11 @@
-name: Docker Build Push Deploy
+name: CI & CD Pipeline
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  deploy:
+  Build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +19,17 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build and Push Docker image
-      run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/servicehost:latest -f Lampshade/ServiceHost/Dockerfile Lampshade
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/servicehost:latest
-
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: |
+          amirhkz84/servicehost:1.${{ github.run_number }}
+          amirhkz84/servicehost:latest
+  deply:
+    needs: Build-and-push
+    runs-on: ubuntu-latest
+    steps:
     - name: Deploy on Server with SSH
       uses: appleboy/ssh-action@v1.2.0
       with:
@@ -30,5 +37,6 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_SSH_KEY }}
         script: |
-          cd AmirSite
-          docker compose -f compose.prod.yml up -d --build
+          cd /root/AmirSite
+          docker compose -f compose.prod.yml pull
+          docker compose -f compose.prod.yml up -d
