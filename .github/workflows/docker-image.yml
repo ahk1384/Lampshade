@@ -1,18 +1,34 @@
-name: Docker Image CI
+name: Docker Build Push Deploy
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build -t servicehost -f Lampshade/ServiceHost/Dockerfile Lampshade --tag servicehost:$(date +%s)
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and Push Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/servicehost:latest -f Lampshade/ServiceHost/Dockerfile Lampshade
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/servicehost:latest
+
+    - name: Deploy on Server with SSH
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd AmirSite
+          docker compose -f compose.prod.yml up -d --build
