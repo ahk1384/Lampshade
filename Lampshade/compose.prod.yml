@@ -23,7 +23,6 @@
       - ConnectionStrings__LampshadeDB=Server=mysql;Port=3306;Database=${MYSQL_DB};User=${MYSQL_USER};Password=${MYSQL_PASSWORD};AllowPublicKeyRetrieval=True;SslMode=None;Connect Timeout=120;Default Command Timeout=120;Keepalive=60;Connection Idle Timeout=300;Pooling=True;Min Pool Size=1;Max Pool Size=20;
       - MERCHANT_ID=${MERCHANT_ID}
     networks:
-      - lampshade_network
       - shared_network
 
   mysql:
@@ -52,13 +51,11 @@
       - "127.0.0.1:3306:3306"
 
     networks:
-      - lampshade_network
+      - shared_network
 
 volumes:
   mysql-data:
 
 networks:
-  lampshade_network:
-    driver: bridge
   shared_network:
     external: true
