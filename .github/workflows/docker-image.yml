@@ -18,8 +18,9 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_SSH_KEY }}
-        source: "./Lampshade/compose.prod.yml"
+        source: "Lampshade/compose.prod.yml"
         target: "/root/AmirSite"
+        strip_components: 1
     
     - name: Login to Docker Hub
     
