@@ -1,19 +1,19 @@
 ﻿services:
   servicehost:
     image: servicehost:dev
-
     container_name: servicehost
-    
+    expose:
+      - "8080"
     ports:
-      - "8084:8080"
+      - "8080:8080"
     
     depends_on:
       mysql:
         condition: service_healthy
 
     environment:
-      ASPNETCORE_ENVIRONMENT: Docker
-
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__LampshadeDB=Server=mysql;Port=3306;Database=LampshadeTets;User=root;Password=1384;AllowPublicKeyRetrieval=True;SslMode=None;Connect Timeout=120;Default Command Timeout=120;Keepalive=60;Connection Idle Timeout=300;Pooling=True;Min Pool Size=1;Max Pool Size=20;
     networks:
       - lampshade_network
   mysql:
@@ -21,14 +21,13 @@
     
     container_name: mysql
     restart: unless-stopped
-    
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "1384"
       MYSQL_DATABASE: LampshadeTest
-    
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./mysql-init-scripts:/docker-entrypoint-initdb.d/
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 20s

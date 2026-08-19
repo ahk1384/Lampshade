@@ -1,12 +1,10 @@
-﻿
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY . .
 
 RUN dotnet restore "ServiceHost/ServiceHost.csproj"
 
-# Copy the remaining source code
 COPY . .
 WORKDIR "/src/ServiceHost"
 RUN dotnet publish "ServiceHost.csproj" -c Release -o /app/publish

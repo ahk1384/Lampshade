@@ -36,6 +36,7 @@ public class Program
 
         string? databaseType = builder.Configuration["DatabaseType"];
         string? connectionString = builder.Configuration.GetConnectionString("LampShadeDB");
+
         Console.WriteLine(connectionString);
         DiscountManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);
         ShopManagementBootstrapper.Configure(builder.Services, connectionString, databaseType);

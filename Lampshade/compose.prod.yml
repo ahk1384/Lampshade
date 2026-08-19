@@ -2,15 +2,12 @@
   servicehost:
     image: registry-1.docker.io/amirhkz84/servicehost:latest
     
-    .env_file: .env
+    env_file: .env
 
     container_name: servicehost
 
     expose:
       - "8080"
-
-    ports:
-      - "8084:8080"
 
     restart: unless-stopped
 
@@ -24,8 +21,9 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__LampshadeDB=Server=mysql;Port=3306;Database=${MYSQL_DB};User=${MYSQL_USER};Password=${MYSQL_PASSWORD};AllowPublicKeyRetrieval=True;SslMode=None;Connect Timeout=120;Default Command Timeout=120;Keepalive=60;Connection Idle Timeout=300;Pooling=True;Min Pool Size=1;Max Pool Size=20;
-
+      - MERCHANT_ID=${MERCHANT_ID}
     networks:
+      - lampshade_network
       - shared_network
 
   mysql:
@@ -34,7 +32,7 @@
 
     container_name: mysql
 
-    .env_file: .env
+    env_file: .env
     
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
@@ -54,11 +52,13 @@
       - "127.0.0.1:3306:3306"
 
     networks:
-      - shared_network
+      - lampshade_network
 
 volumes:
   mysql-data:
 
 networks:
+  lampshade_network:
+    driver: bridge
   shared_network:
     external: true
