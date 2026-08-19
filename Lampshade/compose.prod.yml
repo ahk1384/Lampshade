@@ -24,6 +24,7 @@
       - MERCHANT_ID=${MERCHANT_ID}
     networks:
       - shared_network
+      - lampshade_network
 
   mysql:
 
@@ -51,7 +52,7 @@
       - "127.0.0.1:3306:3306"
 
     networks:
-      - shared_network
+      - lampshade_network
 
 volumes:
   mysql-data:
@@ -59,3 +60,5 @@ volumes:
 networks:
   shared_network:
     external: true
+  lampshade_network:
+    driver: bridge
