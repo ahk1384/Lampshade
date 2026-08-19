@@ -81,20 +81,21 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
     public List<ProductCategoryQueryModel> GetProductCategories()
     {
-        var res = _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x =>
-            new ProductCategoryQueryModel
-            {
-                Id = x.Id,
-                Description = x.Description,
-                Keywords = x.Keywords,
-                MetaDescription = x.MetaDescription,
-                Name = x.Title,
-                Picture = x.Picture,
-                PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle,
-                Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList()),
-                Slug = x.Slug
-            }).AsNoTracking().ToList();
+        var res = _context.ProductCategories.Where(x => !x.IsDeleted).Include(x => x.Products)
+            .ThenInclude(x => x.Category).Select(x =>
+                new ProductCategoryQueryModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    Keywords = x.Keywords,
+                    MetaDescription = x.MetaDescription,
+                    Name = x.Title,
+                    Picture = x.Picture,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList()),
+                    Slug = x.Slug
+                }).AsNoTracking().ToList();
         return res == null ? new List<ProductCategoryQueryModel>() : res;
     }
 
@@ -105,20 +106,21 @@ public class ProductCategoryQuery : IProductCategoryQuery
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
-        var categories = _context.ProductCategories.Include(x => x.Products).ThenInclude(x => x.Category).Select(x =>
-            new ProductCategoryQueryModel
-            {
-                Id = x.Id,
-                Description = x.Description,
-                Keywords = x.Keywords,
-                MetaDescription = x.MetaDescription,
-                Name = x.Title,
-                Picture = x.Picture,
-                PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle,
-                Slug = x.Slug,
-                Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList())
-            }).AsNoTracking().ToList();
+        var categories = _context.ProductCategories.Where(x => !x.IsDeleted).Include(x => x.Products)
+            .ThenInclude(x => x.Category).Select(x =>
+                new ProductCategoryQueryModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    Keywords = x.Keywords,
+                    MetaDescription = x.MetaDescription,
+                    Name = x.Title,
+                    Picture = x.Picture,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Slug = x.Slug,
+                    Products = MapProducts(x.Products.Where(x => !x.IsDeleted).ToList())
+                }).AsNoTracking().ToList();
         ;
         foreach (var category in categories)
         {

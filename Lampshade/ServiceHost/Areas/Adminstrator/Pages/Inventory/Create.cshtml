@@ -11,8 +11,7 @@
 <form asp-page="./Index" asp-page-handler="Create"
       method="post"
       data-ajax="true"
-      data-callback=""
-      data-action="Refresh">
+      data-ajax-success="onSuccess">
     <div class="modal-body">
         <div class="row">
             <div class="col-md-6">
@@ -36,6 +35,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
-        <button type="submit" onclick="reloadPage()" class="btn btn-info waves-effect waves-light">تعریف</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">تعریف</button>
     </div>
 </form>

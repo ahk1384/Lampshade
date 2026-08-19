@@ -1132,6 +1132,9 @@ a:focus {
 
 .modal .modal-dialog .modal-content .modal-body {
     padding: 20px 0;
+    overflow-x: auto;
+    width: 99% !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 .modal .modal-dialog .modal-content .modal-footer {
@@ -1486,9 +1489,9 @@ lesshat-selector {
 .topbar .topbar-left {
     background: #317eeb;
     float: right;
-    height: 70px;
+    height: 55px;
     position: relative;
-    width: 170px;
+    width: 230px;
     z-index: 1;
 }
 

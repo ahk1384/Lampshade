@@ -9,7 +9,8 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" data-ajax="true"
+                          data-ajax-success="onSuccess" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -67,7 +68,7 @@
 
                         </div>
                         <input type="hidden" asp-for="Command.Id" value="@Model.Command.Id"/>
-                        <button type="submit" onclick="reloadPage()" class="btn btn-info waves-effect waves-light">
+                        <button type="submit" class="btn btn-info waves-effect waves-light">
                             ویرایش
                         </button>
                         <a asp-page="./Index" class="btn btn-dark waves-effect waves-light m-b-5">بازگشت</a>
