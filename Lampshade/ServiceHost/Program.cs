@@ -18,6 +18,7 @@ using DiscountManagement.Infrastructure.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using ShopManagement.Application;
 using ShopManagement.Application.Contracts.Cart;
 using ShopManagement.Application.Contracts.Report;
@@ -63,6 +64,10 @@ public class Program
         builder.Services.AddTransient<IInventoryQuery, InventoryQuery>();
         builder.Services.AddTransient<ICartCalculatorService, CartCalculatorService>();
         builder.Services.AddSingleton<ICartService, CartService>();
+        builder.Services.AddDataProtection()
+            .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
+            .SetApplicationName("Lampshade");
+
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
@@ -70,6 +75,7 @@ public class Program
                 o.LogoutPath = new PathString("/Logout");
                 o.AccessDeniedPath = new PathString("/AccessDenied");
             });
+
         builder.Services.AddAuthorization();
 
         builder.Services.AddCors(options => options.AddPolicy("MyPolicy", builder =>
@@ -112,6 +118,17 @@ public class Program
         builder.Services.AddRazorPages();
 
         var app = builder.Build();
+        app.UseHttpsRedirection();
+
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseCookiePolicy();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -120,16 +137,8 @@ public class Program
             app.UseHsts();
         }
 
-        app.UseAuthentication();
-
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseCookiePolicy();
-        app.UseRouting();
-        app.UseAuthorization();
-
         app.MapRazorPages();
+
         app.MapDefaultControllerRoute();
 
         app.Run();
