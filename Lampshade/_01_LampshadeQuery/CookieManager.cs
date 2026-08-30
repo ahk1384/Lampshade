@@ -30,7 +30,7 @@ public class CookieManager : ICookieManager
                 var cartitems = w.Items;
                 var searlizer = new JavaScriptSerializer();
                 var CartItems = searlizer.Serialize(cartitems);
-                var options = new CookieOptions { Expires = DateTime.Now.AddDays(2) };
+                var options = new CookieOptions { Expires = DateTime.Now.AddDays(10) };
                 response.Cookies.Append(CookieName, CartItems, options);
             }
             else
